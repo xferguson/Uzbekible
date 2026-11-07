@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | F UI |
 | Read first | `docs/design/brief.md`, `docs/architecture.md` (Shared UI), `docs/games/01-juft.md` (other docs only if needed) |
 | Depends on | [D2](D2-juft-mockups.md), [U2](U2-ui-tile-text.md), [U3](U3-ui-shell-hud.md), [E2](E2-juft-rules.md) |

@@ -73,3 +73,13 @@ describe('Tile', () => {
     expect(onPointerDown).toHaveBeenCalled();
   });
 });
+
+describe('Tile onKeyDown', () => {
+  it('passes key presses to the caller', async () => {
+    const onKeyDown = vi.fn();
+    render(<Tile label="a" onKeyDown={onKeyDown} />);
+    screen.getByRole('button').focus();
+    await userEvent.keyboard('h');
+    expect(onKeyDown).toHaveBeenCalledTimes(1);
+  });
+});

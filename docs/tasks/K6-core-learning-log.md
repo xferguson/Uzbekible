@@ -4,6 +4,7 @@
 |---|---|
 | Status | todo |
 | Lane | D Core |
+| Read first | `docs/architecture.md` (your module's row) (other docs only if needed) |
 | Depends on | [K5](K5-core-storage.md) |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `pr-flow` |

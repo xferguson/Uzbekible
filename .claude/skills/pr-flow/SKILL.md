@@ -1,6 +1,6 @@
 ---
 name: pr-flow
-description: Use whenever committing, pushing, opening, updating, labelling, or merging a pull request in Uzbekible, or when CI fails on a PR. Encodes branch naming, the PR template, approval gates, and when the agent merges its own PR.
+description: Use when committing, pushing, opening, labelling or merging a PR, or when CI fails: branch naming, main sync, approval gates.
 ---
 
 # Pull request flow (Uzbekible)

@@ -4,6 +4,7 @@
 |---|---|
 | Status | in review |
 | Lane | A Foundation |
+| Read first | `docs/technical-design.md` §1–2, §8–9 (other docs only if needed) |
 | Depends on | [T00](T00-app-scaffold.md) |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `pr-flow` |

@@ -4,6 +4,7 @@
 |---|---|
 | Status | done |
 | Lane | C Content |
+| Read first | `docs/technical-design.md` §3–4 (other docs only if needed) |
 | Depends on | none |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `cognate-research`, `add-content-items`, `uzbek-text-rules`, `pr-flow` |

@@ -1,6 +1,6 @@
 ---
 name: tdd-task
-description: Use when picking up, starting, or implementing any task from docs/tasks/ (IDs like T00, K1, E3, U4, C5) or any code change in Uzbekible. Drives the red-green-refactor loop, commit cadence, and the definition of done for a task.
+description: Use when starting any docs/tasks/ task (T00, K1, E3, U4, C5…) or any code change: red-green-refactor loop and done criteria.
 ---
 
 # TDD task workflow (Uzbekible)
@@ -12,7 +12,8 @@ Every code change in this repo is test-first. A task is not done until its tests
    (`git log origin/main --oneline`, and the `Status` row of each dependency's task file). If a dependency is not merged, stop and
    tell the user; do not re-implement another task's scope.
 2. Read the task file `docs/tasks/<ID>-*.md` fully: goal, acceptance criteria, test plan, files touched.
-3. Read `docs/architecture.md` for import boundaries and the shared module you must reuse.
+3. Read the docs in the task's `Read first` row (not the whole `docs/` tree), plus the `docs/architecture.md`
+   row of any shared module you will use.
 4. Create the branch: `task/<ID>-<short-slug>` (unless the session assigns a branch — then use that).
 
 ## 2. Red

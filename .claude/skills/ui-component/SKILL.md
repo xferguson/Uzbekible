@@ -1,6 +1,6 @@
 ---
 name: ui-component
-description: Use when building or changing a shared React component or hook in src/ui/ (Tile, UzText, SourceText, HUD, Countdown, ResultsScreen, LevelMap, SettingsPanel, motif renderers, useLongPress, usePathSelect) for Uzbekible. Ensures token-only styling, accessibility, RTL, reduced motion, and tests.
+description: Use when building shared React components or hooks in src/ui/: tokens-only styling, a11y, RTL, reduced motion, tests.
 ---
 
 # Shared UI component recipe

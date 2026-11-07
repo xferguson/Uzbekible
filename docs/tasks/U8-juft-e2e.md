@@ -4,6 +4,7 @@
 |---|---|
 | Status | todo |
 | Lane | F UI |
+| Read first | `docs/design/brief.md`, `docs/architecture.md` (Shared UI), `docs/games/01-juft.md` (other docs only if needed) |
 | Depends on | [U7](U7-juft-wiring.md), [T01](T01-pwa-deploy.md) |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `e2e-visual-check`, `pr-flow` |

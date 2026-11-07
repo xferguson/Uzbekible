@@ -9,7 +9,7 @@
 | Skills | `design-mockup`, `pr-flow`, `uzbek-text-rules` |
 | Branch | `task/D2-juft-mockups` |
 
-> **Approval gate:** the PR must carry the `needs-approval` label. Auto-merge skips it; the user approves and merges.
+> **Approval gate:** don't merge until the user explicitly approves in the session. Label the PR `needs-approval`.
 
 ## Goal
 Design every Juft screen and interaction using the approved design system, for user approval.

@@ -10,7 +10,9 @@ question: *with intermediate Turkish, what is the fastest path to Uzbek?*
 - Work queue: [docs/tasks/README.md](docs/tasks/README.md)
 - Agent conventions: [CLAUDE.md](CLAUDE.md) · [.claude/skills.md](.claude/skills.md)
 
+## Working on it
+Open a session and say **"Do <task ID>"** (e.g. "Do D1"). See [docs/tasks/README.md](docs/tasks/README.md).
+Agents merge their own PRs once CI is green; approval-gated (🔒) tasks wait for your OK.
+
 ## Repository settings required
-- **Actions → General → Workflow permissions:** *Read and write*, plus *Allow GitHub Actions to create and approve pull requests*
 - **Pages → Source:** GitHub Actions (once task T01 lands)
-- **Labels:** `needs-approval`, `do-not-merge`, `content`

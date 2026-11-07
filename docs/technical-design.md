@@ -120,15 +120,12 @@ The site lives under the repo path on GitHub Pages: Vite `base: '/Uzbekible/'`.
 | Workflow | Trigger | What it does |
 |---|---|---|
 | `ci.yml` | `pull_request`, `push` to `main` | **changes** job detects docs-only (`docs/**`, `.claude/**`, `**/*.md`). Docs-only → fast pass. Otherwise lint, typecheck, unit + coverage, build, e2e. Code jobs skip themselves until `package.json` exists. |
-| `automerge.yml` | `workflow_run` of CI completed | If CI succeeded and the PR is not a draft and has no `needs-approval` / `do-not-merge` label, squash-merge and delete the branch |
-| `deploy.yml` (task T01) | `push` to `main` (manual merges) + `workflow_dispatch` (sent by automerge) | Build and deploy to GitHub Pages |
+| `deploy.yml` (task T01) | `push` to `main` + `workflow_dispatch` | Build and deploy to GitHub Pages |
 
-**Caveat:** merges done with `GITHUB_TOKEN` don't fire `push` events for other workflows. Events that
-`GITHUB_TOKEN` *can* fire are `workflow_dispatch` and `repository_dispatch`, so after a successful merge
-`automerge.yml` runs `gh workflow run deploy.yml --ref main` (only if `deploy.yml` exists). The PR's own CI run
-gates quality; `main` is not re-tested after an automerge.
-**Repo settings needed:** Actions → Workflow permissions → *Read and write* and *Allow GitHub Actions to create
-and approve pull requests*; Pages → Source: GitHub Actions; labels `needs-approval`, `do-not-merge`, `content`.
+**Merging:** there's no auto-merge workflow. Agents merge their own PRs through the GitHub tools once CI is green
+(approval-gated tasks wait for the user). See the `pr-flow` skill. Those merges are made with the user's
+credentials, so `push` to `main` triggers CI and deploy normally.
+**Repo settings needed:** Pages → Source: GitHub Actions (for T01). The labels `needs-approval`, `do-not-merge`, `content` are optional signals.
 
 ## 10. Quality gates
 - Coverage thresholds (Vitest): `src/core/**` ≥ 95% lines and branches; `src/ui/**` ≥ 80%.

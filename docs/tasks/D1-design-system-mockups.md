@@ -9,7 +9,7 @@
 | Skills | `design-mockup`, `pr-flow`, `uzbek-text-rules` |
 | Branch | `task/D1-design-system-mockups` |
 
-> **Approval gate:** the PR must carry the `needs-approval` label. Auto-merge skips it; the user approves and merges.
+> **Approval gate:** don't merge until the user explicitly approves in the session. Label the PR `needs-approval`.
 
 ## Goal
 Produce the Uzbekible visual identity for user approval: palette, type, motif library, tile states, 3 icon concepts, sample home screen.

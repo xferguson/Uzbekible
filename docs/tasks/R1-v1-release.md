@@ -9,7 +9,7 @@
 | Skills | `e2e-visual-check`, `pr-flow` |
 | Branch | `task/R1-v1-release` |
 
-> **Approval gate:** the PR must carry the `needs-approval` label. Auto-merge skips it; the user approves and merges.
+> **Approval gate:** don't merge until the user explicitly approves in the session. Label the PR `needs-approval`.
 
 ## Goal
 Ship Juft v1.

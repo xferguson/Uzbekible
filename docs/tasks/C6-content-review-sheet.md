@@ -9,7 +9,7 @@
 | Skills | `add-content-items`, `pr-flow` |
 | Branch | `task/C6-content-review-sheet` |
 
-> **Approval gate:** the PR must carry the `needs-approval` label. Auto-merge skips it; the user approves and merges.
+> **Approval gate:** don't merge until the user explicitly approves in the session. Label the PR `needs-approval`.
 
 ## Goal
 Give the user an easy way to spot-check pairs before they ship.

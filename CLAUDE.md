@@ -10,12 +10,21 @@ Behind it is a research question: *Given intermediate (B1) Turkish, what is the 
 - Work queue: `docs/tasks/README.md` (task index, dependencies, gates); status lives in each task file
 - Skills: `.claude/skills.md`. Skills in `.claude/skills/` load automatically; follow them.
 
+## "Do <ID>" (how sessions start)
+When the user says **"Do D1"**, **"Do C1"**, **"work on K3"** or similar, that's a task ID from `docs/tasks/`:
+1. Open `docs/tasks/<ID>-*.md` and read it in full. That file is the task's spec and its session prompt.
+2. Check its dependencies against `main` (the `Status` row of each dependency's task file, plus `git log origin/main`).
+   If one isn't merged, say which one and stop.
+3. Follow the skills the task lists (always `tdd-task` and `pr-flow`), on branch `task/<ID>-<slug>`, unless the
+   session was assigned a branch.
+4. Finish the task: PR, CI green, then merge it, or wait for approval if the task is 🔒.
+
 ## Non-negotiables
 1. **Red-green TDD.** Write a failing test first, then the code. See the `tdd-task` skill.
 2. **One task per PR**, small enough to run in parallel with other work. Everything merges into `main` through a PR.
    See the `pr-flow` skill.
-3. **Auto-merge:** PRs merge automatically when CI is green, unless they are drafts or labelled `needs-approval` /
-   `do-not-merge`. Design and product-decision PRs always carry `needs-approval`.
+3. **Merging:** the agent merges its own PR once CI is green. Approval-gated tasks (🔒: D1, D2, C6, S1, S2, R1)
+   wait for the user's explicit approval in the session first. See the `pr-flow` skill.
 4. **Reuse shared modules.** Timers, randomness, scoring, difficulty, text handling, storage and logging live in
    `src/core/`; tiles, HUD, map and results live in `src/ui/`. Games only add rules and layout.
    Lint enforces the import boundaries in `docs/architecture.md`.

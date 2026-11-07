@@ -5,6 +5,7 @@
 | Status | done |
 | Lane | F UI |
 | Read first | `docs/design/brief.md`, `docs/architecture.md` (Shared UI), `docs/games/01-juft.md` (other docs only if needed) |
+| Screens owned | `board-1`, `board-3`, `board-6`, `board-8`, `board-12`, `wrong`, `hint` |
 | Depends on | [D2](D2-juft-mockups.md), [U2](U2-ui-tile-text.md), [U3](U3-ui-shell-hud.md), [E2](E2-juft-rules.md) |
 | Skills | `ui-component`, `uzbek-text-rules`, `tdd-task`, `pr-flow` |
 | Branch | `task/U4-juft-board` |

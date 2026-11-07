@@ -5,6 +5,7 @@
 | Status | done |
 | Lane | F UI |
 | Read first | `docs/design/brief.md`, `docs/architecture.md` (Shared UI), `docs/games/01-juft.md` (other docs only if needed) |
+| Screens owned | `home` |
 | Depends on | [U4](U4-juft-board.md), [U5](U5-ui-level-map.md), [U6](U6-settings.md), [E1](E1-juft-levels.md), [E3](E3-juft-scoring-balance.md) |
 | Skills | `new-game-scaffold`, `tdd-task`, `pr-flow` |
 | Branch | `task/U7-juft-wiring` |

@@ -54,3 +54,6 @@ description: Use when writing or running Playwright e2e tests, taking screenshot
 
 Visual regression snapshots are **deferred** (see `docs/PRD.md` › Later); do not add `toHaveScreenshot`
 assertions yet.
+
+
+UI work is judged against the approved frames, not by green tests: run `npm run shots`, compare each pair side by side, and run the design-fidelity review (skill added by V5) before merging.

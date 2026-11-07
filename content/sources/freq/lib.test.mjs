@@ -29,6 +29,8 @@ test('foldApostrophes: other in-word apostrophes become the tutuq U+02BC', () =>
   assert.equal(foldApostrophes("ma'no"), `ma${TUTUQ}no`);
   assert.equal(foldApostrophes('ta’sir'), `ta${TUTUQ}sir`);
   assert.equal(foldApostrophes('sun`iy'), `sun${TUTUQ}iy`);
+  assert.equal(foldApostrophes(`sun${OKINA}iy`), `sun${TUTUQ}iy`);
+  assert.equal(foldApostrophes(`ko${OKINA}z`), `ko${OKINA}z`);
 });
 
 test('foldApostrophes: output is NFC', () => {

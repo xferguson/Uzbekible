@@ -7,11 +7,11 @@ import type { StorageBackend } from '@core/storage';
 import { getGame, GAMES, type AnyGameDefinition } from '@games/registry';
 import { registerJuft } from '@games/juft/definition';
 import type { GameSettings } from '@games/types';
-import { LevelMap, ScreenBar, SettingsPanel, type Script } from '@ui/index';
+import { LevelMap, ModePicker, ScreenBar, SettingsPanel, type Script } from '@ui/index';
 import { label } from '../ui/labels';
 import { isGalleryPath } from '../dev/gallery/route';
 import { GameShell } from './GameShell';
-import { createProgressStore, type Progress } from './progress';
+import { createModeStore, createProgressStore, type Progress } from './progress';
 import {
   applyTheme,
   createSettingsStore,
@@ -94,11 +94,28 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
     };
   }, [loadPack]);
 
+  // One store per mode for a game with modes (key `<id>:<mode>`), one store for a game without.
   const progressStores = useMemo(
-    () => new Map(games.map((g) => [g.id, createProgressStore(g.id, storage)])),
+    () =>
+      new Map(
+        games.flatMap((g) =>
+          g.modes
+            ? g.modes.map(
+                (m) => [`${g.id}:${m.id}`, createProgressStore(g.id, storage, m.id)] as const,
+              )
+            : [[g.id, createProgressStore(g.id, storage)] as const],
+        ),
+      ),
     [games, storage],
   );
-  const progressOf = (id: string) => progressStores.get(id)!;
+  const modeStore = useMemo(() => createModeStore(storage), [storage]);
+  const [chosen, setChosen] = useState(() => modeStore.get());
+  useEffect(() => modeStore.subscribe(setChosen), [modeStore]);
+  /** The mode in force for a game: the remembered one if it still exists, else the first. */
+  const modeOf = (g: AnyGameDefinition) =>
+    g.modes && (g.modes.find((m) => m.id === chosen[g.id]) ?? g.modes[0])?.id;
+  const progressOf = (g: AnyGameDefinition) =>
+    progressStores.get(g.modes ? `${g.id}:${modeOf(g)}` : g.id)!;
 
   const [screen, setScreen] = useState<Screen>({ name: 'home' });
   const script: Script = settings.script === 'uz-Cyrl' ? 'cyrl' : 'latn';
@@ -122,22 +139,17 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
           onScript={(s) => setScript(settingsStore, s)}
           onTheme={(th) => setTheme(settingsStore, th)}
           onExport={(f) => exportLog(log, f)}
-          onReset={() =>
-            resetProgress(
-              games.map((g) => progressOf(g.id)),
-              log,
-            )
-          }
+          onReset={() => resetProgress([...progressStores.values()], log)}
         />
       </main>
     );
   } else if (screen.name === 'map' || screen.name === 'play') {
     const def = games.find((g) => g.id === screen.gameId);
-    const progress = progressOf(screen.gameId);
     if (!def) {
       body = null;
     } else if (screen.name === 'play') {
       const { level } = screen;
+      const progress = progressOf(def);
       const toMap = () => setScreen({ name: 'map', gameId: def.id });
       body = (
         <main className={`${styles.page} ${styles.wide}`}>
@@ -150,6 +162,7 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
           <GameShell
             definition={def}
             level={level}
+            mode={modeOf(def)}
             settings={gameSettings}
             history={log.aggregates()}
             clock={clock}
@@ -164,8 +177,11 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
     } else {
       body = (
         <MapScreen
+          key={modeOf(def) ?? def.id}
           def={def}
-          progress={progress}
+          progress={progressOf(def)}
+          mode={modeOf(def)}
+          onMode={(id) => modeStore.update((m) => ({ ...m, [def.id]: id }))}
           script={script}
           onSelect={(level) => setScreen({ name: 'play', gameId: def.id, level })}
           onBack={home}
@@ -212,12 +228,16 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
 function MapScreen({
   def,
   progress,
+  mode,
+  onMode,
   script,
   onSelect,
   onBack,
 }: {
   def: AnyGameDefinition;
   progress: ReturnType<typeof createProgressStore>;
+  mode?: string;
+  onMode: (id: string) => void;
   script: Script;
   onSelect: (level: number) => void;
   onBack: () => void;
@@ -232,6 +252,9 @@ function MapScreen({
         onBack={onBack}
         script={script}
       />
+      {def.modes && mode !== undefined && (
+        <ModePicker modes={def.modes} value={mode} script={script} onChange={onMode} />
+      )}
       <LevelMap chapters={chapters} progress={current} script={script} onSelect={onSelect} />
     </main>
   );

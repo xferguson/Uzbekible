@@ -2,6 +2,9 @@ import { readFileSync } from 'node:fs';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { createFakeClock } from '@core/clock';
 import { createMemoryBackend } from '@core/storage';
+import { GAMES } from '@games/registry';
+import { getGame } from '@games/registry';
+import { createProgressStore } from './progress';
 import { App } from './App';
 
 const pack = JSON.parse(readFileSync('public/content/items.v1.json', 'utf8'));
@@ -90,5 +93,51 @@ describe('<App />', () => {
     expect(screen.getByRole('img', { name: /\/3/ })).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Bosh sahifa' }));
     expect(screen.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeInTheDocument();
+  });
+});
+
+describe('<App /> difficulty modes', () => {
+  it('shows no picker for Juft (no modes)', async () => {
+    setup();
+    fireEvent.click(await screen.findByRole('button', { name: 'Juft' }));
+    expect(screen.queryByRole('radiogroup')).toBeNull();
+  });
+
+  it('shows a picker for a game with modes, remembers the choice and keeps progress per mode', async () => {
+    const backend = createMemoryBackend();
+    createProgressStore('juft', { backend }, 'qiyin').set({
+      unlocked: 4,
+      best: {},
+    });
+    const juft = getGame('juft') ?? GAMES[0];
+    const withModes = {
+      ...juft!,
+      modes: [
+        { id: 'oson', name: { uzLatn: 'Oson', uzCyrl: 'Осон' } },
+        { id: 'qiyin', name: { uzLatn: 'Qiyin', uzCyrl: 'Қийин' } },
+      ],
+    };
+    GAMES.splice(GAMES.indexOf(juft!), 1, withModes);
+    try {
+      const view = render(
+        <App loadPack={() => Promise.resolve(pack)} clock={createFakeClock(1)} backend={backend} />,
+      );
+      fireEvent.click(await screen.findByRole('button', { name: 'Juft' }));
+      expect(screen.getByRole('radio', { name: 'Oson' })).toBeChecked();
+      expect(screen.getByRole('button', { name: /^4-daraja/ })).toHaveAttribute(
+        'aria-disabled',
+        'true',
+      );
+      fireEvent.click(screen.getByRole('radio', { name: 'Qiyin' }));
+      expect(screen.getByRole('button', { name: /^4-daraja, joriy/ })).toBeInTheDocument();
+      view.unmount();
+      render(
+        <App loadPack={() => Promise.resolve(pack)} clock={createFakeClock(1)} backend={backend} />,
+      );
+      fireEvent.click(await screen.findByRole('button', { name: 'Juft' }));
+      expect(screen.getByRole('radio', { name: 'Qiyin' })).toBeChecked();
+    } finally {
+      GAMES.splice(GAMES.indexOf(withModes), 1, juft!);
+    }
   });
 });

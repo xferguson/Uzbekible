@@ -172,4 +172,37 @@ describe('GameShell', () => {
     act(() => screen.getByRole('button', { name: /xarita/i }).click());
     expect(onMap).toHaveBeenCalledOnce();
   });
+
+  it('passes the mode to levels (seed) and to multipliers', () => {
+    vi.useRealTimers();
+    const clock = createFakeClock(0);
+    const backend = createMemoryBackend();
+    const seen: Array<string | undefined> = [];
+    const multipliers = vi.fn((_s: unknown, mode?: string) => [mode === 'qiyin' ? 2 : 1]);
+    const def: typeof fake = {
+      ...fake,
+      modes: [{ id: 'qiyin', name: { uzLatn: 'Qiyin', uzCyrl: 'Қийин' } }],
+      levels: (ctx) => {
+        seen.push(ctx.mode);
+        return { level: ctx.level, seed: ctx.seed, lives: 2, params: { n: 1 } };
+      },
+      multipliers,
+    };
+    render(
+      <GameShell
+        definition={def}
+        mode="qiyin"
+        level={1}
+        settings={{ sourceLangs: ['tr'], script: 'latn' }}
+        history={[]}
+        clock={clock}
+        progress={createProgressStore('fake', { backend }, 'qiyin')}
+        log={createLearningLog({ clock, sessionId: 's', storage: { backend } })}
+        countdownMs={0}
+        onMap={() => {}}
+      />,
+    );
+    expect(seen[0]).toBe('qiyin');
+    expect(multipliers).toHaveBeenCalledWith(expect.anything(), 'qiyin');
+  });
 });

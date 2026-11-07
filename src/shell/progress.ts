@@ -32,8 +32,31 @@ const schema = {
     ),
 };
 
-export function createProgressStore(gameId: string, options?: StoreOptions): Store<Progress> {
-  return createStore(`progress:${gameId}`, schema, {}, options);
+/**
+ * A game without modes keeps its original key (`progress:<gameId>`), so existing progress is untouched and
+ * needs no migration; a game with modes gets one independent store per mode.
+ */
+export function createProgressStore(
+  gameId: string,
+  options?: StoreOptions,
+  mode?: string,
+): Store<Progress> {
+  const namespace = mode === undefined ? `progress:${gameId}` : `progress:${gameId}:${mode}`;
+  return createStore(namespace, schema, {}, options);
+}
+
+/** The mode last chosen for each game, by game id. */
+export type ChosenModes = Record<string, string>;
+
+const modesSchema = {
+  version: 1,
+  default: {} as ChosenModes,
+  validate: (v: unknown): v is ChosenModes =>
+    isObject(v) && Object.values(v).every((m) => typeof m === 'string'),
+};
+
+export function createModeStore(options?: StoreOptions): Store<ChosenModes> {
+  return createStore('modes', modesSchema, {}, options);
 }
 
 /**

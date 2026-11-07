@@ -5,10 +5,16 @@ import type { SimGame, SimStep } from '../core/sim/index.ts';
 import type { GameDefinition, GameSettings, LevelContext } from './types.ts';
 import type { GameEvent } from '../core/session/index.ts';
 
-/** `<gameId>:<level>:<settingsHash>`; the hash ignores source-language order. */
-export function levelSeed(gameId: string, level: number, settings: GameSettings): string {
+/** `<gameId>[:<mode>]:<level>:<settingsHash>`; the hash ignores source-language order. */
+export function levelSeed(
+  gameId: string,
+  level: number,
+  settings: GameSettings,
+  mode?: string,
+): string {
   const canonical = `${[...settings.sourceLangs].sort().join(',')}|${settings.script}`;
-  return `${gameId}:${level}:${seedFrom(canonical).toString(16).padStart(8, '0')}`;
+  const prefix = mode === undefined ? gameId : `${gameId}:${mode}`;
+  return `${prefix}:${level}:${seedFrom(canonical).toString(16).padStart(8, '0')}`;
 }
 
 export function levelContext(
@@ -16,9 +22,11 @@ export function levelContext(
   level: number,
   settings: GameSettings,
   history: readonly Aggregate[],
+  mode?: string,
 ): LevelContext {
-  const seed = levelSeed(gameId, level, settings);
-  return { level, settings, history, seed, rng: createRng(seedFrom(seed)) };
+  const seed = levelSeed(gameId, level, settings, mode);
+  const ctx = { level, settings, history, seed, rng: createRng(seedFrom(seed)) };
+  return mode === undefined ? ctx : { ...ctx, mode };
 }
 
 export interface ToSimGameOptions<S, A> {

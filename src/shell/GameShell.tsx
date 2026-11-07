@@ -30,6 +30,8 @@ import { recordWin, type Progress } from './progress';
 export interface GameShellProps {
   definition: AnyGameDefinition;
   level: number;
+  /** The chosen difficulty mode, for a game that declares `modes`. */
+  mode?: string;
   settings: GameSettings;
   history: readonly Aggregate[];
   clock: Clock;
@@ -60,7 +62,7 @@ export function GameShell(props: GameShellProps) {
   // A fresh Attempt per try gives a new session and a new attempt Rng (fresh shuffle, same level content).
   return (
     <Attempt
-      key={`${props.level}:${attempt}`}
+      key={`${props.mode ?? ''}:${props.level}:${attempt}`}
       {...props}
       attempt={attempt}
       onRetry={() => setAttempt((n) => n + 1)}
@@ -71,6 +73,7 @@ export function GameShell(props: GameShellProps) {
 function Attempt({
   definition: def,
   level,
+  mode,
   settings,
   history,
   clock,
@@ -86,7 +89,7 @@ function Attempt({
   const script = settings.script;
 
   const [run] = useState(() => {
-    const spec = def.levels(levelContext(def.id, level, settings, history));
+    const spec = def.levels(levelContext(def.id, level, settings, history, mode));
     const rules = def.createRules(spec, createRng(seedFrom(`${spec.seed}:attempt:${attempt}`)));
     const session: Session<unknown, unknown, GameEvent> = createSession({
       rules,
@@ -96,7 +99,7 @@ function Attempt({
     });
     const events: GameEvent[] = [];
     const scoring = def.scoringFor?.(spec, settings) ?? def.scoring;
-    const multipliers = def.multipliers?.(settings);
+    const multipliers = def.multipliers?.(settings, mode);
     const state = {
       lastAt: 0,
       outcome: undefined as Outcome | undefined,

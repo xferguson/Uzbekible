@@ -24,7 +24,9 @@ export interface LevelContext {
   settings: GameSettings;
   /** Per-item learning aggregates, for the scheduler. */
   history: readonly Aggregate[];
-  /** `<gameId>:<level>:<settingsHash>`: stable for a level and settings, so a level is reproducible. */
+  /** The difficulty mode the player picked; only set for a game that declares `modes`. */
+  mode?: string;
+  /** `<gameId>:<level>:<settingsHash>`, or `<gameId>:<mode>:<level>:<settingsHash>` with a mode: stable, so a level is reproducible. */
   seed: string;
   /** Seeded from `seed`: the only randomness `levels` may use. */
   rng: Rng;
@@ -49,6 +51,8 @@ export interface BoardProps<Params, State, Action, E extends GameEvent = never> 
 export interface GameDefinition<Params, State, Action, E extends GameEvent = never> {
   id: string;
   title: { uzLatn: string; uzCyrl: string };
+  /** Difficulty modes the player picks on the map screen. Absent: the game has one mode and no picker. */
+  modes?: readonly { id: string; name: { uzLatn: string; uzCyrl: string } }[];
   /** Deterministic for a given context. */
   levels(ctx: LevelContext): LevelSpec<Params>;
   /**
@@ -60,7 +64,7 @@ export interface GameDefinition<Params, State, Action, E extends GameEvent = nev
   /** Per-level scoring (par and star thresholds often scale with the board). Falls back to `scoring`. */
   scoringFor?(spec: LevelSpec<Params>, settings: GameSettings): ScoringConfig;
   /** Score multipliers the settings earn (e.g. Cyrillic hard mode). */
-  multipliers?(settings: GameSettings): readonly number[];
+  multipliers?(settings: GameSettings, mode?: string): readonly number[];
   /**
    * Learning-log events for one rules event. `rtMs` is the time since the previous rules event (or the start).
    * `level_start`, `level_complete` and `level_failed` are written by the shell.

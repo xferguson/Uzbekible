@@ -186,7 +186,7 @@ _(no exports yet)_
 - `Announcer({ message }: { message: string; }): import("react").JSX.Element` - Visually hidden polite live region.
 - `AnnouncerProvider({ children }: { children: ReactNode; }): import("react").JSX.Element` - Hosts the single shared live region and lets descendants announce via `useAnnounce`.
 - `LongPressHandlers` { onPointerDown: (e: PointerEvent) => void; onPointerMove: (e: PointerEvent) => void; onPointerUp: () => void; onPointerLeave: () => void; onPointerCancel: () => void; onContextMenu: (e: MouseEvent…
-- `LongPressOptions` { ms?: number; tolerance?: number }
+- `LongPressOptions` { ms?: number; tolerance?: number; clock?: FrameClock }
 - `PatternBg({ strength, cell, className }: PatternBgProps): import("react").JSX.Element` - Star-and-cross line lattice that fills its container. Decorative, low contrast.
 - `PatternBgProps` { strength?: number; cell?: number; className?: string }
 - `RosetteBand({ width, height, className }: RosetteBandProps): import("react").JSX.Element` - Horizontal band: alternating stars in octagon frames with gold diamonds between, on cobalt-deep.
@@ -196,7 +196,7 @@ _(no exports yet)_
 - `SourceTextProps` { lang: SourceLang; text: string; className?: string }
 - `Star8({ size, variant, className }: Star8Props): import("react").JSX.Element` - The signature star: {8/2} khatam, {8/3} turquoise interlace and a gold octagon centre. Decorative.
 - `Star8Props` { size?: number; variant?: 'full' | 'outline'; className?: string }
-- `Tile({ label, state, shape, onSelect, pressHandlers, children }: TileProps): import("react").JSX.Element` - The shared game tile: states, rect or hex shape, keyboard (Enter/Space), never colour-only.
+- `Tile({ label, state, shape, onSelect, pressHandlers, children, }: TileProps): import("react").JSX.Element` - The shared game tile: states, rect or hex shape, keyboard (Enter/Space), never colour-only.
 - `TileProps` { label: string; state?: TileState; shape?: TileShape; onSelect?: () => void; pressHandlers?: Partial<LongPressHandlers>; children?: ReactNode }
 - `TileShape` = `'rect' | 'hex'`
 - `TileState` = `'idle' | 'selected' | 'matched' | 'wrong' | 'cracked' | 'disabled'`

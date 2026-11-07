@@ -14,6 +14,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "e2e": "playwright test",
     "content:validate": "node --experimental-strip-types --no-warnings content/scripts/cli.ts validate",
     "content:review": "node --experimental-strip-types --no-warnings content/scripts/cli.ts review",

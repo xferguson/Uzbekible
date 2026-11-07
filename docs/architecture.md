@@ -60,7 +60,10 @@ shell  ──►  games/*  ──►  ui  ──►  design
 | Balance | `core/sim` + `game-balance-tuning` skill |
 
 ## Quality gates (enforced in CI)
-- **Boundaries:** `eslint.config.js` encodes the rules above with `eslint-plugin-boundaries`; `scripts/lint-boundaries.test.ts` proves a bad import is reported. A new top-level folder or game must be classified there.
+- **Boundaries:** `eslint.config.js` encodes the rules above with `eslint-plugin-boundaries` (`scripts/` and `content/scripts/` may import only core); `scripts/lint-boundaries.test.ts` proves a bad import is reported. A new top-level folder or game must be classified there.
+- **Determinism:** ESLint rejects `Math.random`, `Date.now`, `setTimeout` and `setInterval` in `src/**` (allowed only in `src/core/clock/**` and `src/shell/**`); inject `Clock` and `Rng` instead.
+- **Core has no DOM:** `src/core/**` tests run in Vitest's `node` project (`vite.config.ts`), everything else in `jsdom`, so DOM use in core fails its tests.
+- **Formatting:** `npm run format:check` (`prettier --check .`) runs in CI; fix with `npm run format`.
 - **Accessibility:** `eslint-plugin-jsx-a11y` (recommended) runs on all `.tsx`.
 - **Coverage:** `vite.config.ts` thresholds fail `npm test -- --coverage` below 95% lines and branches for `src/core/**` and 80% for `src/ui/**`. Never lower them.
 - **Property tests:** invariants go in `<module>.property.test.ts` next to the unit test, using `fast-check` with a fixed `seed` (see `src/core/_example/`).

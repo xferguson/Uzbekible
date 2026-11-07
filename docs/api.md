@@ -183,9 +183,20 @@ _(no exports yet)_
 
 ## `ui`
 
+- `Combo({ count, script }: Common & { count: number; }): import("react").JSX.Element | null` - Consecutive-correct streak; shown from 2 up.
+- `Countdown({ remainingMs, script }: Common & { remainingMs: number; }): import("react").JSX.Element`
+- `LevelBadge({ level, script }: Common & { level: number; }): import("react").JSX.Element`
+- `Lives({ lives, max, script }: Common & { lives: number; max: number; }): import("react").JSX.Element` - One glazed tile per life; a lost life shows crack lines as well as a paler glaze.
 - `PatternBg({ strength, cell, className }: PatternBgProps): import("react").JSX.Element` - Star-and-cross line lattice that fills its container. Decorative, low contrast.
 - `PatternBgProps` { strength?: number; cell?: number; className?: string }
+- `PauseOverlay({ onResume, onMap, script, }: Common & { onResume: () => void; onMap: () => void; }): import("react").JSX.Element` - Covers the screen and replaces the board, so a pause cannot be used to study the tiles.
+- `ResultsScreen(p: ResultsScreenProps): import("react").JSX.Element`
+- `ResultsScreenProps` { won: boolean; stars: 0 | 1 | 2 | 3; score: number; timeMs: number; mistakes: number; hints: number; newBest: boolean; onNext?: () => void; onReplay?: () => void; onMap: () => void }
 - `RosetteBand({ width, height, className }: RosetteBandProps): import("react").JSX.Element` - Horizontal band: alternating stars in octagon frames with gold diamonds between, on cobalt-deep.
 - `RosetteBandProps` { width?: number; height?: number; className?: string }
+- `Score({ value, script }: Common & { value: number; }): import("react").JSX.Element`
+- `Script` = `'latn' | 'cyrl'` - Uzbek script a label is shown in.
 - `Star8({ size, variant, className }: Star8Props): import("react").JSX.Element` - The signature star: {8/2} khatam, {8/3} turquoise interlace and a gold octagon centre. Decorative.
 - `Star8Props` { size?: number; variant?: 'full' | 'outline'; className?: string }
+- `Timer({ ms, script }: Common & { ms: number; }): import("react").JSX.Element`
+- `formatTime(ms: number): string` - m:ss, rounded down.

@@ -1,0 +1,65 @@
+.countdown {
+  display: grid;
+  place-items: center;
+  min-block-size: 50dvh;
+  font-family: var(--font-display);
+  font-size: 6rem;
+  color: var(--color-cobalt);
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: var(--space-4);
+  background: var(--color-cobalt-deep);
+  color: var(--color-on-deep);
+  font-family: var(--font-ui);
+  text-align: center;
+}
+.results {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: center;
+  padding: var(--space-6);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+}
+.stars {
+  display: inline-flex;
+  gap: var(--space-2);
+}
+.star {
+  font-size: 2rem;
+  color: var(--color-gold);
+}
+.stat {
+  display: flex;
+  gap: var(--space-4);
+  font-variant-numeric: tabular-nums;
+}
+.best {
+  color: var(--color-ochre);
+  font-weight: 700;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.button {
+  min-block-size: var(--space-12);
+  padding-inline: var(--space-6);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-cobalt);
+  background: var(--color-cobalt);
+  color: var(--color-on-cobalt);
+  font: inherit;
+  cursor: pointer;
+}
+.button:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}

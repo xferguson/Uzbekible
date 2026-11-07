@@ -24,7 +24,14 @@ describe('PauseOverlay', () => {
 });
 
 describe('ResultsScreen', () => {
-  const base = { score: 420, timeMs: 75_000, mistakes: 1, hints: 0, onReplay: vi.fn(), onMap: vi.fn() };
+  const base = {
+    score: 420,
+    timeMs: 75_000,
+    mistakes: 1,
+    hints: 0,
+    onReplay: vi.fn(),
+    onMap: vi.fn(),
+  };
 
   it('shows stars, score, time and new best on a win', () => {
     render(<ResultsScreen {...base} won stars={2} newBest onNext={vi.fn()} />);
@@ -44,7 +51,15 @@ describe('ResultsScreen', () => {
     const onReplay = vi.fn();
     const onMap = vi.fn();
     render(
-      <ResultsScreen {...base} won stars={1} newBest={false} onNext={onNext} onReplay={onReplay} onMap={onMap} />,
+      <ResultsScreen
+        {...base}
+        won
+        stars={1}
+        newBest={false}
+        onNext={onNext}
+        onReplay={onReplay}
+        onMap={onMap}
+      />,
     );
     await userEvent.click(screen.getByRole('button', { name: /keyingi/i }));
     await userEvent.click(screen.getByRole('button', { name: /qayta/i }));

@@ -1,7 +1,11 @@
 import { createMemoryBackend } from '@core/storage';
 import { createProgressStore, recordWin } from './progress';
 
-const result = (score: number, stars: 0 | 1 | 2 | 3 = 1, timeMs = 1000) => ({ score, stars, timeMs });
+const result = (score: number, stars: 0 | 1 | 2 | 3 = 1, timeMs = 1000) => ({
+  score,
+  stars,
+  timeMs,
+});
 
 describe('progress', () => {
   it('starts with level 1 unlocked and no bests', () => {

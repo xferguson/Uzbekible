@@ -24,13 +24,17 @@ function Board({ state, dispatch }: BoardProps<{ n: number }, State, Action>) {
 const fake: GameDefinition<{ n: number }, State, Action> = {
   id: 'fake',
   title: { uzLatn: 'Soxta', uzCyrl: 'Сохта' },
-  levels: (ctx) => ({ level: ctx.level, seed: ctx.seed, lives: 2, params: { n: 2 } }),
+  levels: (ctx) => ({ level: ctx.level, seed: ctx.seed, lives: 2, params: { n: 3 } }),
   createRules: (spec): Rules<State, Action> => ({
     init: { left: spec.params.n },
     reduce(state, action) {
-      if (action.type === 'miss') return { state, events: [{ type: 'mistake' }, { type: 'lifeLost' }] };
+      if (action.type === 'miss')
+        return { state, events: [{ type: 'mistake' }, { type: 'lifeLost' }] };
       const left = state.left - 1;
-      return { state: { left }, events: left === 0 ? [{ type: 'combo' }, { type: 'complete' }] : [{ type: 'combo' }] };
+      return {
+        state: { left },
+        events: left === 0 ? [{ type: 'combo' }, { type: 'complete' }] : [{ type: 'combo' }],
+      };
     },
   }),
   scoring: {
@@ -117,7 +121,9 @@ describe('GameShell', () => {
     const { advance, progress, log, onNext } = setup();
     advance(3_000);
     act(() => screen.getByRole('button', { name: 'take' }).click());
-    expect(screen.getByLabelText(/kombo/i)).toBeInTheDocument();
+    expect(screen.queryByLabelText(/kombo/i)).toBeNull();
+    act(() => screen.getByRole('button', { name: 'take' }).click());
+    expect(screen.getByLabelText(/kombo/i)).toHaveTextContent('2');
     advance(2_000);
     act(() => screen.getByRole('button', { name: 'take' }).click());
     expect(screen.queryByTestId('board')).toBeNull();
@@ -134,14 +140,12 @@ describe('GameShell', () => {
   it('does not report a new best on a worse replay', () => {
     const { advance, progress } = setup();
     advance(3_000);
-    act(() => screen.getByRole('button', { name: 'take' }).click());
-    act(() => screen.getByRole('button', { name: 'take' }).click());
+    for (let i = 0; i < 3; i++) act(() => screen.getByRole('button', { name: 'take' }).click());
     const best = progress.get().best[1]!.score;
     act(() => screen.getByRole('button', { name: /qayta$/i }).click());
     advance(3_000);
     advance(60_000); // far past par: lower score
-    act(() => screen.getByRole('button', { name: 'take' }).click());
-    act(() => screen.getByRole('button', { name: 'take' }).click());
+    for (let i = 0; i < 3; i++) act(() => screen.getByRole('button', { name: 'take' }).click());
     expect(screen.queryByText(/yangi rekord/i)).toBeNull();
     expect(progress.get().best[1]!.score).toBe(best);
   });

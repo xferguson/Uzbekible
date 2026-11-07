@@ -1,5 +1,5 @@
-import { GAMES, getGame, registerGame } from './registry';
-import type { GameDefinition } from './types';
+import { GAMES, getGame, registerGame } from './registry.ts';
+import type { GameDefinition } from './types.ts';
 
 describe('registry', () => {
   it('looks up a registered game by id and rejects duplicates', () => {

@@ -1,0 +1,1001 @@
+<title>Juft Screen Mockups</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif+Display:wght@500;700&family=Noto+Naskh+Arabic:wght@400;600&family=Vazirmatn:wght@400;600&display=swap">
+<style>
+/* Layout: a reading column of plates. Each screen is drawn at native device size (390×844 or 1280×800)
+   and scaled to fit; every screen appears in both themes. Tokens are the approved D1 values
+   (docs/design/brief.md "Approved decisions"), named so U1 can lift them into src/design/tokens.ts. */
+:root, .t-light {
+  --color-ground: #F7F4EC; --color-surface: #FFFFFF; --color-cobalt: #1B3F8F; --color-cobalt-deep: #0F2A66;
+  --color-turquoise: #1FA3B5; --color-turquoise-pale: #CDEFF2; --color-gold: #B08423; --color-ochre: #B5652B;
+  --color-crack: #7A2E2E; --color-text: #13213F; --color-text-muted: #4B5878; --color-on-cobalt: #FFFFFF;
+  --color-on-deep: #FFFFFF; --color-heading: #0F2A66;
+  --on-gold: #0A1838;
+  --glaze-hi: rgba(255,255,255,.95); --glaze-tint: #EEF6F8;
+  --shadow: 0 2px 0 rgba(15,42,102,.18), 0 6px 14px rgba(15,42,102,.10);
+  --line: rgba(27,63,143,.16); --pattern: rgba(27,63,143,.07); --veil: rgba(247,244,236,.72);
+  color-scheme: light;
+}
+.t-dark {
+  --color-ground: #0B1A3A; --color-surface: #12254D; --color-cobalt: #5B86E8; --color-cobalt-deep: #0A1838;
+  --color-turquoise: #34C3D3; --color-turquoise-pale: #164A57; --color-gold: #E2B54C; --color-ochre: #D88A4E;
+  --color-crack: #E08A8A; --color-text: #EEF2FA; --color-text-muted: #A8B4CF; --color-on-cobalt: #0A1838;
+  --color-on-deep: #EEF2FA; --color-heading: #EEF2FA;
+  --on-gold: #0A1838;
+  --glaze-hi: rgba(255,255,255,.10); --glaze-tint: #16305F;
+  --shadow: 0 2px 0 rgba(0,0,0,.35), 0 6px 14px rgba(0,0,0,.25);
+  --line: rgba(168,180,207,.18); --pattern: rgba(91,134,232,.10); --veil: rgba(11,26,58,.74);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-ground: #0B1A3A; --color-surface: #12254D; --color-cobalt: #5B86E8; --color-cobalt-deep: #0A1838;
+    --color-turquoise: #34C3D3; --color-turquoise-pale: #164A57; --color-gold: #E2B54C; --color-ochre: #D88A4E;
+    --color-crack: #E08A8A; --color-text: #EEF2FA; --color-text-muted: #A8B4CF; --color-on-cobalt: #0A1838;
+    --color-on-deep: #EEF2FA; --color-heading: #EEF2FA; --glaze-hi: rgba(255,255,255,.10); --glaze-tint: #16305F;
+    --shadow: 0 2px 0 rgba(0,0,0,.35), 0 6px 14px rgba(0,0,0,.25); --line: rgba(168,180,207,.18);
+    --pattern: rgba(91,134,232,.10); --veil: rgba(11,26,58,.74); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --color-ground: #0B1A3A; --color-surface: #12254D; --color-cobalt: #5B86E8; --color-cobalt-deep: #0A1838;
+  --color-turquoise: #34C3D3; --color-turquoise-pale: #164A57; --color-gold: #E2B54C; --color-ochre: #D88A4E;
+  --color-crack: #E08A8A; --color-text: #EEF2FA; --color-text-muted: #A8B4CF; --color-on-cobalt: #0A1838;
+  --color-on-deep: #EEF2FA; --color-heading: #EEF2FA; --glaze-hi: rgba(255,255,255,.10); --glaze-tint: #16305F;
+  --shadow: 0 2px 0 rgba(0,0,0,.35), 0 6px 14px rgba(0,0,0,.25); --line: rgba(168,180,207,.18);
+  --pattern: rgba(91,134,232,.10); --veil: rgba(11,26,58,.74); color-scheme: dark;
+}
+:root {
+  --font-display: "Noto Serif Display", "Noto Serif", Georgia, serif;
+  --font-ui: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-naskh: "Noto Naskh Arabic", "Geeza Pro", "Times New Roman", serif;
+  --font-fa: "Vazirmatn", "Noto Naskh Arabic", Tahoma, sans-serif;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+  --r-tile: 14px; --r-card: 16px;
+  --ease-set: cubic-bezier(.2,.9,.3,1.15);
+}
+* { box-sizing: border-box; }
+body { background: var(--color-ground); color: var(--color-text); font: 400 16px/1.55 var(--font-ui); }
+.t-light, .t-dark { background: var(--color-ground); color: var(--color-text); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 var(--s7); }
+h1, h2, h3, h4 { font-family: var(--font-display); text-wrap: balance; margin: 0; color: var(--color-heading); }
+h2 { font-size: 30px; font-weight: 700; line-height: 1.15; }
+h3 { font-size: 20px; font-weight: 500; }
+p { margin: 0; max-width: 66ch; }
+.eyebrow { font: 600 12px/1 var(--font-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); }
+.muted { color: var(--color-text-muted); }
+code, .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .86em; }
+section.plate { display: grid; gap: var(--s5); padding-block: var(--s7) 0; }
+.plate-head { display: grid; gap: var(--s2); }
+.note { font-size: 14px; color: var(--color-text-muted); border-left: 3px solid var(--color-turquoise); padding: var(--s1) 0 var(--s1) var(--s3); max-width: 70ch; }
+a { color: var(--color-cobalt); }
+:focus-visible { outline: 3px solid var(--color-cobalt); outline-offset: 3px; }
+.fa { font-family: var(--font-fa); }
+.ar { font-family: var(--font-naskh); }
+
+/* ---------- masthead ---------- */
+.mast { background: var(--color-cobalt-deep); color: var(--color-on-deep); }
+.mast .inner { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: var(--s7) var(--s6); display: grid; gap: var(--s3); }
+.mast h1 { color: var(--color-on-deep) !important; font-size: clamp(36px, 7vw, 64px); font-weight: 700; line-height: 1.02; letter-spacing: -.01em; }
+.mast h1 i { font-style: normal; color: var(--color-gold); }
+.mast p { color: var(--color-on-deep); opacity: .86; }
+.mast .eyebrow { color: var(--color-gold); }
+.band { display: block; width: 100%; height: 56px; }
+
+/* ---------- flow ---------- */
+.flow { display: flex; flex-wrap: wrap; gap: var(--s2); align-items: center; padding: 0; margin: 0; list-style: none; counter-reset: f; }
+.flow li { display: inline-flex; align-items: center; gap: var(--s2); font-size: 14px; }
+.flow a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 var(--s3); border-radius: 12px; border: 1.5px solid var(--line); background: var(--color-surface); color: var(--color-text); text-decoration: none; font-weight: 600; }
+.flow a::before { counter-increment: f; content: counter(f); font: 700 14px var(--font-display); color: var(--color-turquoise); }
+.flow .arr { color: var(--color-text-muted); }
+.flow .side a { border-style: dashed; }
+.flow .side a::before { content: "↺"; }
+
+/* ---------- frames ---------- */
+.group { display: grid; gap: var(--s3); padding-top: var(--s5); border-top: 1px solid var(--line); }
+.group-head { display: grid; gap: var(--s1); }
+.frames { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: var(--s5) var(--s4); align-items: start; }
+.frames.desk-frames { grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); }
+.frames > div, section.plate > *, .group > * { min-width: 0; }
+.frame-cap { font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--s2); display: flex; justify-content: space-between; gap: 8px; }
+.frame-cap b { color: var(--color-text); font-weight: 600; }
+.fit { width: 100%; overflow: hidden; }
+.fit > .device { transform-origin: 0 0; }
+.device { border-radius: 36px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 20px 40px rgba(11,26,58,.18); position: relative; background: var(--color-ground); color: var(--color-text); }
+.device.desk { border-radius: 14px; }
+.device.phone::after { content: ""; position: absolute; bottom: 8px; left: 50%; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: var(--color-text); opacity: .35; z-index: 30; }
+
+/* ---------- screen chrome ---------- */
+.scr { position: absolute; inset: 0; display: flex; flex-direction: column; font-family: var(--font-ui); color: var(--color-text); background: var(--color-ground); overflow: hidden; }
+.scr > .bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.scr > :not(.bg):not(.overlay) { position: relative; z-index: 1; }
+.appbar { background: var(--color-cobalt-deep); color: var(--color-on-deep); flex: none; }
+.appbar .top { display: flex; align-items: center; gap: 8px; padding: 50px 12px 10px; }
+.desk .appbar .top { padding: 12px 24px; }
+.appbar .ttl { font: 700 24px/1 var(--font-display); color: var(--color-on-deep); flex: 1; display: flex; align-items: center; gap: 8px; min-width: 0; }
+.appbar .ttl svg { width: 26px; height: 26px; flex: none; }
+.appbar .meta { font: 600 15px var(--font-ui); display: inline-flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; }
+.appbar .meta svg { width: 18px; height: 18px; }
+.band-s { display: block; width: 100%; height: 16px; flex: none; }
+.ib { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; color: var(--color-on-deep); border: 1.5px solid rgba(255,255,255,.22); flex: none; }
+.ib svg { width: 22px; height: 22px; }
+.scr main { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 14px; padding: 16px 16px 46px; }
+.desk .scr main { padding: 28px 32px 32px; }
+.col-c { width: 100%; max-width: 440px; margin-inline: auto; display: flex; flex-direction: column; gap: 14px; }
+.btn { min-height: 52px; border-radius: 14px; font: 700 17px/1.1 var(--font-ui); display: flex; align-items: center; justify-content: center; gap: 8px; border: 2px solid var(--color-cobalt); background: var(--color-surface); color: var(--color-text); box-shadow: inset 0 0 0 1px var(--glaze-hi), var(--shadow); text-align: center; padding: 0 16px; }
+.btn.pri { background: var(--color-cobalt); color: var(--color-on-cobalt); }
+.btn small { font-weight: 500; font-size: 13px; opacity: .85; display: block; }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btns .btn.pri { grid-column: 1 / -1; }
+.card { background: var(--color-surface); border-radius: var(--r-card); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 16px; display: grid; gap: 10px; }
+.stars-s { display: inline-flex; gap: 2px; vertical-align: middle; }
+.stars-s svg { width: 16px; height: 16px; }
+
+/* ---------- HUD ---------- */
+.hud { background: var(--color-cobalt-deep); color: var(--color-on-deep); flex: none; }
+.hud .top { display: flex; align-items: center; gap: 10px; padding: 50px 12px 4px; }
+.hud .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 2px 16px 10px; }
+.desk .hud .top { padding: 10px 24px; gap: 18px; }
+.lvl { position: relative; width: 44px; height: 44px; display: grid; place-items: center; font: 700 17px/1 var(--font-display); color: var(--on-gold); flex: none; }
+.lvl svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.lvl span { position: relative; }
+.grow { flex: 1; }
+.hs { display: inline-flex; align-items: center; gap: 6px; font: 600 18px/1 var(--font-ui); font-variant-numeric: tabular-nums; color: var(--color-on-deep); }
+.hs svg { width: 18px; height: 18px; flex: none; }
+.hs.score { font-size: 20px; }
+.hs .delta { font-size: 14px; font-weight: 700; padding: 3px 6px; border-radius: 6px; background: var(--color-crack); color: #FFFFFF; }
+.t-dark .hs .delta { color: #0A1838; }
+.hs .delta.up { background: var(--color-turquoise); color: #0A1838; }
+.combo { display: inline-flex; align-items: center; gap: 4px; padding: 0 10px; height: 28px; border-radius: 999px; background: var(--color-gold); color: var(--on-gold); font: 700 15px/1 var(--font-ui); font-variant-numeric: tabular-nums; }
+.combo svg { width: 14px; height: 14px; }
+.combo.off { visibility: hidden; }
+.lives { display: inline-flex; gap: 6px; align-items: center; }
+.life { width: 24px; height: 24px; }
+
+/* ---------- board and tiles ---------- */
+.board { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 16px 16px 46px; align-content: center; }
+.desk .board { width: 100%; max-width: 760px; margin-inline: auto; gap: 24px; padding: 24px 32px 32px; }
+.bcol { display: grid; gap: 10px; grid-auto-rows: var(--th, 72px); min-width: 0; }
+.tile {
+  position: relative; display: grid; place-items: center; min-width: 0; width: 100%; height: 100%; padding: 6px 12px;
+  border-radius: var(--r-tile); border: 2px solid var(--color-cobalt);
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface) 55%, var(--glaze-tint) 100%);
+  box-shadow: inset 0 0 0 1px var(--glaze-hi), var(--shadow);
+  font: 600 var(--fs, 20px)/1.2 var(--font-ui); color: var(--color-text); user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  transition: transform 220ms var(--ease-set), border-color 180ms, background-color 180ms, opacity 200ms;
+}
+.tile .w { position: relative; z-index: 2; text-align: center; overflow-wrap: anywhere; }
+.tile .w[lang="fa"] { font-family: var(--font-fa); font-size: calc(var(--fs, 20px) + 3px); }
+.tile .w[lang="ar"] { font-family: var(--font-naskh); font-size: calc(var(--fs, 20px) + 4px); line-height: 1.35; }
+.tile .badge { position: absolute; top: -9px; right: -9px; width: 22px; height: 22px; z-index: 3; }
+.tile .lb { position: absolute; top: 4px; inset-inline-start: 6px; z-index: 3; font: 700 11px/1 var(--font-ui); letter-spacing: .04em; color: var(--color-text-muted); padding: 3px 5px; border-radius: 4px; border: 1px solid var(--line); background: var(--color-surface); }
+.tile .lb[lang="fa"], .tile .lb[lang="ar"] { font: 600 14px/1 var(--font-naskh); padding: 1px 5px 3px; }
+.tile.sel { border-color: var(--color-gold); border-width: 3px; transform: translateY(-3px); background: var(--color-turquoise-pale); }
+.tile.match { border-color: var(--color-turquoise); background: var(--color-turquoise-pale); }
+.tile .star-bg { position: absolute; inset: -12px; z-index: 1; width: calc(100% + 24px); height: calc(100% + 24px); }
+.tile.wrong { border-color: var(--color-crack); }
+.tile .cracks { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; border-radius: inherit; }
+.tile.socket { border: 2px dashed var(--color-text-muted); background: transparent; box-shadow: none; opacity: .38; }
+.tile.socket svg { width: 22px; height: 22px; }
+.tile.back { background: var(--color-cobalt-deep); border-color: var(--color-cobalt); }
+.tile.back svg { width: 30px; height: 30px; }
+.tile.fresh { box-shadow: 0 0 0 4px var(--color-turquoise-pale), 0 0 22px 2px var(--color-turquoise); }
+.tile.hinting { z-index: 5; }
+.tile.focus { outline: 3px solid var(--color-cobalt); outline-offset: 3px; }
+.tile.dim { opacity: .45; }
+.hint { position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: var(--color-text); color: var(--color-ground); font: 500 14px/1.2 var(--font-ui); padding: 7px 10px; border-radius: 8px; white-space: nowrap; z-index: 6; }
+.hint::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--color-text); }
+.hint b { font-weight: 700; }
+.ring { position: absolute; inset: -6px; border-radius: 18px; border: 3px solid var(--color-gold); z-index: 4; pointer-events: none; }
+.ring.half { clip-path: inset(0 50% 0 0); }
+.ring.dotted { border-style: dotted; }
+.fresh-tag { display: flex; align-items: center; justify-content: center; gap: 6px; font: 600 15px var(--font-ui); color: var(--color-text); }
+.fresh-tag svg { width: 18px; height: 18px; }
+.pop { position: absolute; z-index: 7; font: 700 18px/1 var(--font-ui); color: var(--color-text); background: var(--color-surface); border: 2px solid var(--color-turquoise); border-radius: 999px; padding: 4px 10px; font-variant-numeric: tabular-nums; }
+
+/* ---------- overlays ---------- */
+.overlay { position: absolute; inset: 0; z-index: 8; display: grid; place-items: center; background: var(--veil); padding: 16px; }
+.count { position: relative; width: 190px; height: 190px; display: grid; place-items: center; }
+.count svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.count span { position: relative; font: 700 84px/1 var(--font-display); color: var(--on-gold); }
+.count span.go { font-size: 34px; }
+.ovcard { width: min(100%, 320px); background: var(--color-surface); border-radius: 20px; border: 1px solid var(--line); box-shadow: var(--shadow); padding: 24px; display: grid; gap: 12px; text-align: center; }
+.ovcard h3 { font: 700 30px/1.1 var(--font-display); color: var(--color-heading); }
+
+/* ---------- home ---------- */
+.hello h2 { font-size: 30px; }
+.hello p { color: var(--color-text-muted); font-size: 15px; }
+.gcard { background: var(--color-surface); border: 2px solid var(--color-cobalt); border-radius: var(--r-card); padding: 14px; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: center; box-shadow: inset 0 0 0 1px var(--glaze-hi), var(--shadow); }
+.gcard .gi { width: 48px; height: 48px; grid-row: span 2; }
+.gcard h4 { font: 700 22px/1.1 var(--font-display); color: var(--color-text); }
+.gcard .sub { font-size: 14px; color: var(--color-text-muted); }
+.gcard .prog { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-variant-numeric: tabular-nums; padding-top: 8px; border-top: 1px solid var(--line); margin-top: 6px; }
+.gcard.lock { border-style: dashed; border-color: var(--color-text-muted); box-shadow: none; background: transparent; }
+.gcard.lock .gi { width: 36px; height: 36px; grid-row: auto; }
+.locks { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.locks .gcard { grid-template-columns: 1fr; justify-items: start; padding: 10px; gap: 4px; }
+.locks h4 { font-size: 17px; }
+.soon { display: inline-flex; gap: 4px; align-items: center; font-size: 12px; font-weight: 600; color: var(--color-text-muted); }
+.soon svg { width: 13px; height: 13px; }
+
+/* ---------- level map ---------- */
+.chapters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.chap { display: grid; justify-items: center; gap: 2px; padding: 8px 4px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--color-surface); font-size: 12px; text-align: center; min-height: 44px; }
+.chap svg { width: 40px; height: 34px; }
+.chap b { font: 700 13px/1.1 var(--font-display); color: var(--color-text); }
+.chap span { color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.chap.on { border: 3px solid var(--color-gold); padding: 6px 2px; }
+.chap.done span::before { content: "✓ "; color: var(--color-turquoise); font-weight: 700; }
+.chap.lock { border-style: dashed; background: transparent; opacity: .7; }
+.mnr { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+.mnr .cap { width: 222px; height: 80px; display: block; flex: none; }
+.mnr .shaft { width: 202px; display: flex; flex-direction: column; align-items: center; background: var(--color-turquoise-pale); border: 2px solid var(--color-cobalt); border-bottom: 0; border-radius: 6px 6px 0 0; }
+.mnr .ringb { height: 6px; align-self: stretch; background: repeating-linear-gradient(90deg, var(--color-cobalt) 0 8px, var(--color-surface) 8px 12px, var(--color-gold) 12px 20px, var(--color-surface) 20px 24px); border-block: 1.5px solid var(--color-cobalt); }
+.mnr .lrow { display: flex; gap: 10px; padding: 6px 0; justify-content: center; align-self: stretch; }
+.mnr .base { width: 222px; height: 16px; background: var(--color-cobalt); border-radius: 4px 4px 0 0; }
+.mnr .ground { width: 100%; max-width: 340px; height: 6px; border-radius: 3px; background: var(--color-ochre); }
+.cell { width: 64px; height: 52px; border-radius: 10px; display: grid; place-items: center; align-content: center; gap: 1px; font: 700 18px/1 var(--font-display); color: var(--color-text); border: 2px solid var(--color-cobalt); background: var(--color-surface); position: relative; }
+.cell .pips { display: flex; gap: 2px; }
+.cell .pips svg { width: 10px; height: 10px; }
+.cell.s1 { background: var(--color-surface); }
+.cell.s2 { background: var(--color-turquoise); color: var(--on-gold); border-color: var(--color-cobalt); }
+.cell.s3 { background: var(--color-gold); color: var(--on-gold); border-color: var(--color-cobalt-deep); }
+.cell.cur { border: 3px solid var(--color-gold); box-shadow: 0 0 0 4px var(--color-turquoise-pale); }
+.cell.cur .pl { width: 14px; height: 14px; }
+.cell.lk { border-style: dashed; border-color: var(--color-text-muted); background: transparent; color: var(--color-text-muted); font-size: 16px; }
+.cell.lk svg { width: 11px; height: 11px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 12px; color: var(--color-text-muted); justify-content: center; }
+.legend span { display: inline-flex; align-items: center; gap: 4px; }
+.legend i { width: 14px; height: 12px; border-radius: 3px; border: 1.5px solid var(--color-cobalt); display: inline-block; }
+
+/* ---------- ready ---------- */
+.ready { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 16px; text-align: center; align-items: center; }
+.ready .big-lvl { position: relative; width: 150px; height: 150px; display: grid; place-items: center; }
+.ready .big-lvl svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ready .big-lvl span { position: relative; font: 700 56px/1 var(--font-display); color: var(--on-gold); }
+.ready h2 { font-size: 34px; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.fact { background: var(--color-surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 6px; display: grid; gap: 4px; justify-items: center; }
+.fact b { font: 700 20px/1 var(--font-ui); font-variant-numeric: tabular-nums; color: var(--color-text); }
+.fact .eyebrow { font-size: 11px; }
+.chips { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px; border-radius: 999px; border: 1.5px solid var(--color-cobalt); font-size: 14px; font-weight: 600; background: var(--color-surface); }
+.chip .muted { font-weight: 500; }
+
+/* ---------- results / fail ---------- */
+.res { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; text-align: center; }
+.res h2 { font-size: 40px; line-height: 1.05; }
+.bigstars { display: flex; justify-content: center; gap: 10px; align-items: end; }
+.bigstars svg { width: 76px; height: 76px; }
+.bigstars svg.mid { width: 92px; height: 92px; }
+.ribbon { align-self: center; display: inline-flex; align-items: center; gap: 8px; background: var(--color-gold); color: var(--on-gold); font: 700 15px/1 var(--font-ui); padding: 9px 14px; border-radius: 8px; }
+.ribbon small { font-weight: 500; font-size: 13px; }
+.ribbon svg { width: 16px; height: 16px; }
+.bigscore { font: 700 54px/1 var(--font-display); font-variant-numeric: tabular-nums; color: var(--color-heading); }
+.bigscore small { display: block; font: 500 14px var(--font-ui); color: var(--color-text-muted); margin-top: 6px; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.stat { background: var(--color-surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 4px; display: grid; gap: 4px; }
+.stat b { font: 700 19px/1 var(--font-ui); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 11px; color: var(--color-text-muted); }
+.glazed { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: var(--color-text-muted); }
+.glazed .cell { width: 40px; height: 32px; font-size: 14px; }
+.cracked { display: flex; justify-content: center; gap: 12px; }
+.cracked svg { width: 64px; height: 64px; }
+
+/* ---------- settings ---------- */
+.sgroup { display: grid; gap: 0; background: var(--color-surface); border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; }
+.sgroup > .eyebrow { padding: 14px 16px 6px; }
+.srow { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: center; padding: 10px 16px; border-top: 1px solid var(--line); min-height: 60px; }
+.srow .nm { font: 600 18px/1.2 var(--font-ui); display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.srow .nm [lang="fa"] { font-family: var(--font-fa); }
+.srow .nm [lang="ar"] { font-family: var(--font-naskh); }
+.srow .nm small { font: 500 13px var(--font-ui); color: var(--color-text-muted); }
+.srow .ex { font-size: 13px; color: var(--color-text-muted); grid-column: 1; }
+.srow .ex [lang="fa"] { font-family: var(--font-fa); }
+.srow .ex [lang="ar"] { font-family: var(--font-naskh); }
+.tg { grid-row: 1 / span 2; grid-column: 2; width: 56px; height: 34px; border-radius: 999px; border: 2px solid var(--color-cobalt); background: var(--color-surface); position: relative; }
+.tg::after { content: ""; position: absolute; top: 4px; left: 4px; width: 22px; height: 22px; border-radius: 50%; background: var(--color-text-muted); }
+.tg.on { background: var(--color-cobalt); }
+.tg.on::after { left: 26px; background: var(--color-on-cobalt); }
+.tg.on::before { content: "✓"; position: absolute; left: 9px; top: 5px; font: 700 14px/1 var(--font-ui); color: var(--color-on-cobalt); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px 16px 14px; }
+.seg.three { grid-template-columns: 1fr 1fr 1fr; }
+.seg span { min-height: 48px; border-radius: 12px; border: 2px solid var(--line); display: grid; place-items: center; align-content: center; font: 600 15px/1.2 var(--font-ui); text-align: center; padding: 4px; gap: 2px; }
+.seg span small { font-weight: 500; font-size: 12px; color: var(--color-text-muted); }
+.seg span.on { border-color: var(--color-cobalt); background: var(--color-cobalt); color: var(--color-on-cobalt); }
+.seg span.on small { color: var(--color-on-cobalt); opacity: .85; }
+.seg span.on::before { content: "✓"; font-size: 12px; }
+.hard { display: inline-flex; gap: 4px; align-items: center; font: 700 11px/1 var(--font-ui); letter-spacing: .04em; text-transform: uppercase; padding: 2px 5px; border-radius: 5px; border: 1.5px solid var(--color-ochre); color: var(--color-text); }
+.seg span.on .hard { color: var(--color-on-cobalt); }
+.snote { font-size: 13px; color: var(--color-text-muted); padding: 0 16px 14px; }
+
+/* ---------- desktop variants ---------- */
+.desk .split { display: grid; grid-template-columns: 260px 1fr 360px; gap: 28px; flex: 1; min-height: 0; }
+.desk .split .chapters { grid-template-columns: 1fr; align-content: start; }
+.desk .split .chap { grid-template-columns: 48px 1fr; justify-items: start; text-align: start; padding: 10px 12px; column-gap: 10px; }
+.desk .split .chap svg { grid-row: span 2; }
+.desk .home-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: start; max-width: 1080px; width: 100%; margin-inline: auto; }
+
+/* ---------- storyboards ---------- */
+.sbs { display: grid; gap: var(--s5); }
+.sbrow { display: grid; gap: var(--s3); }
+.sbrow h3 { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.sbrow h3 small { font: 500 14px var(--font-ui); color: var(--color-text-muted); }
+.sbstrip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(200px, 1fr); gap: var(--s3); overflow-x: auto; padding: 14px 2px 6px; }
+.sb { margin: 0; display: grid; gap: var(--s2); align-content: start; }
+.sb-stage { position: relative; height: 132px; border-radius: 12px; border: 1px solid var(--line); background: var(--color-ground); display: flex; align-items: center; justify-content: center; gap: 10px; overflow: visible; }
+.sb-stage .tile { width: 84px; height: 56px; flex: none; --fs: 18px; }
+.sb-stage .bloom { position: absolute; width: 96px; height: 96px; left: calc(50% - 48px); top: calc(50% - 48px); z-index: 5; }
+.sb-stage .mini-l { position: absolute; top: 8px; right: 8px; }
+.sb-stage .mini-l .life { width: 18px; height: 18px; }
+.sb-stage .mini-s { position: absolute; top: 8px; left: 8px; font: 700 13px var(--font-ui); font-variant-numeric: tabular-nums; color: var(--color-text-muted); display: flex; gap: 4px; align-items: center; }
+.sb-stage .mini-s .delta { padding: 2px 5px; border-radius: 5px; background: var(--color-crack); color: #FFFFFF; font-size: 12px; }
+.t-dark .sb-stage .mini-s .delta { color: #0A1838; }
+.sb-stage .mini-s .delta.up { background: var(--color-turquoise); color: #0A1838; }
+.sb-stage .motion { position: absolute; bottom: 8px; left: 0; right: 0; text-align: center; font: 600 12px var(--font-ui); color: var(--color-text-muted); }
+.sb figcaption { display: grid; gap: 2px; font-size: 13px; }
+.sb figcaption b { font-size: 13px; color: var(--color-text); }
+.sb figcaption span { color: var(--color-text-muted); }
+.rmtag { display: inline-flex; align-items: center; gap: 4px; font: 700 11px/1 var(--font-ui); letter-spacing: .06em; text-transform: uppercase; padding: 4px 7px; border-radius: 5px; border: 1.5px solid var(--color-turquoise); color: var(--color-text); }
+
+/* ---------- board samples ---------- */
+.samples { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: var(--s4); }
+.sample { border-radius: var(--r-card); border: 1px solid var(--line); overflow: hidden; display: grid; }
+.sample .cap { padding: 10px 14px; display: flex; justify-content: space-between; gap: 8px; font-size: 13px; border-bottom: 1px solid var(--line); background: var(--color-surface); }
+.sample .cap b { font-weight: 600; }
+.sample .board { padding: 16px; gap: 12px; --th: 58px; }
+
+/* ---------- try it ---------- */
+.try { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: var(--s5); align-items: start; }
+.tryframe { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), var(--shadow); background: var(--color-ground); max-width: 400px; width: 100%; }
+.tryframe .hud .top { padding-top: 12px; }
+.tryframe .board { --th: 68px; padding: 24px 16px; min-height: 290px; }
+.tryframe .tile { cursor: pointer; touch-action: manipulation; }
+.tryframe .tile.socket { cursor: default; }
+.tryframe .bloom { position: absolute; width: 110px; height: 110px; z-index: 6; pointer-events: none; animation: bloom 250ms var(--ease-set) both, dissolve 200ms 250ms ease-in forwards; }
+.tryframe .tile.sel { transition: transform 220ms var(--ease-set); }
+.tryframe .overlay .ovcard { padding: 18px; }
+.ctrls { display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center; }
+button.ctl { font: 600 14px var(--font-ui); min-height: 44px; padding: 0 var(--s4); border-radius: 12px; border: 2px solid var(--color-cobalt); background: var(--color-surface); color: var(--color-text); cursor: pointer; }
+.toggle { display: inline-flex; gap: var(--s2); align-items: center; font-size: 14px; min-height: 44px; }
+.toggle input { width: 20px; height: 20px; accent-color: var(--color-cobalt); }
+.trynotes { display: grid; gap: var(--s3); }
+.trynotes ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 15px; max-width: 60ch; }
+kbd { font: 600 13px ui-monospace, Menlo, monospace; padding: 1px 6px; border-radius: 5px; border: 1px solid var(--line); background: var(--color-surface); }
+@keyframes bloom { from { opacity: 0; transform: scale(.3) rotate(-22.5deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes dissolve { to { opacity: 0; } }
+@keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+@keyframes draw { from { stroke-dashoffset: 60; } }
+@keyframes ringfill { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.tryframe .tile.shake { animation: shake 150ms ease-in-out 2; }
+.tryframe .cracks path { stroke-dasharray: 60; animation: draw 120ms ease-out both; }
+.tryframe .ring.fill { animation: ringfill 450ms linear both; }
+.tryframe .tile.going { transition: transform 200ms var(--ease-set), opacity 200ms ease-in; }
+.tryframe.rm *, .tryframe.rm *::before { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* ---------- timings ---------- */
+.tscroll { overflow-x: auto; min-width: 0; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--color-surface); }
+table.tm { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.tm th, table.tm td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.tm th { font-size: 12px; font-weight: 600; color: var(--color-text-muted); letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+table.tm td.ms { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+table.tm td:first-child { font-weight: 600; white-space: nowrap; }
+table.tm tr.sub td { padding-top: 16px; font: 700 15px var(--font-display); color: var(--color-heading); border-bottom: 1px solid var(--color-cobalt); }
+
+/* ---------- decisions ---------- */
+.decisions { display: grid; gap: 0; padding: 0; margin: 0; list-style: none; counter-reset: d; }
+.decisions li { display: grid; grid-template-columns: 32px 1fr; gap: var(--s3); padding: var(--s3) 0; border-bottom: 1px solid var(--line); }
+.decisions li::before { counter-increment: d; content: counter(d); font: 700 18px/1.3 var(--font-display); color: var(--color-turquoise); }
+.decisions b { font-weight: 600; }
+</style>
+
+<header class="mast">
+  <svg class="band" data-band aria-hidden="true"></svg>
+  <div class="inner">
+    <span class="eyebrow">Task D2 · proposal for approval</span>
+    <h1>Juft, screen by screen</h1>
+    <p>Every screen of Game 1 in the approved D1 system: the mosaic map, the board at four sizes, pause, results and fail, settings. Then the three moments that make the game feel like tilework: a match that sets into a <i style="font-style:normal;color:var(--color-gold)">girih star</i>, a wrong pair that cracks the glaze, and the long-press hint.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section class="plate" id="flow">
+  <div class="plate-head">
+    <span class="eyebrow">Docs/games/01-juft.md · core loop</span>
+    <h2>The flow</h2>
+    <p class="muted">Screens in the order a player meets them. Pause can interrupt the board at any time. Each name jumps to its screens.</p>
+  </div>
+  <ol class="flow">
+    <li><a href="#g-home">Home</a><span class="arr" aria-hidden="true">→</span></li>
+    <li><a href="#g-map">Level map</a><span class="arr" aria-hidden="true">→</span></li>
+    <li><a href="#g-ready">Ready</a><span class="arr" aria-hidden="true">→</span></li>
+    <li><a href="#g-count">Countdown</a><span class="arr" aria-hidden="true">→</span></li>
+    <li><a href="#g-board">Board</a><span class="arr" aria-hidden="true">→</span></li>
+    <li><a href="#g-results">Results</a><span class="arr" aria-hidden="true">or</span></li>
+    <li><a href="#g-fail">Fail</a></li>
+    <li class="side"><a href="#g-pause">Pause</a></li>
+    <li class="side"><a href="#g-settings">Settings</a></li>
+  </ol>
+</section>
+
+<section class="plate" id="phone">
+  <div class="plate-head">
+    <span class="eyebrow">Phone 390 × 844 · light and dark</span>
+    <h2>Phone screens</h2>
+    <p class="muted">Phone first: every control sits in the thumb's half of the screen, and every tap target is at least 44 × 44 px. The shell (menus, buttons) is English with Uzbek flourishes. The board carries no words except the two columns of tiles.</p>
+  </div>
+  <div id="phone-groups"></div>
+</section>
+
+<section class="plate" id="samples">
+  <div class="plate-head">
+    <span class="eyebrow">Brief §4 · scripts on the board</span>
+    <h2>Board samples in every script</h2>
+    <p class="muted">The source column is always on the left and Uzbek on the right, also for Persian and Arabic. Column position is part of the game, so it never flips; only the text inside an RTL tile runs right to left (<code>lang</code> and <code>dir</code> come from <code>scriptMeta()</code> in <code>core/text</code>). Uzbek follows the player's script setting. When more than one source language is on, each source tile carries a small badge in its own script.</p>
+  </div>
+  <div class="samples" id="samples-grid"></div>
+</section>
+
+<section class="plate" id="story">
+  <div class="plate-head">
+    <span class="eyebrow">Brief §7 · interaction storyboards</span>
+    <h2>Match, crack, hint</h2>
+    <p class="muted">Frame by frame, with the time each frame starts. The row under each is the reduced-motion version: the same shape cues (gold border, star outline, crack lines, dashed socket) appear at once, nothing slides and nothing shakes. Scroll each strip sideways on a phone.</p>
+  </div>
+  <div class="sbs" id="storyboards"></div>
+</section>
+
+<section class="plate" id="try">
+  <div class="plate-head">
+    <span class="eyebrow">Prototype</span>
+    <h2>Try a level</h2>
+    <p class="muted">A three-pair board with the real timings. Tap a tile in each column. Press and hold a tile for the English hint.</p>
+  </div>
+  <div class="try">
+    <div class="tryframe t-light" id="tryframe"></div>
+    <div class="trynotes">
+      <div class="ctrls">
+        <button class="ctl" id="try-new" type="button">New shuffle</button>
+        <label class="toggle"><input type="checkbox" id="try-rm"> Reduced motion</label>
+        <label class="toggle"><input type="checkbox" id="try-dark"> Dark theme</label>
+      </div>
+      <ul>
+        <li>Tap the same tile again to deselect it. Tapping another tile in the same column moves the selection.</li>
+        <li>The other tiles stay live during every animation, so a fast player is never blocked.</li>
+        <li>Matched tiles leave a dashed socket and nothing moves up, so no tile shifts under your thumb.</li>
+        <li>Hold for 450 ms: the gold ring fills, then the English gloss shows for 1.5 s and costs 5 points. A hold never selects the tile.</li>
+        <li>Keyboard: <kbd>Tab</kbd> to a tile, <kbd>Enter</kbd> or <kbd>Space</kbd> to select it, <kbd>H</kbd> for the hint.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="plate" id="timings">
+  <div class="plate-head">
+    <span class="eyebrow">Brief §7 · motion budget</span>
+    <h2>Animation timings</h2>
+    <p class="muted">Every single movement sits in the brief's 120–260 ms range, with the "tile set into mortar" easing <code>cubic-bezier(.2, .9, .3, 1.15)</code> for anything that lands. Longer entries are sequences of those steps, or holds. These become constants in <code>src/ui/motion.ts</code> (U1) so games never hard-code a duration.</p>
+  </div>
+  <div class="tscroll"><table class="tm" id="timing-table"></table></div>
+</section>
+
+<section class="plate" id="desktop">
+  <div class="plate-head">
+    <span class="eyebrow">Desktop 1280 × 800 · light and dark</span>
+    <h2>Desktop screens</h2>
+    <p class="muted">The same screens on a wide window. The board is capped at 760 px so the two columns stay close enough to scan in one glance, and the map joins the ready card in one view.</p>
+  </div>
+  <div id="desk-groups"></div>
+</section>
+
+<section class="plate" id="decisions">
+  <div class="plate-head">
+    <span class="eyebrow">For your approval</span>
+    <h2>Decisions to approve</h2>
+    <p class="muted">Approving D2 appends these to <code>docs/games/01-juft.md</code> and unlocks U4 (Juft board) and U5 (level map).</p>
+  </div>
+  <ol class="decisions">
+    <li><span><b>Screens and flow</b> as shown: home, level map, ready, countdown, board, pause, results, fail, settings. On desktop the map and the ready card share one view.</span></li>
+    <li><span><b>HUD is numbers and icons only:</b> pause, level octagon, three life tiles, timer, combo, score. No words, so nothing on the board screen is English. Screen-reader labels are the exception.</span></li>
+    <li><span><b>Columns:</b> source on the left, Uzbek on the right, for every language, RTL included. Each column is shuffled on its own. Tile height adapts to the pair count (1 pair: 96 px; 8 pairs: 66 px on a phone).</span></li>
+    <li><span><b>Matched tiles leave a dashed socket.</b> Nothing reflows, so no target moves under the thumb.</span></li>
+    <li><span><b>Input is never locked.</b> Other tiles stay tappable while a match or a crack plays.</span></li>
+    <li><span><b>Hidden tiles are face-down glazed tiles</b> (cobalt-deep with a star) during the countdown and pause. Pausing hides them instantly in every motion setting.</span></li>
+    <li><span><b>Long-press hint:</b> a 450 ms hold fills a gold ring, then the English gloss shows for 1500 ms and costs points. A hold never selects. Keyboard: <kbd>H</kbd>.</span></li>
+    <li><span><b>Mixed languages:</b> a small badge in the language's own script (TR, РУ, فا, عر) on the source tile, at the inline-start corner.</span></li>
+    <li><span><b>Hard pair</b> (open question 1): a one-pair board, no distractors, with a turquoise "Yangi naqsh" (new pattern) glow.</span></li>
+    <li><span><b>Combo counter visible</b> (open question 2): a gold ×N pill in the HUD from the second correct match in a row; it resets on a mistake.</span></li>
+    <li><span><b>Level map:</b> one building per chapter: Gumbaz (dome) 1–10, Minora (minaret) 11–20, Ayvon (iwan) 21–30, Registon 31+. Levels climb upward. A cleared cell's glaze shows its stars: white 1, turquoise 2, gold 3, with star pips as the shape cue.</span></li>
+    <li><span><b>Results:</b> Next, Replay, Map; a gold "Yangi rekord!" ribbon for a new best. <b>Fail:</b> Try again (same words, new shuffle) or Map; no score is saved.</span></li>
+    <li><span><b>Settings:</b> source languages named in their own script; the last one on cannot be turned off. Uzbek script as Lotin / Кирилл, with Cyrillic tagged hard mode. Motion and theme follow the system unless set.</span></li>
+    <li><span><b>One new token,</b> <code>--on-gold</code> (#0A1838 in both themes): dark text on gold and turquoise fills (level badge, combo pill, new-best ribbon, glazed map cells). 5.14:1 or better in every case; added to <code>contrast.mjs</code>.</span></li>
+    <li><span><b>Timings</b> as in the table above, held as shared constants in <code>src/ui</code>.</span></li>
+  </ol>
+</section>
+
+</div>
+
+<script>
+(function () {
+  const TAU = Math.PI * 2;
+  const f = (n) => +n.toFixed(2);
+  const ROT8 = -Math.PI / 2 + Math.PI / 8;
+
+  /* ---------- geometry: same functions as D1 (prototype of core/motif) ---------- */
+  function starPoints(cx, cy, R, n, k, rot = -Math.PI / 2) {
+    const r = R * Math.cos(Math.PI * k / n) / Math.cos(Math.PI * (k - 1) / n);
+    const pts = [];
+    for (let i = 0; i < 2 * n; i++) { const a = rot + i * Math.PI / n; const rad = i % 2 ? r : R; pts.push([cx + rad * Math.cos(a), cy + rad * Math.sin(a)]); }
+    return pts;
+  }
+  function starChords(cx, cy, R, n, k, rot = -Math.PI / 2) {
+    const v = [...Array(n)].map((_, i) => [cx + R * Math.cos(rot + i * TAU / n), cy + R * Math.sin(rot + i * TAU / n)]);
+    return v.map((p, i) => [p, v[(i + k) % n]]);
+  }
+  function polygon(cx, cy, R, n, rot = -Math.PI / 2 + Math.PI / n) {
+    return [...Array(n)].map((_, i) => [cx + R * Math.cos(rot + i * TAU / n), cy + R * Math.sin(rot + i * TAU / n)]);
+  }
+  const pathOf = (pts) => 'M' + pts.map((p) => f(p[0]) + ' ' + f(p[1])).join('L') + 'Z';
+  const chordsPath = (ch) => ch.map(([a, b]) => `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`).join('');
+  function signatureStar(cx, cy, R, o = {}) {
+    const sw = o.sw || Math.max(1, R * 0.05);
+    return `<path d="${pathOf(starPoints(cx, cy, R, 8, 2, ROT8))}" fill="${o.fill || 'var(--color-cobalt)'}"/>` +
+      `<path d="${chordsPath(starChords(cx, cy, R * 0.74, 8, 3, ROT8))}" stroke="${o.lace || 'var(--color-turquoise)'}" stroke-width="${f(sw)}" fill="none" stroke-linecap="round"/>` +
+      `<path d="${pathOf(polygon(cx, cy, R * 0.25, 8))}" fill="${o.gold || 'var(--color-gold)'}"/>`;
+  }
+  function patternSVG(id, cell, stroke) {
+    const h = cell / 2; const st = (x, y) => pathOf(starPoints(x, y, h, 8, 2, ROT8));
+    const d = [st(h, h), st(0, 0), st(cell, 0), st(0, cell), st(cell, cell)].join('');
+    return `<defs><pattern id="${id}" width="${cell}" height="${cell}" patternUnits="userSpaceOnUse"><path d="${d}" fill="none" stroke="${stroke}" stroke-width="1.2"/></pattern></defs><rect width="100%" height="100%" fill="url(#${id})"/>`;
+  }
+  function bandSVG(w, h) {
+    const step = h * 1.25; const n = Math.ceil(w / step) + 1;
+    let s = `<rect width="${w}" height="${h}" fill="var(--color-cobalt-deep)"/><rect y="1.5" width="${w}" height="1.5" fill="var(--color-gold)"/><rect y="${h - 3}" width="${w}" height="1.5" fill="var(--color-gold)"/>`;
+    for (let i = 0; i < n; i++) {
+      const cx = i * step + step / 2, cy = h / 2, R = h * 0.36;
+      s += `<path d="${pathOf(polygon(cx, cy, R * 1.12, 8))}" fill="none" stroke="var(--color-turquoise)" stroke-width="1.2" opacity=".6"/>`;
+      s += signatureStar(cx, cy, R, { fill: i % 2 ? 'var(--color-turquoise)' : '#FFFFFF', lace: i % 2 ? '#FFFFFF' : 'var(--color-cobalt)', sw: Math.max(.8, h / 40) });
+      const dx = cx + step / 2, dr = h * 0.12;
+      s += `<path d="M${f(dx)} ${f(cy - dr)}L${f(dx + dr)} ${f(cy)}L${f(dx)} ${f(cy + dr)}L${f(dx - dr)} ${f(cy)}Z" fill="var(--color-gold)"/>`;
+    }
+    return s;
+  }
+  const CRACKS = 'M50 0 L46 14 L54 24 L44 38 L50 60 M46 14 L30 10 L18 18 M54 24 L72 20 L86 30 M44 38 L28 44 L14 40 M50 48 L64 52';
+  const crackSVG = () => `<svg class="cracks" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true"><path d="${CRACKS}" fill="none" stroke="var(--color-crack)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>`;
+  const starPath = (c, R) => pathOf(starPoints(c, c, R, 8, 2, ROT8));
+  const miniStar = (fill = 'var(--color-gold)', stroke = 'var(--color-cobalt-deep)') => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${starPath(12, 11)}" fill="${fill}" stroke="${stroke}" stroke-width="1.2"/></svg>`;
+  const starBg = () => `<svg class="star-bg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="${pathOf(starPoints(50, 50, 50, 8, 2, ROT8))}" fill="none" stroke="var(--color-gold)" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg>`;
+  const octagon = (fill = 'var(--color-gold)', stroke = 'var(--color-cobalt-deep)') => `<svg viewBox="0 0 44 44" aria-hidden="true"><path d="${pathOf(polygon(22, 22, 21, 8))}" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/></svg>`;
+  const starOcta = () => `<svg viewBox="0 0 190 190" aria-hidden="true"><path d="${pathOf(starPoints(95, 95, 92, 8, 2, ROT8))}" fill="var(--color-gold)" stroke="var(--color-cobalt-deep)" stroke-width="3"/><path d="${pathOf(polygon(95, 95, 62, 8))}" fill="none" stroke="var(--color-cobalt-deep)" stroke-width="1.5" opacity=".35"/></svg>`;
+  const bloomSVG = (cls = 'bloom') => `<svg class="${cls}" viewBox="0 0 120 120" aria-hidden="true"><path d="${pathOf(polygon(60, 60, 58, 16))}" fill="var(--color-gold)" opacity=".25"/>${signatureStar(60, 60, 50, { fill: 'var(--color-gold)', lace: '#FFFFFF', gold: 'var(--color-cobalt-deep)' })}</svg>`;
+  const bigStar = (on, cls = '') => `<svg class="${cls}" viewBox="0 0 100 100" aria-hidden="true">${on ? signatureStar(50, 50, 46, { fill: 'var(--color-gold)', lace: '#FFFFFF', gold: 'var(--color-cobalt-deep)' }) : `<path d="${starPath(50, 46)}" fill="none" stroke="var(--color-text-muted)" stroke-width="2.5" stroke-dasharray="5 4"/>`}</svg>`;
+  const pips = (n, size = 10) => `<span class="pips" aria-hidden="true">${[0, 1, 2].map((i) => `<svg viewBox="0 0 12 12" style="width:${size}px;height:${size}px"><path d="${starPath(6, 5.5)}" fill="${i < n ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1"/></svg>`).join('')}</span>`;
+  const starsS = (n) => `<span class="stars-s" aria-label="${n} of 3 stars">${[0, 1, 2].map((i) => `<svg viewBox="0 0 24 24"><path d="${starPath(12, 11)}" fill="${i < n ? 'var(--color-gold)' : 'none'}" stroke="${i < n ? 'var(--color-gold)' : 'var(--color-text-muted)'}" stroke-width="1.6"/></svg>`).join('')}</span>`;
+  function life(state) { // 'ok' | 'cracked'
+    return `<svg class="life" viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="1" width="20" height="20" rx="5" fill="${state === 'cracked' ? 'var(--color-cobalt-deep)' : 'var(--color-surface)'}" stroke="${state === 'cracked' ? 'var(--color-crack)' : 'var(--color-cobalt)'}" stroke-width="2"/>` +
+      (state === 'cracked' ? '<path d="M11 1 L9 8 L13 12 L10 21 M9 8 L3 7 M13 12 L20 13" fill="none" stroke="var(--color-crack)" stroke-width="1.8"/>' : `<path d="${pathOf(starPoints(11, 11, 6, 8, 2, ROT8))}" fill="var(--color-turquoise)"/>`) + '</svg>';
+  }
+  const lives = (left) => `<span class="lives" role="img" aria-label="${left} of 3 lives">${[0, 1, 2].map((i) => life(i < left ? 'ok' : 'cracked')).join('')}</span>`;
+  const I = {
+    pause: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>',
+    clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>',
+    back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+    gear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
+    replay: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/></svg>',
+    map: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 21V10a7 7 0 0 1 14 0v11zM9 21v-6a3 3 0 0 1 6 0v6"/></svg>',
+    next: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>',
+    lock: '<svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="6" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 6 V4.5 a2.5 2.5 0 0 1 5 0 V6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>',
+  };
+  const NBSP = ' ';
+  const num = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, NBSP);
+
+  /* ---------- content: real pairs (source, uz-Latn, uz-Cyrl, English gloss for the hint) ---------- */
+  const W = {
+    tr: [['göz', 'koʻz', 'кўз', 'eye'], ['su', 'suv', 'сув', 'water'], ['dağ', 'togʻ', 'тоғ', 'mountain'], ['taş', 'tosh', 'тош', 'stone'], ['yol', 'yoʻl', 'йўл', 'road'], ['gün', 'kun', 'кун', 'day'], ['kitap', 'kitob', 'китоб', 'book'], ['şehir', 'shahar', 'шаҳар', 'city']],
+    ru: [['автобус', 'avtobus', 'автобус', 'bus'], ['поезд', 'poyezd', 'поезд', 'train'], ['стол', 'stol', 'стол', 'table'], ['телефон', 'telefon', 'телефон', 'phone']],
+    fa: [['شهر', 'shahar', 'шаҳар', 'city'], ['گل', 'gul', 'гул', 'flower'], ['دوست', 'doʻst', 'дўст', 'friend'], ['باغ', 'bogʻ', 'боғ', 'garden']],
+    ar: [['كتاب', 'kitob', 'китоб', 'book'], ['قلم', 'qalam', 'қалам', 'pen'], ['وقت', 'vaqt', 'вақт', 'time'], ['صبر', 'sabr', 'сабр', 'patience']],
+  };
+  const HARD = ['ev', 'uy', 'уй', 'house'];
+  const BADGE = { tr: 'TR', ru: 'РУ', fa: 'فا', ar: 'عر' };
+
+  /* ---------- tiles and board ---------- */
+  // t = { w, lang, st: 'sel'|'match'|'wrong'|'socket'|'back'|'fresh'|'hint'|'focus'|'dim', badge, gloss }
+  function tileHTML(t) {
+    const cls = ['tile'];
+    const st = (t.st || '').split(' ').filter(Boolean);
+    st.forEach((s) => cls.push(s === 'hint' ? 'hinting' : s));
+    if (st.includes('socket')) return `<div class="tile socket" aria-hidden="true">${miniStar('none', 'var(--color-text-muted)')}</div>`;
+    if (st.includes('back')) return `<div class="tile back" aria-hidden="true"><svg viewBox="0 0 40 40">${signatureStar(20, 20, 18, { fill: 'var(--color-cobalt)', lace: 'var(--color-turquoise)', sw: 1.2 })}</svg></div>`;
+    const dir = t.lang === 'fa' || t.lang === 'ar' ? 'rtl' : 'ltr';
+    let inner = `<span class="w" lang="${t.lang}" dir="${dir}">${t.w}</span>`;
+    if (t.badge) inner += `<span class="lb" lang="${t.badge}">${BADGE[t.badge]}</span>`;
+    if (st.includes('sel')) inner += `<span class="badge">${miniStar()}</span>`;
+    if (st.includes('match')) inner += starBg() + `<span class="badge">${miniStar('var(--color-turquoise)')}</span>`;
+    if (st.includes('wrong')) inner += crackSVG();
+    if (st.includes('hint')) inner += `<span class="ring"></span><span class="hint" lang="en">${t.gloss} <b>−5</b></span>`;
+    return `<div class="${cls.join(' ')}">${inner}</div>`;
+  }
+  // A fixed permutation for the right column: i -> (i*k + 1) mod n, with k coprime to n.
+  const gcd = (a, b) => (b ? gcd(b, a % b) : a);
+  const perm = (n) => { let k = 2; while (n > 2 && gcd(k, n) !== 1) k++; return [...Array(n)].map((_, i) => (i * k + 1) % n); };
+  // pairs: [[src, latn, cyrl, gloss, srcLang?]]
+  // opts: { src, script, orderR, done: [pair idx] (sockets on both sides), L / R: {pairIdx: state}, badges, th, fs }
+  function boardHTML(pairs, o = {}) {
+    const script = o.script || 'uz-Latn';
+    const n = pairs.length;
+    const orderR = o.orderR || perm(n);
+    const done = new Set(o.done || []);
+    const stOf = (side, pi) => (done.has(pi) ? 'socket' : (o[side] || {})[pi]);
+    const left = pairs.map((p, i) => tileHTML({ w: p[0], lang: p[4] || o.src || 'tr', badge: o.badges ? (p[4] || o.src) : null, gloss: p[3], st: stOf('L', i) }));
+    const right = orderR.map((pi) => { const p = pairs[pi]; return tileHTML({ w: script === 'uz-Cyrl' ? p[2] : p[1], lang: script, gloss: p[3], st: stOf('R', pi) }); });
+    const th = o.th || (n === 1 ? 96 : Math.min(88, Math.floor(((o.avail || 600) - (n - 1) * 10) / n)));
+    const fs = o.fs || (n >= 7 ? 19 : 20);
+    return `<div class="board" style="--th:${th}px;--fs:${fs}px"><div class="bcol">${left.join('')}</div><div class="bcol">${right.join('')}</div></div>`;
+  }
+  // Phone: pause, level, lives on the top line; time, combo, score below. Desktop: one line.
+  function hudHTML(o = {}, desk = false) {
+    const combo = o.combo > 1 ? `<span class="combo" aria-label="Combo ${o.combo}">${miniStar('var(--on-gold)', 'none')}×${o.combo}</span>` : '<span class="combo off" aria-hidden="true">×1</span>';
+    const delta = o.delta ? `<span class="delta${o.delta > 0 ? ' up' : ''}">${o.delta > 0 ? '+' : '−'}${Math.abs(o.delta)}</span>` : '';
+    const lead = `<span class="ib" role="button" aria-label="Pause">${I.pause}</span><span class="lvl" aria-label="Level ${o.level || 17}">${octagon()}<span>${o.level || 17}</span></span>`;
+    const stats = `<span class="hs" aria-label="Time">${I.clock}${o.time || '0:23'}</span>${combo}<span class="hs score" aria-label="Score">${delta}${miniStar('var(--color-gold)', 'none')}${num(o.score ?? 1240)}</span>`;
+    const lv = lives(o.lives ?? 3);
+    if (desk) return `<header class="hud"><div class="top">${lead}${stats}<span class="grow"></span>${lv}</div></header>`;
+    return `<header class="hud"><div class="top">${lead}<span class="grow"></span>${lv}</div><div class="row">${stats}</div></header>`;
+  }
+  const band = (w, h = 16) => `<svg class="band-s" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMinYMid slice" aria-hidden="true">${bandSVG(w, h)}</svg>`;
+  let pid = 0;
+  const bg = () => `<svg class="bg" aria-hidden="true">${patternSVG('p' + (pid++), 64, 'var(--pattern)')}</svg>`;
+  const appbar = (title, opts = {}, desk = false) => `<header class="appbar"><div class="top">${opts.back ? `<span class="ib" role="button" aria-label="Back">${I.back}</span>` : ''}<span class="ttl">${opts.brand ? miniStar('var(--color-gold)', 'var(--color-gold)') : ''}${title}</span>${opts.meta || ''}${opts.gear ? `<span class="ib" role="button" aria-label="Settings">${I.gear}</span>` : ''}</div>${band(desk ? 1280 : 390)}</header>`;
+
+  /* ---------- level map pieces ---------- */
+  const CH = [
+    ['Gumbaz', '1–10', 'done', `<path d="M6 30 V20 a14 12 0 0 1 28 0 V30 Z" fill="var(--color-turquoise)" stroke="var(--color-cobalt)" stroke-width="1.6"/><rect x="19" y="2" width="2" height="7" fill="var(--color-gold)"/><rect x="2" y="29" width="36" height="3" rx="1" fill="var(--color-ochre)"/>`],
+    ['Minora', '11–20', 'on', `<path d="M15 30 L16.5 9 H23.5 L25 30 Z" fill="var(--color-turquoise-pale)" stroke="var(--color-cobalt)" stroke-width="1.6"/><path d="M14 9 h12 l-2 -4 h-8 Z" fill="var(--color-cobalt)"/><path d="M16 16 h8 M15.6 23 h8.8" stroke="var(--color-gold)" stroke-width="1.6"/><rect x="2" y="29" width="36" height="3" rx="1" fill="var(--color-ochre)"/>`],
+    ['Ayvon', '21–30', 'lock', `<rect x="6" y="6" width="28" height="24" fill="none" stroke="var(--color-text-muted)" stroke-width="1.6"/><path d="M13 30 V18 a7 8 0 0 1 14 0 V30" fill="none" stroke="var(--color-text-muted)" stroke-width="1.6"/><rect x="2" y="29" width="36" height="3" rx="1" fill="var(--color-text-muted)"/>`],
+    ['Registon', '31+', 'lock', `<path d="M3 30 V12 h10 V30 M15 30 V8 h10 V30 M27 30 V12 h10 V30" fill="none" stroke="var(--color-text-muted)" stroke-width="1.6"/><rect x="2" y="29" width="36" height="3" rx="1" fill="var(--color-text-muted)"/>`],
+  ];
+  const chaptersHTML = () => `<nav class="chapters" aria-label="Chapters">${CH.map(([n, r, s, svg]) => `<div class="chap ${s}"${s === 'on' ? ' aria-current="true"' : ''}><svg viewBox="0 0 40 34" aria-hidden="true">${svg}</svg><b>${n}</b><span>${s === 'done' ? '10/10' : s === 'on' ? '6/10 · ' + r : r}</span></div>`).join('')}</nav>`;
+  const STARS = { 11: 3, 12: 2, 13: 3, 14: 1, 15: 3, 16: 2 };
+  function cellHTML(lv, cls = '') {
+    const s = STARS[lv];
+    if (s) return `<div class="cell s${s} ${cls}" role="button" aria-label="Level ${lv}, ${s} stars">${lv}${pips(s)}</div>`;
+    if (lv === 17) return `<div class="cell cur ${cls}" role="button" aria-label="Level 17, next">${lv}<svg class="pl" viewBox="0 0 24 24" fill="var(--color-gold)"><path d="M8 5v14l11-7z"/></svg></div>`;
+    return `<div class="cell lk ${cls}" aria-label="Level ${lv}, locked" aria-disabled="true">${lv}${I.lock}</div>`;
+  }
+  function minaretHTML(scale = 1) {
+    const rows = [[19, 20], [17, 18], [15, 16], [13, 14], [11, 12]];
+    const cap = `<svg class="cap" viewBox="0 0 222 80" aria-hidden="true">` +
+      `<rect x="110" y="0" width="2" height="7" fill="var(--color-gold)"/><path d="M76 31 a35 26 0 0 1 70 0 Z" fill="var(--color-turquoise)" stroke="var(--color-cobalt)" stroke-width="2"/>` +
+      `<rect x="76" y="31" width="70" height="31" fill="var(--color-surface)" stroke="var(--color-cobalt)" stroke-width="2"/>` +
+      [84, 104, 124].map((x) => `<path d="M${x} 60 V45 a7 7 0 0 1 14 0 V60" fill="var(--color-cobalt-deep)"/>`).join('') +
+      `<path d="M0 62 H222 L212 80 H10 Z" fill="var(--color-cobalt)"/>` +
+      [...Array(11)].map((_, i) => `<path d="${pathOf(starPoints(21 + i * 18, 71, 3.6, 8, 2, ROT8))}" fill="var(--color-gold)"/>`).join('') + `</svg>`;
+    const shaft = rows.map((r, i) => `${i ? '<div class="ringb"></div>' : ''}<div class="lrow">${r.map((lv) => cellHTML(lv)).join('')}</div>`).join('');
+    return `<div class="mnr" style="${scale !== 1 ? `zoom:${scale}` : ''}">${cap}<div class="shaft">${shaft}<div class="ringb"></div></div><div class="base"></div><div class="ground"></div></div>`;
+  }
+  const legend = () => `<div class="legend"><span><i style="background:var(--color-surface)"></i>1 ★</span><span><i style="background:var(--color-turquoise)"></i>2 ★</span><span><i style="background:var(--color-gold)"></i>3 ★</span><span><i style="border:3px solid var(--color-gold)"></i>next</span><span><i style="border-style:dashed;border-color:var(--color-text-muted)"></i>locked</span></div>`;
+
+  /* ---------- screens: each returns the inside of a device ---------- */
+  const J_ICON = `<svg class="gi" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="12" width="14" height="16" rx="3" fill="none" stroke="var(--color-cobalt)" stroke-width="2"/><rect x="24" y="12" width="14" height="16" rx="3" fill="none" stroke="var(--color-cobalt)" stroke-width="2"/><path d="${pathOf(starPoints(20, 20, 8, 8, 2, ROT8))}" fill="var(--color-gold)"/></svg>`;
+  const lockCard = (n, sub) => `<div class="gcard lock"><h4>${n}</h4><span class="sub">${sub}</span><span class="soon">${I.lock} Soon</span></div>`;
+  const readyCard = () => `<div class="ready">` +
+    `<span class="eyebrow">Minora · level</span><div class="big-lvl">${starOcta()}<span>17</span></div>` +
+    `<h2>Tayyormisiz?</h2>` +
+    `<div class="facts"><div class="fact"><span class="eyebrow">Pairs</span><b>6</b></div><div class="fact"><span class="eyebrow">Par</span><b>0:45</b></div><div class="fact"><span class="eyebrow">Best</span><b>—</b></div></div>` +
+    `<div class="chips"><span class="chip">TR <span class="muted">Türkçe</span></span><span class="chip">→ Lotin</span></div>` +
+    `<div class="btn pri" role="button" style="width:100%">${I.play} Start</div></div>`;
+  const SCREENS = {
+    home: (desk) => {
+      const juft = `<div class="gcard" role="button">${J_ICON}<h4>Juft</h4><span class="sub">Match the pairs</span><div class="prog"><span>Level 17 · Minora</span><span>${starsS(2)} 39 ★</span></div></div>`;
+      const others = `<div class="locks">${lockCard('Qoʻsh', 'Build words')}${lockCard('Wordfall', 'Zap it')}${lockCard('Eshit', 'Hear it')}</div>`;
+      const cta = `<div class="btn pri" role="button">${I.play} Davom et <small>· Juft, level 17</small></div>`;
+      const hello = `<div class="hello"><h2>Salom!</h2><p>Pick a game, or carry on where you stopped.</p></div>`;
+      const body = desk ? `<div class="home-grid"><div class="col-c" style="max-width:none">${hello}${juft}${cta}</div><div class="col-c" style="max-width:none"><span class="eyebrow">Coming later</span>${others}<div class="card"><span class="eyebrow">Your facade</span>${chaptersHTML()}</div></div></div>`
+        : `${hello}${juft}${cta}<span class="eyebrow">Coming later</span>${others}`;
+      return `${bg()}${appbar('Uzbekible', { brand: 1, gear: 1 }, desk)}<main>${body}</main>`;
+    },
+    map: (desk) => {
+      const meta = `<span class="meta">${miniStar('var(--color-gold)', 'none')}39</span>`;
+      if (desk) return `${bg()}${appbar('Juft', { back: 1, meta }, true)}<main><div class="split">${chaptersHTML()}<div style="display:flex;flex-direction:column;gap:12px;min-height:0">${minaretHTML(1.06)}${legend()}</div><div class="card" style="align-self:center">${readyCard()}</div></div></main>`;
+      return `${bg()}${appbar('Juft', { back: 1, meta })}<main style="gap:12px">${chaptersHTML()}${minaretHTML()}${legend()}<div class="btn pri" role="button">${I.play} Level 17</div></main>`;
+    },
+    ready: () => `${bg()}${appbar('Juft', { back: 1 })}<main>${readyCard()}</main>`,
+    count: (desk, o) => {
+      const backs = Array(6).fill(0).map(() => ['tr', 'k', 'k', 'x']);
+      const b = boardHTML(backs, { L: { 0: 'back', 1: 'back', 2: 'back', 3: 'back', 4: 'back', 5: 'back' }, R: { 0: 'back', 1: 'back', 2: 'back', 3: 'back', 4: 'back', 5: 'back' }, avail: desk ? 560 : 600 });
+      return `${bg()}${hudHTML({ time: '0:00', score: 0 }, desk)}${band(desk ? 1280 : 390)}${b}<div class="overlay"><div class="count">${starOcta()}<span class="${o.go ? 'go' : ''}"${o.go ? ' lang="uz-Latn"' : ''}>${o.go ? 'Boshla!' : '3'}</span></div></div>`;
+    },
+    board: (desk, o) => `${bg()}${hudHTML(o.hud || {}, desk)}${band(desk ? 1280 : 390)}${o.pre || ''}${boardHTML(o.pairs, Object.assign({ avail: desk ? 560 : (o.pre ? 560 : 600) }, o.b))}${o.post || ''}`,
+    pause: (desk) => {
+      const backs = Array(6).fill(0).map(() => ['tr', 'k', 'k', 'x']);
+      const all = { 0: 'back', 1: 'back', 2: 'back', 3: 'back', 4: 'back', 5: 'back' };
+      const b = boardHTML(backs, { L: all, R: all, done: [1, 4], avail: desk ? 560 : 600 });
+      return `${bg()}${hudHTML({ time: '0:19', score: 640, combo: 2 }, desk)}${band(desk ? 1280 : 390)}${b}<div class="overlay"><div class="ovcard"><span class="eyebrow">The clock is stopped</span><h3>Tanaffus</h3><p class="muted" style="font-size:14px">Tiles stay hidden until you resume.</p><div class="btn pri" role="button">${I.play} Resume</div><div class="btns"><div class="btn" role="button">${I.replay} Restart</div><div class="btn" role="button">${I.map} Map</div></div></div></div>`;
+    },
+    results: (desk, o) => {
+      const s = o.stars;
+      const heads = { 3: 'Barakalla!', 2: 'Yaxshi!', 1: 'Oʻtdingiz!' };
+      const subs = { 3: 'Well done', 2: 'Good', 1: 'You passed' };
+      const card = `<div class="res"><span class="eyebrow">Level 17 · cleared</span><h2 lang="uz-Latn">${heads[s]}</h2><span class="muted" style="margin-top:-8px">${subs[s]}</span>` +
+        `<div class="bigstars">${bigStar(s >= 1)}${bigStar(s >= 2, 'mid')}${bigStar(s >= 3)}</div>` +
+        (o.best ? `<span class="ribbon">${miniStar('var(--on-gold)', 'none')}Yangi rekord! <small>· New best</small></span>` : '') +
+        `<div class="bigscore">${num(o.score)}<small>points${o.best ? ' · was ' + num(o.was) : ' · best ' + num(o.was)}</small></div>` +
+        `<div class="stats"><div class="stat"><b>${o.time}</b><span>time · par 0:45</span></div><div class="stat"><b>${o.mis}</b><span>mistakes</span></div><div class="stat"><b>${o.hints}</b><span>hints</span></div><div class="stat"><b>×${o.combo}</b><span>best combo</span></div></div>` +
+        `<div class="glazed">${cellHTML(17).replace('cell cur', 'cell s' + s).replace(/<svg class="pl"[\s\S]*?<\/svg>/, pips(s, 8))} Minora cell 17 glazed · level 18 open</div>` +
+        `<div class="btns"><div class="btn pri" role="button">Next ${I.next}</div><div class="btn" role="button">${I.replay} Replay</div><div class="btn" role="button">${I.map} Map</div></div></div>`;
+      if (desk) {
+        return `${bg()}${hudHTML({ time: o.time, score: o.score, combo: o.combo }, true)}${band(1280)}${boardHTML(W.tr.slice(0, 6), { done: [0, 1, 2, 3, 4, 5], avail: 560 })}<div class="overlay"><div class="ovcard" style="width:440px;text-align:center">${card}</div></div>`;
+      }
+      return `${bg()}${appbar('Juft', { back: 1 })}<main>${card}</main>`;
+    },
+    fail: (desk) => {
+      const card = `<div class="res"><span class="eyebrow">Level 17 · three cracks</span><div class="cracked" role="img" aria-label="No lives left">${[0, 1, 2].map(() => life('cracked').replace('class="life"', 'class="life" style="width:64px;height:64px"')).join('')}</div><h2 lang="uz-Latn">Yana!</h2><p class="muted" style="margin-inline:auto">Again. No score is saved this time. You get the same six words in a new order.</p>` +
+        `<div class="stats" style="grid-template-columns:repeat(3,1fr)"><div class="stat"><b>4 / 6</b><span>pairs matched</span></div><div class="stat"><b>0:31</b><span>time</span></div><div class="stat"><b>3</b><span>mistakes</span></div></div>` +
+        `<div class="btns"><div class="btn pri" role="button">${I.replay} Try again</div><div class="btn" role="button" style="grid-column:1/-1">${I.map} Map</div></div></div>`;
+      if (desk) {
+        return `${bg()}${hudHTML({ time: '0:31', score: 380, lives: 0 }, true)}${band(1280)}${boardHTML(W.tr.slice(0, 6), { done: [0, 2, 4, 5], L: { 1: 'wrong dim', 3: 'dim' }, R: { 1: 'dim', 3: 'wrong dim' }, avail: 560 })}<div class="overlay"><div class="ovcard" style="width:440px">${card}</div></div>`;
+      }
+      return `${bg()}${appbar('Juft', { back: 1 })}<main>${card}</main>`;
+    },
+    settings: (desk) => {
+      const row = (code, name, en, ex, exLang, on, uz) => `<div class="srow"><span class="nm"><span lang="${code}" dir="${code === 'fa' || code === 'ar' ? 'rtl' : 'ltr'}">${name}</span><small>${en}</small></span><span class="ex">e.g. <span lang="${exLang}" dir="${exLang === 'fa' || exLang === 'ar' ? 'rtl' : 'ltr'}">${ex}</span> → ${uz}</span><span class="tg${on ? ' on' : ''}" role="switch" aria-checked="${on}" aria-label="${en}"></span></div>`;
+      const body = `<div class="sgroup"><span class="eyebrow">Source languages</span>` +
+        row('tr', 'Türkçe', 'Turkish', 'göz', 'tr', true, 'koʻz') + row('ru', 'Русский', 'Russian', 'автобус', 'ru', false, 'avtobus') + row('fa', 'فارسی', 'Persian', 'دوست', 'fa', true, 'doʻst') + row('ar', 'العربية', 'Arabic', 'قلم', 'ar', false, 'qalam') +
+        `<p class="snote">At least one stays on. With several on, each pair shows one source, Turkish first when it has the word.</p></div>` +
+        `<div class="sgroup"><span class="eyebrow">Uzbek script</span><div class="seg"><span class="on" lang="uz-Latn">Lotin<small>oʻzbekcha</small></span><span lang="uz-Cyrl">Кирилл<small>ўзбекча · <b class="hard" lang="en">hard ×1.25</b></small></span></div></div>` +
+        `<div class="sgroup"><span class="eyebrow">Motion</span><div class="seg"><span class="on">System</span><span>Reduced</span></div><span class="eyebrow" style="padding-top:4px">Theme</span><div class="seg three"><span class="on">System</span><span>Light</span><span>Dark</span></div></div>`;
+      return `${bg()}${appbar('Settings', { back: 1 }, desk)}<main style="overflow:hidden">${desk ? `<div class="col-c" style="max-width:560px">${body}</div>` : body}</main>`;
+    },
+  };
+
+  /* ---------- screen catalogue ---------- */
+  const tr6 = W.tr.slice(0, 6), tr3 = W.tr.slice(0, 3);
+  const PHONE = [
+    ['g-home', 'Home and game picker', 'Juft is the only live game; the others are dashed with a lock. "Davom et" (carry on) jumps straight to the next level.', [['home']]],
+    ['g-map', 'Level map: the Minora', 'Each chapter is a building, and its levels are the tiles of its facade. Levels climb from the base of the minaret to the lantern. Glaze depth shows stars, with pips as the non-colour cue. Every cell is 64 × 52 px.', [['map']]],
+    ['g-ready', 'Ready', 'Shell screen, so English is allowed. It shows what the level will ask: pair count, par time, best, and which languages and script are in play.', [['ready']]],
+    ['g-count', 'Countdown', 'The board is laid out face down, so the player sees the shape of the level but no words. 3, 2, 1, then "Boshla!" (start), and the tiles turn over.', [['count', { go: 0 }, '“3”'], ['count', { go: 1 }, '“Boshla!”']]],
+    ['g-board', 'Board: 1, 3, 6 and 8 pairs', 'The HUD is numbers and icons only. Tile height scales with the pair count; the 8-pair board still gives 66 px tiles. Mid-play states shown: selected, cleared sockets, a crack with a life lost, the combo pill.', [
+      ['board', { hud: { level: 5, time: '0:02', score: 0, combo: 0 }, pairs: [HARD], b: { L: { 0: 'fresh' }, R: { 0: 'fresh' } }, pre: `<div class="fresh-tag" style="padding-top:28px" lang="uz-Latn">${miniStar('var(--color-turquoise)', 'var(--color-cobalt)')}Yangi naqsh</div>`, post: '' }, '1 pair · hard pair'],
+      ['board', { hud: { level: 2, time: '0:04', score: 100, combo: 0 }, pairs: tr3, b: { L: { 1: 'sel' } } }, '3 pairs · one selected'],
+      ['board', { hud: { time: '0:19', score: 640, combo: 3, delta: 140 }, pairs: tr6, b: { done: [1, 4], L: { 2: 'sel' }, R: { 5: 'focus' } } }, '6 pairs · combo ×3, focus ring'],
+      ['board', { hud: { level: 24, time: '0:41', score: 1180, lives: 2, delta: -20 }, pairs: W.tr, b: { done: [0, 5], L: { 3: 'wrong' }, R: { 1: 'wrong' } } }, '8 pairs · wrong, life cracks'],
+      ['board', { hud: { time: '0:12', score: 395, delta: -5 }, pairs: tr6, b: { done: [0], R: { 2: 'hint' } } }, 'Long-press hint (the only English)'],
+    ]],
+    ['g-pause', 'Pause', 'The timer stops and every live tile turns face down at once, in every motion setting, so pausing can never be used to study the board. Cleared sockets stay visible.', [['pause']]],
+    ['g-results', 'Results: 1 to 3 stars, new best', 'The heading changes with the stars (Barakalla, Yaxshi, Oʻtdingiz). The new-best ribbon is gold with dark text. The glazed cell links the result to the map.', [
+      ['results', { stars: 3, best: 1, score: 1420, was: 1180, time: '0:38', mis: 0, hints: 0, combo: 6 }, '3 ★ · new best'],
+      ['results', { stars: 2, best: 0, score: 960, was: 1420, time: '0:51', mis: 1, hints: 1, combo: 3 }, '2 ★'],
+      ['results', { stars: 1, best: 0, score: 410, was: 1420, time: '1:24', mis: 2, hints: 3, combo: 2 }, '1 ★'],
+    ]],
+    ['g-fail', 'Fail: third strike', 'Three cracked life tiles say why the level ended. "Yana!" (again) restarts with the same words in a new order.', [['fail']]],
+    ['g-settings', 'Settings', 'Each language is named in its own script. Here Turkish and Persian are on; turning one off leaves the other locked on. Cyrillic is tagged as hard mode with its score multiplier.', [['settings']]],
+  ];
+  const DESK = [
+    ['Home', 'home', {}], ['Level map with ready card', 'map', {}], ['Countdown', 'count', { go: 0 }],
+    ['Board · 6 pairs', 'board', { hud: { time: '0:19', score: 640, combo: 3, delta: 140 }, pairs: tr6, b: { done: [1, 4], L: { 2: 'sel' } } }],
+    ['Board · 8 pairs, mixed languages', 'board', { hud: { level: 24, time: '0:41', score: 1180, lives: 2 }, pairs: [['телефон', 'telefon', 'телефон', 'phone', 'ru'], ['باغ', 'bogʻ', 'боғ', 'garden', 'fa'], ['göz', 'koʻz', 'кўз', 'eye', 'tr'], ['كتاب', 'kitob', 'китоб', 'book', 'ar'], ['su', 'suv', 'сув', 'water', 'tr'], ['دوست', 'doʻst', 'дўст', 'friend', 'fa'], ['поезд', 'poyezd', 'поезд', 'train', 'ru'], ['dağ', 'togʻ', 'тоғ', 'mountain', 'tr']], b: { badges: 1, done: [2] } }],
+    ['Pause', 'pause', {}],
+    ['Results · 3 ★, new best', 'results', { stars: 3, best: 1, score: 1420, was: 1180, time: '0:38', mis: 0, hints: 0, combo: 6 }],
+    ['Fail', 'fail', {}], ['Settings', 'settings', {}],
+  ];
+
+  function frame(kind, theme, desk, o, cap) {
+    const w = desk ? 1280 : 390, h = desk ? 800 : 844;
+    const inner = SCREENS[kind](desk, o || {});
+    return `<div><div class="frame-cap"><b>${cap}</b><span>${theme}</span></div><div class="fit" data-w="${w}" data-h="${h}"><div class="device ${desk ? 'desk' : 'phone'} t-${theme}" style="width:${w}px;height:${h}px"><div class="scr">${inner}</div></div></div></div>`;
+  }
+  document.getElementById('phone-groups').innerHTML = PHONE.map(([id, title, why, list]) =>
+    `<div class="group" id="${id}"><div class="group-head"><h3>${title}</h3><p class="muted" style="font-size:15px">${why}</p></div><div class="frames">` +
+    list.map(([k, o, cap]) => ['light', 'dark'].map((t) => frame(k, t, false, o, cap || title)).join('')).join('') + `</div></div>`).join('');
+  document.getElementById('desk-groups').innerHTML = DESK.map(([title, k, o]) =>
+    `<div class="group" id="d-${k}${o.pairs && o.pairs.length === 8 ? '-8' : ''}"><div class="group-head"><h3>${title}</h3></div><div class="frames desk-frames">${['light', 'dark'].map((t) => frame(k, t, true, o, title)).join('')}</div></div>`).join('');
+
+  /* ---------- board samples ---------- */
+  const SAMPLES = [
+    ['Turkish → Uzbek Latin', 'tr', 'uz-Latn', W.tr.slice(0, 4), 'light'],
+    ['Turkish → Uzbek Cyrillic', 'tr', 'uz-Cyrl', W.tr.slice(0, 4), 'dark'],
+    ['Russian → Uzbek Latin', 'ru', 'uz-Latn', W.ru, 'dark'],
+    ['Russian → Uzbek Cyrillic', 'ru', 'uz-Cyrl', W.ru, 'light'],
+    ['Persian (RTL) → Uzbek Latin', 'fa', 'uz-Latn', W.fa, 'light'],
+    ['Persian (RTL) → Uzbek Cyrillic', 'fa', 'uz-Cyrl', W.fa, 'dark'],
+    ['Arabic (RTL) → Uzbek Latin', 'ar', 'uz-Latn', W.ar, 'dark'],
+    ['Arabic (RTL) → Uzbek Cyrillic', 'ar', 'uz-Cyrl', W.ar, 'light'],
+    ['Mixed (Turkish off) → Latin', null, 'uz-Latn', [['телефон', 'telefon', 'телефон', 'phone', 'ru'], ['باغ', 'bogʻ', 'боғ', 'garden', 'fa'], ['كتاب', 'kitob', 'китоб', 'book', 'ar'], ['دوست', 'doʻst', 'дўст', 'friend', 'fa']], 'light'],
+    ['Mixed (Turkish off) → Cyrillic', null, 'uz-Cyrl', [['телефон', 'telefon', 'телефон', 'phone', 'ru'], ['باغ', 'bogʻ', 'боғ', 'garden', 'fa'], ['كتاب', 'kitob', 'китоб', 'book', 'ar'], ['دوست', 'doʻst', 'дўст', 'friend', 'fa']], 'dark'],
+  ];
+  document.getElementById('samples-grid').innerHTML = SAMPLES.map(([cap, src, script, pairs, theme]) =>
+    `<div class="sample t-${theme}"><div class="cap"><b>${cap}</b><span class="muted">${theme}</span></div>${boardHTML(pairs, { src: src || 'tr', script, badges: !src, th: 58, orderR: [2, 0, 3, 1] })}</div>`).join('') +
+    `<p class="note" style="grid-column:1/-1">Russian loans in Cyrillic mode are often letter-for-letter the same word (<span lang="ru">стол</span> ↔ <span lang="uz-Cyrl">стол</span>). That is a real feature of the content, not a bug: they sit at the easy end of the transparency scale, and <code>core/difficulty</code> mixes them with harder pairs.</p>`;
+
+  /* ---------- storyboards ---------- */
+  const T = (w, lang, st, extra = '') => tileHTML({ w, lang, st, gloss: 'eye' }).replace('<div class="tile', `<div style="${extra}" class="tile`);
+  const sb = (t, cap, inner) => `<figure class="sb"><div class="sb-stage">${inner}</div><figcaption><b class="mono">${t}</b><span>${cap}</span></figcaption></figure>`;
+  const mini = (left, score, delta) => `<span class="mini-l">${lives(left).replace(/class="life"/g, 'class="life"')}</span><span class="mini-s">★ ${score}${delta ? `<span class="delta${delta > 0 ? ' up' : ''}">${delta > 0 ? '+' : '−'}${Math.abs(delta)}</span>` : ''}</span>`;
+  const STORY = [
+    ['Correct match', 'göz ↔ koʻz · 650 ms in all', [
+      sb('0 ms', 'First tap: gold border, 3 px lift, corner star (220 ms).', mini(3, 520) + T('göz', 'tr', 'sel') + T('koʻz', 'uz-Latn', '')),
+      sb('0 ms', 'Second tap on the partner: it selects too, and the match is decided at once.', mini(3, 520) + T('göz', 'tr', 'sel') + T('koʻz', 'uz-Latn', 'sel')),
+      sb('0 → 200 ms', 'Both tiles slide toward each other and meet in the middle.', mini(3, 520) + T('göz', 'tr', 'sel', 'transform:translate(18px,-3px)') + T('koʻz', 'uz-Latn', 'sel', 'transform:translate(-18px,-3px)') + '<span class="motion">→ ←</span>'),
+      sb('200 → 450 ms', 'A gold 8-point star blooms over the join (scale .3 → 1, a 22.5° turn). Score +120 with the combo.', mini(3, 640, 120) + T('göz', 'tr', 'match', 'transform:translateX(24px)') + T('koʻz', 'uz-Latn', 'match', 'transform:translateX(-24px)') + bloomSVG()),
+      sb('450 → 650 ms', 'Tiles and star dissolve together.', mini(3, 640) + T('göz', 'tr', 'match', 'transform:translateX(24px);opacity:.35') + T('koʻz', 'uz-Latn', 'match', 'transform:translateX(-24px);opacity:.35') + bloomSVG().replace('class="bloom"', 'class="bloom" style="opacity:.3"')),
+      sb('650 ms', 'Two dashed sockets hold the places. Nothing reflows.', mini(3, 640) + T('', '', 'socket', 'width:84px;height:56px') + T('', '', 'socket', 'width:84px;height:56px')),
+    ], [
+      sb('0 ms', 'First tap: gold border and corner star appear at once, no lift.', mini(3, 520) + T('göz', 'tr', 'sel', 'transform:none') + T('koʻz', 'uz-Latn', '')),
+      sb('0 → 300 ms', 'Second tap: both tiles show the star outline and turquoise border, held still.', mini(3, 640, 120) + T('göz', 'tr', 'match') + T('koʻz', 'uz-Latn', 'match')),
+      sb('300 ms', 'Both become sockets in one step.', mini(3, 640) + T('', '', 'socket', 'width:84px;height:56px') + T('', '', 'socket', 'width:84px;height:56px')),
+    ]],
+    ['Wrong pair', 'ev ↔ koʻz · 500 ms in all', [
+      sb('0 ms', 'First tap selects ev.', mini(3, 640) + T('ev', 'tr', 'sel') + T('koʻz', 'uz-Latn', '')),
+      sb('0 → 120 ms', 'Second tap on a non-partner: crack lines draw across both glazes; a HUD life tile cracks. Score −20, combo resets.', mini(2, 620, -20) + T('ev', 'tr', 'wrong sel') + T('koʻz', 'uz-Latn', 'wrong')),
+      sb('0 → 300 ms', 'Both tiles shake twice (6 px, 150 ms each).', mini(2, 620) + T('ev', 'tr', 'wrong', 'transform:translateX(-6px)') + T('koʻz', 'uz-Latn', 'wrong', 'transform:translateX(6px)') + '<span class="motion">↔ ↔</span>'),
+      sb('300 → 500 ms', 'Selection clears; the cracks fade out.', mini(2, 620) + T('ev', 'tr', 'wrong', 'opacity:.7') + T('koʻz', 'uz-Latn', 'wrong', 'opacity:.7')),
+      sb('500 ms', 'Both tiles are back in play, unharmed. Only the life stays cracked.', mini(2, 620) + T('ev', 'tr', '') + T('koʻz', 'uz-Latn', '')),
+    ], [
+      sb('0 → 500 ms', 'Cracks shown fully drawn, no shake. The life tile cracks.', mini(2, 620, -20) + T('ev', 'tr', 'wrong') + T('koʻz', 'uz-Latn', 'wrong')),
+      sb('500 ms', 'Cracks and selection clear in one step.', mini(2, 620) + T('ev', 'tr', '') + T('koʻz', 'uz-Latn', '')),
+    ]],
+    ['Long-press hint', 'hold koʻz · 450 ms to show, 1500 ms visible', [
+      sb('0 ms', 'Finger down. A gold ring starts to fill clockwise around the tile.', mini(3, 400) + T('koʻz', 'uz-Latn', '', '') .replace('</div>', '<span class="ring" style="clip-path:inset(0 88% 0 0)"></span></div>')),
+      sb('225 ms', 'Half way. Lifting now is an ordinary tap and selects the tile.', mini(3, 400) + T('koʻz', 'uz-Latn', '').replace('</div>', '<span class="ring half"></span></div>')),
+      sb('450 ms', 'Ring closed: the English gloss fades in (120 ms) above the tile; −5 points. The tile is not selected.', mini(3, 395, -5) + T('koʻz', 'uz-Latn', 'hint')),
+      sb('450 → 1950 ms', 'Gloss stays 1.5 s even if the finger lifts. The rest of the board stays live.', mini(3, 395) + T('koʻz', 'uz-Latn', 'hint').replace('<span class="ring"></span>', '')),
+      sb('1950 ms', 'Gloss fades out (160 ms). The hint is logged.', mini(3, 395) + T('koʻz', 'uz-Latn', '')),
+    ], [
+      sb('0 → 450 ms', 'A dotted gold ring shows the hold has registered; it does not fill.', mini(3, 400) + T('koʻz', 'uz-Latn', '').replace('</div>', '<span class="ring dotted"></span></div>')),
+      sb('450 → 1950 ms', 'Gloss appears and later disappears without fades.', mini(3, 395, -5) + T('koʻz', 'uz-Latn', 'hint').replace('<span class="ring"></span>', '')),
+    ]],
+  ];
+  document.getElementById('storyboards').innerHTML = STORY.map(([title, sub, motion, rm]) =>
+    `<div class="sbrow"><h3>${title} <small>${sub}</small></h3><div class="sbstrip">${motion.join('')}</div><span class="rmtag">Reduced motion</span><div class="sbstrip">${rm.join('')}</div></div>`).join('');
+
+  /* ---------- timings table ---------- */
+  const TM = [
+    ['Board'],
+    ['Select', '220', 'Lift 3 px with overshoot, border to gold 3 px', 'Border and corner star at once, no lift'],
+    ['Deselect / move selection', '160', 'Settle back down', 'Instant'],
+    ['Match: slide', '0–200', 'Tiles travel to the midpoint', 'None'],
+    ['Match: star bloom', '200–450', 'Scale .3 → 1, rotate −22.5° → 0', 'Star outline on both tiles, held 300 ms'],
+    ['Match: dissolve', '450–650', 'Tiles and star fade out', 'Tiles become sockets at 300 ms'],
+    ['Score pop', '0–400', '+N chip rises 16 px and fades', 'Score number changes in place'],
+    ['Combo pill', '180', 'Pops 1 → 1.15 → 1 on increase', 'Number changes in place'],
+    ['Wrong: crack draw', '0–120', 'Crack lines draw in', 'Cracks shown fully drawn'],
+    ['Wrong: shake', '0–300', 'Two 150 ms shakes, 6 px', 'None'],
+    ['Wrong: life crack', '0–120', 'HUD tile cracks in with the tile cracks', 'Cracked tile at once'],
+    ['Wrong: recover', '300–500', 'Selection clears, cracks fade', 'All clear at 500 ms in one step'],
+    ['Hint: hold to show', '450', 'Gold ring fills (linear)', 'Dotted ring, no fill'],
+    ['Hint: gloss', '120 in · 1500 hold · 160 out', 'Fades in and out', 'Appears and disappears at once'],
+    ['Level flow'],
+    ['Countdown numeral', '700 each', 'Each 3, 2, 1 sets in (220) then holds', 'Numbers change in place'],
+    ['"Boshla!"', '500', 'Sets in, then the tiles turn', 'Same hold'],
+    ['Tiles turn face up', '200 + 20 per row', 'Flip in rows, top first', 'All at once'],
+    ['Pause: hide tiles', '0', 'Instant in every mode, so pause cannot be used to read the board', 'Instant'],
+    ['Pause: veil and card', '160', 'Fade in', 'Instant'],
+    ['Resume', '200', 'Tiles turn face up', 'All at once'],
+    ['Results card', '260', 'Rises 24 px and fades in', 'Instant'],
+    ['Results stars', '250 each, 150 apart', 'Each star sets in like a tile', 'All three at once'],
+    ['New-best ribbon', '220 after the stars', 'Slides in from the left', 'Instant'],
+    ['Fail', '120 + 260', 'Last life cracks, board dims', 'Instant'],
+    ['Map'],
+    ['Cell glaze on return', '400', 'Glaze fills the newly cleared cell', 'Instant'],
+    ['Next-level cell', '1600 loop', 'Gold border breathes (opacity .6 ↔ 1)', 'Static gold border and play mark'],
+  ];
+  document.getElementById('timing-table').innerHTML = '<thead><tr><th>Moment</th><th>ms</th><th>Motion</th><th>Reduced motion</th></tr></thead><tbody>' +
+    TM.map((r) => r.length === 1 ? `<tr class="sub"><td colspan="4">${r[0]}</td></tr>` : `<tr><td>${r[0]}</td><td class="ms">${r[1]}</td><td>${r[2]}</td><td class="muted">${r[3]}</td></tr>`).join('') + '</tbody>';
+
+  /* ---------- prototype ---------- */
+  const fr = document.getElementById('tryframe');
+  const PAIRS = [['göz', 'koʻz', 'eye'], ['dağ', 'togʻ', 'mountain'], ['yol', 'yoʻl', 'road']];
+  let S;
+  const shuffle = (a) => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+  const rm = () => fr.classList.contains('rm') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function newGame() {
+    S = { L: shuffle([0, 1, 2]), R: shuffle([0, 1, 2]), done: new Set(), sel: null, lives: 3, score: 0, combo: 0, t0: performance.now(), end: null, hint: 0 };
+    render();
+  }
+  function tileEl(col, idx) {
+    const pi = S[col][idx];
+    if (S.done.has(pi)) return `<div class="tile socket" aria-hidden="true">${miniStar('none', 'var(--color-text-muted)')}</div>`;
+    const sel = S.sel && S.sel.col === col && S.sel.idx === idx;
+    const w = col === 'L' ? PAIRS[pi][0] : PAIRS[pi][1];
+    return `<div class="tile${sel ? ' sel' : ''}" role="button" tabindex="0" aria-pressed="${!!sel}" data-col="${col}" data-idx="${idx}"><span class="w" lang="${col === 'L' ? 'tr' : 'uz-Latn'}">${w}</span>${sel ? `<span class="badge">${miniStar()}</span>` : ''}</div>`;
+  }
+  function render() {
+    const t = Math.floor(((S.end || performance.now()) - S.t0) / 1000);
+    fr.innerHTML = hudHTML({ level: 3, time: `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`, score: S.score, combo: S.combo, lives: S.lives }) + band(400, 14) +
+      `<div class="board" style="--th:68px"><div class="bcol">${[0, 1, 2].map((i) => tileEl('L', i)).join('')}</div><div class="bcol">${[0, 1, 2].map((i) => tileEl('R', i)).join('')}</div></div>` +
+      (S.end ? `<div class="overlay"><div class="ovcard">${S.lives ? `<h3 lang="uz-Latn">Barakalla!</h3><p class="muted">${num(S.score)} points</p>` : `<h3 lang="uz-Latn">Yana!</h3><p class="muted">Three cracks.</p>`}<button class="btn pri" type="button" id="try-again">${I.replay} ${S.lives ? 'Replay' : 'Try again'}</button></div></div>` : '');
+    const again = fr.querySelector('#try-again'); if (again) again.addEventListener('click', newGame);
+  }
+  setInterval(() => { if (S && !S.end) { const h = fr.querySelector('.hs'); if (h) { const t = Math.floor((performance.now() - S.t0) / 1000); h.innerHTML = I.clock + `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`; } } }, 250);
+  const el = (col, idx) => fr.querySelector(`.tile[data-col="${col}"][data-idx="${idx}"]`);
+  function tap(col, idx) {
+    if (S.end) return;
+    const pi = S[col][idx]; if (S.done.has(pi)) return;
+    if (!S.sel) { S.sel = { col, idx }; render(); return; }
+    if (S.sel.col === col) { S.sel = S.sel.idx === idx ? null : { col, idx }; render(); focusTile(col, idx); return; }
+    const a = S.sel, other = { col, idx }; S.sel = null;
+    const L = a.col === 'L' ? a : other, R = a.col === 'R' ? a : other;
+    const lt = el(L.col, L.idx), rt = el(R.col, R.idx);
+    if (S.L[L.idx] === S.R[R.idx]) {
+      S.combo += 1; S.score += 100 + (S.combo > 1 ? 20 * (S.combo - 1) : 0);
+      const lp = S.L[L.idx];
+      [lt, rt].forEach((t) => { t.classList.add('sel', 'match'); t.insertAdjacentHTML('beforeend', starBg()); });
+      if (!rm()) {
+        const fb = fr.getBoundingClientRect(), lb = lt.getBoundingClientRect(), rb = rt.getBoundingClientRect();
+        const mx = (lb.right + rb.left) / 2, my = (lb.top + lb.bottom + rb.top + rb.bottom) / 4;
+        lt.classList.add('going'); rt.classList.add('going');
+        lt.style.transform = `translate(${mx - lb.right}px, ${my - (lb.top + lb.bottom) / 2}px)`;
+        rt.style.transform = `translate(${mx - rb.left}px, ${my - (rb.top + rb.bottom) / 2}px)`;
+        setTimeout(() => {
+          fr.insertAdjacentHTML('beforeend', bloomSVG('bloom'));
+          const b = fr.lastElementChild; b.style.left = (mx - fb.left - 55) + 'px'; b.style.top = (my - fb.top - 55) + 'px';
+          setTimeout(() => { lt.style.opacity = rt.style.opacity = '0'; }, 250);
+          setTimeout(() => { b.remove(); finish(lp); }, 450);
+        }, 200);
+      } else setTimeout(() => finish(lp), 300);
+      updateHud();
+    } else {
+      S.combo = 0; S.lives -= 1; S.score = Math.max(0, S.score - 20);
+      [lt, rt].forEach((t) => { t.classList.add('wrong'); if (!rm()) t.classList.add('shake'); t.insertAdjacentHTML('beforeend', crackSVG()); });
+      updateHud();
+      setTimeout(() => { if (S.lives <= 0) { S.end = performance.now(); } render(); }, rm() ? 500 : 300);
+    }
+  }
+  function finish(pi) { S.done.add(pi); if (S.done.size === 3) S.end = performance.now(); render(); }
+  function updateHud() {
+    const hud = fr.querySelector('.hud'); if (!hud) return;
+    const t = Math.floor((performance.now() - S.t0) / 1000);
+    hud.outerHTML = hudHTML({ level: 3, time: `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`, score: S.score, combo: S.combo, lives: S.lives });
+  }
+  function focusTile(col, idx) { const t = el(col, idx); if (t) t.focus(); }
+  function hint(t) {
+    const pi = S[t.dataset.col][+t.dataset.idx];
+    t.querySelectorAll('.ring').forEach((r) => r.remove());
+    if (t.querySelector('.hint')) return;
+    t.insertAdjacentHTML('beforeend', `<span class="hint" lang="en">${PAIRS[pi][2]} <b>−5</b></span>`);
+    S.score = Math.max(0, S.score - 5); S.hint += 1; updateHud();
+    setTimeout(() => { const h = t.querySelector('.hint'); if (h) h.remove(); }, 1500);
+  }
+  let press = null;
+  fr.addEventListener('pointerdown', (e) => {
+    const t = e.target.closest('.tile[data-col]'); if (!t || S.end) return;
+    t.insertAdjacentHTML('beforeend', `<span class="ring ${rm() ? 'dotted' : 'fill'}"></span>`);
+    press = { t, fired: false, timer: setTimeout(() => { press.fired = true; hint(t); }, 450) };
+  });
+  const cancel = () => { if (press) { clearTimeout(press.timer); press.t.querySelectorAll('.ring').forEach((r) => r.remove()); } };
+  fr.addEventListener('pointerup', (e) => {
+    if (!press) return; cancel(); const p = press; press = null;
+    if (!p.fired && e.target.closest('.tile') === p.t) tap(p.t.dataset.col, +p.t.dataset.idx);
+  });
+  fr.addEventListener('pointerleave', () => { cancel(); press = null; });
+  fr.addEventListener('pointercancel', () => { cancel(); press = null; });
+  fr.addEventListener('contextmenu', (e) => { if (e.target.closest('.tile')) e.preventDefault(); });
+  fr.addEventListener('keydown', (e) => {
+    const t = e.target.closest('.tile[data-col]'); if (!t) return;
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tap(t.dataset.col, +t.dataset.idx); }
+    else if (e.key === 'h' || e.key === 'H') { e.preventDefault(); hint(t); }
+  });
+  document.getElementById('try-new').addEventListener('click', newGame);
+  document.getElementById('try-rm').addEventListener('change', (e) => fr.classList.toggle('rm', e.target.checked));
+  document.getElementById('try-dark').addEventListener('change', (e) => { fr.classList.toggle('t-dark', e.target.checked); fr.classList.toggle('t-light', !e.target.checked); });
+  newGame();
+
+  /* ---------- bands and fitting ---------- */
+  document.querySelectorAll('[data-band]').forEach((svg) => { svg.setAttribute('viewBox', '0 0 1600 56'); svg.setAttribute('preserveAspectRatio', 'xMinYMid slice'); svg.innerHTML = bandSVG(1600, 56); });
+  function fit() {
+    document.querySelectorAll('.fit').forEach((box) => {
+      const w = +box.dataset.w, h = +box.dataset.h; const s = Math.min(1, box.clientWidth / w);
+      box.firstElementChild.style.transform = `scale(${s})`; box.style.height = (h * s) + 'px';
+    });
+  }
+  fit(); addEventListener('resize', fit);
+})();
+</script>

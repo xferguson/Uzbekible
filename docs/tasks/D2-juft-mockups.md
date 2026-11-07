@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | in review |
 | Lane | B Design |
 | Depends on | [D1](D1-design-system-mockups.md) |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |

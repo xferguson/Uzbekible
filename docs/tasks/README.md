@@ -33,8 +33,15 @@ E Juft:       E1 (C5,K7,K8,K4,Q2,Q7) · E2 (K3) · E3 (K4,E2,K10,Q5,Q6)
 F UI:         U1 (D1,T00,K9) ── U2 / U3 / U5 / U6 ── U4 ── **U7 ── U8 ── R1**  (U3 also needs Q7)
 Q Quality:    Q1 ─┬─ Q2      Q5 ─┬─ Q6        Q3 · Q4 · Q9 (independent)
                   └─ Q8         └─ Q7
+X Harness:    X1 ─┬─ X5 ──┐      X2 ── X4 (also Q4)
+                  └─ X7   ├─ X8  X3 (independent)
+              X6 ─────────┘
 ```
 **Start right away, in parallel:** T00, D1, C1, S1, S2. After T00: T01, T02, K1, K2, K4, K5, K9.
+
+**X lane (harness efficiency):** makes agent sessions cheaper and more uniform: a quiet `npm run gate`, a
+SessionStart hook, a task board with a CI status check, guardrail hooks, a generated API digest, helper
+subagents, and leaner task/skill docs. Harness-only; none are gated. Start X1, X2, X3, X6 in parallel.
 
 **Q lane (added after K7, from a tech-quality review):** fixes drift between the built code and the quality rules
 (broken content CLI, missing transparency, coverage that skipped `index.ts`, mismatched event names, an unsettled
@@ -89,6 +96,14 @@ so merge it while few branches are open.
 | [Q7](Q7-game-contract.md) | One game contract: GameDefinition types | Q Quality | Q5 |
 | [Q8](Q8-type-helper-consolidation.md) | Consolidate duplicated types and helpers | Q Quality | Q1 |
 | [Q9](Q9-docs-drift.md) | Fix docs drift in technical design and architecture | Q Quality | none |
+| [X1](X1-gate-script.md) | One quiet fast-gate command: `npm run gate` | X Harness | none |
+| [X2](X2-session-start-hook.md) | SessionStart hook: deps, fresh main, task board | X Harness | none |
+| [X3](X3-task-status-tooling.md) | Task board script + CI check that merged tasks are done | X Harness | none |
+| [X4](X4-guardrail-hooks.md) | Guardrail hooks and a permission allowlist | X Harness | X2, Q4 |
+| [X5](X5-docs-diet.md) | Docs diet: drop duplicated instructions from tasks and skills | X Harness | X1 |
+| [X6](X6-api-digest.md) | Generated API digest: `docs/api.md` | X Harness | none |
+| [X7](X7-helper-subagents.md) | Cheap helper subagents: gate-runner and ci-triage | X Harness | X1 |
+| [X8](X8-task-breakdown-skill.md) | `task-breakdown` skill for writing new task files | X Harness | X5, X6 |
 
 ## Writing new tasks
 Copy [`_TEMPLATE.md`](_TEMPLATE.md). Keep a task small enough for one PR (about ≤ 400 lines of non-generated

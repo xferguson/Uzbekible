@@ -20,6 +20,8 @@ export const HINT_HOLD_MS = 450;
 export const WRONG_MS = 500;
 /** Correct check: the star shows its tick while the next pair slides in. */
 export const RIGHT_MS = 650;
+/** How long the point cost stays beside a hinted slot. */
+export const HINT_POP_MS = 1500;
 
 const BADGES: Record<SourceLang, string> = { tr: 'TR', ru: 'РУ', fa: 'فا', ar: 'عر' };
 const MODE_NAMES: Record<ImloMode, string> = { oson: 'Oson', orta: 'Oʻrta', qiyin: 'Qiyin' };
@@ -41,6 +43,8 @@ export interface ImloBoardProps extends BoardProps<
 > {
   /** Injected for tests; defaults to the system clock. */
   clock?: FrameClock;
+  /** Points a hint costs, shown beside the hinted slot (the game's scoring config). */
+  hintCost?: number;
 }
 
 type Result = Partial<Record<Side, 'right' | 'wrong'>>;
@@ -54,6 +58,7 @@ export function Board({
   dispatch,
   subscribe,
   clock = systemClock,
+  hintCost = 5,
 }: ImloBoardProps) {
   const { pairs, mode } = spec.params;
   const game = state.game;
@@ -62,6 +67,7 @@ export function Board({
   const previous = useRef(game.pair);
   const [result, setResult] = useState<Result | null>(null);
   const [solved, setSolved] = useState(false);
+  const [pop, setPop] = useState<{ side: Side; slot: number } | null>(null);
   const stops = useRef(new Set<() => void>());
 
   const after = useCallback(
@@ -88,7 +94,7 @@ export function Board({
   useEffect(
     () =>
       subscribe((e) => {
-        const ev = e as { type: string; side?: Side };
+        const ev = e as { type: string; side?: Side; slot?: number };
         if (ev.type === 'spellWrong' && ev.side) {
           const wrongSide = ev.side;
           setResult((cur) => {
@@ -100,6 +106,10 @@ export function Board({
             return next;
           });
           after(WRONG_MS, () => setResult(null));
+        } else if (ev.type === 'hintUsed' && ev.side && ev.slot !== undefined) {
+          const p = { side: ev.side, slot: ev.slot };
+          setPop(p);
+          after(HINT_POP_MS, () => setPop((cur) => (cur === p ? null : cur)));
         } else if (ev.type === 'spellCorrect') {
           setSolved(true);
           after(RIGHT_MS, () => setSolved(false));
@@ -195,6 +205,8 @@ export function Board({
           state={game}
           script={script}
           result={result?.source}
+          pop={pop?.side === 'source' ? pop.slot : undefined}
+          hintCost={hintCost}
           badge={BADGES[pair.source.lang]}
           dispatch={dispatch}
           clock={clock}
@@ -212,7 +224,14 @@ export function Board({
             onClick={check}
           >
             <svg viewBox="0 0 100 100" aria-hidden="true" className={styles.starShape}>
-              <polygon points="50,2 61,21 85,15 80,39 98,50 80,61 85,85 61,80 50,98 39,80 15,85 20,61 2,50 20,39 15,15 39,21" />
+              <polygon
+                className={styles.starOuter}
+                points="50,2 61,21 85,15 80,39 98,50 80,61 85,85 61,80 50,98 39,80 15,85 20,61 2,50 20,39 15,15 39,21"
+              />
+              <polygon
+                className={styles.starInner}
+                points="84.2,64.2 64.2,84.2 35.8,84.2 15.8,64.2 15.8,35.8 35.8,15.8 64.2,15.8 84.2,35.8"
+              />
             </svg>
             <span className={styles.starLabel}>{label(script, 'Tekshir')}</span>
             {solved && <span aria-hidden="true">✓</span>}
@@ -227,6 +246,8 @@ export function Board({
           state={game}
           script={script}
           result={result?.uz}
+          pop={pop?.side === 'uz' ? pop.slot : undefined}
+          hintCost={hintCost}
           badge="UZ"
           dispatch={dispatch}
           clock={clock}
@@ -297,6 +318,8 @@ interface SlotRowProps {
   letterOf: (id: string | null) => string | undefined;
   byId: Map<string, BankTile>;
   mode: ImloMode;
+  pop: number | undefined;
+  hintCost: number;
 }
 
 function SlotRow({
@@ -311,6 +334,8 @@ function SlotRow({
   letterOf,
   byId,
   mode,
+  pop,
+  hintCost,
 }: SlotRowProps) {
   const word = pair[side].letters;
   const rtl = side === 'source' && (pair.source.lang === 'fa' || pair.source.lang === 'ar');
@@ -332,6 +357,8 @@ function SlotRow({
         {
           '--slot-phone': `${size.phone}px`,
           '--slot-desk': `${size.desktop}px`,
+          '--n': String(word.length),
+          '--gap': `${word.length >= 8 ? 2 : word.length === 7 ? 4 : 8}px`,
         } as React.CSSProperties
       }
       onClick={() => dispatch({ type: 'selectSide', side })}
@@ -342,6 +369,24 @@ function SlotRow({
       <span className={styles.badge} lang={side === 'source' ? pair.source.lang : undefined}>
         {badge}
       </span>
+      {result === 'right' && (
+        <span data-testid="right-badge" aria-hidden="true" className={styles.rightBadge}>
+          ✓
+        </span>
+      )}
+      {result === 'wrong' && (
+        <svg
+          data-testid="crack"
+          aria-hidden="true"
+          className={styles.crack}
+          viewBox="0 0 100 20"
+          preserveAspectRatio="none"
+        >
+          <polyline points="0,6 12,11 22,5 34,12 46,6 58,13 70,7 82,12 100,8" />
+          <polyline points="30,12 36,19 40,14" />
+          <polyline points="64,13 70,0 76,7" />
+        </svg>
+      )}
       {state.slots[side].map((id, i) => (
         <Slot
           key={i}
@@ -355,7 +400,7 @@ function SlotRow({
           script={script}
           dispatch={dispatch}
           clock={clock}
-          wrong={result === 'wrong'}
+          cost={pop === i ? hintCost : undefined}
           mode={mode}
         />
       ))}
@@ -374,7 +419,7 @@ interface SlotProps {
   script: 'latn' | 'cyrl';
   dispatch: (a: ImloAction) => void;
   clock: FrameClock;
-  wrong: boolean;
+  cost: number | undefined;
   mode: ImloMode;
 }
 
@@ -389,7 +434,7 @@ function Slot({
   script,
   dispatch,
   clock,
-  wrong,
+  cost,
   mode,
 }: SlotProps) {
   const held = useRef(false);
@@ -435,13 +480,7 @@ function Slot({
       }}
     >
       {filled ? (
-        <Tile
-          label={letter}
-          state={wrong ? 'wrong' : 'idle'}
-          onSelect={onSelect}
-          onKeyDown={onKeyDown}
-          pressHandlers={handlers}
-        >
+        <Tile label={letter} onSelect={onSelect} onKeyDown={onKeyDown} pressHandlers={handlers}>
           <Letter tile={tile} pair={pair} script={script} />
           {locked && (
             <span aria-hidden="true" className={styles.lock}>
@@ -464,6 +503,11 @@ function Slot({
             </span>
           )}
         </button>
+      )}
+      {cost !== undefined && (
+        <span data-testid="hint-cost" className={styles.cost}>
+          −{cost}
+        </span>
       )}
     </div>
   );

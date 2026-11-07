@@ -4,7 +4,7 @@ import { createFakeClock, type FakeClock } from '@core/clock';
 import { createRng } from '@core/random';
 import { createSession, type GameEvent, type Session, type SessionState } from '@core/session';
 import type { LevelSpec } from '../types.ts';
-import { Board, HINT_HOLD_MS, WRONG_MS } from './Board.tsx';
+import { Board, HINT_HOLD_MS, HINT_POP_MS, WRONG_MS } from './Board.tsx';
 import type { BankTile, ImloMode, ImloPair, ImloParams } from './levels.ts';
 import { createImloRules, type ImloAction, type ImloEvent, type ImloState } from './rules.ts';
 
@@ -166,6 +166,31 @@ describe('Imlo Board', () => {
     act(() => t.clock.advance(WRONG_MS + 50));
     expect(t.row('uz')).not.toHaveAttribute('data-result');
     expect(t.session.getState().lives).toBe(2);
+  });
+
+  it('draws a crack across the wrong row only, and glazes the right row with a tick badge', async () => {
+    const t = setup({ pairs: [NAME] });
+    const user = userEvent.setup();
+    for (const l of 'isim') await t.tap(user, l);
+    for (const l of 'smi') await t.tap(user, l);
+    await user.click(t.star());
+    t.rerender();
+    expect(within(t.row('uz')).getByTestId('crack')).toBeInTheDocument();
+    expect(within(t.row('source')).queryByTestId('crack')).toBeNull();
+    expect(within(t.row('source')).getByTestId('right-badge')).toBeInTheDocument();
+    act(() => t.clock.advance(WRONG_MS + 50));
+    expect(screen.queryByTestId('crack')).toBeNull();
+    expect(screen.queryByTestId('right-badge')).toBeNull();
+  });
+
+  it('a hint pops the point cost beside the locked slot, then it fades', () => {
+    const t = setup();
+    const slot = within(within(t.row('uz')).getAllByTestId('slot')[1]!).getByRole('button');
+    fireEvent.pointerDown(slot, { clientX: 1, clientY: 1 });
+    act(() => t.clock.advance(HINT_HOLD_MS + 20));
+    expect(screen.getByTestId('hint-cost')).toHaveTextContent('−5');
+    act(() => t.clock.advance(HINT_POP_MS + 50));
+    expect(screen.queryByTestId('hint-cost')).toBeNull();
   });
 
   it('uses Tekshir in Latin and Текшир in Cyrillic', () => {

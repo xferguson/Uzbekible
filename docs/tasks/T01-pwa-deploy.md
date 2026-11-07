@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | A Foundation |
 | Depends on | [T00](T00-app-scaffold.md) |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |

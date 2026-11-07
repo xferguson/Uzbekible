@@ -26,7 +26,7 @@ export default defineConfig({
   webServer: {
     // Test build (mode "e2e") exposes window.__uzbekibleTest.
     command: `npx vite build --mode e2e && npx vite preview --port ${port} --strictPort`,
-    url: `http://localhost:${port}`,
+    url: `http://localhost:${port}/Uzbekible/`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

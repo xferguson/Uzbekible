@@ -183,9 +183,25 @@ _(no exports yet)_
 
 ## `ui`
 
+- `Announcer({ message }: { message: string; }): import("react").JSX.Element` - Visually hidden polite live region.
+- `AnnouncerProvider({ children }: { children: ReactNode; }): import("react").JSX.Element` - Hosts the single shared live region and lets descendants announce via `useAnnounce`.
+- `LongPressHandlers` { onPointerDown: (e: PointerEvent) => void; onPointerMove: (e: PointerEvent) => void; onPointerUp: () => void; onPointerLeave: () => void; onPointerCancel: () => void; onContextMenu: (e: MouseEvent…
+- `LongPressOptions` { ms?: number; tolerance?: number }
 - `PatternBg({ strength, cell, className }: PatternBgProps): import("react").JSX.Element` - Star-and-cross line lattice that fills its container. Decorative, low contrast.
 - `PatternBgProps` { strength?: number; cell?: number; className?: string }
 - `RosetteBand({ width, height, className }: RosetteBandProps): import("react").JSX.Element` - Horizontal band: alternating stars in octagon frames with gold diamonds between, on cobalt-deep.
 - `RosetteBandProps` { width?: number; height?: number; className?: string }
+- `ScriptProvider({ script, children }: { script: UzScript; children: ReactNode; }): import("react").JSX.Element` - Supplies the player's Uzbek script setting to every `UzText` below.
+- `SourceText({ lang, text, className }: SourceTextProps): import("react").JSX.Element` - Text in a source language's native script (RTL for Persian/Arabic).
+- `SourceTextProps` { lang: SourceLang; text: string; className?: string }
 - `Star8({ size, variant, className }: Star8Props): import("react").JSX.Element` - The signature star: {8/2} khatam, {8/3} turquoise interlace and a gold octagon centre. Decorative.
 - `Star8Props` { size?: number; variant?: 'full' | 'outline'; className?: string }
+- `Tile({ label, state, shape, onSelect, pressHandlers, children }: TileProps): import("react").JSX.Element` - The shared game tile: states, rect or hex shape, keyboard (Enter/Space), never colour-only.
+- `TileProps` { label: string; state?: TileState; shape?: TileShape; onSelect?: () => void; pressHandlers?: Partial<LongPressHandlers>; children?: ReactNode }
+- `TileShape` = `'rect' | 'hex'`
+- `TileState` = `'idle' | 'selected' | 'matched' | 'wrong' | 'cracked' | 'disabled'`
+- `UzText({ latn, cyrl, script, className }: UzTextProps): import("react").JSX.Element` - Uzbek text in the player's chosen script, with correct lang/dir/font.
+- `UzTextProps` { latn: string; cyrl?: string | undefined; script?: UzScript; className?: string }
+- `useAnnounce(): (message: string) => void`
+- `useLongPress(onLongPress: () => void, options?: LongPressOptions): LongPressHandlers` - Touch/mouse/pen long press; fires `onLongPress` once per hold, cancels on move, release or leave.
+- `useUzScript(): UzScript`

@@ -1,76 +1,79 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import { createFakeClock, type FakeClock } from '@core/clock';
 import { useLongPress } from './useLongPress';
 
-function Probe({ onLong, ms }: { onLong: () => void; ms?: number }) {
-  const handlers = useLongPress(onLong, ms === undefined ? {} : { ms });
+function Probe({ onLong, ms, clock }: { onLong: () => void; ms?: number; clock: FakeClock }) {
+  const handlers = useLongPress(onLong, ms === undefined ? { clock } : { ms, clock });
   return <button {...handlers}>hold</button>;
 }
 
 describe('useLongPress', () => {
-  beforeEach(() => vi.useFakeTimers());
-  afterEach(() => vi.useRealTimers());
+  let clock: FakeClock;
+  beforeEach(() => {
+    clock = createFakeClock();
+  });
 
   it('fires once after the delay', () => {
     const fn = vi.fn();
-    render(<Probe onLong={fn} />);
+    render(<Probe onLong={fn} clock={clock} />);
     fireEvent.pointerDown(screen.getByRole('button'), { clientX: 5, clientY: 5 });
-    act(() => void vi.advanceTimersByTime(499));
+    act(() => clock.advance(499));
     expect(fn).not.toHaveBeenCalled();
-    act(() => void vi.advanceTimersByTime(2));
-    act(() => void vi.advanceTimersByTime(2000));
+    act(() => clock.advance(2));
+    act(() => clock.advance(2000));
     expect(fn).toHaveBeenCalledTimes(1);
   });
 
   it('does not fire on a short tap', () => {
     const fn = vi.fn();
-    render(<Probe onLong={fn} />);
+    render(<Probe onLong={fn} clock={clock} />);
     const b = screen.getByRole('button');
     fireEvent.pointerDown(b);
-    act(() => void vi.advanceTimersByTime(100));
+    act(() => clock.advance(100));
     fireEvent.pointerUp(b);
-    act(() => void vi.advanceTimersByTime(1000));
+    act(() => clock.advance(1000));
     expect(fn).not.toHaveBeenCalled();
   });
 
   it('cancels when the pointer moves beyond tolerance', () => {
     const fn = vi.fn();
-    render(<Probe onLong={fn} />);
+    render(<Probe onLong={fn} clock={clock} />);
     const b = screen.getByRole('button');
     fireEvent.pointerDown(b, { clientX: 0, clientY: 0 });
     fireEvent.pointerMove(b, { clientX: 40, clientY: 0 });
-    act(() => void vi.advanceTimersByTime(1000));
+    act(() => clock.advance(1000));
     expect(fn).not.toHaveBeenCalled();
   });
 
   it('ignores tiny jitter', () => {
     const fn = vi.fn();
-    render(<Probe onLong={fn} />);
+    render(<Probe onLong={fn} clock={clock} />);
     const b = screen.getByRole('button');
     fireEvent.pointerDown(b, { clientX: 0, clientY: 0 });
     fireEvent.pointerMove(b, { clientX: 2, clientY: 1 });
-    act(() => void vi.advanceTimersByTime(600));
+    act(() => clock.advance(600));
     expect(fn).toHaveBeenCalledTimes(1);
   });
 
   it('cancels on leave/cancel and honours custom ms', () => {
     const fn = vi.fn();
-    render(<Probe onLong={fn} ms={200} />);
+    render(<Probe onLong={fn} ms={200} clock={clock} />);
     const b = screen.getByRole('button');
     fireEvent.pointerDown(b);
     fireEvent.pointerLeave(b);
-    act(() => void vi.advanceTimersByTime(300));
+    act(() => clock.advance(300));
     expect(fn).not.toHaveBeenCalled();
     fireEvent.pointerDown(b);
-    act(() => void vi.advanceTimersByTime(250));
+    act(() => clock.advance(250));
     expect(fn).toHaveBeenCalledTimes(1);
     fireEvent.pointerDown(b);
     fireEvent.pointerCancel(b);
-    act(() => void vi.advanceTimersByTime(300));
+    act(() => clock.advance(300));
     expect(fn).toHaveBeenCalledTimes(1);
   });
 
   it('suppresses the context menu after a long press', () => {
-    render(<Probe onLong={() => undefined} />);
+    render(<Probe onLong={() => undefined} clock={clock} />);
     const b = screen.getByRole('button');
     expect(fireEvent.contextMenu(b)).toBe(false);
   });

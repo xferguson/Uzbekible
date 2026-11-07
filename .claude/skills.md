@@ -17,16 +17,18 @@ description. This file is the human-readable index. **To add a skill:** create t
 | 9 | [`e2e-visual-check`](skills/e2e-visual-check/SKILL.md) | Playwright tests, screenshots, offline/PWA checks | Deterministic e2e flows, screenshots |
 | 10 | [`game-balance-tuning`](skills/game-balance-tuning/SKILL.md) | difficulty, scoring, timing, star thresholds | Config-only change + simulation table |
 | 11 | [`task-breakdown`](skills/task-breakdown/SKILL.md) | writing or splitting `docs/tasks/` task files | Small, dependency-ordered tasks with a named red test, README rows |
+| 12 | [`design-fidelity-review`](skills/design-fidelity-review/SKILL.md) | a PR changes how the app looks, or before merging a UI task | Independent `design-reviewer` mismatch table in the PR; no blocker/major left open |
 
 ## Agents
 
-Cheap helper subagents in `.claude/agents/` (model `haiku`) that keep large logs out of the main context.
+Cheap helper subagents in `.claude/agents/` (mostly `haiku`) that keep large logs out of the main context.
 Spawn them for long output only; a few lines are cheaper to read directly.
 
 | Agent | Use it when… | Replies with |
 |---|---|---|
 | [`gate-runner`](agents/gate-runner.md) | you want the verdict of `npm run gate` (or one step) | `GATE OK`, or the failing step + ≤ 20 lines of `file:line` errors |
 | [`ci-triage`](agents/ci-triage.md) | CI is red on a PR and the log is long | failing job/step, ≤ 30-line root-cause excerpt, local repro command |
+| [`design-reviewer`](agents/design-reviewer.md) | after `npm run shots` for any visual change (independent; model `sonnet`) | mismatch table (frame · what differs · severity), or `No mismatches` |
 
 Candidates for later: `audio-pipeline` (once spike S1
 lands), `research-analysis` (analyzing exported learning logs).

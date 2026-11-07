@@ -43,6 +43,13 @@ confidence (see [`cognates/README.md`](cognates/README.md)). Not reachable from 
 itself, kaikki.org, Nişanyan Sözlük and the StarLing (Starostin) databases. Allowing them would let a later
 revision raise `low` items. Derived facts only (pairings, origin classes) are stored, not dictionary text.
 
+## Russian, Persian and Arabic partners (task C3)
+
+No new inputs. The origin words are curator knowledge (`loans/curated.tsv`); confidence uses the same pinned EtymDB
+2.1 snapshot as C2 (Uzbek and Turkish entries' ancestor chains reaching Russian, Persian or Arabic). Method and
+caveats: [`loans/README.md`](loans/README.md). Not reachable from the build environment: Wiktionary itself and
+kaikki.org, so most partners are unchecked (`low`) and are listed for review in `loans/report.md`.
+
 ---
 
 ## Method: `uz-freq-top1000.csv` (task C1)

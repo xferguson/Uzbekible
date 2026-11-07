@@ -64,7 +64,7 @@ describe('Juft definition', () => {
     expect(juft.title.uzLatn).toBeTruthy();
     expect(juft.title.uzCyrl).toBeTruthy();
     const a = juft.scoringFor!(juft.levels(levelContext('juft', 1, tr, [])), tr);
-    const b = juft.scoringFor!(juft.levels(levelContext('juft', 100, tr, [])), tr);
+    const b = juft.scoringFor!(juft.levels(levelContext('juft', 110, tr, [])), tr);
     expect(b.parMs).toBeGreaterThan(a.parMs);
   });
 

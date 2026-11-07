@@ -95,7 +95,10 @@ function Attempt({
       clock,
     });
     const events: GameEvent[] = [];
+    const scoring = def.scoringFor?.(spec, settings) ?? def.scoring;
+    const multipliers = def.multipliers?.(settings);
     const state = {
+      lastAt: 0,
       outcome: undefined as Outcome | undefined,
       startedAt: 0,
       streak: 0,
@@ -104,9 +107,15 @@ function Attempt({
     };
     session.subscribe((e: SessionEvent<GameEvent>) => {
       if (e.type === 'phase' && 'phase' in e) {
+        if (e.phase === 'playing') state.lastAt = e.at;
         if (e.phase === 'won' || e.phase === 'lost') finish(e.phase === 'won');
       } else {
         events.push(e);
+        const entries = def.logEvents?.(spec, e, e.at - state.lastAt) ?? [];
+        for (const entry of entries) log.log(entry);
+        // Response time runs from the start of play, or from the previous answer.
+        if (entries.some((x) => x.type === 'match_correct' || x.type === 'match_wrong'))
+          state.lastAt = e.at;
         if (e.type === 'combo') state.streak++;
         if (e.type === 'mistake' || e.type === 'lifeLost') state.streak = 0;
       }
@@ -121,8 +130,8 @@ function Attempt({
         return;
       }
       const input = { timeMs, ...tally };
-      const score = scoreOf(input, def.scoring);
-      const stars = starsOf(input, def.scoring);
+      const score = scoreOf({ ...input, multipliers }, scoring);
+      const stars = starsOf(input, scoring);
       const { newBest } = recordWin(progress, level, { score, stars, timeMs });
       state.outcome = { won, score, stars, timeMs, ...tally, newBest };
       log.log({
@@ -139,9 +148,9 @@ function Attempt({
       log.log({ type: 'level_start', gameId: def.id, level });
       session.start();
     }
-    return { session, state, begin };
+    return { session, state, begin, scoring, multipliers };
   });
-  const { session, state, begin } = run;
+  const { session, state, begin, scoring, multipliers } = run;
 
   useEffect(() => {
     if (session.getState().phase !== 'ready') return;
@@ -187,7 +196,10 @@ function Attempt({
         <Timer ms={s.elapsedMs} script={script} />
         <Lives lives={s.lives} max={state.spec.lives} script={script} />
         <Score
-          value={scoreOf({ timeMs: s.elapsedMs, ...tallyScoreInput(state.events) }, def.scoring)}
+          value={scoreOf(
+            { timeMs: s.elapsedMs, ...tallyScoreInput(state.events), multipliers },
+            scoring,
+          )}
           script={script}
         />
         <Combo count={state.streak} script={script} />

@@ -125,6 +125,7 @@ ${rs.map(cell).join('\n')}</section>`,
 <style>
 :root{--bg:#f7f5ef;--fg:#1b2333;--muted:#5b6475;--card:#fff;--line:#d9d4c7;--warn:#8a5a00;--warnbg:#fff3d6;--err:#a3231a;--errbg:#fde4e1;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11161f;--fg:#e8e6df;--muted:#a3a9b5;--card:#1a2130;--line:#2c3547;--warn:#ffd37a;--warnbg:#3a2d10;--err:#ffb4ab;--errbg:#47201c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11161f;--fg:#e8e6df;--muted:#a3a9b5;--card:#1a2130;--line:#2c3547;--warn:#ffd37a;--warnbg:#3a2d10;--err:#ffb4ab;--errbg:#47201c;color-scheme:dark}
 body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,sans-serif}
 header,main{max-width:1500px;margin:0 auto;padding:16px}
 nav{display:flex;flex-wrap:wrap;gap:8px 12px}a{color:inherit}

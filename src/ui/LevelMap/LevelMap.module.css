@@ -1,0 +1,108 @@
+.map {
+  display: grid;
+  gap: var(--space-4);
+  font-family: var(--font-ui);
+  color: var(--color-text);
+}
+.skyline {
+  display: flex;
+  gap: var(--space-1);
+  align-items: flex-end;
+  overflow-x: auto;
+}
+.building {
+  display: grid;
+  min-inline-size: 44px;
+  min-block-size: 44px;
+  padding: var(--space-2);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--color-cobalt);
+  border-radius: var(--radius-tile) var(--radius-tile) 0 0;
+  font: inherit;
+  cursor: pointer;
+}
+.building[data-active='true'] {
+  background: var(--color-cobalt);
+  color: var(--color-on-cobalt);
+  border-color: var(--color-gold);
+}
+.building:focus-visible,
+.cell:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+.buildingName {
+  font-family: var(--font-display);
+}
+.buildingCount {
+  font-size: 0.75rem;
+}
+@media (min-width: 900px) {
+  .skyline {
+    flex-direction: column;
+    align-items: stretch;
+    float: inline-start;
+  }
+  .building {
+    border-radius: var(--radius-tile);
+    grid-auto-flow: column;
+    justify-content: space-between;
+  }
+}
+.facade {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(56px, 1fr));
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-4);
+  list-style: none;
+  background: var(--color-cobalt-deep);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+}
+.row {
+  display: grid;
+}
+.cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-block-size: 56px;
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 2px solid var(--color-cobalt);
+  border-radius: var(--radius-tile);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.cell[data-state='current'] {
+  border-color: var(--color-gold);
+  border-width: 4px;
+}
+.cell[data-state='locked'] {
+  opacity: 0.5;
+  border-style: dashed;
+  cursor: not-allowed;
+}
+.cell[data-stars='1'] {
+  background: var(--color-surface);
+}
+.cell[data-stars='2'] {
+  background: var(--color-turquoise-pale);
+}
+.cell[data-stars='3'] {
+  background: var(--color-gold);
+  color: var(--color-cobalt-deep);
+}
+.pips {
+  display: flex;
+  gap: 2px;
+  min-block-size: 8px;
+}
+.pip {
+  inline-size: 8px;
+  block-size: 8px;
+  background: var(--color-cobalt);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}

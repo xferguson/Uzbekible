@@ -6,7 +6,6 @@
 | Lane | D Core |
 | Read first | `docs/architecture.md` (your module's row) (other docs only if needed) |
 | Depends on | [K5](K5-core-storage.md) |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `pr-flow` |
 | Branch | `task/K6-core-learning-log` |
 
@@ -25,8 +24,3 @@ The research instrument: every attempt logged locally and exportable.
 
 ## Files likely touched
 - `src/core/learning-log/**`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task K6 (core/learning-log + export). Read CLAUDE.md and docs/tasks/K6-core-learning-log.md first, and follow the skills it lists (tdd-task, pr-flow). Confirm that its dependencies (K5) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

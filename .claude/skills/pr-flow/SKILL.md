@@ -31,7 +31,7 @@ description: Use when committing, pushing, opening, labelling or merging a PR, o
    git fetch origin main && git merge origin/main   # merge, don't rebase or force-push
    ```
    Resolve any conflicts (regenerate lockfiles with `npm install`, never hand-edit `package-lock.json`),
-   then re-run the fast gate (`npm run lint && npm run typecheck && npm test -- --coverage && npm run build`)
+   then re-run the fast gate (`npm run gate`)
    before pushing. If `main` moved while CI was running, repeat this before you merge.
    Then push: `git push -u origin <branch>` (retry on network errors with 2s/4s/8s/16s backoff).
 4. Open the PR **as a draft**, filling the `.github/pull_request_template.md` sections:

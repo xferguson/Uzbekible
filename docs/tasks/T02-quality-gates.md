@@ -6,7 +6,6 @@
 | Lane | A Foundation |
 | Read first | `docs/technical-design.md` §1–2, §8–9 (other docs only if needed) |
 | Depends on | [T00](T00-app-scaffold.md) |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `pr-flow` |
 | Branch | `task/T02-quality-gates` |
 
@@ -27,8 +26,3 @@ Enforce architecture and quality bars in CI so parallel agents can't erode them.
 - `.eslintrc / eslint.config.js`
 - `vitest.config.ts`
 - `src/core/_example/*`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task T02 (Import boundaries, coverage thresholds, fast-check). Read CLAUDE.md and docs/tasks/T02-quality-gates.md first, and follow the skills it lists (tdd-task, pr-flow). Confirm that its dependencies (T00) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

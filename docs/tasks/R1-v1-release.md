@@ -6,7 +6,6 @@
 | Lane | G Release |
 | Read first | `docs/PRD.md` §7 (other docs only if needed) |
 | Depends on | [U8](U8-juft-e2e.md), [D3](D3-pwa-icon-set.md), [C6](C6-content-review-sheet.md) |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `e2e-visual-check`, `pr-flow` |
 | Branch | `task/R1-v1-release` |
 
@@ -28,8 +27,3 @@ Ship Juft v1.
 ## Files likely touched
 - `README.md`
 - `docs/PRD.md`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task R1 (Juft v1 release checklist). Read CLAUDE.md and docs/tasks/R1-v1-release.md first, and follow the skills it lists (e2e-visual-check, pr-flow). Confirm that its dependencies (U8 and D3 and C6) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

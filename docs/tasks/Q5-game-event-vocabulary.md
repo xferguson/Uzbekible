@@ -6,7 +6,6 @@
 | Lane | Q Quality |
 | Read first | `docs/technical-design.md` §5, `docs/architecture.md` (`session`, `scoring`, `sim` rows) (other docs only if needed) |
 | Depends on | none |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `pr-flow` |
 | Branch | `task/Q5-game-event-vocabulary` |
 
@@ -27,8 +26,3 @@ Give rules, session, sim and (later) GameShell one event vocabulary. Today Juft 
 - `src/core/session/**`
 - `src/core/sim/sim.ts`
 - `src/games/juft/rules.ts` (+ tests)
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task Q5 (Shared, typed game-event vocabulary + score tally). Read CLAUDE.md and docs/tasks/Q5-game-event-vocabulary.md first, and follow the skills it lists (tdd-task, pr-flow). Confirm that its dependencies (none) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

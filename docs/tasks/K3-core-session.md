@@ -6,7 +6,6 @@
 | Lane | D Core |
 | Read first | `docs/architecture.md` (your module's row) (other docs only if needed) |
 | Depends on | [K2](K2-core-random-clock.md) |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `pr-flow` |
 | Branch | `task/K3-core-session` |
 
@@ -25,8 +24,3 @@ Generic state machine every game runs inside: ready → countdown → playing �
 
 ## Files likely touched
 - `src/core/session/**`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task K3 (core/session: shared game lifecycle). Read CLAUDE.md and docs/tasks/K3-core-session.md first, and follow the skills it lists (tdd-task, pr-flow). Confirm that its dependencies (K2) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

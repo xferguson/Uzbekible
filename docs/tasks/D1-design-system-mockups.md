@@ -6,7 +6,6 @@
 | Lane | B Design |
 | Read first | `docs/design/brief.md` (other docs only if needed) |
 | Depends on | none |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `design-mockup`, `pr-flow`, `uzbek-text-rules` |
 | Branch | `task/D1-design-system-mockups` |
 
@@ -31,8 +30,3 @@ Produce the Uzbekible visual identity for user approval: palette, type, motif li
 ## Files likely touched
 - `docs/design/mockups/**`
 - `docs/design/brief.md`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task D1 (General design system mockups (GATE)). Read CLAUDE.md and docs/tasks/D1-design-system-mockups.md first, and follow the skills it lists (design-mockup, pr-flow, uzbek-text-rules). Confirm that its dependencies (none) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

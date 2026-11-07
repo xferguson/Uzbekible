@@ -6,7 +6,6 @@
 | Lane | B Design |
 | Read first | `docs/design/brief.md` (other docs only if needed) |
 | Depends on | [D1](D1-design-system-mockups.md) |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `design-mockup`, `pr-flow` |
 | Branch | `task/D3-pwa-icon-set` |
 
@@ -25,8 +24,3 @@ Turn the approved icon concept into production icons.
 ## Files likely touched
 - `public/icons/**`
 - `docs/design/icon/**`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task D3 (Final PWA icon set). Read CLAUDE.md and docs/tasks/D3-pwa-icon-set.md first, and follow the skills it lists (design-mockup, pr-flow). Confirm that its dependencies (D1) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

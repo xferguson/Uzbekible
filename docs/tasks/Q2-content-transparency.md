@@ -6,7 +6,6 @@
 | Lane | Q Quality |
 | Read first | `docs/technical-design.md` §3, `docs/architecture.md` (`similarity`, `content` rows) (other docs only if needed) |
 | Depends on | [Q1](Q1-node-runnable-core.md) |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `pr-flow` |
 | Branch | `task/Q2-content-transparency` |
 
@@ -28,8 +27,3 @@ Put `core/similarity` transparency scores into `public/content/items.v1.json` (c
 - `content/scripts/cli.ts`
 - `public/content/items.v1.json` (generated)
 - `.github/workflows/ci.yml`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task Q2 (Wire transparency scores into the content build). Read CLAUDE.md and docs/tasks/Q2-content-transparency.md first, and follow the skills it lists (tdd-task, pr-flow). Confirm that its dependencies (Q1) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

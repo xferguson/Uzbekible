@@ -6,7 +6,6 @@
 | Lane | F UI |
 | Read first | `docs/design/brief.md`, `docs/architecture.md` (Shared UI), `docs/games/01-juft.md` (other docs only if needed) |
 | Depends on | [D1](D1-design-system-mockups.md), [T00](T00-app-scaffold.md), [K9](K9-core-motif-geometry.md) |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `ui-component`, `uzbek-text-rules`, `tdd-task`, `pr-flow` |
 | Branch | `task/U1-design-tokens-motif-ui` |
 
@@ -26,8 +25,3 @@ Lift the approved design into code.
 - `src/design/**`
 - `src/ui/motif/**`
 - `src/dev/gallery/**`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task U1 (Design tokens, fonts, motif renderers, dev gallery). Read CLAUDE.md and docs/tasks/U1-design-tokens-motif-ui.md first, and follow the skills it lists (ui-component, uzbek-text-rules, tdd-task, pr-flow). Confirm that its dependencies (D1 and T00 and K9) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

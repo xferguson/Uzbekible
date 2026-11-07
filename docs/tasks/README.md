@@ -1,14 +1,9 @@
 # Task index: Juft v1 and foundations
 
 **How to use:** start a **new session** per task and say **"Do <ID>"** (e.g. "Do D1"). `CLAUDE.md` tells the
-agent to open the task file, check its dependencies and follow its skills. Each task file also has a longer
-*Session prompt* for when you want to spell it out. Tasks with no
+agent to open the task file, check its dependencies and follow its skills. Tasks with no
 unmerged dependencies can run **in parallel**. Each task's **Status** row lives in *its own task file*
 (`todo → in progress → in review → done`), so parallel PRs never conflict on this index.
-
-## P0 precondition
-The PR that added `.claude/skills/`, `CLAUDE.md` and these docs must be **merged to `main`** before any task
-starts, so every session loads the skills automatically.
 
 ## Gates 🔒
 - **D1** general design system → user approval (`needs-approval` label) → unlocks **D2**, **D3** and **U1**

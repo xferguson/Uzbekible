@@ -115,7 +115,22 @@ test('latnToCyrl: y before oʻ is й, not ё (yoʻq, yoʻl)', () => {
 });
 
 test('latnToCyrl ∘ cyrlToLatn round-trips native words', () => {
-  for (const w of ['кўз', 'тоғ', 'шаҳар', 'ер', 'ёки', 'эди', 'келди', 'оила', 'маъно', 'ҳаёт', 'юз', 'чиқмоқ', 'йўқ', 'йўл']) {
+  for (const w of [
+    'кўз',
+    'тоғ',
+    'шаҳар',
+    'ер',
+    'ёки',
+    'эди',
+    'келди',
+    'оила',
+    'маъно',
+    'ҳаёт',
+    'юз',
+    'чиқмоқ',
+    'йўқ',
+    'йўл',
+  ]) {
     assert.equal(latnToCyrl(cyrlToLatn(w)), w);
   }
 });
@@ -132,7 +147,10 @@ test('parseAnalyses: groups hfst-lookup output, drops clitic tails and unknowns'
     'xyzq\txyzq+?\tinf',
   ].join('\n');
   const m = parseAnalyses(out);
-  assert.deepEqual(m.get('keldi'), [{ stem: 'kel', tags: ['v', 'iv', 'ifi', 'p3', 'sg'] }, { stem: 'kel', tags: ['v', 'iv', 'ifi', 'p3', 'pl'] }]);
+  assert.deepEqual(m.get('keldi'), [
+    { stem: 'kel', tags: ['v', 'iv', 'ifi', 'p3', 'sg'] },
+    { stem: 'kel', tags: ['v', 'iv', 'ifi', 'p3', 'pl'] },
+  ]);
   assert.equal(m.get('uchun').length, 2);
   assert.deepEqual(m.get('mumkin'), [{ stem: 'mumkin', tags: ['adj'] }]);
   assert.deepEqual(m.get('xyzq'), []);
@@ -141,7 +159,10 @@ test('parseAnalyses: groups hfst-lookup output, drops clitic tails and unknowns'
 const A = (stem, ...tags) => ({ stem, tags });
 
 test('chooseCandidate: inflected verb form → verb lemma', () => {
-  assert.deepEqual(chooseCandidate('keldi', [A('kel', 'v', 'iv', 'ifi', 'p3', 'sg')]), { stem: 'kel', pos: 'verb' });
+  assert.deepEqual(chooseCandidate('keldi', [A('kel', 'v', 'iv', 'ifi', 'p3', 'sg')]), {
+    stem: 'kel',
+    pos: 'verb',
+  });
 });
 
 test('chooseCandidate: an uninflected closed-class reading beats a verb imperative', () => {
@@ -157,14 +178,24 @@ test('chooseCandidate: whole-word readings beat segmentations into a shorter ste
     { stem: 'endi', pos: 'adv' },
   );
   assert.deepEqual(
-    chooseCandidate('ham', [A('ha', 'n', 'px1sg', 'nom'), A('ham', 'cnjcoo'), A('ham', 'n', 'nom')]),
+    chooseCandidate('ham', [
+      A('ha', 'n', 'px1sg', 'nom'),
+      A('ham', 'cnjcoo'),
+      A('ham', 'n', 'nom'),
+    ]),
     { stem: 'ham', pos: 'conj' },
   );
 });
 
 test('chooseCandidate: pronoun beats noun homograph; adjective beats noun', () => {
-  assert.deepEqual(chooseCandidate('men', [A('men', 'n', 'nom'), A('men', 'prn', 'pers', 'p1', 'sg', 'nom')]), { stem: 'men', pos: 'pron' });
-  assert.deepEqual(chooseCandidate('katta', [A('katta', 'n', 'nom'), A('katta', 'adj')]), { stem: 'katta', pos: 'adj' });
+  assert.deepEqual(
+    chooseCandidate('men', [A('men', 'n', 'nom'), A('men', 'prn', 'pers', 'p1', 'sg', 'nom')]),
+    { stem: 'men', pos: 'pron' },
+  );
+  assert.deepEqual(chooseCandidate('katta', [A('katta', 'n', 'nom'), A('katta', 'adj')]), {
+    stem: 'katta',
+    pos: 'adj',
+  });
 });
 
 test('chooseCandidate: reviewed overrides win (the converb deb → verb de-)', () => {
@@ -172,47 +203,105 @@ test('chooseCandidate: reviewed overrides win (the converb deb → verb de-)', (
   const analyses = [A('de', 'v', 'tv', 'prc_perf'), A('deb', 'cnjsub')];
   assert.deepEqual(chooseCandidate('deb', analyses), { stem: 'deb', pos: 'conj' });
   assert.deepEqual(chooseCandidate('deb', analyses, { overrides }), { stem: 'de', pos: 'verb' });
-  assert.equal(chooseCandidate('zzz', [], { overrides: new Map([['zzz', { stem: 'z', pos: 'noun' }]]) }), null);
+  assert.equal(
+    chooseCandidate('zzz', [], { overrides: new Map([['zzz', { stem: 'z', pos: 'noun' }]]) }),
+    null,
+  );
 });
 
 test('chooseCandidate: numerals beat pronoun readings (ikki)', () => {
   assert.deepEqual(
-    chooseCandidate('ikki', [A('ikki', 'n', 'nom'), A('ikki', 'num'), A('ikki', 'prn', 'qnt', 'nom')]),
+    chooseCandidate('ikki', [
+      A('ikki', 'n', 'nom'),
+      A('ikki', 'num'),
+      A('ikki', 'prn', 'qnt', 'nom'),
+    ]),
     { stem: 'ikki', pos: 'num' },
   );
 });
 
 test('chooseCandidate: without a closed-class whole-word reading, the lemma with the larger prior wins', () => {
-  const oldi = [A('ol', 'v', 'tv', 'ifi', 'p3', 'sg'), A('ol', 'vaux', 'ifi', 'p3', 'sg'), A('old', 'n', 'px3sp', 'nom'), A('oldi', 'adj')];
-  const priors = new Map([['olmoq', 5000], ['old', 3], ['oldi', 400]]);
+  const oldi = [
+    A('ol', 'v', 'tv', 'ifi', 'p3', 'sg'),
+    A('ol', 'vaux', 'ifi', 'p3', 'sg'),
+    A('old', 'n', 'px3sp', 'nom'),
+    A('oldi', 'adj'),
+  ];
+  const priors = new Map([
+    ['olmoq', 5000],
+    ['old', 3],
+    ['oldi', 400],
+  ]);
   assert.deepEqual(chooseCandidate('oldi', oldi, { priors }), { stem: 'ol', pos: 'verb' });
   // With no priors the whole-word reading is kept.
   assert.deepEqual(chooseCandidate('oldi', oldi), { stem: 'oldi', pos: 'adj' });
-  const uning = [A('u', 'prn', 'pers', 'p3', 'sg', 'gen'), A('un', 'n', 'px2sg', 'nom'), A('uning', 'n', 'nom')];
-  assert.deepEqual(chooseCandidate('uning', uning, { priors: new Map([['u', 9000], ['un', 50], ['uning', 1200]]) }), { stem: 'u', pos: 'pron' });
+  const uning = [
+    A('u', 'prn', 'pers', 'p3', 'sg', 'gen'),
+    A('un', 'n', 'px2sg', 'nom'),
+    A('uning', 'n', 'nom'),
+  ];
+  assert.deepEqual(
+    chooseCandidate('uning', uning, {
+      priors: new Map([
+        ['u', 9000],
+        ['un', 50],
+        ['uning', 1200],
+      ]),
+    }),
+    { stem: 'u', pos: 'pron' },
+  );
 });
 
 test('chooseCandidate: an inflected form prefers the noun reading, a bare form the adjective', () => {
-  assert.deepEqual(chooseCandidate('kunlar', [A('kun', 'adj', 'subst', 'pl', 'nom'), A('kun', 'n', 'pl', 'nom')]), { stem: 'kun', pos: 'noun' });
-  assert.deepEqual(chooseCandidate('kun', [A('kun', 'adj'), A('kun', 'n', 'nom')]), { stem: 'kun', pos: 'adj' });
+  assert.deepEqual(
+    chooseCandidate('kunlar', [A('kun', 'adj', 'subst', 'pl', 'nom'), A('kun', 'n', 'pl', 'nom')]),
+    { stem: 'kun', pos: 'noun' },
+  );
+  assert.deepEqual(chooseCandidate('kun', [A('kun', 'adj'), A('kun', 'n', 'nom')]), {
+    stem: 'kun',
+    pos: 'adj',
+  });
 });
 
-test('lemmaPriors: splits each form\'s mass evenly across its candidate lemmas', () => {
+test("lemmaPriors: splits each form's mass evenly across its candidate lemmas", () => {
   const analyses = new Map([
     ['oldi', [A('ol', 'v', 'tv', 'ifi', 'p3', 'sg'), A('oldi', 'adj'), A('oldi', 'n', 'nom')]],
     ['olib', [A('ol', 'v', 'tv', 'prc_perf')]],
     ['xyz', []],
   ]);
-  const p = lemmaPriors(new Map([['oldi', 10], ['olib', 4], ['xyz', 7]]), analyses);
-  assert.deepEqual([...p.entries()].sort(), [['oldi', 5], ['olmoq', 9]]);
+  const p = lemmaPriors(
+    new Map([
+      ['oldi', 10],
+      ['olib', 4],
+      ['xyz', 7],
+    ]),
+    analyses,
+  );
+  assert.deepEqual([...p.entries()].sort(), [
+    ['oldi', 5],
+    ['olmoq', 9],
+  ]);
 });
 
 test('chooseCandidate: copula forms map to edi / ekan / emas', () => {
-  assert.deepEqual(chooseCandidate('edi', [A('e', 'cop', 'ifi', 'p3', 'sg')]), { stem: 'edi', pos: 'aux' });
-  assert.deepEqual(chooseCandidate('edim', [A('e', 'cop', 'ifi', 'p1', 'sg')]), { stem: 'edi', pos: 'aux' });
-  assert.deepEqual(chooseCandidate('ekan', [A('e', 'cop', 'aor', 'evid', 'p3', 'sg')]), { stem: 'ekan', pos: 'aux' });
+  assert.deepEqual(chooseCandidate('edi', [A('e', 'cop', 'ifi', 'p3', 'sg')]), {
+    stem: 'edi',
+    pos: 'aux',
+  });
+  assert.deepEqual(chooseCandidate('edim', [A('e', 'cop', 'ifi', 'p1', 'sg')]), {
+    stem: 'edi',
+    pos: 'aux',
+  });
+  assert.deepEqual(chooseCandidate('ekan', [A('e', 'cop', 'aor', 'evid', 'p3', 'sg')]), {
+    stem: 'ekan',
+    pos: 'aux',
+  });
   assert.deepEqual(
-    chooseCandidate('emas', [A('e', 'cop', 'neg', 'aor', 'p3', 'sg'), A('emas', 'adj'), A('emas', 'adv')]),
+    chooseCandidate('emas', [
+      A('e', 'cop', 'neg', 'aor', 'p3', 'sg'),
+      A('emas', 'adj'),
+      A('emas', 'adv'),
+    ]),
     { stem: 'emas', pos: 'aux' },
   );
 });
@@ -225,7 +314,11 @@ test('chooseCandidate: proper nouns, abbreviations and unknowns give null', () =
 
 test('chooseCandidate: abbreviation readings are ignored when a real reading exists', () => {
   assert.deepEqual(
-    chooseCandidate('ming', [A('m', 'abbr', 'px2sg', 'nom'), A('mi', 'n', 'px2sg', 'nom'), A('ming', 'num')]),
+    chooseCandidate('ming', [
+      A('m', 'abbr', 'px2sg', 'nom'),
+      A('mi', 'n', 'px2sg', 'nom'),
+      A('ming', 'num'),
+    ]),
     { stem: 'ming', pos: 'num' },
   );
 });
@@ -252,50 +345,118 @@ test('zipfPerMillion: decreasing in rank and sums to ~1e6 over the whole list', 
 });
 
 test('mergeSources: averages per-million across sources and drops lemmas seen in fewer than minSources', () => {
-  const s1 = new Map([['a', 500], ['b', 300], ['solo', 900]]);
-  const s2 = new Map([['a', 100], ['b', 300]]);
+  const s1 = new Map([
+    ['a', 500],
+    ['b', 300],
+    ['solo', 900],
+  ]);
+  const s2 = new Map([
+    ['a', 100],
+    ['b', 300],
+  ]);
   const s3 = new Map([['b', 300]]);
   const merged = mergeSources([s1, s2, s3], { minSources: 2 });
-  assert.deepEqual(merged.map((m) => m.key), ['b', 'a']);
+  assert.deepEqual(
+    merged.map((m) => m.key),
+    ['b', 'a'],
+  );
   assert.equal(merged[0].score, 300);
   assert.equal(merged[1].score, 200);
   assert.deepEqual(merged[1].present, [0, 1]);
 });
 
 test('mergeSources: ties break by key so the output is deterministic', () => {
-  const merged = mergeSources([new Map([['b', 1], ['a', 1]]), new Map([['b', 1], ['a', 1]])], { minSources: 1 });
-  assert.deepEqual(merged.map((m) => m.key), ['a', 'b']);
+  const merged = mergeSources(
+    [
+      new Map([
+        ['b', 1],
+        ['a', 1],
+      ]),
+      new Map([
+        ['b', 1],
+        ['a', 1],
+      ]),
+    ],
+    { minSources: 1 },
+  );
+  assert.deepEqual(
+    merged.map((m) => m.key),
+    ['a', 'b'],
+  );
 });
 
 test('chooseCandidate: segmentations into a 1–2 letter non-pronoun stem are not readings (yoshga ≠ yo + …)', () => {
-  const priors = new Map([['yo', 1e6], ['yosh', 10], ['ha', 1e6], ['hali', 1]]);
-  assert.deepEqual(chooseCandidate('yoshga', [A('yo', 'cnjcoo'), A('yosh', 'adj', 'subst', 'dat'), A('yosh', 'n', 'dat')], { priors }), { stem: 'yosh', pos: 'noun' });
-  assert.deepEqual(chooseCandidate('hali', [A('ha', 'n', 'px3sp', 'nom'), A('hali', 'adv')], { priors }), { stem: 'hali', pos: 'adv' });
+  const priors = new Map([
+    ['yo', 1e6],
+    ['yosh', 10],
+    ['ha', 1e6],
+    ['hali', 1],
+  ]);
+  assert.deepEqual(
+    chooseCandidate(
+      'yoshga',
+      [A('yo', 'cnjcoo'), A('yosh', 'adj', 'subst', 'dat'), A('yosh', 'n', 'dat')],
+      { priors },
+    ),
+    { stem: 'yosh', pos: 'noun' },
+  );
+  assert.deepEqual(
+    chooseCandidate('hali', [A('ha', 'n', 'px3sp', 'nom'), A('hali', 'adv')], { priors }),
+    { stem: 'hali', pos: 'adv' },
+  );
   // pronoun stems stay: uning → u
-  assert.deepEqual(chooseCandidate('unga', [A('u', 'prn', 'pers', 'p3', 'sg', 'dat'), A('unga', 'n', 'nom')], { priors: new Map([['u', 100]]) }), { stem: 'u', pos: 'pron' });
+  assert.deepEqual(
+    chooseCandidate('unga', [A('u', 'prn', 'pers', 'p3', 'sg', 'dat'), A('unga', 'n', 'nom')], {
+      priors: new Map([['u', 100]]),
+    }),
+    { stem: 'u', pos: 'pron' },
+  );
 });
 
 test('chooseCandidate: copula forms built on ekan/edi/emas keep that lemma whatever the tags (ekanini → ekan)', () => {
-  assert.deepEqual(chooseCandidate('ekanini', [A('e', 'cop', 'ger_past', 'px3sp', 'acc')]), { stem: 'ekan', pos: 'aux' });
-  assert.deepEqual(chooseCandidate('emish', [A('e', 'cop', 'aor', 'p3', 'sg')]), { stem: 'emish', pos: 'aux' });
+  assert.deepEqual(chooseCandidate('ekanini', [A('e', 'cop', 'ger_past', 'px3sp', 'acc')]), {
+    stem: 'ekan',
+    pos: 'aux',
+  });
+  assert.deepEqual(chooseCandidate('emish', [A('e', 'cop', 'aor', 'p3', 'sg')]), {
+    stem: 'emish',
+    pos: 'aux',
+  });
 });
 
 test('chooseCandidate: blocked stem|pos readings are ignored', () => {
   const analyses = [A('yo', 'v', 'iv', 'aor', 'p3', 'pl'), A('yosh', 'n', 'pl', 'nom')];
-  const priors = new Map([['yomoq', 1e6], ['yosh', 1]]);
+  const priors = new Map([
+    ['yomoq', 1e6],
+    ['yosh', 1],
+  ]);
   assert.deepEqual(chooseCandidate('yoshlar', analyses, { priors }), { stem: 'yo', pos: 'verb' });
-  assert.deepEqual(chooseCandidate('yoshlar', analyses, { priors, blocked: new Set(['yo|verb']) }), { stem: 'yosh', pos: 'noun' });
-  assert.equal(chooseCandidate('ob', [A('ob', 'n', 'nom')], { blocked: new Set(['ob|noun']) }), null);
+  assert.deepEqual(
+    chooseCandidate('yoshlar', analyses, { priors, blocked: new Set(['yo|verb']) }),
+    { stem: 'yosh', pos: 'noun' },
+  );
+  assert.equal(
+    chooseCandidate('ob', [A('ob', 'n', 'nom')], { blocked: new Set(['ob|noun']) }),
+    null,
+  );
 });
 
 test('lemmaPriors: respects blocked readings', () => {
-  const analyses = new Map([['yoshlar', [A('yo', 'v', 'iv', 'aor', 'p3', 'pl'), A('yosh', 'n', 'pl', 'nom')]]]);
-  assert.deepEqual([...lemmaPriors(new Map([['yoshlar', 6]]), analyses, { blocked: new Set(['yo|verb']) })], [['yosh', 6]]);
+  const analyses = new Map([
+    ['yoshlar', [A('yo', 'v', 'iv', 'aor', 'p3', 'pl'), A('yosh', 'n', 'pl', 'nom')]],
+  ]);
+  assert.deepEqual(
+    [...lemmaPriors(new Map([['yoshlar', 6]]), analyses, { blocked: new Set(['yo|verb']) })],
+    [['yosh', 6]],
+  );
 });
 
 test('parseCsv: header row → objects; quoted fields may hold commas and doubled quotes', () => {
   const rows = parseCsv('a,b,c\n1,"x, y",3\n4,"say ""hi""",6\n\n');
-  assert.deepEqual(rows, [{ a: '1', b: 'x, y', c: '3' }, { a: '4', b: 'say "hi"', c: '6' }]);
+  assert.deepEqual(rows, [
+    { a: '1', b: 'x, y', c: '3' },
+    { a: '4', b: 'say "hi"', c: '6' },
+  ]);
 });
 
 test('parseLemmaFixes: block / merge / pos actions, apostrophes folded', () => {
@@ -305,10 +466,16 @@ test('parseLemmaFixes: block / merge / pos actions, apostrophes folded', () => {
   assert.deepEqual([...fixes.blocked], ['yo|verb']);
   assert.deepEqual([...fixes.merges], [[`o${OKINA}g${OKINA}li`, `o${OKINA}g${OKINA}il`]]);
   assert.deepEqual([...fixes.pos], [['kam', 'adj']]);
-  assert.throws(() => parseLemmaFixes('lemma,action,value,reason\nx,rename,y,z\n'), /unknown action/);
+  assert.throws(
+    () => parseLemmaFixes('lemma,action,value,reason\nx,rename,y,z\n'),
+    /unknown action/,
+  );
 });
 
 test('chooseCandidate: a short stem is kept when it is the only reading (uyda → uy, oyda → oy)', () => {
   assert.deepEqual(chooseCandidate('uyda', [A('uy', 'n', 'loc')]), { stem: 'uy', pos: 'noun' });
-  assert.deepEqual(chooseCandidate('otlar', [A('ot', 'n', 'pl', 'nom')]), { stem: 'ot', pos: 'noun' });
+  assert.deepEqual(chooseCandidate('otlar', [A('ot', 'n', 'pl', 'nom')]), {
+    stem: 'ot',
+    pos: 'noun',
+  });
 });

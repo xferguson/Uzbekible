@@ -192,8 +192,16 @@ describe('cyrlToLatn', () => {
 
 describe('scriptMeta', () => {
   it('describes each supported language', () => {
-    expect(scriptMeta('uz-Latn')).toEqual({ dir: 'ltr', bcp47: 'uz-Latn', fontStack: 'var(--font-ui)' });
-    expect(scriptMeta('uz-Cyrl')).toEqual({ dir: 'ltr', bcp47: 'uz-Cyrl', fontStack: 'var(--font-ui)' });
+    expect(scriptMeta('uz-Latn')).toEqual({
+      dir: 'ltr',
+      bcp47: 'uz-Latn',
+      fontStack: 'var(--font-ui)',
+    });
+    expect(scriptMeta('uz-Cyrl')).toEqual({
+      dir: 'ltr',
+      bcp47: 'uz-Cyrl',
+      fontStack: 'var(--font-ui)',
+    });
     expect(scriptMeta('tr')).toEqual({ dir: 'ltr', bcp47: 'tr', fontStack: 'var(--font-ui)' });
     expect(scriptMeta('ru')).toEqual({ dir: 'ltr', bcp47: 'ru', fontStack: 'var(--font-ui)' });
     expect(scriptMeta('fa')).toEqual({ dir: 'rtl', bcp47: 'fa', fontStack: 'var(--font-fa)' });

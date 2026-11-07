@@ -54,9 +54,41 @@ export function tokenize(line) {
 
 const CYRL_VOWELS = new Set('аеёиоуэюяў');
 const C2L = {
-  а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', ё: 'yo', ж: 'j', з: 'z', и: 'i', й: 'y', к: 'k', л: 'l', м: 'm',
-  н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'x', ч: 'ch', ш: 'sh', щ: 'sh',
-  ъ: TUTUQ, ы: 'i', ь: '', э: 'e', ю: 'yu', я: 'ya', ў: `o${OKINA}`, қ: 'q', ғ: `g${OKINA}`, ҳ: 'h',
+  а: 'a',
+  б: 'b',
+  в: 'v',
+  г: 'g',
+  д: 'd',
+  ё: 'yo',
+  ж: 'j',
+  з: 'z',
+  и: 'i',
+  й: 'y',
+  к: 'k',
+  л: 'l',
+  м: 'm',
+  н: 'n',
+  о: 'o',
+  п: 'p',
+  р: 'r',
+  с: 's',
+  т: 't',
+  у: 'u',
+  ф: 'f',
+  х: 'x',
+  ч: 'ch',
+  ш: 'sh',
+  щ: 'sh',
+  ъ: TUTUQ,
+  ы: 'i',
+  ь: '',
+  э: 'e',
+  ю: 'yu',
+  я: 'ya',
+  ў: `o${OKINA}`,
+  қ: 'q',
+  ғ: `g${OKINA}`,
+  ҳ: 'h',
 };
 
 export function cyrlToLatn(word) {
@@ -78,11 +110,40 @@ export function cyrlToLatn(word) {
 
 const LATN_VOWELS = new Set(['a', 'e', 'i', 'o', 'u']);
 const L2C_DIGRAPHS = [
-  [`o${OKINA}`, 'ў'], [`g${OKINA}`, 'ғ'], ['sh', 'ш'], ['ch', 'ч'], ['yo', 'ё'], ['yu', 'ю'], ['ya', 'я'], ['ye', 'е'],
+  [`o${OKINA}`, 'ў'],
+  [`g${OKINA}`, 'ғ'],
+  ['sh', 'ш'],
+  ['ch', 'ч'],
+  ['yo', 'ё'],
+  ['yu', 'ю'],
+  ['ya', 'я'],
+  ['ye', 'е'],
 ];
 const L2C = {
-  a: 'а', b: 'б', d: 'д', f: 'ф', g: 'г', h: 'ҳ', i: 'и', j: 'ж', k: 'к', l: 'л', m: 'м', n: 'н', o: 'о',
-  p: 'п', q: 'қ', r: 'р', s: 'с', t: 'т', u: 'у', v: 'в', x: 'х', y: 'й', z: 'з', [TUTUQ]: 'ъ',
+  a: 'а',
+  b: 'б',
+  d: 'д',
+  f: 'ф',
+  g: 'г',
+  h: 'ҳ',
+  i: 'и',
+  j: 'ж',
+  k: 'к',
+  l: 'л',
+  m: 'м',
+  n: 'н',
+  o: 'о',
+  p: 'п',
+  q: 'қ',
+  r: 'р',
+  s: 'с',
+  t: 'т',
+  u: 'у',
+  v: 'в',
+  x: 'х',
+  y: 'й',
+  z: 'з',
+  [TUTUQ]: 'ъ',
 };
 
 export function latnToCyrl(word) {
@@ -125,18 +186,48 @@ export function parseAnalyses(text) {
     const stem = head.slice(0, lt);
     const tags = [...head.matchAll(/<([^>]+)>/g)].map((m) => m[1]);
     const list = map.get(form);
-    if (!list.some((a) => a.stem === stem && a.tags.join() === tags.join())) list.push({ stem, tags });
+    if (!list.some((a) => a.stem === stem && a.tags.join() === tags.join()))
+      list.push({ stem, tags });
   }
   return map;
 }
 
 const POS_OF_TAG = {
-  n: 'noun', v: 'verb', vaux: 'verb', adj: 'adj', adv: 'adv', prn: 'pron', det: 'det', post: 'adp', postadv: 'adv',
-  cnjcoo: 'conj', cnjsub: 'conj', cnjadv: 'conj', num: 'num', ij: 'intj', cop: 'aux', mod: 'part', qst: 'part',
-  emph: 'part', part: 'part',
+  n: 'noun',
+  v: 'verb',
+  vaux: 'verb',
+  adj: 'adj',
+  adv: 'adv',
+  prn: 'pron',
+  det: 'det',
+  post: 'adp',
+  postadv: 'adv',
+  cnjcoo: 'conj',
+  cnjsub: 'conj',
+  cnjadv: 'conj',
+  num: 'num',
+  ij: 'intj',
+  cop: 'aux',
+  mod: 'part',
+  qst: 'part',
+  emph: 'part',
+  part: 'part',
 };
 // Lower is preferred when several readings of the same lemma survive (see the method in SOURCES.md).
-const POS_PRIORITY = ['aux', 'num', 'pron', 'adp', 'conj', 'det', 'part', 'adv', 'adj', 'noun', 'verb', 'intj'];
+const POS_PRIORITY = [
+  'aux',
+  'num',
+  'pron',
+  'adp',
+  'conj',
+  'det',
+  'part',
+  'adv',
+  'adj',
+  'noun',
+  'verb',
+  'intj',
+];
 // A whole-word reading in one of these classes is taken as is (va, uchun, emas), before any prior.
 const CLOSED = new Set(['aux', 'num', 'pron', 'adp', 'conj', 'det', 'part']);
 export const DEFAULT_MARGIN = 4; // tuned on UD Uzbek gold: 2 → 91.4%, 4 → 91.6%, 8 → 91.5%, 16 → 91.1%
@@ -162,7 +253,17 @@ function toCandidate(form, { stem, tags }, blocked) {
   const imperative = tags.includes('imp');
   // Very short non-verb, non-pronoun stems from a segmentation are suspect (yoshga → yo+…, hali → ha+…).
   const short = !whole && lemma.length <= 2 && pos !== 'pron' && pos !== 'verb';
-  return { stem: lemma, pos, short, key: citationForm({ stem: lemma, pos }), whole, shape, imperative, rank: POS_PRIORITY.indexOf(pos), ntags: tags.length };
+  return {
+    stem: lemma,
+    pos,
+    short,
+    key: citationForm({ stem: lemma, pos }),
+    whole,
+    shape,
+    imperative,
+    rank: POS_PRIORITY.indexOf(pos),
+    ntags: tags.length,
+  };
 }
 
 /** Candidate readings of a surface form, with proper nouns, abbreviations and punctuation removed. */
@@ -180,7 +281,11 @@ const cmp = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
  * Cascade: reviewed override → whole-word closed-class reading → lemma with the largest prior (then reading
  * shape, then longer lemma) → POS within that lemma (an inflected form prefers noun, a bare form adj/adv).
  */
-export function chooseCandidate(form, analyses, { priors, overrides, blocked, margin = DEFAULT_MARGIN } = {}) {
+export function chooseCandidate(
+  form,
+  analyses,
+  { priors, overrides, blocked, margin = DEFAULT_MARGIN } = {},
+) {
   const cands = candidates(form, analyses, blocked);
   if (cands.length === 0) return null;
   if (overrides?.has(form)) return { ...overrides.get(form) };
@@ -190,20 +295,31 @@ export function chooseCandidate(form, analyses, { priors, overrides, blocked, ma
 
   const byKey = new Map();
   for (const c of cands) {
-    const k = byKey.get(c.key) ?? { key: c.key, prior: priors?.get(c.key) ?? 0, shape: c.shape, imperative: true, cands: [] };
+    const k = byKey.get(c.key) ?? {
+      key: c.key,
+      prior: priors?.get(c.key) ?? 0,
+      shape: c.shape,
+      imperative: true,
+      cands: [],
+    };
     k.shape = Math.min(k.shape, c.shape);
     k.imperative &&= c.imperative;
     k.cands.push(c);
     byKey.set(c.key, k);
   }
   const groups = [...byKey.values()].sort(
-    (a, b) => b.prior - a.prior || a.shape - b.shape || b.key.length - a.key.length || cmp(a.key, b.key),
+    (a, b) =>
+      b.prior - a.prior || a.shape - b.shape || b.key.length - a.key.length || cmp(a.key, b.key),
   );
   // A whole-word reading stands unless a non-imperative segmentation is `margin` times more frequent overall.
   const whole = groups.find((g) => g.shape === 0);
   const challenger = groups.find((g) => g.shape === 2 && !g.imperative);
   let best = groups[0];
-  if (whole) best = challenger && challenger.prior >= margin * Math.max(whole.prior, Number.MIN_VALUE) ? challenger : whole;
+  if (whole)
+    best =
+      challenger && challenger.prior >= margin * Math.max(whole.prior, Number.MIN_VALUE)
+        ? challenger
+        : whole;
 
   const inflected = !best.cands[0].whole;
   const posOrder = (c) => (inflected && c.pos === 'noun' ? -1 : c.rank);
@@ -223,7 +339,9 @@ export function citationForm({ stem, pos }) {
 export function lemmaPriors(formMass, analyses, { blocked } = {}) {
   const priors = new Map();
   for (const [form, mass] of formMass) {
-    const keys = [...new Set(candidates(form, analyses.get(form) ?? [], blocked).map((c) => c.key))];
+    const keys = [
+      ...new Set(candidates(form, analyses.get(form) ?? [], blocked).map((c) => c.key)),
+    ];
     for (const k of keys) priors.set(k, (priors.get(k) ?? 0) + mass / keys.length);
   }
   return priors;

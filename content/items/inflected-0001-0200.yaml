@@ -6,7 +6,7 @@
   freqRank: 32
   form: inflected
   lemma: uz-ish
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: work (plural)
   sources:
@@ -15,13 +15,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-ish; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-ishim
   uz: { latn: ishim, cyrl: ишим }
   freqRank: 32
   form: inflected
   lemma: uz-ish
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: work (my)
   sources:
@@ -30,13 +30,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-ish; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-ishing
   uz: { latn: ishing, cyrl: ишинг }
   freqRank: 32
   form: inflected
   lemma: uz-ish
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: work (your (sg.))
   sources:
@@ -45,13 +45,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-ish; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-ishda
   uz: { latn: ishda, cyrl: ишда }
   freqRank: 32
   form: inflected
   lemma: uz-ish
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: work (in, at)
   sources:
@@ -60,13 +60,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-ish; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-ishga
   uz: { latn: ishga, cyrl: ишга }
   freqRank: 32
   form: inflected
   lemma: uz-ish
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: work (to)
   sources:
@@ -75,13 +75,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-ish; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-ishdan
   uz: { latn: ishdan, cyrl: ишдан }
   freqRank: 32
   form: inflected
   lemma: uz-ish
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: work (from)
   sources:
@@ -90,13 +90,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-ish; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-odamlar
   uz: { latn: odamlar, cyrl: одамлар }
   freqRank: 37
   form: inflected
   lemma: uz-odam
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: person (plural)
   sources:
@@ -104,15 +104,15 @@
       text: adamlar
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-odam; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-odamim
   uz: { latn: odamim, cyrl: одамим }
   freqRank: 37
   form: inflected
   lemma: uz-odam
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: person (my)
   sources:
@@ -120,15 +120,15 @@
       text: adamım
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-odam; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-odaming
   uz: { latn: odaming, cyrl: одаминг }
   freqRank: 37
   form: inflected
   lemma: uz-odam
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: person (your (sg.))
   sources:
@@ -136,15 +136,15 @@
       text: adamın
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-odam; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-odamda
   uz: { latn: odamda, cyrl: одамда }
   freqRank: 37
   form: inflected
   lemma: uz-odam
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: person (in, at)
   sources:
@@ -152,15 +152,15 @@
       text: adamda
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-odam; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-odamga
   uz: { latn: odamga, cyrl: одамга }
   freqRank: 37
   form: inflected
   lemma: uz-odam
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: person (to)
   sources:
@@ -168,15 +168,15 @@
       text: adama
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-odam; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-odamdan
   uz: { latn: odamdan, cyrl: одамдан }
   freqRank: 37
   form: inflected
   lemma: uz-odam
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: person (from)
   sources:
@@ -184,15 +184,15 @@
       text: adamdan
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-odam; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-kunlar
   uz: { latn: kunlar, cyrl: кунлар }
   freqRank: 41
   form: inflected
   lemma: uz-kun
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: day (plural)
   sources:
@@ -200,15 +200,15 @@
       text: günler
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ü>u ]
+      correspondence: [g>k, ü>u]
       ref: lemma:uz-kun; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-kunim
   uz: { latn: kunim, cyrl: куним }
   freqRank: 41
   form: inflected
   lemma: uz-kun
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: day (my)
   sources:
@@ -216,15 +216,15 @@
       text: günüm
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ü>u ]
+      correspondence: [g>k, ü>u]
       ref: lemma:uz-kun; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-kuning
   uz: { latn: kuning, cyrl: кунинг }
   freqRank: 41
   form: inflected
   lemma: uz-kun
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: day (your (sg.))
   sources:
@@ -232,15 +232,15 @@
       text: günün
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ü>u ]
+      correspondence: [g>k, ü>u]
       ref: lemma:uz-kun; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-kunda
   uz: { latn: kunda, cyrl: кунда }
   freqRank: 41
   form: inflected
   lemma: uz-kun
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: day (in, at)
   sources:
@@ -248,15 +248,15 @@
       text: günde
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ü>u ]
+      correspondence: [g>k, ü>u]
       ref: lemma:uz-kun; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-kunga
   uz: { latn: kunga, cyrl: кунга }
   freqRank: 41
   form: inflected
   lemma: uz-kun
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: day (to)
   sources:
@@ -264,15 +264,15 @@
       text: güne
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ü>u ]
+      correspondence: [g>k, ü>u]
       ref: lemma:uz-kun; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-kundan
   uz: { latn: kundan, cyrl: кундан }
   freqRank: 41
   form: inflected
   lemma: uz-kun
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: day (from)
   sources:
@@ -280,15 +280,15 @@
       text: günden
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ü>u ]
+      correspondence: [g>k, ü>u]
       ref: lemma:uz-kun; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-yerlar
   uz: { latn: yerlar, cyrl: ерлар }
   freqRank: 42
   form: inflected
   lemma: uz-yer
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: earth (plural)
   sources:
@@ -297,13 +297,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-yer; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-yerim
   uz: { latn: yerim, cyrl: ерим }
   freqRank: 42
   form: inflected
   lemma: uz-yer
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: earth (my)
   sources:
@@ -312,13 +312,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-yer; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-yering
   uz: { latn: yering, cyrl: еринг }
   freqRank: 42
   form: inflected
   lemma: uz-yer
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: earth (your (sg.))
   sources:
@@ -327,13 +327,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-yer; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-yerda
   uz: { latn: yerda, cyrl: ерда }
   freqRank: 42
   form: inflected
   lemma: uz-yer
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: earth (in, at)
   sources:
@@ -342,13 +342,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-yer; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-yerga
   uz: { latn: yerga, cyrl: ерга }
   freqRank: 42
   form: inflected
   lemma: uz-yer
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: earth (to)
   sources:
@@ -357,13 +357,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-yer; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-yerdan
   uz: { latn: yerdan, cyrl: ердан }
   freqRank: 42
   form: inflected
   lemma: uz-yer
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: earth (from)
   sources:
@@ -372,13 +372,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-yer; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-yillar
   uz: { latn: yillar, cyrl: йиллар }
   freqRank: 49
   form: inflected
   lemma: uz-yil
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: year (plural)
   sources:
@@ -386,15 +386,15 @@
       text: yıllar
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ı>i ]
+      correspondence: [ı>i]
       ref: lemma:uz-yil; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-yilim
   uz: { latn: yilim, cyrl: йилим }
   freqRank: 49
   form: inflected
   lemma: uz-yil
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: year (my)
   sources:
@@ -402,15 +402,15 @@
       text: yılım
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ı>i ]
+      correspondence: [ı>i]
       ref: lemma:uz-yil; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-yiling
   uz: { latn: yiling, cyrl: йилинг }
   freqRank: 49
   form: inflected
   lemma: uz-yil
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: year (your (sg.))
   sources:
@@ -418,15 +418,15 @@
       text: yılın
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ı>i ]
+      correspondence: [ı>i]
       ref: lemma:uz-yil; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-yilda
   uz: { latn: yilda, cyrl: йилда }
   freqRank: 49
   form: inflected
   lemma: uz-yil
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: year (in, at)
   sources:
@@ -434,15 +434,15 @@
       text: yılda
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ı>i ]
+      correspondence: [ı>i]
       ref: lemma:uz-yil; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-yilga
   uz: { latn: yilga, cyrl: йилга }
   freqRank: 49
   form: inflected
   lemma: uz-yil
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: year (to)
   sources:
@@ -450,15 +450,15 @@
       text: yıla
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ı>i ]
+      correspondence: [ı>i]
       ref: lemma:uz-yil; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-yildan
   uz: { latn: yildan, cyrl: йилдан }
   freqRank: 49
   form: inflected
   lemma: uz-yil
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: year (from)
   sources:
@@ -466,15 +466,15 @@
       text: yıldan
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ı>i ]
+      correspondence: [ı>i]
       ref: lemma:uz-yil; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-tillar
   uz: { latn: tillar, cyrl: тиллар }
   freqRank: 54
   form: inflected
   lemma: uz-til
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: tongue (plural)
   sources:
@@ -482,15 +482,15 @@
       text: diller
       relation: turkic-cognate
       confidence: high
-      correspondence: [ d>t ]
+      correspondence: [d>t]
       ref: lemma:uz-til; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-tilim
   uz: { latn: tilim, cyrl: тилим }
   freqRank: 54
   form: inflected
   lemma: uz-til
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: tongue (my)
   sources:
@@ -498,15 +498,15 @@
       text: dilim
       relation: turkic-cognate
       confidence: high
-      correspondence: [ d>t ]
+      correspondence: [d>t]
       ref: lemma:uz-til; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-tiling
   uz: { latn: tiling, cyrl: тилинг }
   freqRank: 54
   form: inflected
   lemma: uz-til
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: tongue (your (sg.))
   sources:
@@ -514,15 +514,15 @@
       text: dilin
       relation: turkic-cognate
       confidence: high
-      correspondence: [ d>t ]
+      correspondence: [d>t]
       ref: lemma:uz-til; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-tilda
   uz: { latn: tilda, cyrl: тилда }
   freqRank: 54
   form: inflected
   lemma: uz-til
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: tongue (in, at)
   sources:
@@ -530,15 +530,15 @@
       text: dilde
       relation: turkic-cognate
       confidence: high
-      correspondence: [ d>t ]
+      correspondence: [d>t]
       ref: lemma:uz-til; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-tilga
   uz: { latn: tilga, cyrl: тилга }
   freqRank: 54
   form: inflected
   lemma: uz-til
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: tongue (to)
   sources:
@@ -546,15 +546,15 @@
       text: dile
       relation: turkic-cognate
       confidence: high
-      correspondence: [ d>t ]
+      correspondence: [d>t]
       ref: lemma:uz-til; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-tildan
   uz: { latn: tildan, cyrl: тилдан }
   freqRank: 54
   form: inflected
   lemma: uz-til
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: tongue (from)
   sources:
@@ -562,15 +562,15 @@
       text: dilden
       relation: turkic-cognate
       confidence: high
-      correspondence: [ d>t ]
+      correspondence: [d>t]
       ref: lemma:uz-til; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-uylar
   uz: { latn: uylar, cyrl: уйлар }
   freqRank: 58
   form: inflected
   lemma: uz-uy
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: house (plural)
   sources:
@@ -578,15 +578,15 @@
       text: evler
       relation: turkic-cognate
       confidence: high
-      correspondence: [ irregular ]
+      correspondence: [irregular]
       ref: lemma:uz-uy; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-uyim
   uz: { latn: uyim, cyrl: уйим }
   freqRank: 58
   form: inflected
   lemma: uz-uy
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: house (my)
   sources:
@@ -594,15 +594,15 @@
       text: evim
       relation: turkic-cognate
       confidence: high
-      correspondence: [ irregular ]
+      correspondence: [irregular]
       ref: lemma:uz-uy; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-uying
   uz: { latn: uying, cyrl: уйинг }
   freqRank: 58
   form: inflected
   lemma: uz-uy
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: house (your (sg.))
   sources:
@@ -610,15 +610,15 @@
       text: evin
       relation: turkic-cognate
       confidence: high
-      correspondence: [ irregular ]
+      correspondence: [irregular]
       ref: lemma:uz-uy; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-uyda
   uz: { latn: uyda, cyrl: уйда }
   freqRank: 58
   form: inflected
   lemma: uz-uy
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: house (in, at)
   sources:
@@ -626,15 +626,15 @@
       text: evde
       relation: turkic-cognate
       confidence: high
-      correspondence: [ irregular ]
+      correspondence: [irregular]
       ref: lemma:uz-uy; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-uyga
   uz: { latn: uyga, cyrl: уйга }
   freqRank: 58
   form: inflected
   lemma: uz-uy
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: house (to)
   sources:
@@ -642,15 +642,15 @@
       text: eve
       relation: turkic-cognate
       confidence: high
-      correspondence: [ irregular ]
+      correspondence: [irregular]
       ref: lemma:uz-uy; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-uydan
   uz: { latn: uydan, cyrl: уйдан }
   freqRank: 58
   form: inflected
   lemma: uz-uy
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: house (from)
   sources:
@@ -658,15 +658,15 @@
       text: evden
       relation: turkic-cognate
       confidence: high
-      correspondence: [ irregular ]
+      correspondence: [irregular]
       ref: lemma:uz-uy; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-yollar
   uz: { latn: yoʻllar, cyrl: йўллар }
   freqRank: 61
   form: inflected
   lemma: uz-yol
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: road (plural)
   sources:
@@ -674,15 +674,15 @@
       text: yollar
       relation: turkic-cognate
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-yol; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-yolim
   uz: { latn: yoʻlim, cyrl: йўлим }
   freqRank: 61
   form: inflected
   lemma: uz-yol
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: road (my)
   sources:
@@ -690,15 +690,15 @@
       text: yolum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-yol; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-yoling
   uz: { latn: yoʻling, cyrl: йўлинг }
   freqRank: 61
   form: inflected
   lemma: uz-yol
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: road (your (sg.))
   sources:
@@ -706,15 +706,15 @@
       text: yolun
       relation: turkic-cognate
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-yol; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-yolda
   uz: { latn: yoʻlda, cyrl: йўлда }
   freqRank: 61
   form: inflected
   lemma: uz-yol
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: road (in, at)
   sources:
@@ -722,15 +722,15 @@
       text: yolda
       relation: turkic-cognate
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-yol; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-yolga
   uz: { latn: yoʻlga, cyrl: йўлга }
   freqRank: 61
   form: inflected
   lemma: uz-yol
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: road (to)
   sources:
@@ -738,15 +738,15 @@
       text: yola
       relation: turkic-cognate
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-yol; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-yoldan
   uz: { latn: yoʻldan, cyrl: йўлдан }
   freqRank: 61
   form: inflected
   lemma: uz-yol
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: road (from)
   sources:
@@ -754,15 +754,15 @@
       text: yoldan
       relation: turkic-cognate
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-yol; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-boshlar
   uz: { latn: boshlar, cyrl: бошлар }
   freqRank: 64
   form: inflected
   lemma: uz-bosh
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: head (plural)
   sources:
@@ -770,15 +770,15 @@
       text: başlar
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-bosh; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-boshim
   uz: { latn: boshim, cyrl: бошим }
   freqRank: 64
   form: inflected
   lemma: uz-bosh
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: head (my)
   sources:
@@ -786,15 +786,15 @@
       text: başım
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-bosh; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-boshing
   uz: { latn: boshing, cyrl: бошинг }
   freqRank: 64
   form: inflected
   lemma: uz-bosh
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: head (your (sg.))
   sources:
@@ -802,15 +802,15 @@
       text: başın
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-bosh; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-boshda
   uz: { latn: boshda, cyrl: бошда }
   freqRank: 64
   form: inflected
   lemma: uz-bosh
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: head (in, at)
   sources:
@@ -818,15 +818,15 @@
       text: başta
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-bosh; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-boshga
   uz: { latn: boshga, cyrl: бошга }
   freqRank: 64
   form: inflected
   lemma: uz-bosh
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: head (to)
   sources:
@@ -834,15 +834,15 @@
       text: başa
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-bosh; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-boshdan
   uz: { latn: boshdan, cyrl: бошдан }
   freqRank: 64
   form: inflected
   lemma: uz-bosh
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: head (from)
   sources:
@@ -850,15 +850,15 @@
       text: baştan
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-bosh; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-onalar
   uz: { latn: onalar, cyrl: оналар }
   freqRank: 65
   form: inflected
   lemma: uz-ona
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: mother (plural)
   sources:
@@ -866,15 +866,15 @@
       text: analar
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ona; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-onam
   uz: { latn: onam, cyrl: онам }
   freqRank: 65
   form: inflected
   lemma: uz-ona
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: mother (my)
   sources:
@@ -882,15 +882,15 @@
       text: anam
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ona; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-onang
   uz: { latn: onang, cyrl: онанг }
   freqRank: 65
   form: inflected
   lemma: uz-ona
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: mother (your (sg.))
   sources:
@@ -898,15 +898,15 @@
       text: anan
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ona; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-onada
   uz: { latn: onada, cyrl: онада }
   freqRank: 65
   form: inflected
   lemma: uz-ona
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: mother (in, at)
   sources:
@@ -914,15 +914,15 @@
       text: anada
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ona; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-onaga
   uz: { latn: onaga, cyrl: онага }
   freqRank: 65
   form: inflected
   lemma: uz-ona
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: mother (to)
   sources:
@@ -930,15 +930,15 @@
       text: anaya
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ona; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-onadan
   uz: { latn: onadan, cyrl: онадан }
   freqRank: 65
   form: inflected
   lemma: uz-ona
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: mother (from)
   sources:
@@ -946,15 +946,15 @@
       text: anadan
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ona; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-kozlar
   uz: { latn: koʻzlar, cyrl: кўзлар }
   freqRank: 66
   form: inflected
   lemma: uz-koz
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: eye (plural)
   sources:
@@ -962,15 +962,15 @@
       text: gözler
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ö>oʻ ]
+      correspondence: [g>k, ö>oʻ]
       ref: lemma:uz-koz; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-kozim
   uz: { latn: koʻzim, cyrl: кўзим }
   freqRank: 66
   form: inflected
   lemma: uz-koz
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: eye (my)
   sources:
@@ -978,15 +978,15 @@
       text: gözüm
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ö>oʻ ]
+      correspondence: [g>k, ö>oʻ]
       ref: lemma:uz-koz; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-kozing
   uz: { latn: koʻzing, cyrl: кўзинг }
   freqRank: 66
   form: inflected
   lemma: uz-koz
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: eye (your (sg.))
   sources:
@@ -994,15 +994,15 @@
       text: gözün
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ö>oʻ ]
+      correspondence: [g>k, ö>oʻ]
       ref: lemma:uz-koz; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-kozda
   uz: { latn: koʻzda, cyrl: кўзда }
   freqRank: 66
   form: inflected
   lemma: uz-koz
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: eye (in, at)
   sources:
@@ -1010,15 +1010,15 @@
       text: gözde
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ö>oʻ ]
+      correspondence: [g>k, ö>oʻ]
       ref: lemma:uz-koz; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-kozga
   uz: { latn: koʻzga, cyrl: кўзга }
   freqRank: 66
   form: inflected
   lemma: uz-koz
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: eye (to)
   sources:
@@ -1026,15 +1026,15 @@
       text: göze
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ö>oʻ ]
+      correspondence: [g>k, ö>oʻ]
       ref: lemma:uz-koz; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-kozdan
   uz: { latn: koʻzdan, cyrl: кўздан }
   freqRank: 66
   form: inflected
   lemma: uz-koz
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: eye (from)
   sources:
@@ -1042,15 +1042,15 @@
       text: gözden
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ö>oʻ ]
+      correspondence: [g>k, ö>oʻ]
       ref: lemma:uz-koz; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-kitoblar
   uz: { latn: kitoblar, cyrl: китоблар }
   freqRank: 81
   form: inflected
   lemma: uz-kitob
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: book (plural)
   sources:
@@ -1058,15 +1058,15 @@
       text: kitaplar
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, p>b ]
+      correspondence: [a>o, p>b]
       ref: lemma:uz-kitob; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-kitobim
   uz: { latn: kitobim, cyrl: китобим }
   freqRank: 81
   form: inflected
   lemma: uz-kitob
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: book (my)
   sources:
@@ -1074,15 +1074,15 @@
       text: kitabım
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, p>b ]
+      correspondence: [a>o, p>b]
       ref: lemma:uz-kitob; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-kitobing
   uz: { latn: kitobing, cyrl: китобинг }
   freqRank: 81
   form: inflected
   lemma: uz-kitob
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: book (your (sg.))
   sources:
@@ -1090,15 +1090,15 @@
       text: kitabın
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, p>b ]
+      correspondence: [a>o, p>b]
       ref: lemma:uz-kitob; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-kitobda
   uz: { latn: kitobda, cyrl: китобда }
   freqRank: 81
   form: inflected
   lemma: uz-kitob
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: book (in, at)
   sources:
@@ -1106,15 +1106,15 @@
       text: kitapta
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, p>b ]
+      correspondence: [a>o, p>b]
       ref: lemma:uz-kitob; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-kitobga
   uz: { latn: kitobga, cyrl: китобга }
   freqRank: 81
   form: inflected
   lemma: uz-kitob
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: book (to)
   sources:
@@ -1122,15 +1122,15 @@
       text: kitaba
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, p>b ]
+      correspondence: [a>o, p>b]
       ref: lemma:uz-kitob; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-kitobdan
   uz: { latn: kitobdan, cyrl: китобдан }
   freqRank: 81
   form: inflected
   lemma: uz-kitob
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: book (from)
   sources:
@@ -1138,15 +1138,15 @@
       text: kitaptan
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, p>b ]
+      correspondence: [a>o, p>b]
       ref: lemma:uz-kitob; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-qizlar
   uz: { latn: qizlar, cyrl: қизлар }
   freqRank: 85
   form: inflected
   lemma: uz-qiz
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: girl (plural)
   sources:
@@ -1154,15 +1154,15 @@
       text: kızlar
       relation: turkic-cognate
       confidence: high
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: lemma:uz-qiz; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-qizim
   uz: { latn: qizim, cyrl: қизим }
   freqRank: 85
   form: inflected
   lemma: uz-qiz
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: girl (my)
   sources:
@@ -1170,15 +1170,15 @@
       text: kızım
       relation: turkic-cognate
       confidence: high
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: lemma:uz-qiz; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-qizing
   uz: { latn: qizing, cyrl: қизинг }
   freqRank: 85
   form: inflected
   lemma: uz-qiz
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: girl (your (sg.))
   sources:
@@ -1186,15 +1186,15 @@
       text: kızın
       relation: turkic-cognate
       confidence: high
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: lemma:uz-qiz; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-qizda
   uz: { latn: qizda, cyrl: қизда }
   freqRank: 85
   form: inflected
   lemma: uz-qiz
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: girl (in, at)
   sources:
@@ -1202,15 +1202,15 @@
       text: kızda
       relation: turkic-cognate
       confidence: high
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: lemma:uz-qiz; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-qizga
   uz: { latn: qizga, cyrl: қизга }
   freqRank: 85
   form: inflected
   lemma: uz-qiz
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: girl (to)
   sources:
@@ -1218,15 +1218,15 @@
       text: kıza
       relation: turkic-cognate
       confidence: high
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: lemma:uz-qiz; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-qizdan
   uz: { latn: qizdan, cyrl: қиздан }
   freqRank: 85
   form: inflected
   lemma: uz-qiz
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: girl (from)
   sources:
@@ -1234,15 +1234,15 @@
       text: kızdan
       relation: turkic-cognate
       confidence: high
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: lemma:uz-qiz; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-kishilar
   uz: { latn: kishilar, cyrl: кишилар }
   freqRank: 86
   form: inflected
   lemma: uz-kishi
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: person (plural)
   sources:
@@ -1251,13 +1251,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-kishi; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-kishim
   uz: { latn: kishim, cyrl: кишим }
   freqRank: 86
   form: inflected
   lemma: uz-kishi
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: person (my)
   sources:
@@ -1266,13 +1266,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-kishi; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-kishing
   uz: { latn: kishing, cyrl: кишинг }
   freqRank: 86
   form: inflected
   lemma: uz-kishi
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: person (your (sg.))
   sources:
@@ -1281,13 +1281,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-kishi; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-kishida
   uz: { latn: kishida, cyrl: кишида }
   freqRank: 86
   form: inflected
   lemma: uz-kishi
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: person (in, at)
   sources:
@@ -1296,13 +1296,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-kishi; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-kishiga
   uz: { latn: kishiga, cyrl: кишига }
   freqRank: 86
   form: inflected
   lemma: uz-kishi
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: person (to)
   sources:
@@ -1311,13 +1311,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-kishi; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-kishidan
   uz: { latn: kishidan, cyrl: кишидан }
   freqRank: 86
   form: inflected
   lemma: uz-kishi
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: person (from)
   sources:
@@ -1326,13 +1326,13 @@
       relation: turkic-cognate
       confidence: high
       ref: lemma:uz-kishi; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-sozlar
   uz: { latn: soʻzlar, cyrl: сўзлар }
   freqRank: 87
   form: inflected
   lemma: uz-soz
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: word (plural)
   sources:
@@ -1340,15 +1340,15 @@
       text: sözler
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ö>oʻ ]
+      correspondence: [ö>oʻ]
       ref: lemma:uz-soz; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-sozim
   uz: { latn: soʻzim, cyrl: сўзим }
   freqRank: 87
   form: inflected
   lemma: uz-soz
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: word (my)
   sources:
@@ -1356,15 +1356,15 @@
       text: sözüm
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ö>oʻ ]
+      correspondence: [ö>oʻ]
       ref: lemma:uz-soz; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-sozing
   uz: { latn: soʻzing, cyrl: сўзинг }
   freqRank: 87
   form: inflected
   lemma: uz-soz
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: word (your (sg.))
   sources:
@@ -1372,15 +1372,15 @@
       text: sözün
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ö>oʻ ]
+      correspondence: [ö>oʻ]
       ref: lemma:uz-soz; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-sozda
   uz: { latn: soʻzda, cyrl: сўзда }
   freqRank: 87
   form: inflected
   lemma: uz-soz
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: word (in, at)
   sources:
@@ -1388,15 +1388,15 @@
       text: sözde
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ö>oʻ ]
+      correspondence: [ö>oʻ]
       ref: lemma:uz-soz; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-sozga
   uz: { latn: soʻzga, cyrl: сўзга }
   freqRank: 87
   form: inflected
   lemma: uz-soz
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: word (to)
   sources:
@@ -1404,15 +1404,15 @@
       text: söze
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ö>oʻ ]
+      correspondence: [ö>oʻ]
       ref: lemma:uz-soz; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-sozdan
   uz: { latn: soʻzdan, cyrl: сўздан }
   freqRank: 87
   form: inflected
   lemma: uz-soz
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: word (from)
   sources:
@@ -1420,15 +1420,15 @@
       text: sözden
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ö>oʻ ]
+      correspondence: [ö>oʻ]
       ref: lemma:uz-soz; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-suvlar
   uz: { latn: suvlar, cyrl: сувлар }
   freqRank: 89
   form: inflected
   lemma: uz-suv
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: water (plural)
   sources:
@@ -1437,13 +1437,13 @@
       relation: turkic-cognate
       confidence: medium
       ref: lemma:uz-suv; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-suvim
   uz: { latn: suvim, cyrl: сувим }
   freqRank: 89
   form: inflected
   lemma: uz-suv
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: water (my)
   sources:
@@ -1452,13 +1452,13 @@
       relation: turkic-cognate
       confidence: medium
       ref: lemma:uz-suv; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-suving
   uz: { latn: suving, cyrl: сувинг }
   freqRank: 89
   form: inflected
   lemma: uz-suv
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: water (your (sg.))
   sources:
@@ -1467,13 +1467,13 @@
       relation: turkic-cognate
       confidence: medium
       ref: lemma:uz-suv; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-suvda
   uz: { latn: suvda, cyrl: сувда }
   freqRank: 89
   form: inflected
   lemma: uz-suv
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: water (in, at)
   sources:
@@ -1482,13 +1482,13 @@
       relation: turkic-cognate
       confidence: medium
       ref: lemma:uz-suv; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-suvga
   uz: { latn: suvga, cyrl: сувга }
   freqRank: 89
   form: inflected
   lemma: uz-suv
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: water (to)
   sources:
@@ -1497,13 +1497,13 @@
       relation: turkic-cognate
       confidence: medium
       ref: lemma:uz-suv; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-suvdan
   uz: { latn: suvdan, cyrl: сувдан }
   freqRank: 89
   form: inflected
   lemma: uz-suv
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: water (from)
   sources:
@@ -1512,13 +1512,13 @@
       relation: turkic-cognate
       confidence: medium
       ref: lemma:uz-suv; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-yoshlar
   uz: { latn: yoshlar, cyrl: ёшлар }
   freqRank: 78
   form: inflected
   lemma: uz-yosh
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: young (plural)
   sources:
@@ -1526,15 +1526,15 @@
       text: yaşlar
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-yosh; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-yoshim
   uz: { latn: yoshim, cyrl: ёшим }
   freqRank: 78
   form: inflected
   lemma: uz-yosh
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: young (my)
   sources:
@@ -1542,15 +1542,15 @@
       text: yaşım
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-yosh; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-yoshing
   uz: { latn: yoshing, cyrl: ёшинг }
   freqRank: 78
   form: inflected
   lemma: uz-yosh
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: young (your (sg.))
   sources:
@@ -1558,15 +1558,15 @@
       text: yaşın
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-yosh; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-yoshda
   uz: { latn: yoshda, cyrl: ёшда }
   freqRank: 78
   form: inflected
   lemma: uz-yosh
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: young (in, at)
   sources:
@@ -1574,15 +1574,15 @@
       text: yaşta
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-yosh; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-yoshga
   uz: { latn: yoshga, cyrl: ёшга }
   freqRank: 78
   form: inflected
   lemma: uz-yosh
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: young (to)
   sources:
@@ -1590,15 +1590,15 @@
       text: yaşa
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-yosh; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-yoshdan
   uz: { latn: yoshdan, cyrl: ёшдан }
   freqRank: 78
   form: inflected
   lemma: uz-yosh
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: young (from)
   sources:
@@ -1606,15 +1606,15 @@
       text: yaştan
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-yosh; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-otalar
   uz: { latn: otalar, cyrl: оталар }
   freqRank: 80
   form: inflected
   lemma: uz-ota
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: father (plural)
   sources:
@@ -1622,15 +1622,15 @@
       text: atalar
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ota; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-otam
   uz: { latn: otam, cyrl: отам }
   freqRank: 80
   form: inflected
   lemma: uz-ota
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: father (my)
   sources:
@@ -1638,15 +1638,15 @@
       text: atam
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ota; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-otang
   uz: { latn: otang, cyrl: отанг }
   freqRank: 80
   form: inflected
   lemma: uz-ota
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: father (your (sg.))
   sources:
@@ -1654,15 +1654,15 @@
       text: atan
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ota; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-otada
   uz: { latn: otada, cyrl: отада }
   freqRank: 80
   form: inflected
   lemma: uz-ota
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: father (in, at)
   sources:
@@ -1670,15 +1670,15 @@
       text: atada
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ota; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-otaga
   uz: { latn: otaga, cyrl: отага }
   freqRank: 80
   form: inflected
   lemma: uz-ota
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: father (to)
   sources:
@@ -1686,15 +1686,15 @@
       text: ataya
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ota; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-otadan
   uz: { latn: otadan, cyrl: отадан }
   freqRank: 80
   form: inflected
   lemma: uz-ota
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: father (from)
   sources:
@@ -1702,15 +1702,15 @@
       text: atadan
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ota; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-maktablar
   uz: { latn: maktablar, cyrl: мактаблар }
   freqRank: 133
   form: inflected
   lemma: uz-maktab
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: school (plural)
   sources:
@@ -1718,15 +1718,15 @@
       text: mektepler
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-maktab; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-maktabim
   uz: { latn: maktabim, cyrl: мактабим }
   freqRank: 133
   form: inflected
   lemma: uz-maktab
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: school (my)
   sources:
@@ -1734,15 +1734,15 @@
       text: mektebim
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-maktab; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-maktabing
   uz: { latn: maktabing, cyrl: мактабинг }
   freqRank: 133
   form: inflected
   lemma: uz-maktab
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: school (your (sg.))
   sources:
@@ -1750,15 +1750,15 @@
       text: mektebin
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-maktab; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-maktabda
   uz: { latn: maktabda, cyrl: мактабда }
   freqRank: 133
   form: inflected
   lemma: uz-maktab
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: school (in, at)
   sources:
@@ -1766,15 +1766,15 @@
       text: mektepte
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-maktab; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-maktabga
   uz: { latn: maktabga, cyrl: мактабга }
   freqRank: 133
   form: inflected
   lemma: uz-maktab
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: school (to)
   sources:
@@ -1782,15 +1782,15 @@
       text: mektebe
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-maktab; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-maktabdan
   uz: { latn: maktabdan, cyrl: мактабдан }
   freqRank: 133
   form: inflected
   lemma: uz-maktab
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: school (from)
   sources:
@@ -1798,15 +1798,15 @@
       text: mektepten
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-maktab; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-dostlar
   uz: { latn: doʻstlar, cyrl: дўстлар }
   freqRank: 127
   form: inflected
   lemma: uz-dost
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: friend (plural)
   sources:
@@ -1814,15 +1814,15 @@
       text: dostlar
       relation: shared-persian
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-dost; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-dostim
   uz: { latn: doʻstim, cyrl: дўстим }
   freqRank: 127
   form: inflected
   lemma: uz-dost
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: friend (my)
   sources:
@@ -1830,15 +1830,15 @@
       text: dostum
       relation: shared-persian
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-dost; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-dosting
   uz: { latn: doʻsting, cyrl: дўстинг }
   freqRank: 127
   form: inflected
   lemma: uz-dost
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: friend (your (sg.))
   sources:
@@ -1846,15 +1846,15 @@
       text: dostun
       relation: shared-persian
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-dost; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-dostda
   uz: { latn: doʻstda, cyrl: дўстда }
   freqRank: 127
   form: inflected
   lemma: uz-dost
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: friend (in, at)
   sources:
@@ -1862,15 +1862,15 @@
       text: dostta
       relation: shared-persian
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-dost; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-dostga
   uz: { latn: doʻstga, cyrl: дўстга }
   freqRank: 127
   form: inflected
   lemma: uz-dost
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: friend (to)
   sources:
@@ -1878,15 +1878,15 @@
       text: dosta
       relation: shared-persian
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-dost; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-dostdan
   uz: { latn: doʻstdan, cyrl: дўстдан }
   freqRank: 127
   form: inflected
   lemma: uz-dost
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: friend (from)
   sources:
@@ -1894,15 +1894,15 @@
       text: dosttan
       relation: shared-persian
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-dost; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-dunyolar
   uz: { latn: dunyolar, cyrl: дунёлар }
   freqRank: 112
   form: inflected
   lemma: uz-dunyo
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: world (plural)
   sources:
@@ -1910,15 +1910,15 @@
       text: dünyalar
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, ü>u ]
+      correspondence: [a>o, ü>u]
       ref: lemma:uz-dunyo; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-dunyom
   uz: { latn: dunyom, cyrl: дунём }
   freqRank: 112
   form: inflected
   lemma: uz-dunyo
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: world (my)
   sources:
@@ -1926,15 +1926,15 @@
       text: dünyam
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, ü>u ]
+      correspondence: [a>o, ü>u]
       ref: lemma:uz-dunyo; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-dunyong
   uz: { latn: dunyong, cyrl: дунёнг }
   freqRank: 112
   form: inflected
   lemma: uz-dunyo
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: world (your (sg.))
   sources:
@@ -1942,15 +1942,15 @@
       text: dünyan
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, ü>u ]
+      correspondence: [a>o, ü>u]
       ref: lemma:uz-dunyo; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-dunyoda
   uz: { latn: dunyoda, cyrl: дунёда }
   freqRank: 112
   form: inflected
   lemma: uz-dunyo
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: world (in, at)
   sources:
@@ -1958,15 +1958,15 @@
       text: dünyada
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, ü>u ]
+      correspondence: [a>o, ü>u]
       ref: lemma:uz-dunyo; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-dunyoga
   uz: { latn: dunyoga, cyrl: дунёга }
   freqRank: 112
   form: inflected
   lemma: uz-dunyo
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: world (to)
   sources:
@@ -1974,15 +1974,15 @@
       text: dünyaya
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, ü>u ]
+      correspondence: [a>o, ü>u]
       ref: lemma:uz-dunyo; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-dunyodan
   uz: { latn: dunyodan, cyrl: дунёдан }
   freqRank: 112
   form: inflected
   lemma: uz-dunyo
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: world (from)
   sources:
@@ -1990,15 +1990,15 @@
       text: dünyadan
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, ü>u ]
+      correspondence: [a>o, ü>u]
       ref: lemma:uz-dunyo; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-davlatlar
   uz: { latn: davlatlar, cyrl: давлатлар }
   freqRank: 108
   form: inflected
   lemma: uz-davlat
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: state (plural)
   sources:
@@ -2006,15 +2006,15 @@
       text: devletler
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-davlat; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-davlatim
   uz: { latn: davlatim, cyrl: давлатим }
   freqRank: 108
   form: inflected
   lemma: uz-davlat
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: state (my)
   sources:
@@ -2022,15 +2022,15 @@
       text: devletim
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-davlat; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-davlating
   uz: { latn: davlating, cyrl: давлатинг }
   freqRank: 108
   form: inflected
   lemma: uz-davlat
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: state (your (sg.))
   sources:
@@ -2038,15 +2038,15 @@
       text: devletin
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-davlat; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-davlatda
   uz: { latn: davlatda, cyrl: давлатда }
   freqRank: 108
   form: inflected
   lemma: uz-davlat
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: state (in, at)
   sources:
@@ -2054,15 +2054,15 @@
       text: devlette
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-davlat; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-davlatga
   uz: { latn: davlatga, cyrl: давлатга }
   freqRank: 108
   form: inflected
   lemma: uz-davlat
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: state (to)
   sources:
@@ -2070,15 +2070,15 @@
       text: devlete
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-davlat; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-davlatdan
   uz: { latn: davlatdan, cyrl: давлатдан }
   freqRank: 108
   form: inflected
   lemma: uz-davlat
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: state (from)
   sources:
@@ -2086,15 +2086,15 @@
       text: devletten
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-davlat; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-xalqlar
   uz: { latn: xalqlar, cyrl: халқлар }
   freqRank: 152
   form: inflected
   lemma: uz-xalq
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: people (plural)
   sources:
@@ -2102,15 +2102,15 @@
       text: halklar
       relation: shared-arabic
       confidence: high
-      correspondence: [ h>x, k>q ]
+      correspondence: [h>x, k>q]
       ref: lemma:uz-xalq; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-xalqim
   uz: { latn: xalqim, cyrl: халқим }
   freqRank: 152
   form: inflected
   lemma: uz-xalq
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: people (my)
   sources:
@@ -2118,15 +2118,15 @@
       text: halkım
       relation: shared-arabic
       confidence: high
-      correspondence: [ h>x, k>q ]
+      correspondence: [h>x, k>q]
       ref: lemma:uz-xalq; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-xalqing
   uz: { latn: xalqing, cyrl: халқинг }
   freqRank: 152
   form: inflected
   lemma: uz-xalq
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: people (your (sg.))
   sources:
@@ -2134,15 +2134,15 @@
       text: halkın
       relation: shared-arabic
       confidence: high
-      correspondence: [ h>x, k>q ]
+      correspondence: [h>x, k>q]
       ref: lemma:uz-xalq; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-xalqda
   uz: { latn: xalqda, cyrl: халқда }
   freqRank: 152
   form: inflected
   lemma: uz-xalq
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: people (in, at)
   sources:
@@ -2150,15 +2150,15 @@
       text: halkta
       relation: shared-arabic
       confidence: high
-      correspondence: [ h>x, k>q ]
+      correspondence: [h>x, k>q]
       ref: lemma:uz-xalq; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-xalqqa
   uz: { latn: xalqqa, cyrl: халққа }
   freqRank: 152
   form: inflected
   lemma: uz-xalq
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: people (to)
   sources:
@@ -2166,15 +2166,15 @@
       text: halka
       relation: shared-arabic
       confidence: high
-      correspondence: [ h>x, k>q ]
+      correspondence: [h>x, k>q]
       ref: lemma:uz-xalq; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-xalqdan
   uz: { latn: xalqdan, cyrl: халқдан }
   freqRank: 152
   form: inflected
   lemma: uz-xalq
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: people (from)
   sources:
@@ -2182,15 +2182,15 @@
       text: halktan
       relation: shared-arabic
       confidence: high
-      correspondence: [ h>x, k>q ]
+      correspondence: [h>x, k>q]
       ref: lemma:uz-xalq; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-hayotlar
   uz: { latn: hayotlar, cyrl: ҳаётлар }
   freqRank: 101
   form: inflected
   lemma: uz-hayot
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: life (plural)
   sources:
@@ -2198,15 +2198,15 @@
       text: hayatlar
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-hayot; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-hayotim
   uz: { latn: hayotim, cyrl: ҳаётим }
   freqRank: 101
   form: inflected
   lemma: uz-hayot
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: life (my)
   sources:
@@ -2214,15 +2214,15 @@
       text: hayatım
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-hayot; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-hayoting
   uz: { latn: hayoting, cyrl: ҳаётинг }
   freqRank: 101
   form: inflected
   lemma: uz-hayot
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: life (your (sg.))
   sources:
@@ -2230,15 +2230,15 @@
       text: hayatın
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-hayot; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-hayotda
   uz: { latn: hayotda, cyrl: ҳаётда }
   freqRank: 101
   form: inflected
   lemma: uz-hayot
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: life (in, at)
   sources:
@@ -2246,15 +2246,15 @@
       text: hayatta
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-hayot; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-hayotga
   uz: { latn: hayotga, cyrl: ҳаётга }
   freqRank: 101
   form: inflected
   lemma: uz-hayot
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: life (to)
   sources:
@@ -2262,15 +2262,15 @@
       text: hayata
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-hayot; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-hayotdan
   uz: { latn: hayotdan, cyrl: ҳаётдан }
   freqRank: 101
   form: inflected
   lemma: uz-hayot
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: life (from)
   sources:
@@ -2278,15 +2278,15 @@
       text: hayattan
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-hayot; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-oylar
   uz: { latn: oylar, cyrl: ойлар }
   freqRank: 136
   form: inflected
   lemma: uz-oy
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: moon (plural)
   sources:
@@ -2294,15 +2294,15 @@
       text: aylar
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-oy; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-oyim
   uz: { latn: oyim, cyrl: ойим }
   freqRank: 136
   form: inflected
   lemma: uz-oy
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: moon (my)
   sources:
@@ -2310,15 +2310,15 @@
       text: ayım
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-oy; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-oying
   uz: { latn: oying, cyrl: ойинг }
   freqRank: 136
   form: inflected
   lemma: uz-oy
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: moon (your (sg.))
   sources:
@@ -2326,15 +2326,15 @@
       text: ayın
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-oy; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-oyda
   uz: { latn: oyda, cyrl: ойда }
   freqRank: 136
   form: inflected
   lemma: uz-oy
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: moon (in, at)
   sources:
@@ -2342,15 +2342,15 @@
       text: ayda
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-oy; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-oyga
   uz: { latn: oyga, cyrl: ойга }
   freqRank: 136
   form: inflected
   lemma: uz-oy
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: moon (to)
   sources:
@@ -2358,15 +2358,15 @@
       text: aya
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-oy; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-oydan
   uz: { latn: oydan, cyrl: ойдан }
   freqRank: 136
   form: inflected
   lemma: uz-oy
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: moon (from)
   sources:
@@ -2374,15 +2374,15 @@
       text: aydan
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-oy; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-soatlar
   uz: { latn: soatlar, cyrl: соатлар }
   freqRank: 146
   form: inflected
   lemma: uz-soat
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: hour (plural)
   sources:
@@ -2390,15 +2390,15 @@
       text: saatler
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-soat; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-soatim
   uz: { latn: soatim, cyrl: соатим }
   freqRank: 146
   form: inflected
   lemma: uz-soat
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: hour (my)
   sources:
@@ -2406,15 +2406,15 @@
       text: saatim
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-soat; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-soating
   uz: { latn: soating, cyrl: соатинг }
   freqRank: 146
   form: inflected
   lemma: uz-soat
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: hour (your (sg.))
   sources:
@@ -2422,15 +2422,15 @@
       text: saatin
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-soat; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-soatda
   uz: { latn: soatda, cyrl: соатда }
   freqRank: 146
   form: inflected
   lemma: uz-soat
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: hour (in, at)
   sources:
@@ -2438,15 +2438,15 @@
       text: saatte
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-soat; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-soatga
   uz: { latn: soatga, cyrl: соатга }
   freqRank: 146
   form: inflected
   lemma: uz-soat
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: hour (to)
   sources:
@@ -2454,15 +2454,15 @@
       text: saate
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-soat; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-soatdan
   uz: { latn: soatdan, cyrl: соатдан }
   freqRank: 146
   form: inflected
   lemma: uz-soat
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: hour (from)
   sources:
@@ -2470,15 +2470,15 @@
       text: saatten
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-soat; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-sabablar
   uz: { latn: sabablar, cyrl: сабаблар }
   freqRank: 192
   form: inflected
   lemma: uz-sabab
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: reason (plural)
   sources:
@@ -2486,15 +2486,15 @@
       text: sebepler
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-sabab; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-sababim
   uz: { latn: sababim, cyrl: сабабим }
   freqRank: 192
   form: inflected
   lemma: uz-sabab
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: reason (my)
   sources:
@@ -2502,15 +2502,15 @@
       text: sebebim
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-sabab; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-sababing
   uz: { latn: sababing, cyrl: сабабинг }
   freqRank: 192
   form: inflected
   lemma: uz-sabab
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: reason (your (sg.))
   sources:
@@ -2518,15 +2518,15 @@
       text: sebebin
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-sabab; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-sababda
   uz: { latn: sababda, cyrl: сабабда }
   freqRank: 192
   form: inflected
   lemma: uz-sabab
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: reason (in, at)
   sources:
@@ -2534,15 +2534,15 @@
       text: sebepte
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-sabab; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-sababga
   uz: { latn: sababga, cyrl: сабабга }
   freqRank: 192
   form: inflected
   lemma: uz-sabab
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: reason (to)
   sources:
@@ -2550,15 +2550,15 @@
       text: sebebe
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-sabab; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-sababdan
   uz: { latn: sababdan, cyrl: сабабдан }
   freqRank: 192
   form: inflected
   lemma: uz-sabab
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: reason (from)
   sources:
@@ -2566,15 +2566,15 @@
       text: sebepten
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: lemma:uz-sabab; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-mamlakatlar
   uz: { latn: mamlakatlar, cyrl: мамлакатлар }
   freqRank: 193
   form: inflected
   lemma: uz-mamlakat
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: country (plural)
   sources:
@@ -2582,15 +2582,15 @@
       text: memleketler
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mamlakat; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-mamlakatim
   uz: { latn: mamlakatim, cyrl: мамлакатим }
   freqRank: 193
   form: inflected
   lemma: uz-mamlakat
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: country (my)
   sources:
@@ -2598,15 +2598,15 @@
       text: memleketim
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mamlakat; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-mamlakating
   uz: { latn: mamlakating, cyrl: мамлакатинг }
   freqRank: 193
   form: inflected
   lemma: uz-mamlakat
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: country (your (sg.))
   sources:
@@ -2614,15 +2614,15 @@
       text: memleketin
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mamlakat; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-mamlakatda
   uz: { latn: mamlakatda, cyrl: мамлакатда }
   freqRank: 193
   form: inflected
   lemma: uz-mamlakat
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: country (in, at)
   sources:
@@ -2630,15 +2630,15 @@
       text: memlekette
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mamlakat; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-mamlakatga
   uz: { latn: mamlakatga, cyrl: мамлакатга }
   freqRank: 193
   form: inflected
   lemma: uz-mamlakat
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: country (to)
   sources:
@@ -2646,15 +2646,15 @@
       text: memlekete
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mamlakat; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-mamlakatdan
   uz: { latn: mamlakatdan, cyrl: мамлакатдан }
   freqRank: 193
   form: inflected
   lemma: uz-mamlakat
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: country (from)
   sources:
@@ -2662,15 +2662,15 @@
       text: memleketten
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mamlakat; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-mashinalar
   uz: { latn: mashinalar, cyrl: машиналар }
   freqRank: 120
   form: inflected
   lemma: uz-mashina
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: car (plural)
   sources:
@@ -2678,15 +2678,15 @@
       text: makineler
       relation: other-loan
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mashina; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-mashinam
   uz: { latn: mashinam, cyrl: машинам }
   freqRank: 120
   form: inflected
   lemma: uz-mashina
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: car (my)
   sources:
@@ -2694,15 +2694,15 @@
       text: makinem
       relation: other-loan
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mashina; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-mashinang
   uz: { latn: mashinang, cyrl: машинанг }
   freqRank: 120
   form: inflected
   lemma: uz-mashina
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: car (your (sg.))
   sources:
@@ -2710,15 +2710,15 @@
       text: makinen
       relation: other-loan
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mashina; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-mashinada
   uz: { latn: mashinada, cyrl: машинада }
   freqRank: 120
   form: inflected
   lemma: uz-mashina
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: car (in, at)
   sources:
@@ -2726,15 +2726,15 @@
       text: makinede
       relation: other-loan
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mashina; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-mashinaga
   uz: { latn: mashinaga, cyrl: машинага }
   freqRank: 120
   form: inflected
   lemma: uz-mashina
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: car (to)
   sources:
@@ -2742,15 +2742,15 @@
       text: makineye
       relation: other-loan
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mashina; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-mashinadan
   uz: { latn: mashinadan, cyrl: машинадан }
   freqRank: 120
   form: inflected
   lemma: uz-mashina
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: car (from)
   sources:
@@ -2758,15 +2758,15 @@
       text: makineden
       relation: other-loan
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-mashina; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-yuzlar
   uz: { latn: yuzlar, cyrl: юзлар }
   freqRank: 84
   form: inflected
   lemma: uz-yuz
-  suffixes: [ -lar ]
+  suffixes: [-lar]
   pos: noun
   glossEn: face (plural)
   sources:
@@ -2774,15 +2774,15 @@
       text: yüzler
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ü>u ]
+      correspondence: [ü>u]
       ref: lemma:uz-yuz; rule:C4-morph
-  tags: [ plural ]
+  tags: [plural]
 - id: uz-yuzim
   uz: { latn: yuzim, cyrl: юзим }
   freqRank: 84
   form: inflected
   lemma: uz-yuz
-  suffixes: [ -im ]
+  suffixes: [-im]
   pos: noun
   glossEn: face (my)
   sources:
@@ -2790,15 +2790,15 @@
       text: yüzüm
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ü>u ]
+      correspondence: [ü>u]
       ref: lemma:uz-yuz; rule:C4-morph
-  tags: [ possessive-1sg ]
+  tags: [possessive-1sg]
 - id: uz-yuzing
   uz: { latn: yuzing, cyrl: юзинг }
   freqRank: 84
   form: inflected
   lemma: uz-yuz
-  suffixes: [ -ing ]
+  suffixes: [-ing]
   pos: noun
   glossEn: face (your (sg.))
   sources:
@@ -2806,15 +2806,15 @@
       text: yüzün
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ü>u ]
+      correspondence: [ü>u]
       ref: lemma:uz-yuz; rule:C4-morph
-  tags: [ possessive-2sg ]
+  tags: [possessive-2sg]
 - id: uz-yuzda
   uz: { latn: yuzda, cyrl: юзда }
   freqRank: 84
   form: inflected
   lemma: uz-yuz
-  suffixes: [ -da ]
+  suffixes: [-da]
   pos: noun
   glossEn: face (in, at)
   sources:
@@ -2822,15 +2822,15 @@
       text: yüzde
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ü>u ]
+      correspondence: [ü>u]
       ref: lemma:uz-yuz; rule:C4-morph
-  tags: [ locative ]
+  tags: [locative]
 - id: uz-yuzga
   uz: { latn: yuzga, cyrl: юзга }
   freqRank: 84
   form: inflected
   lemma: uz-yuz
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: noun
   glossEn: face (to)
   sources:
@@ -2838,15 +2838,15 @@
       text: yüze
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ü>u ]
+      correspondence: [ü>u]
       ref: lemma:uz-yuz; rule:C4-morph
-  tags: [ dative ]
+  tags: [dative]
 - id: uz-yuzdan
   uz: { latn: yuzdan, cyrl: юздан }
   freqRank: 84
   form: inflected
   lemma: uz-yuz
-  suffixes: [ -dan ]
+  suffixes: [-dan]
   pos: noun
   glossEn: face (from)
   sources:
@@ -2854,15 +2854,15 @@
       text: yüzden
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ü>u ]
+      correspondence: [ü>u]
       ref: lemma:uz-yuz; rule:C4-morph
-  tags: [ ablative ]
+  tags: [ablative]
 - id: uz-boldim
   uz: { latn: boʻldim, cyrl: бўлдим }
   freqRank: 3
   form: inflected
   lemma: uz-bolmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to be (I (past))
   sources:
@@ -2870,15 +2870,15 @@
       text: oldum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ o>oʻ, ∅>b ]
+      correspondence: [o>oʻ, ∅>b]
       ref: lemma:uz-bolmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-bolyapman
   uz: { latn: boʻlyapman, cyrl: бўляпман }
   freqRank: 3
   form: inflected
   lemma: uz-bolmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to be (I am (…-ing))
   sources:
@@ -2886,15 +2886,15 @@
       text: oluyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ o>oʻ, ∅>b ]
+      correspondence: [o>oʻ, ∅>b]
       ref: lemma:uz-bolmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-oldim
   uz: { latn: oldim, cyrl: олдим }
   freqRank: 10
   form: inflected
   lemma: uz-olmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to take (I (past))
   sources:
@@ -2902,15 +2902,15 @@
       text: aldım
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-olmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-olyapman
   uz: { latn: olyapman, cyrl: оляпман }
   freqRank: 10
   form: inflected
   lemma: uz-olmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to take (I am (…-ing))
   sources:
@@ -2918,15 +2918,15 @@
       text: alıyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-olmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-dedim
   uz: { latn: dedim, cyrl: дедим }
   freqRank: 11
   form: inflected
   lemma: uz-demoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to say (I (past))
   sources:
@@ -2936,13 +2936,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-demoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-deyapman
   uz: { latn: deyapman, cyrl: деяпман }
   freqRank: 11
   form: inflected
   lemma: uz-demoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to say (I am (…-ing))
   sources:
@@ -2952,13 +2952,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-demoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-keldim
   uz: { latn: keldim, cyrl: келдим }
   freqRank: 15
   form: inflected
   lemma: uz-kelmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to come (I (past))
   sources:
@@ -2966,15 +2966,15 @@
       text: geldim
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k ]
+      correspondence: [g>k]
       ref: lemma:uz-kelmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-kelyapman
   uz: { latn: kelyapman, cyrl: келяпман }
   freqRank: 15
   form: inflected
   lemma: uz-kelmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to come (I am (…-ing))
   sources:
@@ -2982,15 +2982,15 @@
       text: geliyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k ]
+      correspondence: [g>k]
       ref: lemma:uz-kelmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-berdim
   uz: { latn: berdim, cyrl: бердим }
   freqRank: 17
   form: inflected
   lemma: uz-bermoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to give (I (past))
   sources:
@@ -2998,15 +2998,15 @@
       text: verdim
       relation: turkic-cognate
       confidence: high
-      correspondence: [ v>b ]
+      correspondence: [v>b]
       ref: lemma:uz-bermoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-beryapman
   uz: { latn: beryapman, cyrl: беряпман }
   freqRank: 17
   form: inflected
   lemma: uz-bermoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to give (I am (…-ing))
   sources:
@@ -3014,15 +3014,15 @@
       text: veriyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ v>b ]
+      correspondence: [v>b]
       ref: lemma:uz-bermoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-kordim
   uz: { latn: koʻrdim, cyrl: кўрдим }
   freqRank: 22
   form: inflected
   lemma: uz-kormoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to see (I (past))
   sources:
@@ -3030,15 +3030,15 @@
       text: gördüm
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ö>oʻ ]
+      correspondence: [g>k, ö>oʻ]
       ref: lemma:uz-kormoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-koryapman
   uz: { latn: koʻryapman, cyrl: кўряпман }
   freqRank: 22
   form: inflected
   lemma: uz-kormoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to see (I am (…-ing))
   sources:
@@ -3046,15 +3046,15 @@
       text: görüyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k, ö>oʻ ]
+      correspondence: [g>k, ö>oʻ]
       ref: lemma:uz-kormoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-qoldim
   uz: { latn: qoldim, cyrl: қолдим }
   freqRank: 23
   form: inflected
   lemma: uz-qolmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to stay (I (past))
   sources:
@@ -3062,15 +3062,15 @@
       text: kaldım
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o, k>q ]
+      correspondence: [a>o, k>q]
       ref: lemma:uz-qolmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-qolyapman
   uz: { latn: qolyapman, cyrl: қоляпман }
   freqRank: 23
   form: inflected
   lemma: uz-qolmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to stay (I am (…-ing))
   sources:
@@ -3078,15 +3078,15 @@
       text: kalıyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o, k>q ]
+      correspondence: [a>o, k>q]
       ref: lemma:uz-qolmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-ketdim
   uz: { latn: ketdim, cyrl: кетдим }
   freqRank: 24
   form: inflected
   lemma: uz-ketmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to leave (I (past))
   sources:
@@ -3094,15 +3094,15 @@
       text: gittim
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k ]
+      correspondence: [g>k]
       ref: lemma:uz-ketmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-ketyapman
   uz: { latn: ketyapman, cyrl: кетяпман }
   freqRank: 24
   form: inflected
   lemma: uz-ketmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to leave (I am (…-ing))
   sources:
@@ -3110,15 +3110,15 @@
       text: gidiyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ g>k ]
+      correspondence: [g>k]
       ref: lemma:uz-ketmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-etdim
   uz: { latn: etdim, cyrl: этдим }
   freqRank: 26
   form: inflected
   lemma: uz-etmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to do (I (past))
   sources:
@@ -3128,13 +3128,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-etmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-etyapman
   uz: { latn: etyapman, cyrl: этяпман }
   freqRank: 26
   form: inflected
   lemma: uz-etmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to do (I am (…-ing))
   sources:
@@ -3144,13 +3144,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-etmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-bildim
   uz: { latn: bildim, cyrl: билдим }
   freqRank: 31
   form: inflected
   lemma: uz-bilmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to know (I (past))
   sources:
@@ -3160,13 +3160,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-bilmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-bilyapman
   uz: { latn: bilyapman, cyrl: биляпман }
   freqRank: 31
   form: inflected
   lemma: uz-bilmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to know (I am (…-ing))
   sources:
@@ -3176,13 +3176,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-bilmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-bordim
   uz: { latn: bordim, cyrl: бордим }
   freqRank: 38
   form: inflected
   lemma: uz-bormoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to go (I (past))
   sources:
@@ -3190,15 +3190,15 @@
       text: vardım
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o, v>b ]
+      correspondence: [a>o, v>b]
       ref: lemma:uz-bormoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-boryapman
   uz: { latn: boryapman, cyrl: боряпман }
   freqRank: 38
   form: inflected
   lemma: uz-bormoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to go (I am (…-ing))
   sources:
@@ -3206,15 +3206,15 @@
       text: varıyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o, v>b ]
+      correspondence: [a>o, v>b]
       ref: lemma:uz-bormoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-chiqdim
   uz: { latn: chiqdim, cyrl: чиқдим }
   freqRank: 43
   form: inflected
   lemma: uz-chiqmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to go out (I (past))
   sources:
@@ -3222,15 +3222,15 @@
       text: çıktım
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: lemma:uz-chiqmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-chiqyapman
   uz: { latn: chiqyapman, cyrl: чиқяпман }
   freqRank: 43
   form: inflected
   lemma: uz-chiqmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to go out (I am (…-ing))
   sources:
@@ -3238,15 +3238,15 @@
       text: çıkıyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: lemma:uz-chiqmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-turdim
   uz: { latn: turdim, cyrl: турдим }
   freqRank: 44
   form: inflected
   lemma: uz-turmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to stand (I (past))
   sources:
@@ -3254,15 +3254,15 @@
       text: durdum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ d>t ]
+      correspondence: [d>t]
       ref: lemma:uz-turmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-turyapman
   uz: { latn: turyapman, cyrl: туряпман }
   freqRank: 44
   form: inflected
   lemma: uz-turmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to stand (I am (…-ing))
   sources:
@@ -3270,15 +3270,15 @@
       text: duruyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ d>t ]
+      correspondence: [d>t]
       ref: lemma:uz-turmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-qoydim
   uz: { latn: qoʻydim, cyrl: қўйдим }
   freqRank: 51
   form: inflected
   lemma: uz-qoymoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to put (I (past))
   sources:
@@ -3286,15 +3286,15 @@
       text: koydum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ k>q, o>oʻ ]
+      correspondence: [k>q, o>oʻ]
       ref: lemma:uz-qoymoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-qoyyapman
   uz: { latn: qoʻyyapman, cyrl: қўйяпман }
   freqRank: 51
   form: inflected
   lemma: uz-qoymoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to put (I am (…-ing))
   sources:
@@ -3302,15 +3302,15 @@
       text: koyuyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ k>q, o>oʻ ]
+      correspondence: [k>q, o>oʻ]
       ref: lemma:uz-qoymoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-ishladim
   uz: { latn: ishladim, cyrl: ишладим }
   freqRank: 76
   form: inflected
   lemma: uz-ishlamoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to work (I (past))
   sources:
@@ -3318,15 +3318,15 @@
       text: işledim
       relation: turkic-cognate
       confidence: low
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-ishlamoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-ishlayapman
   uz: { latn: ishlayapman, cyrl: ишлаяпман }
   freqRank: 76
   form: inflected
   lemma: uz-ishlamoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to work (I am (…-ing))
   sources:
@@ -3334,15 +3334,15 @@
       text: işliyorum
       relation: turkic-cognate
       confidence: low
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: lemma:uz-ishlamoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-kirdim
   uz: { latn: kirdim, cyrl: кирдим }
   freqRank: 82
   form: inflected
   lemma: uz-kirmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to enter (I (past))
   sources:
@@ -3350,15 +3350,15 @@
       text: girdim
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ g>k ]
+      correspondence: [g>k]
       ref: lemma:uz-kirmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-kiryapman
   uz: { latn: kiryapman, cyrl: киряпман }
   freqRank: 82
   form: inflected
   lemma: uz-kirmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to enter (I am (…-ing))
   sources:
@@ -3366,15 +3366,15 @@
       text: giriyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ g>k ]
+      correspondence: [g>k]
       ref: lemma:uz-kirmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-oqidim
   uz: { latn: oʻqidim, cyrl: ўқидим }
   freqRank: 83
   form: inflected
   lemma: uz-oqimoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to read (I (past))
   sources:
@@ -3382,15 +3382,15 @@
       text: okudum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ k>q, o>oʻ ]
+      correspondence: [k>q, o>oʻ]
       ref: lemma:uz-oqimoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-oqiyapman
   uz: { latn: oʻqiyapman, cyrl: ўқияпман }
   freqRank: 83
   form: inflected
   lemma: uz-oqimoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to read (I am (…-ing))
   sources:
@@ -3398,15 +3398,15 @@
       text: okuyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ k>q, o>oʻ ]
+      correspondence: [k>q, o>oʻ]
       ref: lemma:uz-oqimoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-soradim
   uz: { latn: soʻradim, cyrl: сўрадим }
   freqRank: 88
   form: inflected
   lemma: uz-soramoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to ask (I (past))
   sources:
@@ -3414,15 +3414,15 @@
       text: sordum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-soramoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-sorayapman
   uz: { latn: soʻrayapman, cyrl: сўраяпман }
   freqRank: 88
   form: inflected
   lemma: uz-soramoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to ask (I am (…-ing))
   sources:
@@ -3430,15 +3430,15 @@
       text: soruyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-soramoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-yashadim
   uz: { latn: yashadim, cyrl: яшадим }
   freqRank: 91
   form: inflected
   lemma: uz-yashamoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to live (I (past))
   sources:
@@ -3448,13 +3448,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-yashamoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-yashayapman
   uz: { latn: yashayapman, cyrl: яшаяпман }
   freqRank: 91
   form: inflected
   lemma: uz-yashamoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to live (I am (…-ing))
   sources:
@@ -3464,13 +3464,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-yashamoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-yozdim
   uz: { latn: yozdim, cyrl: ёздим }
   freqRank: 99
   form: inflected
   lemma: uz-yozmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to write (I (past))
   sources:
@@ -3478,15 +3478,15 @@
       text: yazdım
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-yozmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-yozyapman
   uz: { latn: yozyapman, cyrl: ёзяпман }
   freqRank: 99
   form: inflected
   lemma: uz-yozmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to write (I am (…-ing))
   sources:
@@ -3494,15 +3494,15 @@
       text: yazıyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-yozmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-boshladim
   uz: { latn: boshladim, cyrl: бошладим }
   freqRank: 106
   form: inflected
   lemma: uz-boshlamoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to begin (I (past))
   sources:
@@ -3510,15 +3510,15 @@
       text: başladım
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-boshlamoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-boshlayapman
   uz: { latn: boshlayapman, cyrl: бошлаяпман }
   freqRank: 106
   form: inflected
   lemma: uz-boshlamoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to begin (I am (…-ing))
   sources:
@@ -3526,15 +3526,15 @@
       text: başlıyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-boshlamoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-yurdim
   uz: { latn: yurdim, cyrl: юрдим }
   freqRank: 104
   form: inflected
   lemma: uz-yurmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to walk (I (past))
   sources:
@@ -3542,15 +3542,15 @@
       text: yürüdüm
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ ü>u ]
+      correspondence: [ü>u]
       ref: lemma:uz-yurmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-yuryapman
   uz: { latn: yuryapman, cyrl: юряпман }
   freqRank: 104
   form: inflected
   lemma: uz-yurmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to walk (I am (…-ing))
   sources:
@@ -3558,15 +3558,15 @@
       text: yürüyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ ü>u ]
+      correspondence: [ü>u]
       ref: lemma:uz-yurmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-sotdim
   uz: { latn: sotdim, cyrl: сотдим }
   freqRank: 114
   form: inflected
   lemma: uz-sotmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to sell (I (past))
   sources:
@@ -3574,15 +3574,15 @@
       text: sattım
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-sotmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-sotyapman
   uz: { latn: sotyapman, cyrl: сотяпман }
   freqRank: 114
   form: inflected
   lemma: uz-sotmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to sell (I am (…-ing))
   sources:
@@ -3590,15 +3590,15 @@
       text: satıyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-sotmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-eshitdim
   uz: { latn: eshitdim, cyrl: эшитдим }
   freqRank: 126
   form: inflected
   lemma: uz-eshitmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to hear (I (past))
   sources:
@@ -3608,13 +3608,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-eshitmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-eshityapman
   uz: { latn: eshityapman, cyrl: эшитяпман }
   freqRank: 126
   form: inflected
   lemma: uz-eshitmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to hear (I am (…-ing))
   sources:
@@ -3624,13 +3624,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-eshitmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-otirdim
   uz: { latn: oʻtirdim, cyrl: ўтирдим }
   freqRank: 129
   form: inflected
   lemma: uz-otirmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to sit (I (past))
   sources:
@@ -3638,15 +3638,15 @@
       text: oturdum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-otirmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-otiryapman
   uz: { latn: oʻtiryapman, cyrl: ўтиряпман }
   freqRank: 129
   form: inflected
   lemma: uz-otirmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to sit (I am (…-ing))
   sources:
@@ -3654,15 +3654,15 @@
       text: oturuyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: lemma:uz-otirmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-ochdim
   uz: { latn: ochdim, cyrl: очдим }
   freqRank: 130
   form: inflected
   lemma: uz-ochmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to open (I (past))
   sources:
@@ -3670,15 +3670,15 @@
       text: açtım
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ochmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-ochyapman
   uz: { latn: ochyapman, cyrl: очяпман }
   freqRank: 130
   form: inflected
   lemma: uz-ochmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to open (I am (…-ing))
   sources:
@@ -3686,15 +3686,15 @@
       text: açıyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: lemma:uz-ochmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-organdim
   uz: { latn: oʻrgandim, cyrl: ўргандим }
   freqRank: 131
   form: inflected
   lemma: uz-organmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to learn (I (past))
   sources:
@@ -3702,15 +3702,15 @@
       text: öğrendim
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ e>a, irregular, ö>oʻ ]
+      correspondence: [e>a, irregular, ö>oʻ]
       ref: lemma:uz-organmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-organyapman
   uz: { latn: oʻrganyapman, cyrl: ўрганяпман }
   freqRank: 131
   form: inflected
   lemma: uz-organmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to learn (I am (…-ing))
   sources:
@@ -3718,15 +3718,15 @@
       text: öğreniyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ e>a, irregular, ö>oʻ ]
+      correspondence: [e>a, irregular, ö>oʻ]
       ref: lemma:uz-organmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-korsatdim
   uz: { latn: koʻrsatdim, cyrl: кўрсатдим }
   freqRank: 135
   form: inflected
   lemma: uz-korsatmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to show (I (past))
   sources:
@@ -3734,15 +3734,15 @@
       text: gösterdim
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ e>a, g>k, irregular, ö>oʻ ]
+      correspondence: [e>a, g>k, irregular, ö>oʻ]
       ref: lemma:uz-korsatmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-korsatyapman
   uz: { latn: koʻrsatyapman, cyrl: кўрсатяпман }
   freqRank: 135
   form: inflected
   lemma: uz-korsatmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to show (I am (…-ing))
   sources:
@@ -3750,15 +3750,15 @@
       text: gösteriyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ e>a, g>k, irregular, ö>oʻ ]
+      correspondence: [e>a, g>k, irregular, ö>oʻ]
       ref: lemma:uz-korsatmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-tushdim
   uz: { latn: tushdim, cyrl: тушдим }
   freqRank: 73
   form: inflected
   lemma: uz-tushmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to fall (I (past))
   sources:
@@ -3766,15 +3766,15 @@
       text: düştüm
       relation: turkic-cognate
       confidence: high
-      correspondence: [ d>t, ü>u ]
+      correspondence: [d>t, ü>u]
       ref: lemma:uz-tushmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-tushyapman
   uz: { latn: tushyapman, cyrl: тушяпман }
   freqRank: 73
   form: inflected
   lemma: uz-tushmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to fall (I am (…-ing))
   sources:
@@ -3782,15 +3782,15 @@
       text: düşüyorum
       relation: turkic-cognate
       confidence: high
-      correspondence: [ d>t, ü>u ]
+      correspondence: [d>t, ü>u]
       ref: lemma:uz-tushmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-tutdim
   uz: { latn: tutdim, cyrl: тутдим }
   freqRank: 166
   form: inflected
   lemma: uz-tutmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to hold (I (past))
   sources:
@@ -3800,13 +3800,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-tutmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-tutyapman
   uz: { latn: tutyapman, cyrl: тутяпман }
   freqRank: 166
   form: inflected
   lemma: uz-tutmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to hold (I am (…-ing))
   sources:
@@ -3816,13 +3816,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-tutmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-korindim
   uz: { latn: koʻrindim, cyrl: кўриндим }
   freqRank: 153
   form: inflected
   lemma: uz-korinmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to appear (I (past))
   sources:
@@ -3830,15 +3830,15 @@
       text: göründüm
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ g>k, ö>oʻ ]
+      correspondence: [g>k, ö>oʻ]
       ref: lemma:uz-korinmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-korinyapman
   uz: { latn: koʻrinyapman, cyrl: кўриняпман }
   freqRank: 153
   form: inflected
   lemma: uz-korinmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to appear (I am (…-ing))
   sources:
@@ -3846,15 +3846,15 @@
       text: görünüyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ g>k, ö>oʻ ]
+      correspondence: [g>k, ö>oʻ]
       ref: lemma:uz-korinmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-qurdim
   uz: { latn: qurdim, cyrl: қурдим }
   freqRank: 183
   form: inflected
   lemma: uz-qurmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to build (I (past))
   sources:
@@ -3862,15 +3862,15 @@
       text: kurdum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ k>q ]
+      correspondence: [k>q]
       ref: lemma:uz-qurmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-quryapman
   uz: { latn: quryapman, cyrl: қуряпман }
   freqRank: 183
   form: inflected
   lemma: uz-qurmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to build (I am (…-ing))
   sources:
@@ -3878,15 +3878,15 @@
       text: kuruyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ k>q ]
+      correspondence: [k>q]
       ref: lemma:uz-qurmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-urdim
   uz: { latn: urdim, cyrl: урдим }
   freqRank: 191
   form: inflected
   lemma: uz-urmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to hit (I (past))
   sources:
@@ -3894,15 +3894,15 @@
       text: vurdum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ v>∅ ]
+      correspondence: [v>∅]
       ref: lemma:uz-urmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-uryapman
   uz: { latn: uryapman, cyrl: уряпман }
   freqRank: 191
   form: inflected
   lemma: uz-urmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to hit (I am (…-ing))
   sources:
@@ -3910,15 +3910,15 @@
       text: vuruyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ v>∅ ]
+      correspondence: [v>∅]
       ref: lemma:uz-urmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-chiqardim
   uz: { latn: chiqardim, cyrl: чиқардим }
   freqRank: 186
   form: inflected
   lemma: uz-chiqarmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to take out (I (past))
   sources:
@@ -3926,15 +3926,15 @@
       text: çıkardım
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: lemma:uz-chiqarmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-chiqaryapman
   uz: { latn: chiqaryapman, cyrl: чиқаряпман }
   freqRank: 186
   form: inflected
   lemma: uz-chiqarmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to take out (I am (…-ing))
   sources:
@@ -3942,15 +3942,15 @@
       text: çıkarıyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: lemma:uz-chiqarmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-oldim-200
   uz: { latn: oʻldim, cyrl: ўлдим }
   freqRank: 200
   form: inflected
   lemma: uz-olmoq-200
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to die (I (past))
   sources:
@@ -3958,15 +3958,15 @@
       text: öldüm
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ ö>oʻ ]
+      correspondence: [ö>oʻ]
       ref: lemma:uz-olmoq-200; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-olyapman-200
   uz: { latn: oʻlyapman, cyrl: ўляпман }
   freqRank: 200
   form: inflected
   lemma: uz-olmoq-200
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to die (I am (…-ing))
   sources:
@@ -3974,15 +3974,15 @@
       text: ölüyorum
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ ö>oʻ ]
+      correspondence: [ö>oʻ]
       ref: lemma:uz-olmoq-200; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]
 - id: uz-yetdim
   uz: { latn: yetdim, cyrl: етдим }
   freqRank: 124
   form: inflected
   lemma: uz-yetmoq
-  suffixes: [ -di, -m ]
+  suffixes: [-di, -m]
   pos: verb
   glossEn: to reach (I (past))
   sources:
@@ -3992,13 +3992,13 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-yetmoq; rule:C4-morph
-  tags: [ past ]
+  tags: [past]
 - id: uz-yetyapman
   uz: { latn: yetyapman, cyrl: етяпман }
   freqRank: 124
   form: inflected
   lemma: uz-yetmoq
-  suffixes: [ -yap, -man ]
+  suffixes: [-yap, -man]
   pos: verb
   glossEn: to reach (I am (…-ing))
   sources:
@@ -4008,4 +4008,4 @@
       confidence: high
       correspondence: []
       ref: lemma:uz-yetmoq; rule:C4-morph
-  tags: [ present-continuous, divergent-suffix ]
+  tags: [present-continuous, divergent-suffix]

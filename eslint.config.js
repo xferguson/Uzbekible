@@ -63,7 +63,10 @@ export default tseslint.config(
           default: 'disallow',
           policies: [
             { from: { element: { type: 'core' } }, allow: { to: { element: { type: 'core' } } } },
-            { from: { element: { type: 'design' } }, allow: { to: { element: { type: 'design' } } } },
+            {
+              from: { element: { type: 'design' } },
+              allow: { to: { element: { type: 'design' } } },
+            },
             {
               from: { element: { type: 'ui' } },
               allow: { to: { element: { types: ['ui', 'core', 'design'] } } },
@@ -71,7 +74,14 @@ export default tseslint.config(
             {
               from: { element: { type: 'game' } },
               allow: [
-                { to: { element: { type: 'game', captured: { name: '{{ from.element.captured.name }}' } } } },
+                {
+                  to: {
+                    element: {
+                      type: 'game',
+                      captured: { name: '{{ from.element.captured.name }}' },
+                    },
+                  },
+                },
                 { to: { file: { categories: 'games-root' } } },
                 { to: { element: { types: ['core', 'ui', 'design'] } } },
               ],
@@ -84,7 +94,10 @@ export default tseslint.config(
               ],
             },
             {
-              from: [{ element: { types: ['shell', 'dev'] } }, { file: { categories: 'app-root' } }],
+              from: [
+                { element: { types: ['shell', 'dev'] } },
+                { file: { categories: 'app-root' } },
+              ],
               allow: [
                 { to: { file: { categories: ['games-root', 'app-root'] } } },
                 { to: { element: { types: ['shell', 'dev', 'game', 'ui', 'core', 'design'] } } },
@@ -137,7 +150,8 @@ export default tseslint.config(
         'error',
         ...['ImportDeclaration', 'ExportNamedDeclaration', 'ExportAllDeclaration'].map((node) => ({
           selector: `${node}[source.value=/^\\.{1,2}(\\/.*)?$/]:not(${node}[source.value=/\\.(ts|tsx|css|json|mjs)$/])`,
-          message: 'Relative imports in core and games need an explicit extension (e.g. ./index.ts) so plain Node can run them.',
+          message:
+            'Relative imports in core and games need an explicit extension (e.g. ./index.ts) so plain Node can run them.',
         })),
       ],
     },

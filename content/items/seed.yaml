@@ -6,7 +6,7 @@
   freqRank: 58
   form: inflected
   lemma: uz-uy
-  suffixes: [ -imiz ]
+  suffixes: [-imiz]
   pos: noun
   glossEn: our house
   sources:
@@ -15,13 +15,13 @@
       relation: turkic-cognate
       confidence: low
       ref: curator:C5
-  tags: [ seed ]
+  tags: [seed]
 - id: uz-menga
   uz: { latn: menga, cyrl: менга }
   freqRank: 4
   form: inflected
   lemma: uz-men
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: pron
   glossEn: to me
   sources:
@@ -30,13 +30,13 @@
       relation: turkic-cognate
       confidence: low
       ref: curator:C5
-  tags: [ seed ]
+  tags: [seed]
 - id: uz-senga
   uz: { latn: senga, cyrl: сенга }
   freqRank: 71
   form: inflected
   lemma: uz-sen
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: pron
   glossEn: to you
   sources:
@@ -45,13 +45,13 @@
       relation: turkic-cognate
       confidence: low
       ref: curator:C5
-  tags: [ seed ]
+  tags: [seed]
 - id: uz-bizga
   uz: { latn: bizga, cyrl: бизга }
   freqRank: 29
   form: inflected
   lemma: uz-biz
-  suffixes: [ -ga ]
+  suffixes: [-ga]
   pos: pron
   glossEn: to us
   sources:
@@ -60,13 +60,13 @@
       relation: turkic-cognate
       confidence: low
       ref: curator:C5
-  tags: [ seed ]
+  tags: [seed]
 - id: uz-kitobni
   uz: { latn: kitobni, cyrl: китобни }
   freqRank: 81
   form: inflected
   lemma: uz-kitob
-  suffixes: [ -ni ]
+  suffixes: [-ni]
   pos: noun
   glossEn: the book (object)
   sources:
@@ -75,7 +75,7 @@
       relation: shared-arabic
       confidence: low
       ref: curator:C5
-  tags: [ seed ]
+  tags: [seed]
 - id: uz-oltmish
   uz: { latn: oltmish, cyrl: олтмиш }
   freqRank: 1001
@@ -88,7 +88,7 @@
       relation: turkic-cognate
       confidence: low
       ref: curator:C5
-  tags: [ seed ]
+  tags: [seed]
 - id: uz-yetmish
   uz: { latn: yetmish, cyrl: етмиш }
   freqRank: 1002
@@ -101,7 +101,7 @@
       relation: turkic-cognate
       confidence: low
       ref: curator:C5
-  tags: [ seed ]
+  tags: [seed]
 - id: uz-sakson
   uz: { latn: sakson, cyrl: саксон }
   freqRank: 1003
@@ -114,7 +114,7 @@
       relation: turkic-cognate
       confidence: low
       ref: curator:C5
-  tags: [ seed ]
+  tags: [seed]
 - id: uz-radio
   uz: { latn: radio, cyrl: радио }
   freqRank: 1005
@@ -132,7 +132,7 @@
       relation: russian-loan
       confidence: low
       ref: curator:C5
-  tags: [ seed ]
+  tags: [seed]
 - id: uz-daftar
   uz: { latn: daftar, cyrl: дафтар }
   freqRank: 1006
@@ -150,4 +150,4 @@
       relation: persian-loan
       confidence: low
       ref: curator:C5
-  tags: [ seed ]
+  tags: [seed]

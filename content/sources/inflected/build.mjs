@@ -12,9 +12,11 @@ const here = dirname(fileURLToPath(import.meta.url));
 const items = join(here, '..', '..', 'items');
 
 /** Lemma ids with regular inflection in both languages and a non-false-friend Turkish partner. */
-const NOUNS = `ish odam kun yer yil til uy yoʻl bosh ona koʻz kitob qiz kishi soʻz suv yosh ota maktab doʻst
+const NOUNS =
+  `ish odam kun yer yil til uy yoʻl bosh ona koʻz kitob qiz kishi soʻz suv yosh ota maktab doʻst
   dunyo davlat xalq hayot oy soat sabab mamlakat mashina yuz`.split(/\s+/);
-const VERBS = `boʻlmoq olmoq demoq kelmoq bermoq koʻrmoq qolmoq ketmoq etmoq bilmoq bormoq chiqmoq turmoq
+const VERBS =
+  `boʻlmoq olmoq demoq kelmoq bermoq koʻrmoq qolmoq ketmoq etmoq bilmoq bormoq chiqmoq turmoq
   qoʻymoq ishlamoq kirmoq oʻqimoq soʻramoq yashamoq yozmoq boshlamoq yurmoq sotmoq eshitmoq oʻtirmoq ochmoq
   oʻrganmoq koʻrsatmoq tushmoq tutmoq koʻrinmoq qurmoq urmoq chiqarmoq oʻlmoq yetmoq`.split(/\s+/);
 

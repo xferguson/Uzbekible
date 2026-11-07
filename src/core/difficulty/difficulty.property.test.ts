@@ -12,17 +12,38 @@ const stepCurve = fc
   .map((steps) => {
     const levels = [...new Set(steps.map((s) => s.fromLevel))].sort((a, b) => a - b);
     const values = steps.map((s) => s.value).sort((a, b) => a - b);
-    return { type: 'step' as const, steps: levels.map((fromLevel, i) => ({ fromLevel, value: values[i % values.length] ?? 0 })) };
+    return {
+      type: 'step' as const,
+      steps: levels.map((fromLevel, i) => ({ fromLevel, value: values[i % values.length] ?? 0 })),
+    };
   })
-  .map((c) => ({ ...c, steps: c.steps.map((s, i, a) => ({ ...s, value: Math.max(s.value, a[i - 1]?.value ?? 0) })) }));
+  .map((c) => ({
+    ...c,
+    steps: c.steps.map((s, i, a) => ({ ...s, value: Math.max(s.value, a[i - 1]?.value ?? 0) })),
+  }));
 
-const linearCurve = fc
-  .tuple(level, level, num, num)
-  .map(([a, b, x, y]) => ({ type: 'linear' as const, fromLevel: Math.min(a, b), toLevel: Math.max(a, b), from: Math.min(x, y), to: Math.max(x, y) }));
+const linearCurve = fc.tuple(level, level, num, num).map(([a, b, x, y]) => ({
+  type: 'linear' as const,
+  fromLevel: Math.min(a, b),
+  toLevel: Math.max(a, b),
+  from: Math.min(x, y),
+  to: Math.max(x, y),
+}));
 
 const logisticCurve = fc
-  .tuple(num, num, fc.double({ min: 0, max: 200, noNaN: true }), fc.double({ min: 0.01, max: 2, noNaN: true }))
-  .map(([x, y, midpoint, steepness]) => ({ type: 'logistic' as const, min: Math.min(x, y), max: Math.max(x, y), midpoint, steepness }));
+  .tuple(
+    num,
+    num,
+    fc.double({ min: 0, max: 200, noNaN: true }),
+    fc.double({ min: 0.01, max: 2, noNaN: true }),
+  )
+  .map(([x, y, midpoint, steepness]) => ({
+    type: 'logistic' as const,
+    min: Math.min(x, y),
+    max: Math.max(x, y),
+    midpoint,
+    steepness,
+  }));
 
 const curve = fc.oneof(stepCurve, linearCurve, logisticCurve);
 
@@ -52,7 +73,12 @@ describe('difficulty invariants', () => {
 
   it('special levels return exactly the declared override', () => {
     fc.assert(
-      fc.property(curve, level, num, (c, sp, v) => paramsFor(sp, { params: { p: c }, special: { [sp]: { p: v } } }).p === v),
+      fc.property(
+        curve,
+        level,
+        num,
+        (c, sp, v) => paramsFor(sp, { params: { p: c }, special: { [sp]: { p: v } } }).p === v,
+      ),
       opts,
     );
   });

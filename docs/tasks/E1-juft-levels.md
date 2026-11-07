@@ -5,7 +5,7 @@
 | Status | todo |
 | Lane | E Juft engine |
 | Read first | `docs/games/01-juft.md`, `docs/architecture.md` (rows you use) (other docs only if needed) |
-| Depends on | [C5](C5-content-schema-pipeline.md), [K7](K7-core-scheduler.md), [K8](K8-core-similarity.md), [K4](K4-core-scoring-difficulty.md) |
+| Depends on | [C5](C5-content-schema-pipeline.md), [K7](K7-core-scheduler.md), [K8](K8-core-similarity.md), [K4](K4-core-scoring-difficulty.md), [Q2](Q2-content-transparency.md), [Q7](Q7-game-contract.md) |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `new-game-scaffold`, `pr-flow` |
 | Branch | `task/E1-juft-levels` |
@@ -32,5 +32,5 @@ Turn content + settings + level number into a deterministic LevelSpec.
 
 ## Session prompt (copy-paste)
 ```
-Work on Uzbekible task E1 (Juft level generator). Read CLAUDE.md and docs/tasks/E1-juft-levels.md first, and follow the skills it lists (tdd-task, new-game-scaffold, pr-flow). Confirm that its dependencies (C5 and K7 and K8 and K4) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
+Work on Uzbekible task E1 (Juft level generator). Read CLAUDE.md and docs/tasks/E1-juft-levels.md first, and follow the skills it lists (tdd-task, new-game-scaffold, pr-flow). Confirm that its dependencies (C5 and K7 and K8 and K4 and Q2 and Q7) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
 ```

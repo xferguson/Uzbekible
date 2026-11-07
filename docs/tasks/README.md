@@ -29,10 +29,17 @@ D Core:       T00 ─┬─ K1 ── K8
 C Content:    C1 ─┬─ C2 ── C4
                   └─ C3          C5 (T00+K1) ── C6 (C2+C3)
 B Design:     **D1 🔒 ── D2 🔒** ── (U4, U5)      D1 ── D3
-E Juft:       E1 (C5,K7,K8,K4) · E2 (K3) · E3 (K4,E2,K10)
-F UI:         U1 (D1,T00,K9) ── U2 / U3 / U5 / U6 ── U4 ── **U7 ── U8 ── R1**
+E Juft:       E1 (C5,K7,K8,K4,Q2,Q7) · E2 (K3) · E3 (K4,E2,K10,Q5,Q6)
+F UI:         U1 (D1,T00,K9) ── U2 / U3 / U5 / U6 ── U4 ── **U7 ── U8 ── R1**  (U3 also needs Q7)
+Q Quality:    Q1 ─┬─ Q2      Q5 ─┬─ Q6        Q3 · Q4 · Q9 (independent)
+                  └─ Q8         └─ Q7
 ```
 **Start right away, in parallel:** T00, D1, C1, S1, S2. After T00: T01, T02, K1, K2, K4, K5, K9.
+
+**Q lane (added after K7, from a tech-quality review):** fixes drift between the built code and the quality rules
+(broken content CLI, missing transparency, coverage that skipped `index.ts`, mismatched event names, an unsettled
+game contract). E1, E3 and U3 now wait on the Q tasks they build on. Q4's one-time Prettier pass touches many files,
+so merge it while few branches are open.
 
 ## Tasks
 | ID | Title | Lane | Depends on |
@@ -59,12 +66,12 @@ F UI:         U1 (D1,T00,K9) ── U2 / U3 / U5 / U6 ── U4 ── **U7 ─�
 | [K8](K8-core-similarity.md) | core/similarity: distance, correspondences, transparency | D Core | K1 |
 | [K9](K9-core-motif-geometry.md) | core/motif: girih geometry | D Core | T00 |
 | [K10](K10-core-sim.md) | core/sim: balance simulator | D Core | K3, K4, K2 |
-| [E1](E1-juft-levels.md) | Juft level generator | E Juft engine | C5, K7, K8, K4 |
+| [E1](E1-juft-levels.md) | Juft level generator | E Juft engine | C5, K7, K8, K4, Q2, Q7 |
 | [E2](E2-juft-rules.md) | Juft match rules on core/session | E Juft engine | K3 |
-| [E3](E3-juft-scoring-balance.md) | Juft scoring config + balance pass | E Juft engine | K4, E2, K10 |
+| [E3](E3-juft-scoring-balance.md) | Juft scoring config + balance pass | E Juft engine | K4, E2, K10, Q5, Q6 |
 | [U1](U1-design-tokens-motif-ui.md) | Design tokens, fonts, motif renderers, dev gallery | F UI | D1, T00, K9 |
 | [U2](U2-ui-tile-text.md) | Shared Tile, UzText/SourceText, useLongPress | F UI | U1, K1 |
-| [U3](U3-ui-shell-hud.md) | HUD, Countdown, Results, GameShell + registry | F UI | U1, K3, K5, K6 |
+| [U3](U3-ui-shell-hud.md) | HUD, Countdown, Results, GameShell + registry | F UI | U1, K3, K5, K6, Q7 |
 | [U4](U4-juft-board.md) | Juft board UI | F UI | D2, U2, U3, E2 |
 | [U5](U5-ui-level-map.md) | Shared LevelMap (mosaic) + level select | F UI | D2, U1, K5 |
 | [U6](U6-settings.md) | Settings: languages, script, log export | F UI | U1, K5, K6 |
@@ -73,6 +80,15 @@ F UI:         U1 (D1,T00,K9) ── U2 / U3 / U5 / U6 ── U4 ── **U7 ─�
 | [R1](R1-v1-release.md) 🔒 | Juft v1 release checklist | G Release | U8, D3, C6 |
 | [S1](S1-spike-audio.md) 🔒 | Spike: audio sourcing | H Spikes | none |
 | [S2](S2-spike-speech.md) 🔒 | Spike: Uzbek speech-to-text feasibility | H Spikes | none |
+| [Q1](Q1-node-runnable-core.md) | Node-runnable core imports + CLI smoke in CI | Q Quality | none |
+| [Q2](Q2-content-transparency.md) | Wire transparency scores into the content build | Q Quality | Q1 |
+| [Q3](Q3-honest-coverage.md) | Honest coverage: measure index.ts files, per-file core thresholds | Q Quality | none |
+| [Q4](Q4-enforce-gates.md) | Enforce the unwritten gates: determinism lint, core in node env, Prettier in CI | Q Quality | none |
+| [Q5](Q5-game-event-vocabulary.md) | Shared, typed game-event vocabulary + score tally | Q Quality | none |
+| [Q6](Q6-sim-scan-time.md) | Sim ready for E3: scan-time model, CLI out of core | Q Quality | Q5 |
+| [Q7](Q7-game-contract.md) | One game contract: GameDefinition types | Q Quality | Q5 |
+| [Q8](Q8-type-helper-consolidation.md) | Consolidate duplicated types and helpers | Q Quality | Q1 |
+| [Q9](Q9-docs-drift.md) | Fix docs drift in technical design and architecture | Q Quality | none |
 
 ## Writing new tasks
 Copy [`_TEMPLATE.md`](_TEMPLATE.md). Keep a task small enough for one PR (about ≤ 400 lines of non-generated

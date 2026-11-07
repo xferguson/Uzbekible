@@ -218,9 +218,11 @@ for (const t of udTokens) {
   const c = chooseCandidate(t.form, udAnalyses.get(t.form) ?? [], { priors, overrides, blocked });
   if (!c) continue;
   udCovered++;
-  if (c.stem === t.lemma) udLemmaOk++;
+  const merged = fixes.merges.get(citationForm(c));
+  const ours = merged ? (c.pos === 'verb' ? merged.replace(/moq$/, '') : merged) : c.stem;
+  if (ours === t.lemma) udLemmaOk++;
   else {
-    const k = `${t.form} → ours ${c.stem}, gold ${t.lemma}`;
+    const k = `${t.form} → ours ${ours}, gold ${t.lemma}`;
     udErrors.set(k, (udErrors.get(k) ?? 0) + 1);
   }
   if (c.pos === t.upos) udPosOk++;
@@ -258,7 +260,7 @@ ${[...udErrors.entries()].sort((a, b) => b[1] - a[1]).slice(0, 25).map(([k, n]) 
 ## Output (top ${TOP})
 POS: ${[...posDist.entries()].sort((a, b) => b[1] - a[1]).map(([p, n]) => `${p} ${n}`).join(', ')}
 
-Sources per lemma: all three ${rows.filter((r) => r.present?.length === 3 || r.source.split(';').length === 3).length}, two ${rows.filter((r) => r.source.split(';').length === 2).length}.
+Sources per lemma: all three ${rows.filter((r) => r.source.split(';').length === 3).length}, two ${rows.filter((r) => r.source.split(';').length === 2).length}.
 
 ### Generated Cyrillic not found verbatim in the kaharjan Cyrillic list (check by hand)
 ${unattested.length ? unattested.map((r) => `- ${r.rank} ${r.lemma} → ${r.cyrl}`).join('\n') : '- none'}

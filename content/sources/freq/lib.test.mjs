@@ -1,4 +1,4 @@
-// Unit tests for the C1 frequency-list helpers. Run: node --test content/sources/freq/
+// Unit tests for the C1 frequency-list helpers. Run: node --test content/sources/freq/lib.test.mjs
 // Plain node:test because the app scaffold (T00, Vitest) and core/text (K1) are not on main yet.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

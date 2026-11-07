@@ -8,12 +8,12 @@
 | kaharjan | n/a (ranked list) | 419999 types, top 60000 used | (list excludes proper nouns) |
 
 Distinct forms analysed: 157422. Forms with an accepted analysis: 103769.
-Lemmas attested in ≥2 sources: 10207.
+Lemmas attested in ≥2 sources: 10206.
 
 ## Lemmatiser check against UD Uzbek gold (UT + UzUDT, all splits)
 - Tokens with an alphabetic form and a content UPOS: 10590
 - Covered by the analyser (non-null choice): 9785 (92.4%)
-- Lemma agreement on covered tokens: 9005 (92.0%)
+- Lemma agreement on covered tokens: 9061 (92.6%)
 - POS agreement on covered tokens (analyser choice, before the UD relabelling of output rows): 8173 (83.5%)
 - Output rows whose POS label comes from UD gold (lemma seen ≥ 3× in UD): 547
 
@@ -22,10 +22,8 @@ Most frequent lemma disagreements (many are gold-annotation conventions, e.g. UD
 - 18× ular → ours ular, gold u
 - 18× ularning → ours ular, gold u
 - 11× qarab → ours qarab, gold qara
-- 11× ichida → ours ichida, gold ich
 - 7× qayta → ours qayt, gold qayta
 - 7× deb → ours de, gold deb
-- 6× tomonidan → ours tomonidan, gold tomon
 - 6× ularga → ours ular, gold u
 - 6× ustiga → ours ustiga, gold ust
 - 5× yoshli → ours yosh, gold yoshli
@@ -36,16 +34,18 @@ Most frequent lemma disagreements (many are gold-annotation conventions, e.g. UD
 - 5× namli → ours nam, gold namli
 - 5× aqlli → ours aql, gold aqlli
 - 4× ularni → ours ular, gold u
-- 4× oʻgʻli → ours oʻgʻli, gold oʻgʻil
-- 4× ostida → ours ostida, gold ost
 - 4× shundoq → ours shundoq, gold shu
 - 4× aslida → ours aslida, gold asl
 - 3× bugungi → ours bugun, gold bugungi
 - 3× jumladan → ours jumla, gold jumladan
 - 3× sifatida → ours sifat, gold sifatida
+- 3× davomida → ours davomida, gold davom
+- 3× koʻproq → ours koʻproq, gold koʻp
+- 3× oʻxshash → ours oʻxsha, gold oʻxshash
+- 3× oldida → ours ol, gold old
 
 ## Output (top 1000)
-POS: noun 513, verb 196, adj 129, adv 51, adp 28, conj 20, det 17, pron 15, num 15, part 7, aux 6, intj 3
+POS: noun 514, verb 195, adj 129, adv 51, adp 28, conj 20, det 17, pron 15, num 15, part 7, aux 6, intj 3
 
 Sources per lemma: all three 986, two 14.
 
@@ -62,17 +62,16 @@ Sources per lemma: all three 986, two 14.
 - 513 sayohat → саёҳат
 - 522 charchamoq → чарчамоқ
 - 639 qiziqmoq → қизиқмоқ
-- 677 deyishmoq → дейишмоқ
-- 686 ajramoq → ажрамоқ
-- 755 belgilanmoq → белгиланмоқ
-- 802 qatnashmoq → қатнашмоқ
-- 805 yo → ё
-- 853 kechikmoq → кечикмоқ
-- 879 arzimoq → арзимоқ
-- 912 chi → чи
-- 926 tekshirmoq → текширмоқ
-- 944 aniqlanmoq → аниқланмоқ
-- 980 koʻchmoq → кўчмоқ
+- 685 ajramoq → ажрамоқ
+- 754 belgilanmoq → белгиланмоқ
+- 801 qatnashmoq → қатнашмоқ
+- 804 yo → ё
+- 852 kechikmoq → кечикмоқ
+- 878 arzimoq → арзимоқ
+- 911 chi → чи
+- 925 tekshirmoq → текширмоқ
+- 943 aniqlanmoq → аниқланмоқ
+- 979 koʻchmoq → кўчмоқ
 
 ### Lemma → most frequent surface forms (first 100 ranks)
 | rank | lemma | pos | top forms |

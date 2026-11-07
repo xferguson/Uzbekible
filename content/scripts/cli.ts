@@ -6,12 +6,11 @@ import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 import {
   buildPack,
+  itemTransparency,
   renderReview,
   serializePack,
   validateItems,
-  type TransparencyFn,
 } from '../../src/core/content/index.ts';
-import * as similarity from '../../src/core/similarity/index.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const itemsDir = join(root, 'content/items');
@@ -44,10 +43,6 @@ function validated() {
   return { ...result, errors };
 }
 
-// Transparency comes from core/similarity once K8 is merged; until then it is omitted.
-const scorer = (similarity as { transparency?: unknown }).transparency;
-const transparency = typeof scorer === 'function' ? (scorer as TransparencyFn) : undefined;
-
 const command = process.argv[2];
 const { items, issues, errors } = validated();
 if (command === 'validate') {
@@ -58,7 +53,7 @@ if (command === 'validate') {
   if (errors.length) process.exit(1);
   write(
     'public/content/items.v1.json',
-    serializePack(buildPack(items, transparency ? { transparency } : {})),
+    serializePack(buildPack(items, { transparency: itemTransparency })),
   );
 } else {
   console.error('usage: cli.ts validate | review | build');

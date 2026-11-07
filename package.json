@@ -18,7 +18,8 @@
     "content:validate": "node scripts/stub.mjs content:validate",
     "content:review": "node scripts/stub.mjs content:review",
     "content:build": "node scripts/stub.mjs content:build",
-    "sim": "node scripts/stub.mjs sim"
+    "sim": "node scripts/stub.mjs sim",
+    "icons:build": "node --experimental-strip-types --no-warnings scripts/icons/build.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

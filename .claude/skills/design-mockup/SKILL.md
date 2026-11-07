@@ -26,10 +26,9 @@ motif should be part of how each game *works*, not decoration.
    - No English on game boards (only in long-press hint states).
 4. Take screenshots with Playwright at deviceScaleFactor 2 into `docs/design/mockups/screens/`.
 5. Publish the HTML as an Artifact so the user can review on their phone; put the link in the PR.
-6. Open the PR with label **`needs-approval`** (see `pr-flow`). Auto-merge will not merge it.
+6. Open the PR with label **`needs-approval`** (see `pr-flow`). **Don't merge it** until the user explicitly approves in the session.
 7. Record decisions: when the user approves, add an "Approved decisions" section to
-   `docs/design/brief.md` (palette values, fonts, motif rules) in the same PR. Then the user merges or removes
-   the label.
+   `docs/design/brief.md` (palette values, fonts, motif rules) in the same PR, then merge it (see `pr-flow`).
 
 ## Accessibility bar
 - Text contrast ≥ 4.5:1 (≥ 3:1 for large/bold tile text) in both themes — check cobalt-on-white and

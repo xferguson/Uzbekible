@@ -7,7 +7,7 @@ description. This file is the human-readable index. **To add a skill:** create t
 | # | Skill | Use it when… | Key outputs |
 |---|---|---|---|
 | 1 | [`tdd-task`](skills/tdd-task/SKILL.md) | picking up any `docs/tasks/` task or making a code change | Red → green → refactor commits, evidence in PR |
-| 2 | [`pr-flow`](skills/pr-flow/SKILL.md) | branching, committing, opening/labelling PRs, CI failures | Draft PR → ready → auto-merge on green |
+| 2 | [`pr-flow`](skills/pr-flow/SKILL.md) | branching, committing, opening/labelling PRs, CI failures | Draft PR → ready → agent merges on green (🔒 tasks wait for approval) |
 | 3 | [`uzbek-text-rules`](skills/uzbek-text-rules/SKILL.md) | any code/content touching Uzbek, Turkish, Russian, Persian, Arabic text | Correct normalization, letters, scripts, RTL |
 | 4 | [`add-content-items`](skills/add-content-items/SKILL.md) | adding or editing vocabulary / pair data | Valid `content/items/*.yaml`, review sheet |
 | 5 | [`cognate-research`](skills/cognate-research/SKILL.md) | frequency lists, cognates, borrowings, sound shifts | Cited, confidence-rated relations |

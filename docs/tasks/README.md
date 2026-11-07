@@ -1,6 +1,8 @@
 # Task index: Juft v1 and foundations
 
-**How to use:** start a **new session** per task and paste the task file's *Session prompt*. Tasks with no
+**How to use:** start a **new session** per task and say **"Do <ID>"** (e.g. "Do D1"). `CLAUDE.md` tells the
+agent to open the task file, check its dependencies and follow its skills. Each task file also has a longer
+*Session prompt* for when you want to spell it out. Tasks with no
 unmerged dependencies can run **in parallel**. Each task's **Status** row lives in *its own task file*
 (`todo → in progress → in review → done`), so parallel PRs never conflict on this index.
 

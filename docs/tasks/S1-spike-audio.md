@@ -9,7 +9,7 @@
 | Skills | `cognate-research`, `pr-flow` |
 | Branch | `task/S1-spike-audio` |
 
-> **Approval gate:** the PR must carry the `needs-approval` label. Auto-merge skips it; the user approves and merges.
+> **Approval gate:** don't merge until the user explicitly approves in the session. Label the PR `needs-approval`.
 
 ## Goal
 Decide how Uzbek audio will be sourced for Games 3/4 (and Juft later).

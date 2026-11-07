@@ -16,7 +16,7 @@ Make the app installable and offline-capable, and deploy `main` to GitHub Pages 
 - [ ] `vite-plugin-pwa` with manifest (name/short_name “Uzbekible”, theme cobalt, background glaze white per `docs/design/brief.md`), placeholder icons until D3
 - [ ] Precache app shell, fonts, `public/content/*.json`; `autoUpdate` with a “new version” toast
 - [ ] `base: '/Uzbekible/'` for Pages
-- [ ] `.github/workflows/deploy.yml` triggered by `push` to `main` + `workflow_dispatch` (automerge dispatches it after merging); uses `actions/deploy-pages`
+- [ ] `.github/workflows/deploy.yml` triggered by `push` to `main` + `workflow_dispatch`; uses `actions/deploy-pages`
 - [ ] e2e: after first load, offline reload still renders the home screen
 - [ ] README section documents required repo settings (Pages source = GitHub Actions)
 

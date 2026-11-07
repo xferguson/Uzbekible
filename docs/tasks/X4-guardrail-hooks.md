@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | X Harness |
 | Read first | `CLAUDE.md` (Non-negotiables), `.claude/skills/pr-flow/SKILL.md` (other docs only if needed) |
 | Depends on | [X2](X2-session-start-hook.md), [Q4](Q4-enforce-gates.md) |

@@ -1,6 +1,6 @@
 ---
 name: new-game-scaffold
-description: Use when adding a new game to Uzbekible (e.g. Game 2 Compose, Game 3 Wordfall, Game 4 Listen & Search) or restructuring an existing game. Shows the GameDefinition contract, folder layout, and which shared core/ui modules must be reused instead of rewritten.
+description: Use when adding or restructuring a game: GameDefinition contract, folder layout, shared modules to reuse.
 ---
 
 # Adding a game

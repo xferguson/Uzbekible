@@ -4,6 +4,7 @@
 |---|---|
 | Status | todo |
 | Lane | F UI |
+| Read first | `docs/design/brief.md`, `docs/architecture.md` (Shared UI), `docs/games/01-juft.md` (other docs only if needed) |
 | Depends on | [U1](U1-design-tokens-motif-ui.md), [K1](K1-core-text.md) |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `ui-component`, `uzbek-text-rules`, `tdd-task`, `pr-flow` |

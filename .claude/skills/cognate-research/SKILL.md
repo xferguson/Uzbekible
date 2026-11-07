@@ -1,6 +1,6 @@
 ---
 name: cognate-research
-description: Use when researching Uzbek word frequency, Turkish–Uzbek cognates, sound correspondences, or Russian/Persian/Arabic borrowings for Uzbekible content (tasks C1–C4), or when judging whether a pair is a true cognate, a shared loan, or a false friend.
+description: Use when researching Uzbek frequency, Turkish–Uzbek cognates, sound shifts, or Russian/Persian/Arabic loans (tasks C1–C4).
 ---
 
 # Cognate & frequency research method

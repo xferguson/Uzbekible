@@ -4,6 +4,7 @@
 |---|---|
 | Status | todo |
 | Lane | C Content |
+| Read first | `docs/technical-design.md` §3–4 (other docs only if needed) |
 | Depends on | [C2](C2-turkish-cognates.md), [C3](C3-other-loans.md), [C5](C5-content-schema-pipeline.md) |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `add-content-items`, `pr-flow` |

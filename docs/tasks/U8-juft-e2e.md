@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | F UI |
 | Read first | `docs/design/brief.md`, `docs/architecture.md` (Shared UI), `docs/games/01-juft.md` (other docs only if needed) |
 | Depends on | [U7](U7-juft-wiring.md), [T01](T01-pwa-deploy.md) |
@@ -13,8 +13,8 @@
 Prove the whole thing in a real browser.
 
 ## Acceptance criteria
-- [ ] Flows from the `e2e-visual-check` skill (complete, fail, replay, settings, offline) on phone + desktop
-- [ ] Screenshots in PR
+- [x] Flows from the `e2e-visual-check` skill (complete, fail, replay, settings, offline) on phone + desktop
+- [x] Screenshots in PR
 
 ## Test-first plan
 - Red: e2e written before any missing fixes

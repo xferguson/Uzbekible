@@ -5,8 +5,8 @@ const port = 4173;
 const executablePath = process.env.PW_CHROMIUM_PATH || undefined;
 
 export default defineConfig({
-  testDir: 'e2e',
-  testMatch: '**/*.e2e.ts',
+  testDir: '.',
+  testMatch: ['e2e/**/*.e2e.ts', 'src/games/**/*.e2e.ts'],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,

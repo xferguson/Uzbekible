@@ -6,6 +6,7 @@
 | Lane | <lane> |
 | Depends on | <task links or none> |
 | Read first | <only the docs/sections this task needs> |
+| API used | <`docs/api.md` sections this task calls, e.g. `core/scoring`, or none> |
 | Skills | `tdd-task`, `pr-flow`, ... |
 | Branch | `task/<ID>-<slug>` |
 

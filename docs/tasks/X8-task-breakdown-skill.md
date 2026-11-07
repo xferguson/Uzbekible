@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | X Harness |
 | Read first | `docs/tasks/README.md`, `docs/tasks/_TEMPLATE.md`, `.claude/skills.md` (other docs only if needed) |
 | Depends on | [X5](X5-docs-diet.md), [X6](X6-api-digest.md) |

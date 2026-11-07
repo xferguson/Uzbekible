@@ -4,6 +4,7 @@
 |---|---|
 | Status | todo |
 | Lane | G Release |
+| Read first | `docs/PRD.md` §7 (other docs only if needed) |
 | Depends on | [U8](U8-juft-e2e.md), [D3](D3-pwa-icon-set.md), [C6](C6-content-review-sheet.md) |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `e2e-visual-check`, `pr-flow` |

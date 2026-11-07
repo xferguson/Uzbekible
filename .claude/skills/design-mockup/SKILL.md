@@ -1,6 +1,6 @@
 ---
 name: design-mockup
-description: Use when creating or revising visual design mockups for Uzbekible (design system, game screens, icon concepts — tasks D1, D2, D3 and future game design tasks). Covers the Uzbek tilework visual language, required states/viewports, publishing for review, and the approval gate.
+description: Use when making Uzbekible design mockups (tasks D1–D3, new game designs): tilework look, required states, review gate.
 ---
 
 # Design mockups & approval gate

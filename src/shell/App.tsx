@@ -21,6 +21,7 @@ import {
   setTheme,
   toggleLanguage,
 } from './settings';
+import styles from './App.module.css';
 import { UpdateToast } from './UpdateToast';
 
 // Dev-only: the gallery chunk is dropped from production builds (import.meta.env.DEV is false there).
@@ -111,8 +112,8 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
   let body;
   if (screen.name === 'settings') {
     body = (
-      <>
-        <button type="button" onClick={home}>
+      <main className={styles.page}>
+        <button type="button" className={styles.secondary} onClick={home}>
           {t('Orqaga')}
         </button>
         <SettingsPanel
@@ -130,7 +131,7 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
             )
           }
         />
-      </>
+      </main>
     );
   } else if (screen.name === 'map' || screen.name === 'play') {
     const def = games.find((g) => g.id === screen.gameId);
@@ -166,21 +167,26 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
     }
   } else {
     body = (
-      <main>
-        <h1>Uzbekible</h1>
-        <p>{t('O‘yinlar bilan o‘zbek tili.')}</p>
+      <main className={styles.page}>
+        <h1 className={styles.title}>Uzbekible</h1>
+        <p className={styles.tagline}>{t('O‘yinlar bilan o‘zbek tili.')}</p>
         {failed && <p role="alert">{t('Yuklab boʻlmadi. Internetni tekshiring.')}</p>}
-        <nav>
+        <nav className={styles.games}>
           {games.map((g) => (
             <button
               key={g.id}
               type="button"
+              className={styles.game}
               onClick={() => setScreen({ name: 'map', gameId: g.id })}
             >
               {script === 'cyrl' ? g.title.uzCyrl : g.title.uzLatn}
             </button>
           ))}
-          <button type="button" onClick={() => setScreen({ name: 'settings' })}>
+          <button
+            type="button"
+            className={styles.secondary}
+            onClick={() => setScreen({ name: 'settings' })}
+          >
             {t('Sozlamalar')}
           </button>
         </nav>
@@ -213,11 +219,11 @@ function MapScreen({
   useEffect(() => progress.subscribe(setCurrent), [progress]);
   const chapters = def.chapters ?? [{ id: def.id, name: def.title.uzLatn, levels: 30 }];
   return (
-    <>
-      <button type="button" onClick={onBack}>
+    <main className={styles.page}>
+      <button type="button" className={styles.secondary} onClick={onBack}>
         {label(script, 'Orqaga')}
       </button>
       <LevelMap chapters={chapters} progress={current} script={script} onSelect={onSelect} />
-    </>
+    </main>
   );
 }

@@ -4,11 +4,16 @@
   font-family: var(--font-ui);
   color: var(--color-text);
 }
+.map {
+  min-inline-size: 0;
+}
 .skyline {
   display: flex;
   gap: var(--space-1);
   align-items: flex-end;
   overflow-x: auto;
+  padding-block-end: var(--space-1);
+  scrollbar-width: thin;
 }
 .building {
   display: grid;
@@ -21,6 +26,10 @@
   border-radius: var(--radius-tile) var(--radius-tile) 0 0;
   font: inherit;
   cursor: pointer;
+  /* Keep every name whole; the skyline scrolls instead of squeezing the buildings. */
+  flex: 0 0 auto;
+  white-space: nowrap;
+  justify-items: center;
 }
 .building[data-active='true'] {
   background: var(--color-cobalt);

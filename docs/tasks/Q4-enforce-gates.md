@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | Q Quality |
 | Read first | `CLAUDE.md` (Non-negotiables), `docs/architecture.md` (Layers, Quality gates) (other docs only if needed) |
 | Depends on | none |
@@ -13,10 +13,10 @@
 Turn rules that are only written down into checks: the determinism ban (non-negotiable 5), "core has no DOM", boundaries for `content/scripts`, and Prettier formatting.
 
 ## Acceptance criteria
-- [ ] ESLint `no-restricted-properties`/`no-restricted-globals` reject `Math.random`, `Date.now`, `setTimeout`, `setInterval` in `src/**` (allowed in `src/core/clock/**` and `src/shell/**`), with a test proving a violation is reported
-- [ ] `content/scripts/**` is a boundaries element allowed to import `core` only; lint test covers it
-- [ ] `src/core/**` tests run in the `node` environment (Vitest `projects` or per-glob environment), so DOM use in core fails
-- [ ] `npm run format:check` (`prettier --check .`) exists and runs in CI; the one-time `prettier --write .` is its own `style:` commit
+- [x] ESLint `no-restricted-properties`/`no-restricted-globals` reject `Math.random`, `Date.now`, `setTimeout`, `setInterval` in `src/**` (allowed in `src/core/clock/**` and `src/shell/**`), with a test proving a violation is reported
+- [x] `content/scripts/**` is a boundaries element allowed to import `core` only; lint test covers it
+- [x] `src/core/**` tests run in the `node` environment (Vitest `projects` or per-glob environment), so DOM use in core fails
+- [x] `npm run format:check` (`prettier --check .`) exists and runs in CI; the one-time `prettier --write .` is its own `style:` commit
 
 ## Test-first plan
 - Red: Lint test: `Math.random()` in `src/games/x.ts` and `import '../src/ui/index'` in `content/scripts/x.ts` are not reported today

@@ -27,14 +27,14 @@ describe('foldApostrophes', () => {
     expect(foldApostrophes(`o${c}zbek`)).toBe("o'zbek");
   });
   it('makes spelling variants compare equal', () => {
-    expect(foldApostrophes(`bo${O}lim`)).toBe(foldApostrophes("bo'lim"));
+    expect(foldApostrophes(`b${O}lim`)).toBe(foldApostrophes("bo'lim"));
     expect(foldApostrophes(`ma${T}no`)).toBe(foldApostrophes('ma’no'));
   });
 });
 
 describe('canonicalizeUz', () => {
   it.each(["'", '‘', '’', '`', 'ʻ', 'ʼ'])('o/g + %j becomes U+02BB', (c) => {
-    expect(canonicalizeUz(`bo${c}lim`)).toBe(`bo${O}lim`);
+    expect(canonicalizeUz(`bo${c}lim`)).toBe(`b${O}lim`);
     expect(canonicalizeUz(`g${c}or`)).toBe(`${G}or`);
   });
   it('uses U+02BC for tutuq', () => {
@@ -66,7 +66,7 @@ describe('toLetters (uz-Latn)', () => {
     expect(toLetters('choy', 'uz-Latn')).toEqual(['ch', 'o', 'y']);
     expect(toLetters('sinf', 'uz-Latn')).toEqual(['s', 'i', 'n', 'f']);
     expect(toLetters('tong', 'uz-Latn')).toEqual(['t', 'o', 'ng']);
-    expect(toLetters(`bo${O}lim`, 'uz-Latn')).toEqual(['b', O, 'l', 'i', 'm']);
+    expect(toLetters(`b${O}lim`, 'uz-Latn')).toEqual(['b', O, 'l', 'i', 'm']);
     expect(toLetters(`${G}ish`, 'uz-Latn')).toEqual([G, 'i', 'sh']);
   });
   it('recognises any apostrophe variant and keeps the original characters', () => {
@@ -109,7 +109,7 @@ describe('latnToCyrl', () => {
     ['choy', 'чой'],
     ['sinf', 'синф'],
     ['tong', 'тонг'],
-    [`bo${O}lim`, 'бўлим'],
+    [`b${O}lim`, 'бўлим'],
     [`${G}isht`, 'ғишт'],
     [`ma${T}no`, 'маъно'],
     ['qalam', 'қалам'],
@@ -159,7 +159,7 @@ describe('cyrlToLatn', () => {
   it.each([
     ['шаҳар', 'shahar'],
     ['чой', 'choy'],
-    ['бўлим', `bo${O}lim`],
+    ['бўлим', `b${O}lim`],
     ['ғишт', `${G}isht`],
     ['маъно', `ma${T}no`],
     ['тонг', 'tong'],

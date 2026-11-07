@@ -9,7 +9,6 @@ const letters = [
   'a', 'b', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z',
   'sh', 'ch', 'ng', 'oʻ', 'gʻ', 'ʼ',
 ];
-const vowels = new Set(['a', 'e', 'i', 'o', 'u', 'oʻ']);
 
 const nativeWord = fc
   .array(fc.constantFrom(...letters), { minLength: 1, maxLength: 9 })
@@ -26,7 +25,7 @@ const nativeWord = fc
       if (cur === 'c') return false;
       if (cur === 't' && next === 's') return false;
       if (cur === 'ʼ' && (i === 0 || i === ls.length - 1)) return false;
-      if (cur === 'e' && prev && vowels.has(prev)) return false;
+      if (cur === '\u02BC' && prev && /[og]$/.test(prev)) return false;
     }
     return true;
   })

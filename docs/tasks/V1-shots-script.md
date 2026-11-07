@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | in review |
 | Lane | V Visual quality |
 | Depends on | none |
 | Read first | `.claude/skills/e2e-visual-check/SKILL.md`, `docs/design/mockups/README.md`, the D2 frames in `docs/design/mockups/screens/` (other docs only if needed) |

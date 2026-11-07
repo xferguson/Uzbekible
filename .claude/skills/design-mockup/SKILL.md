@@ -24,7 +24,12 @@ motif should be part of how each game *works*, not decoration.
    - Text samples in **Uzbek Latin, Uzbek Cyrillic, Turkish, Russian, Persian (RTL), Arabic (RTL)**.
    - Reduced-motion note for every animation (what replaces it).
    - No English on game boards (only in long-press hint states).
-4. Take screenshots with Playwright at deviceScaleFactor 2 into `docs/design/mockups/screens/`.
+4. Take screenshots with Playwright at deviceScaleFactor 2 into `docs/design/mockups/screens/`: one PNG per device
+   frame and theme, named `<task>-<phone|desk>-<screen>-<light|dark>.png`, at the shots sizes (390×844 phone,
+   1280×800 desktop). Draw a frame for every screen state the game will have (see `e2e-visual-check` › Screen
+   states), so `npm run shots` has something to compare against.
+   List the frames per screen state in `docs/design/frames.json` (`{scheme}` for light/dark). States the game does not
+   have yet can be added when its e2e states land; the shots test checks both sides once they exist.
 5. Publish the HTML as an Artifact so the user can review on their phone; put the link in the PR.
 6. Open the PR with label **`needs-approval`** (see `pr-flow`). **Don't merge it** until the user explicitly approves in the session.
 7. Record decisions: when the user approves, add an "Approved decisions" section to

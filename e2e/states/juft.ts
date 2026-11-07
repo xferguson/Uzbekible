@@ -1,5 +1,6 @@
 /** Juft screens (docs/games/01-juft.md, D2 frames). Juft-only moves live here; shell moves come from the driver. */
 import type { Page } from '@playwright/test';
+import { scoringFor } from '../../src/games/juft/scoring.config.ts';
 import type { Driver, ScreenState } from '../shots/types.ts';
 
 const TITLE = 'Juft';
@@ -35,10 +36,24 @@ async function board(d: Driver, level: number, pairs: number) {
 }
 
 /**
- * Clears level 1 (one pair) after `waitMs` of play, so the elapsed time sets the stars, and checks the result.
+ * Play time on level 1 (one pair, no mistakes) that lands in the middle of the `stars` band of the live scoring
+ * config, so the state keeps working when the balance is tuned.
+ */
+function playMsFor(stars: 1 | 2 | 3): number {
+  const { basePoints, parMs, overrunFactor, starThresholds } = scoringFor(1, 1);
+  const bands = [...starThresholds, basePoints];
+  const lo = bands[stars - 1]!;
+  const hi = bands[stars]!;
+  const target = (lo + hi) / 2;
+  return Math.round(parMs + parMs * (overrunFactor - 1) * (1 - target / basePoints));
+}
+
+/**
+ * Clears level 1 (one pair) after `playMsFor(stars)` of play, so the elapsed time sets the stars, and checks the result.
  * A best of 1 point on file makes every clear a "new best".
  */
-function results(stars: 1 | 2 | 3, waitMs: number): ScreenState {
+function results(stars: 1 | 2 | 3): ScreenState {
+  const waitMs = playMsFor(stars);
   return {
     id: `results-${stars}`,
     game: 'juft',
@@ -67,7 +82,10 @@ export const juftStates: ScreenState[] = [
     title: 'Level map, early: Minora (levels 16–30), some stars',
     async reach(d) {
       const best = Object.fromEntries(
-        Array.from({ length: 19 }, (_, i) => [i + 1, { score: 900, stars: (i % 3) + 1, timeMs: 9000 }]),
+        Array.from({ length: 19 }, (_, i) => [
+          i + 1,
+          { score: 900, stars: (i % 3) + 1, timeMs: 9000 },
+        ]),
       );
       await d.open({ progress: { juft: { unlocked: 20, best } } });
       await d.openGame(TITLE);
@@ -166,9 +184,9 @@ export const juftStates: ScreenState[] = [
       await d.tap('Pauza');
     },
   },
-  results(3, 0),
-  results(2, 4_000),
-  results(1, 12_000),
+  results(3),
+  results(2),
+  results(1),
   {
     id: 'fail',
     game: 'juft',

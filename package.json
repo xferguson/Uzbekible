@@ -24,7 +24,8 @@
     "icons:build": "node --experimental-strip-types --no-warnings scripts/icons/build.mjs",
     "gate": "node scripts/gate.mjs",
     "api": "node scripts/api-digest.mjs",
-    "gate:changed": "vitest run --changed origin/main --reporter=dot"
+    "gate:changed": "vitest run --changed origin/main --reporter=dot",
+    "shots": "node --experimental-strip-types --no-warnings scripts/shots.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

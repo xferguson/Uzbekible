@@ -34,11 +34,13 @@ export interface Driver {
   open(opts?: OpenOptions): Promise<void>;
   /** Moves the frozen clock forward, firing timers and intervals on the way. */
   advance(ms: number): Promise<void>;
+  /** Advances in small steps until `done()` holds; throws after `maxMs` of app time. */
+  advanceUntil(done: () => Promise<boolean>, opts?: { stepMs?: number; maxMs?: number }): Promise<void>;
   /** Clicks the button with this accessible name (string = exact, RegExp = pattern). */
   tap(name: string | RegExp): Promise<void>;
   /** Home → the game's level map, via its picker button (the game's Uzbek title). */
   openGame(title: string): Promise<void>;
-  /** Map → level `n`. `countdown` = ms of the 3-2-1 to run: omitted runs all of it and waits for play. */
+  /** Map → level `n`. `countdownMs` = how much of the 3-2-1 to run (0 = just opened); omitted plays through to the board. */
   startLevel(n: number, opts?: { countdownMs?: number }): Promise<void>;
   /** Fails the run with `message` unless `ok` (a state that missed its target screen is worse than no shot). */
   check(ok: boolean, message: string): void;

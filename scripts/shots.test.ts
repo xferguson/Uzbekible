@@ -31,14 +31,20 @@ describe('state → frame mapping (docs/design/frames.json)', () => {
 
   it('every game folder with a definition has screen states (new games add theirs)', () => {
     const games = readdirSync(join(root, 'src/games'), { withFileTypes: true })
-      .filter((d) => d.isDirectory() && existsSync(join(root, 'src/games', d.name, 'definition.ts')))
+      .filter(
+        (d) => d.isDirectory() && existsSync(join(root, 'src/games', d.name, 'definition.ts')),
+      )
       .map((d) => d.name);
     expect(games.length).toBeGreaterThan(0);
-    for (const g of games) expect(STATES.some((s: { game: string | null }) => s.game === g)).toBe(true);
+    for (const g of games)
+      expect(STATES.some((s: { game: string | null }) => s.game === g)).toBe(true);
   });
 
   it('reports missing states, stale entries and missing files', () => {
-    const states = [{ id: 'home', game: null }, { id: 'pause', game: 'juft' }];
+    const states = [
+      { id: 'home', game: null },
+      { id: 'pause', game: 'juft' },
+    ];
     const f = {
       states: {
         home: { phone: ['a-{scheme}.png'], desktop: [] },
@@ -80,7 +86,10 @@ describe('shots runner helpers', () => {
       { id: 'mapx', game: 'other' },
     ];
     const ids = (r: { id: string }[]) => r.map((s) => s.id);
-    expect(ids(selectStates(all, { states: ['map'], games: null }))).toEqual(['map-early', 'map-late']);
+    expect(ids(selectStates(all, { states: ['map'], games: null }))).toEqual([
+      'map-early',
+      'map-late',
+    ]);
     expect(ids(selectStates(all, { states: null, games: ['shell'] }))).toEqual(['home']);
     expect(ids(selectStates(all, { states: null, games: null }))).toHaveLength(4);
   });
@@ -105,8 +114,21 @@ describe('shots runner helpers', () => {
         shot: 'home-390-light.png',
         frames: ['frames/x.png'],
       },
-      { state: { id: 'pause', title: 'Pause' }, width: 1280, scheme: 'dark', shot: 'pause-1280-dark.png', frames: [] },
-      { state: { id: 'fail', title: 'Fail' }, width: 360, scheme: 'dark', shot: null, frames: [], error: 'boom <b>' },
+      {
+        state: { id: 'pause', title: 'Pause' },
+        width: 1280,
+        scheme: 'dark',
+        shot: 'pause-1280-dark.png',
+        frames: [],
+      },
+      {
+        state: { id: 'fail', title: 'Fail' },
+        width: 360,
+        scheme: 'dark',
+        shot: null,
+        frames: [],
+        error: 'boom <b>',
+      },
     ]);
     expect(html).toContain('src="home-390-light.png"');
     expect(html).toContain('src="frames/x.png"');

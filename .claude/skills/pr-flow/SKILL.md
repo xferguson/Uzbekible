@@ -47,5 +47,8 @@ description: Use when committing, pushing, opening, labelling or merging a PR, o
 - Fix the cause. Never skip or disable tests, never lower thresholds, never push empty commits to re-trigger.
 
 ## After merge
-- Set the task file's `Status` row to `done` (doing it in the PR itself, before the merge, is preferred).
+- **Always update the task list once a task is merged.** The task file's `Status` row must read `done` on `main`.
+  Set it to `done` in the PR itself, in the last commit before you merge (the task is merging, so it is true by
+  the time it lands). If a merged task still reads `todo`/`in review`, fix it in a docs-only PR straight away.
+- Confirm with `git show origin/main:docs/tasks/<ID>-*.md | grep Status`.
 - Tell the user which tasks are now unblocked (check `docs/tasks/README.md`).

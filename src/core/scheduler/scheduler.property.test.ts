@@ -1,6 +1,7 @@
 import fc from 'fast-check';
 import { describe, it } from 'vitest';
 import { makeItem } from '../content/fixtures.ts';
+import type { Lang } from '../content/schema.ts';
 import type { Aggregate } from '../learning-log/index.ts';
 import { createRng } from '../random/index.ts';
 import { nextItems } from './index.ts';
@@ -17,7 +18,9 @@ const poolArb = fc
       makeItem({
         id: `i${i}`,
         freqRank: r.rank,
-        sources: [{ lang: r.lang, text: 'x', relation: 'turkic-cognate', confidence: 'high', ref: 'x' }],
+        sources: [
+          { lang: r.lang, text: 'x', relation: 'turkic-cognate', confidence: 'high', ref: 'x' },
+        ],
       }),
     ),
   );
@@ -30,21 +33,24 @@ const historyArb = fc.array(
       lang: fc.constantFrom(...LANGS),
     })
     .chain((r) =>
-      fc.integer({ min: 0, max: r.attempts }).map(
-        (correct): Aggregate => ({
-          itemId: `i${r.n}`,
-          sourceLang: r.lang,
-          relation: 'turkic-cognate',
-          attempts: r.attempts,
-          correct,
-          meanRtMs: 900,
-        }),
-      ),
+      fc.integer({ min: 0, max: r.attempts }).map((correct): Aggregate => ({
+        itemId: `i${r.n}`,
+        sourceLang: r.lang,
+        relation: 'turkic-cognate',
+        attempts: r.attempts,
+        correct,
+        meanRtMs: 900,
+      })),
     ),
   { maxLength: 20 },
 );
 
-const enabledArb = fc.constantFrom(undefined, ['tr' as const], ['ru' as const], [...LANGS]);
+const enabledArb = fc.constantFrom<readonly Lang[] | undefined>(
+  undefined,
+  ['tr'],
+  ['ru'],
+  [...LANGS],
+);
 
 describe('nextItems properties', () => {
   it('returns min(n, eligible) distinct items, none filtered out', () => {
@@ -75,11 +81,17 @@ describe('nextItems properties', () => {
 
   it('is deterministic for a seed', () => {
     fc.assert(
-      fc.property(poolArb, historyArb, fc.integer({ min: 0, max: 10 }), fc.integer(), (pool, h, n, seed) => {
-        const a = nextItems(pool, h, n, createRng(seed)).map((i) => i.id);
-        const b = nextItems(pool, h, n, createRng(seed)).map((i) => i.id);
-        return a.join() === b.join();
-      }),
+      fc.property(
+        poolArb,
+        historyArb,
+        fc.integer({ min: 0, max: 10 }),
+        fc.integer(),
+        (pool, h, n, seed) => {
+          const a = nextItems(pool, h, n, createRng(seed)).map((i) => i.id);
+          const b = nextItems(pool, h, n, createRng(seed)).map((i) => i.id);
+          return a.join() === b.join();
+        },
+      ),
       opts,
     );
   });

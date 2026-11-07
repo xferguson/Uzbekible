@@ -8,12 +8,15 @@ const item = (id: string, freqRank: number, lang: 'tr' | 'ru' = 'tr') =>
   makeItem({
     id,
     freqRank,
-    sources: [
-      { lang, text: id, relation: 'turkic-cognate', confidence: 'high', ref: 'x' },
-    ],
+    sources: [{ lang, text: id, relation: 'turkic-cognate', confidence: 'high', ref: 'x' }],
   });
 
-const agg = (itemId: string, attempts: number, correct: number, sourceLang: 'tr' | 'ru' = 'tr'): Aggregate => ({
+const agg = (
+  itemId: string,
+  attempts: number,
+  correct: number,
+  sourceLang: 'tr' | 'ru' = 'tr',
+): Aggregate => ({
   itemId,
   sourceLang,
   relation: 'turkic-cognate',
@@ -29,7 +32,7 @@ describe('masteryOf', () => {
     expect(masteryOf([])).toBe(0.5);
   });
   it('is (correct+1)/(attempts+2), pooled over aggregates', () => {
-    expect(masteryOf([agg('a', 3, 3), agg('a', 1, 0, 'ru')])).toBeCloseTo(5 / 6);
+    expect(masteryOf([agg('a', 3, 3), agg('a', 1, 0, 'ru')])).toBeCloseTo(4 / 6);
   });
   it('drops with misses', () => {
     expect(masteryOf([agg('a', 4, 0)])).toBeCloseTo(1 / 6);

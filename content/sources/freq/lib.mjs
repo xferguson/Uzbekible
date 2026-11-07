@@ -142,31 +142,35 @@ const CLOSED = new Set(['aux', 'num', 'pron', 'adp', 'conj', 'det', 'part']);
 export const DEFAULT_MARGIN = 4; // tuned on UD Uzbek gold: 2 → 91.4%, 4 → 91.6%, 8 → 91.5%, 16 → 91.1%
 const EXCLUDED_TAGS = new Set(['np', 'abbr', 'sent', 'cm', 'guio', 'lquot', 'rquot', 'apos']);
 
-function copulaLemma(tags) {
+function copulaLemma(tags, form) {
+  for (const base of ['ekan', 'edi', 'emas', 'emish']) if (form.startsWith(base)) return base;
   if (tags.includes('neg')) return 'emas';
   if (tags.includes('evid')) return 'ekan';
   if (tags.includes('ifi') || tags.includes('past')) return 'edi';
   return 'emish';
 }
 
-function toCandidate(form, { stem, tags }) {
+function toCandidate(form, { stem, tags }, blocked) {
   if (tags.length === 0 || tags.some((t) => EXCLUDED_TAGS.has(t))) return null;
   const pos = POS_OF_TAG[tags[0]];
   if (!pos) return null;
-  const lemma = tags[0] === 'cop' ? copulaLemma(tags) : stem.toLowerCase();
+  const lemma = tags[0] === 'cop' ? copulaLemma(tags, form) : stem.toLowerCase();
+  if (blocked?.has(`${lemma}|${pos}`)) return null;
   const whole = lemma === form;
-  // Very short non-verb stems mostly come from spurious segmentations (yoshga → yo+…, hali → ha+…);
-  // pronoun (u, men) and verb (ol-, de-) stems are real.
-  if (!whole && lemma.length <= 2 && pos !== 'pron' && pos !== 'verb') return null;
   // 0: whole-word non-verb reading; 1: whole-word verb (imperative); 2: segmented reading.
   const shape = whole ? (pos === 'verb' ? 1 : 0) : 2;
   const imperative = tags.includes('imp');
-  return { stem: lemma, pos, key: citationForm({ stem: lemma, pos }), whole, shape, imperative, rank: POS_PRIORITY.indexOf(pos), ntags: tags.length };
+  // Very short non-verb, non-pronoun stems from a segmentation are suspect (yoshga → yo+…, hali → ha+…).
+  const short = !whole && lemma.length <= 2 && pos !== 'pron' && pos !== 'verb';
+  return { stem: lemma, pos, short, key: citationForm({ stem: lemma, pos }), whole, shape, imperative, rank: POS_PRIORITY.indexOf(pos), ntags: tags.length };
 }
 
 /** Candidate readings of a surface form, with proper nouns, abbreviations and punctuation removed. */
-export function candidates(form, analyses) {
-  return analyses.map((a) => toCandidate(form, a)).filter(Boolean);
+export function candidates(form, analyses, blocked) {
+  const all = analyses.map((a) => toCandidate(form, a, blocked)).filter(Boolean);
+  // Drop suspect short-stem readings, unless they are all there is (uyda → uy).
+  const solid = all.filter((c) => !c.short);
+  return solid.length ? solid : all;
 }
 
 const cmp = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -176,8 +180,8 @@ const cmp = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
  * Cascade: reviewed override → whole-word closed-class reading → lemma with the largest prior (then reading
  * shape, then longer lemma) → POS within that lemma (an inflected form prefers noun, a bare form adj/adv).
  */
-export function chooseCandidate(form, analyses, { priors, overrides, margin = DEFAULT_MARGIN } = {}) {
-  const cands = candidates(form, analyses);
+export function chooseCandidate(form, analyses, { priors, overrides, blocked, margin = DEFAULT_MARGIN } = {}) {
+  const cands = candidates(form, analyses, blocked);
   if (cands.length === 0) return null;
   if (overrides?.has(form)) return { ...overrides.get(form) };
 
@@ -216,10 +220,10 @@ export function citationForm({ stem, pos }) {
  * Corpus prior for each lemma (citation form): every form's mass split evenly across the distinct lemmas
  * its analyses allow. Used by chooseCandidate to resolve segmentation ambiguity (oldi → olmoq, uning → u).
  */
-export function lemmaPriors(formMass, analyses) {
+export function lemmaPriors(formMass, analyses, { blocked } = {}) {
   const priors = new Map();
   for (const [form, mass] of formMass) {
-    const keys = [...new Set(candidates(form, analyses.get(form) ?? []).map((c) => c.key))];
+    const keys = [...new Set(candidates(form, analyses.get(form) ?? [], blocked).map((c) => c.key))];
     for (const k of keys) priors.set(k, (priors.get(k) ?? 0) + mass / keys.length);
   }
   return priors;
@@ -265,4 +269,53 @@ export function mergeSources(sources, { minSources }) {
   }
   out.sort((a, b) => b.score - a.score || (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
   return out;
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// Reviewed data files (overrides.csv, lemma-fixes.csv)
+
+/** Minimal RFC 4180 CSV: first row is the header; returns one object per non-empty row. */
+export function parseCsv(text) {
+  const records = [];
+  let row = [];
+  let field = '';
+  let quoted = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (quoted) {
+      if (c === '"' && text[i + 1] === '"') {
+        field += '"';
+        i++;
+      } else if (c === '"') quoted = false;
+      else field += c;
+    } else if (c === '"') quoted = true;
+    else if (c === ',') {
+      row.push(field);
+      field = '';
+    } else if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[i + 1] === '\n') i++;
+      row.push(field);
+      records.push(row);
+      row = [];
+      field = '';
+    } else field += c;
+  }
+  if (field || row.length) records.push([...row, field]);
+  const [header, ...body] = records.filter((r) => r.some((f) => f !== ''));
+  return body.map((r) => Object.fromEntries(header.map((h, i) => [h, r[i] ?? ''])));
+}
+
+/** lemma-fixes.csv → { blocked: Set<'stem|pos'>, merges: Map<from, to>, pos: Map<lemma, pos> }. */
+export function parseLemmaFixes(text) {
+  const blocked = new Set();
+  const merges = new Map();
+  const pos = new Map();
+  for (const { lemma, action, value } of parseCsv(text)) {
+    const l = foldApostrophes(lemma);
+    if (action === 'block') blocked.add(`${l}|${value}`);
+    else if (action === 'merge') merges.set(l, foldApostrophes(value));
+    else if (action === 'pos') pos.set(l, value);
+    else throw new Error(`lemma-fixes: unknown action "${action}" for ${lemma}`);
+  }
+  return { blocked, merges, pos };
 }

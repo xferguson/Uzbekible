@@ -7,15 +7,15 @@
 | uzcs | 537000 | 100000 lines | 471 forms |
 | kaharjan | n/a (ranked list) | 419999 types, top 60000 used | (list excludes proper nouns) |
 
-Distinct forms analysed: 157422. Forms with an accepted analysis: 102082.
-Lemmas attested in ≥2 sources: 10232.
+Distinct forms analysed: 157422. Forms with an accepted analysis: 103769.
+Lemmas attested in ≥2 sources: 10207.
 
 ## Lemmatiser check against UD Uzbek gold (UT + UzUDT, all splits)
 - Tokens with an alphabetic form and a content UPOS: 10590
-- Covered by the analyser (non-null choice): 9561 (90.3%)
-- Lemma agreement on covered tokens: 8731 (91.3%)
-- POS agreement on covered tokens (analyser choice, before the UD relabelling of output rows): 7935 (83.0%)
-- Output rows whose POS label comes from UD gold (lemma seen ≥ 3× in UD): 529
+- Covered by the analyser (non-null choice): 9785 (92.4%)
+- Lemma agreement on covered tokens: 9005 (92.0%)
+- POS agreement on covered tokens (analyser choice, before the UD relabelling of output rows): 8173 (83.5%)
+- Output rows whose POS label comes from UD gold (lemma seen ≥ 3× in UD): 547
 
 Most frequent lemma disagreements (many are gold-annotation conventions, e.g. UD keeping deb/edi as lemmas):
 - 19× shunday → ours shunday, gold shu
@@ -23,12 +23,10 @@ Most frequent lemma disagreements (many are gold-annotation conventions, e.g. UD
 - 18× ularning → ours ular, gold u
 - 11× qarab → ours qarab, gold qara
 - 11× ichida → ours ichida, gold ich
-- 9× oldi → ours oldi, gold ol
 - 7× qayta → ours qayt, gold qayta
 - 7× deb → ours de, gold deb
 - 6× tomonidan → ours tomonidan, gold tomon
 - 6× ularga → ours ular, gold u
-- 6× olam → ours ola, gold olam
 - 6× ustiga → ours ustiga, gold ust
 - 5× yoshli → ours yosh, gold yoshli
 - 5× birinchi → ours birinchi, gold bir
@@ -42,44 +40,39 @@ Most frequent lemma disagreements (many are gold-annotation conventions, e.g. UD
 - 4× ostida → ours ostida, gold ost
 - 4× shundoq → ours shundoq, gold shu
 - 4× aslida → ours aslida, gold asl
-- 4× boʻlsin → ours boʻlsin, gold boʻl
+- 3× bugungi → ours bugun, gold bugungi
+- 3× jumladan → ours jumla, gold jumladan
+- 3× sifatida → ours sifat, gold sifatida
 
 ## Output (top 1000)
-POS: noun 517, verb 191, adj 136, adv 46, adp 27, conj 21, det 17, pron 14, num 13, part 10, aux 6, intj 2
+POS: noun 513, verb 196, adj 129, adv 51, adp 28, conj 20, det 17, pron 15, num 15, part 7, aux 6, intj 3
 
-Sources per lemma: all three 980, two 20.
+Sources per lemma: all three 986, two 14.
 
 ### Generated Cyrillic not found verbatim in the kaharjan Cyrillic list (check by hand)
 - 2 u → у
-- 27 biz → биз
-- 137 etilmoq → этилмоқ
-- 142 da → да
-- 204 olinmoq → олинмоқ
-- 266 erimoq → эримоқ
-- 267 boshlanmoq → бошланмоқ
-- 344 yoqtirmoq → ёқтирмоқ
-- 351 etishmoq → этишмоқ
-- 402 yogʻmoq → ёғмоқ
-- 409 joylamoq → жойламоқ
-- 452 tugamoq → тугамоқ
-- 498 ku → ку
-- 516 sayohat → саёҳат
-- 526 charchamoq → чарчамоқ
-- 579 kuramoq → курамоқ
-- 648 qiziqmoq → қизиқмоқ
-- 682 bulamoq → буламоқ
-- 687 deyishmoq → дейишмоқ
-- 696 ajramoq → ажрамоқ
-- 764 belgilanmoq → белгиланмоқ
-- 815 qatnamoq → қатнамоқ
-- 862 yo → ё
-- 864 kechikmoq → кечикмоқ
-- 890 arzimoq → арзимоқ
-- 924 chi → чи
-- 938 tekshirmoq → текширмоқ
-- 952 uyimoq → уйимоқ
-- 957 aniqlanmoq → аниқланмоқ
-- 994 koʻchmoq → кўчмоқ
+- 29 biz → биз
+- 144 da → да
+- 270 boshlanmoq → бошланмоқ
+- 347 yoqtirmoq → ёқтирмоқ
+- 401 yogʻmoq → ёғмоқ
+- 405 joylashmoq → жойлашмоқ
+- 451 tugamoq → тугамоқ
+- 495 ku → ку
+- 513 sayohat → саёҳат
+- 522 charchamoq → чарчамоқ
+- 639 qiziqmoq → қизиқмоқ
+- 677 deyishmoq → дейишмоқ
+- 686 ajramoq → ажрамоқ
+- 755 belgilanmoq → белгиланмоқ
+- 802 qatnashmoq → қатнашмоқ
+- 805 yo → ё
+- 853 kechikmoq → кечикмоқ
+- 879 arzimoq → арзимоқ
+- 912 chi → чи
+- 926 tekshirmoq → текширмоқ
+- 944 aniqlanmoq → аниқланмоқ
+- 980 koʻchmoq → кўчмоқ
 
 ### Lemma → most frequent surface forms (first 100 ranks)
 | rank | lemma | pos | top forms |
@@ -93,97 +86,97 @@ Sources per lemma: all three 980, two 20.
 | 7 | qilmoq | verb | qilib, qildi, qilish |
 | 8 | bilan | adp | bilan |
 | 9 | bir | num | bir, biri, bitta |
-| 10 | uchun | adp | uchun |
-| 11 | edi | aux | edi, edim, edik |
-| 12 | oʻz | pron | oʻz, oʻzi, oʻzini |
-| 13 | kelmoq | verb | keldi, kelib, keladi |
-| 14 | siz | pron | siz, sizga, sizning |
-| 15 | bermoq | verb | berdi, beradi, bering |
-| 16 | bor | adj | bor, bormi, boricha |
-| 17 | demoq | verb | deb, deya, de |
-| 18 | shu | pron | shu, shuning, shunda |
-| 19 | kerak | aux | kerak, kerakmi, kerakli |
-| 20 | emas | aux | emas, emasmi, emasman |
-| 21 | koʻrmoq | verb | koʻrib, koʻraman, koʻradi |
-| 22 | qolmoq | verb | qoldi, qolgan, qoladi |
-| 23 | ketmoq | verb | ketdi, ketgan, ketadi |
-| 24 | ular | pron | ular, ularning, ularni |
-| 25 | har | det | har, harimi |
-| 26 | yaxshi | adj | yaxshi, yaxshisi, yaxshimi |
-| 27 | biz | pron | biz, bizning, bizga |
-| 28 | nima | pron | nima, nimani, nimadir |
-| 29 | bilmoq | verb | biladi, bilaman, bilmayman |
-| 30 | ish | noun | ish, ishga, ishni |
-| 31 | yoʻq | adj | yoʻq, yoʻqmi, yoʻqdir |
-| 32 | hech | det | hech, hechdir, hechdan |
-| 33 | juda | adv | juda |
-| 34 | aytmoq | verb | aytdi, aytib, ayting |
-| 35 | odam | noun | odam, odamlar, odamni |
-| 36 | bormoq | verb | borib, bordi, boradi |
-| 37 | narsa | noun | narsa, narsani, narsalarni |
-| 38 | mumkin | aux | mumkin, mumkinmi, mumkindir |
-| 39 | kun | noun | kuni, kun, kunda |
-| 40 | chiqmoq | verb | chiqib, chiqdi, chiqqan |
-| 41 | turmoq | verb | turgan, turib, turadi |
-| 42 | ikki | num | ikki, ikkinchi, ikkita |
-| 43 | qanday | adv | qanday, qandaysiz, qandaylar |
-| 44 | yer | noun | yerda, yer, yerga |
-| 45 | koʻp | adj | koʻp, koʻpi, koʻpdan |
-| 46 | bola | noun | bola, bolalar, bolani |
-| 47 | yil | noun | yil, yilda, yili |
-| 48 | boshqa | adj | boshqa, boshqalar, boshqacha |
-| 49 | qoʻymoq | verb | qoʻydi, qoʻyib, qoʻygan |
-| 50 | kim | pron | kim, kimdir, kimga |
-| 51 | yoki | conj | yoki, yokim |
-| 52 | til | noun | tilida, tilini, tili |
-| 53 | oʻtmoq | verb | oʻtgan, oʻtdi, oʻtib |
-| 54 | esa | conj | esa, esang, esam |
-| 55 | katta | adj | katta, kattalar, kattasi |
-| 56 | eng | adv | eng, englar, engidan |
-| 57 | hamma | pron | hamma, hammasi, hammasini |
-| 58 | yoʻl | noun | yoʻl, yoʻlga, yoʻli |
-| 59 | yana | adv | yana |
-| 60 | vaqt | noun | vaqt, vaqti, vaqtida |
-| 61 | bosh | noun | bosh, boshini, boshi |
-| 62 | ona | noun | ona, onam, onasi |
-| 63 | koʻz | noun | koʻz, koʻzlari, koʻzi |
-| 64 | shunday | det | shunday |
-| 65 | qoʻl | noun | qoʻl, qoʻlga, qoʻlini |
-| 66 | haqida | adp | haqida, haqidadir, haqidami |
-| 67 | sen | pron | sen, seni, senga |
-| 68 | yangi | adj | yangi, yangicha, yangidan |
-| 69 | tushmoq | verb | tushdi, tushib, tushgan |
-| 70 | keyin | noun | keyin |
-| 71 | topmoq | verb | topib, topgan, topdi |
-| 72 | ishlamoq | verb | ishlab, ishlaydi, ishlash |
-| 73 | lekin | conj | lekin |
-| 74 | yosh | noun | yosh, yoshlar, yoshda |
-| 75 | oʻylamoq | verb | oʻylab, oʻyladim, oʻylayman |
-| 76 | ota | noun | ota, otam, otasi |
-| 77 | ekan | aux | ekan, ekanman, ekansiz |
-| 78 | kitob | noun | kitob, kitobni, kitoblar |
-| 79 | kirmoq | verb | kirib, kirdi, kiradi |
-| 80 | oʻqimoq | verb | oʻqib, oʻqish, oʻqishni |
-| 81 | yuz | noun | yuz, yuziga, yuzi |
-| 82 | qiz | noun | qiz, qizlar, qizi |
-| 83 | kishi | noun | kishi, kishining, kishilar |
-| 84 | soʻz | noun | soʻz, soʻzlar, soʻzi |
-| 85 | soʻramoq | verb | soʻradi, soʻradim, soʻrab |
-| 86 | suv | noun | suv, suvga, suvi |
-| 87 | ega | noun | ega, egasi, egalari |
-| 88 | yashamoq | verb | yashaydi, yashash, yashagan |
-| 89 | qachon | adv | qachon |
-| 90 | gap | noun | gap, gapni, gaplarni |
-| 91 | pul | noun | pul, pulni, puli |
-| 92 | agar | conj | agar |
-| 93 | gapirmoq | verb | gapiradi, gapira, gapirdi |
-| 94 | qaytmoq | verb | qayta, qaytib, qaytdi |
-| 95 | yozmoq | verb | yozib, yozilgan, yozgan |
-| 96 | joy | noun | joy, joyda, joyga |
-| 97 | hayot | noun | hayot, hayoti, hayotda |
-| 98 | endi | adv | endi |
-| 99 | uch | noun | uch, uchta, uchinchi |
-| 100 | yurmoq | verb | yurgan, yurdi, yuradi |
+| 10 | olmoq | verb | olib, oldi, olish |
+| 11 | demoq | verb | deb, dedi, degan |
+| 12 | uchun | adp | uchun |
+| 13 | edi | aux | edi, edim, erdi |
+| 14 | oʻz | pron | oʻz, oʻzi, oʻzini |
+| 15 | kelmoq | verb | keldi, kelib, keladi |
+| 16 | siz | pron | siz, sizga, sizning |
+| 17 | bermoq | verb | berdi, beradi, bering |
+| 18 | bor | adj | bor, bormi, boricha |
+| 19 | shu | pron | shu, shuning, shunda |
+| 20 | kerak | aux | kerak, kerakmi, kerakli |
+| 21 | emas | aux | emas, emasmi, emasman |
+| 22 | koʻrmoq | verb | koʻrib, koʻraman, koʻradi |
+| 23 | qolmoq | verb | qoldi, qolgan, qoladi |
+| 24 | ketmoq | verb | ketdi, ketgan, ketadi |
+| 25 | ular | pron | ular, ularning, ularni |
+| 26 | etmoq | verb | etdi, etib, etgan |
+| 27 | har | det | har, harimi |
+| 28 | yaxshi | adj | yaxshi, yaxshisi, yaxshimi |
+| 29 | biz | pron | biz, bizning, bizga |
+| 30 | nima | pron | nima, nimani, nimadir |
+| 31 | bilmoq | verb | biladi, bilaman, bilmayman |
+| 32 | ish | noun | ish, ishga, ishni |
+| 33 | yoʻq | adj | yoʻq, yoʻqmi, yoʻqdir |
+| 34 | hech | det | hech, hechdir, hechdan |
+| 35 | juda | adv | juda |
+| 36 | aytmoq | verb | aytdi, aytib, ayting |
+| 37 | odam | noun | odam, odamlar, odamni |
+| 38 | bormoq | verb | borib, bordi, boradi |
+| 39 | narsa | noun | narsa, narsani, narsalarni |
+| 40 | mumkin | aux | mumkin, mumkinmi, mumkindir |
+| 41 | kun | noun | kuni, kun, kunda |
+| 42 | yer | noun | yerda, yer, yerga |
+| 43 | chiqmoq | verb | chiqib, chiqdi, chiqqan |
+| 44 | turmoq | verb | turgan, turib, turadi |
+| 45 | ikki | num | ikki, ikkinchi, ikkita |
+| 46 | qanday | adv | qanday, qandaysiz, qandaylar |
+| 47 | koʻp | adj | koʻp, koʻpi, koʻpdan |
+| 48 | bola | noun | bola, bolalar, bolani |
+| 49 | yil | noun | yil, yilda, yili |
+| 50 | boshqa | adj | boshqa, boshqalar, boshqacha |
+| 51 | qoʻymoq | verb | qoʻydi, qoʻyib, qoʻygan |
+| 52 | kim | pron | kim, kimdir, kimga |
+| 53 | yoki | conj | yoki, yokim |
+| 54 | til | noun | tilida, tilini, tili |
+| 55 | oʻtmoq | verb | oʻtgan, oʻtdi, oʻtib |
+| 56 | esa | conj | esa, esang, esam |
+| 57 | katta | adj | katta, kattalar, kattasi |
+| 58 | uy | noun | uy, uyga, uyda |
+| 59 | eng | adv | eng, englar, engidan |
+| 60 | hamma | pron | hamma, hammasi, hammasini |
+| 61 | yoʻl | noun | yoʻl, yoʻlga, yoʻli |
+| 62 | yana | adv | yana |
+| 63 | vaqt | noun | vaqt, vaqti, vaqtida |
+| 64 | bosh | noun | bosh, boshini, boshi |
+| 65 | ona | noun | ona, onam, onasi |
+| 66 | koʻz | noun | koʻz, koʻzlari, koʻzi |
+| 67 | ekan | aux | ekan, ekanini, ekanman |
+| 68 | shunday | det | shunday |
+| 69 | qoʻl | noun | qoʻl, qoʻlga, qoʻlini |
+| 70 | haqida | adp | haqida, haqidadir, haqidami |
+| 71 | sen | pron | sen, seni, senga |
+| 72 | yangi | adj | yangi, yangicha, yangidan |
+| 73 | tushmoq | verb | tushdi, tushib, tushgan |
+| 74 | keyin | adv | keyin |
+| 75 | topmoq | verb | topib, topgan, topdi |
+| 76 | ishlamoq | verb | ishlab, ishlaydi, ishlash |
+| 77 | lekin | conj | lekin |
+| 78 | yosh | noun | yosh, yoshlar, yoshda |
+| 79 | oʻylamoq | verb | oʻylab, oʻyladim, oʻylayman |
+| 80 | ota | noun | ota, otam, otasi |
+| 81 | kitob | noun | kitob, kitobni, kitoblar |
+| 82 | kirmoq | verb | kirib, kirdi, kiradi |
+| 83 | oʻqimoq | verb | oʻqib, oʻqish, oʻqishni |
+| 84 | yuz | noun | yuz, yuziga, yuzi |
+| 85 | qiz | noun | qiz, qizlar, qizi |
+| 86 | kishi | noun | kishi, kishining, kishilar |
+| 87 | soʻz | noun | soʻz, soʻzlar, soʻzi |
+| 88 | soʻramoq | verb | soʻradi, soʻradim, soʻrab |
+| 89 | suv | noun | suv, suvga, suvi |
+| 90 | ega | noun | ega, egasi, egalari |
+| 91 | yashamoq | verb | yashaydi, yashash, yashagan |
+| 92 | qachon | adv | qachon |
+| 93 | gap | noun | gap, gapni, gaplarni |
+| 94 | pul | noun | pul, pulni, puli |
+| 95 | agar | conj | agar |
+| 96 | gapirmoq | verb | gapiradi, gapira, gapirdi |
+| 97 | qaytmoq | verb | qayta, qaytib, qaytdi |
+| 98 | tomon | noun | tomonidan, tomon, tomonga |
+| 99 | yozmoq | verb | yozib, yozilgan, yozgan |
+| 100 | joy | noun | joy, joyda, joyga |
 
 ### Highest-frequency forms with no analysis (excluded)
 - frantsuz (1025 per million, summed over sources)

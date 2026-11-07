@@ -18,6 +18,8 @@ import {
   chooseCandidate,
   citationForm,
   lemmaPriors,
+  parseCsv,
+  parseLemmaFixes,
   zipfPerMillion,
   mergeSources,
 } from './lib.mjs';
@@ -32,6 +34,7 @@ const { values: args } = parseArgs({
     top: { type: 'string', default: '1000' },
     'kaharjan-limit': { type: 'string', default: '60000' },
     out: { type: 'string', default: 'content/sources' },
+    debug: { type: 'string' },
   },
 });
 for (const k of ['cv', 'uzcs', 'kaharjan', 'fst', 'ud']) if (!args[k]) throw new Error(`--${k} is required`);
@@ -88,12 +91,15 @@ const kahTop = kah.cyrl.slice(0, KAHARJAN_LIMIT).map((c, i) => ({ rank: i + 1, l
 const allForms = new Set([...cv.counts.keys(), ...uzcs.counts.keys(), ...kahTop.map((k) => k.latn)]);
 const analyses = analyse([...allForms], args.fst);
 
-// Reviewed overrides (form → lemma) from overrides.csv.
-const overrides = new Map();
-for (const line of readFileSync(new URL('./overrides.csv', import.meta.url), 'utf8').split('\n').slice(1)) {
-  const [form, stem, pos] = line.split(',');
-  if (form) overrides.set(foldApostrophes(form), { stem: foldApostrophes(stem), pos });
-}
+// Reviewed fixes: overrides.csv (surface form → lemma) and lemma-fixes.csv (block / merge / pos).
+const overrides = new Map(
+  parseCsv(readFileSync(new URL('./overrides.csv', import.meta.url), 'utf8')).map((r) => [
+    foldApostrophes(r.form),
+    { stem: foldApostrophes(r.stem), pos: r.pos },
+  ]),
+);
+const fixes = parseLemmaFixes(readFileSync(new URL('./lemma-fixes.csv', import.meta.url), 'utf8'));
+const { blocked } = fixes;
 
 // Form mass (per million, summed over sources) → lemma priors for disambiguation.
 const formMass = new Map();
@@ -102,14 +108,14 @@ for (const corpus of [cv, uzcs]) {
   for (const [form, n] of corpus.counts) if (!corpus.propn.has(form)) addMass(form, (n / corpus.tokens) * 1e6);
 }
 for (const { rank, latn } of kahTop) addMass(latn, zipfPerMillion(rank, kah.cyrl.length));
-const priors = lemmaPriors(formMass, analyses);
-const choose = (form, a) => chooseCandidate(form, a, { priors, overrides });
+const priors = lemmaPriors(formMass, analyses, { blocked });
+const choose = (form, a) => chooseCandidate(form, a, { priors, overrides, blocked });
 
 const lemmaOf = new Map();
 const unknown = new Map(); // form → combined evidence, for the report
 for (const form of allForms) {
   const c = choose(form, analyses.get(form) ?? []);
-  if (c) lemmaOf.set(form, { lemma: citationForm(c), pos: c.pos });
+  if (c) lemmaOf.set(form, { lemma: fixes.merges.get(citationForm(c)) ?? citationForm(c), pos: c.pos });
 }
 
 // Per-source lemma frequencies (per million tokens) and raw counts.
@@ -169,6 +175,7 @@ for (const t of udTokens) {
 
 const argmax = (m) => [...m.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0][0];
 function posLabel(key) {
+  if (fixes.pos.has(key)) return fixes.pos.get(key);
   const gold = udPos.get(key);
   if (gold) {
     const n = [...gold.values()].reduce((a, b) => a + b, 0);
@@ -194,6 +201,10 @@ const rows = top.map((m, i) => {
 
 const csv = ['rank,lemma,cyrl,pos,count,source', ...rows.map((r) => [r.rank, r.lemma, r.cyrl, r.pos, r.count, r.source].join(','))];
 writeFileSync(join(args.out, `uz-freq-top${TOP}.csv`), csv.join('\n') + '\n');
+if (args.debug) {
+  const dbg = rows.map((r) => [r.rank, r.lemma, r.pos, r.count, r.source, r.score.toFixed(1), r.topForms.join(' ')].join('\t'));
+  writeFileSync(args.debug, dbg.join('\n') + '\n');
+}
 
 // ---------------------------------------------------------------------------------------------------------
 // Report: lemmatiser accuracy on UD gold, coverage, and items needing a human look.
@@ -204,7 +215,7 @@ let udPosOk = 0;
 let udCovered = 0;
 const udErrors = new Map();
 for (const t of udTokens) {
-  const c = chooseCandidate(t.form, udAnalyses.get(t.form) ?? [], { priors, overrides });
+  const c = chooseCandidate(t.form, udAnalyses.get(t.form) ?? [], { priors, overrides, blocked });
   if (!c) continue;
   udCovered++;
   if (c.stem === t.lemma) udLemmaOk++;

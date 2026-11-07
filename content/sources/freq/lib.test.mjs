@@ -307,3 +307,8 @@ test('parseLemmaFixes: block / merge / pos actions, apostrophes folded', () => {
   assert.deepEqual([...fixes.pos], [['kam', 'adj']]);
   assert.throws(() => parseLemmaFixes('lemma,action,value,reason\nx,rename,y,z\n'), /unknown action/);
 });
+
+test('chooseCandidate: a short stem is kept when it is the only reading (uyda → uy, oyda → oy)', () => {
+  assert.deepEqual(chooseCandidate('uyda', [A('uy', 'n', 'loc')]), { stem: 'uy', pos: 'noun' });
+  assert.deepEqual(chooseCandidate('otlar', [A('ot', 'n', 'pl', 'nom')]), { stem: 'ot', pos: 'noun' });
+});

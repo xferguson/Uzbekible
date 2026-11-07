@@ -11,6 +11,8 @@ import {
   chooseCandidate,
   citationForm,
   lemmaPriors,
+  parseCsv,
+  parseLemmaFixes,
   zipfPerMillion,
   mergeSources,
 } from './lib.mjs';
@@ -271,4 +273,37 @@ test('chooseCandidate: segmentations into a 1–2 letter non-pronoun stem are no
   assert.deepEqual(chooseCandidate('hali', [A('ha', 'n', 'px3sp', 'nom'), A('hali', 'adv')], { priors }), { stem: 'hali', pos: 'adv' });
   // pronoun stems stay: uning → u
   assert.deepEqual(chooseCandidate('unga', [A('u', 'prn', 'pers', 'p3', 'sg', 'dat'), A('unga', 'n', 'nom')], { priors: new Map([['u', 100]]) }), { stem: 'u', pos: 'pron' });
+});
+
+test('chooseCandidate: copula forms built on ekan/edi/emas keep that lemma whatever the tags (ekanini → ekan)', () => {
+  assert.deepEqual(chooseCandidate('ekanini', [A('e', 'cop', 'ger_past', 'px3sp', 'acc')]), { stem: 'ekan', pos: 'aux' });
+  assert.deepEqual(chooseCandidate('emish', [A('e', 'cop', 'aor', 'p3', 'sg')]), { stem: 'emish', pos: 'aux' });
+});
+
+test('chooseCandidate: blocked stem|pos readings are ignored', () => {
+  const analyses = [A('yo', 'v', 'iv', 'aor', 'p3', 'pl'), A('yosh', 'n', 'pl', 'nom')];
+  const priors = new Map([['yomoq', 1e6], ['yosh', 1]]);
+  assert.deepEqual(chooseCandidate('yoshlar', analyses, { priors }), { stem: 'yo', pos: 'verb' });
+  assert.deepEqual(chooseCandidate('yoshlar', analyses, { priors, blocked: new Set(['yo|verb']) }), { stem: 'yosh', pos: 'noun' });
+  assert.equal(chooseCandidate('ob', [A('ob', 'n', 'nom')], { blocked: new Set(['ob|noun']) }), null);
+});
+
+test('lemmaPriors: respects blocked readings', () => {
+  const analyses = new Map([['yoshlar', [A('yo', 'v', 'iv', 'aor', 'p3', 'pl'), A('yosh', 'n', 'pl', 'nom')]]]);
+  assert.deepEqual([...lemmaPriors(new Map([['yoshlar', 6]]), analyses, { blocked: new Set(['yo|verb']) })], [['yosh', 6]]);
+});
+
+test('parseCsv: header row → objects; quoted fields may hold commas and doubled quotes', () => {
+  const rows = parseCsv('a,b,c\n1,"x, y",3\n4,"say ""hi""",6\n\n');
+  assert.deepEqual(rows, [{ a: '1', b: 'x, y', c: '3' }, { a: '4', b: 'say "hi"', c: '6' }]);
+});
+
+test('parseLemmaFixes: block / merge / pos actions, apostrophes folded', () => {
+  const fixes = parseLemmaFixes(
+    "lemma,action,value,reason\nyo,block,verb,spurious\no'g'li,merge,o'g'il,\"vowel drop, oʻgʻil+i\"\nkam,pos,adj,label\n",
+  );
+  assert.deepEqual([...fixes.blocked], ['yo|verb']);
+  assert.deepEqual([...fixes.merges], [[`o${OKINA}g${OKINA}li`, `o${OKINA}g${OKINA}il`]]);
+  assert.deepEqual([...fixes.pos], [['kam', 'adj']]);
+  assert.throws(() => parseLemmaFixes('lemma,action,value,reason\nx,rename,y,z\n'), /unknown action/);
 });

@@ -2,7 +2,7 @@
 
 > *juft* (Uzbek) = pair, a cognate of Turkish *çift*. Working title.
 
-**Status:** approved for build (behind design gates D1 and D2) · **Tasks:** see `../tasks/README.md`
+**Status:** approved for build (design gates D1 and D2 passed) · **Tasks:** see `../tasks/README.md`
 
 ## Pitch
 Two columns of glazed tiles: Turkish (or Russian, Persian, Arabic) on the left, Uzbek on the right. Tap a pair
@@ -94,3 +94,38 @@ Audio, mixed mosaic-grid mode, stats screen, leaderboards.
 - Should a hard pair show both options as a 1-pair board (instant), or a 1-pair board plus distractors?
   (Proposal: 1 pair, no distractors, and a "new pattern" glow.)
 - Should the combo multiplier be visible? (Proposal: yes, as a small gold counter.)
+
+## Approved decisions (D2)
+Approved by the user on 2026-11-07 (task D2, PR #12). Reference mockup: `../design/mockups/D2-juft-screens.html`
+(screens in `../design/mockups/screens/D2-*.png`). These settle the open questions above.
+
+1. **Screens and flow:** home, level map, ready, countdown, board, pause, results, fail, settings, as in the mockup.
+   On desktop the map and the ready card share one view.
+2. **HUD** is numbers and icons only (pause, level octagon, three life tiles, timer, combo, score), so nothing on the
+   board screen is English. Screen-reader labels are the exception.
+3. **Board size** tops out at **12 pairs** (Registon, levels 106–120). Tile height comes from the available height:
+   96 px for 1 pair, 66 px at 8, 46 px at 12 on a 390 × 844 phone (49 px on 1280 × 800), never below 44 px. From 10
+   pairs, gaps are 6 px and tile type 17 px. The board never scrolls.
+4. **Columns:** source on the left, Uzbek on the right, for every language, RTL included. Each column is shuffled on
+   its own.
+5. **Matched tiles** leave a dashed socket; nothing reflows.
+6. **Input is never locked:** other tiles stay tappable while a match or crack animation plays.
+7. **Hidden tiles** are face-down glazed tiles (cobalt-deep with a star) during the countdown and pause. Pause hides
+   them instantly in every motion setting.
+8. **Long-press hint:** a 450 ms hold fills a gold ring, then the English gloss shows for 1500 ms and costs points. A
+   hold never selects. Keyboard: H.
+9. **Mixed languages:** a badge in the language's own script (TR, РУ, فا, عر) at the source tile's inline-start corner.
+10. **Hard pair** (open question 1): a one-pair board, no distractors, with a turquoise "Yangi naqsh" glow.
+11. **Combo counter** (open question 2): visible, as a gold ×N pill from the second correct match in a row; it resets
+    on a mistake.
+12. **Level map:** a city of eight buildings, 15 levels each (see Level progression). A skyline of all eight sits above
+    the current building's facade on phone; on desktop it is a chapter list. Levels climb upward; a cleared cell's
+    glaze shows its stars (white 1, turquoise 2, gold 3) with star pips as the shape cue.
+13. **Results:** Next / Replay / Map, with a gold "Yangi rekord!" ribbon for a new best; heading by stars (Barakalla,
+    Yaxshi, Oʻtdingiz). **Fail:** "Yana!", Try again (same words, new shuffle) or Map; no score saved.
+14. **Settings:** source languages named in their own script; the last one on cannot be turned off. Uzbek script as
+    Lotin / Кирилл, with Cyrillic tagged hard mode. Motion and theme follow the system unless set.
+15. **New token** `--on-gold` (#0A1838, both themes): dark text on gold and turquoise fills. Checked in
+    `../design/mockups/contrast.mjs`.
+16. **Motion timings** as in the mockup's timing table, held as shared constants in `src/ui` (U1), never hard-coded
+    in a game. Every animation has the reduced-motion replacement listed there.

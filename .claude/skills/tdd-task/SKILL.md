@@ -37,6 +37,8 @@ Every code change in this repo is test-first. A task is not done until its tests
 - Remove duplication, name things well, keep functions small. Tests stay green.
 - Commit: `refactor(<area>): ... [<ID>]` (optional).
 
+- If you changed a module's exports (added, removed or re-signed), run `npm run api` and commit `docs/api.md`; CI fails on a stale digest.
+
 ## 5. Before opening the PR — run the full fast gate
 ```bash
 npm run gate   # quiet lint → typecheck → test+coverage → build; ends in GATE OK

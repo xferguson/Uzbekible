@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | X Harness |
 | Read first | `docs/architecture.md` (Shared core modules, Shared UI) (other docs only if needed) |
 | Depends on | none |

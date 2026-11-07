@@ -21,6 +21,7 @@
     "sim": "node --experimental-strip-types --no-warnings scripts/sim.ts",
     "icons:build": "node --experimental-strip-types --no-warnings scripts/icons/build.mjs",
     "gate": "node scripts/gate.mjs",
+    "api": "node scripts/api-digest.mjs",
     "gate:changed": "vitest run --changed origin/main --reporter=dot"
   },
   "devDependencies": {

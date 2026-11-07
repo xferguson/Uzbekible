@@ -6,13 +6,7 @@ import type { Rules, GameEvent } from '../core/session/index.ts';
 import type { ScoringConfig } from '../core/scoring/index.ts';
 import type { DifficultyConfig } from '../core/difficulty/index.ts';
 import { levelSeed, toSimGame } from './sim-adapter.ts';
-import type {
-  BoardProps,
-  GameDefinition,
-  GameSettings,
-  LevelContext,
-  LevelSpec,
-} from './types.ts';
+import type { BoardProps, GameDefinition, GameSettings, LevelContext, LevelSpec } from './types.ts';
 import { simulate } from '../core/sim/index.ts';
 
 interface FakeParams {

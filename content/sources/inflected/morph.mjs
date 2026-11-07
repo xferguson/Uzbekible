@@ -16,7 +16,12 @@ export const NOUN_FORMS = [
 /** Verb forms (1sg). */
 export const VERB_FORMS = [
   { key: 'past', tag: 'past', suffixes: ['-di', '-m'], label: 'I (past)' },
-  { key: 'continuous', tag: 'present-continuous', suffixes: ['-yap', '-man'], label: 'I am (…-ing)' },
+  {
+    key: 'continuous',
+    tag: 'present-continuous',
+    suffixes: ['-yap', '-man'],
+    label: 'I am (…-ing)',
+  },
 ];
 
 // ---------- Uzbek ----------
@@ -75,7 +80,9 @@ export function trNoun(w) {
   const poss = (suffixVowelFinal, suffixCons) => {
     const stem = BUFFER_Y.has(w) ? `${w}y` : soft;
     const sv = FRONT_HARMONY.has(w) ? 'e' : lastVowel(stem);
-    return vowelFinal && !BUFFER_Y.has(w) ? `${soft}${suffixVowelFinal}` : `${stem}${four(sv)}${suffixCons}`;
+    return vowelFinal && !BUFFER_Y.has(w)
+      ? `${soft}${suffixVowelFinal}`
+      : `${stem}${four(sv)}${suffixCons}`;
   };
   return {
     plural: `${w}l${two(v)}r`,
@@ -100,7 +107,10 @@ export function trVerb(inf) {
   let base = IYOR_STEM[stem];
   if (base) {
     // irregular: the suffix vowel is fixed by the changed stem
-    return { past, continuous: `${base}${four(lastVowel(base))}yorum`.replace(/(.)\1yorum$/, '$1yorum') };
+    return {
+      past,
+      continuous: `${base}${four(lastVowel(base))}yorum`.replace(/(.)\1yorum$/, '$1yorum'),
+    };
   }
   let cont;
   if (/[ae]$/.test(stem)) {

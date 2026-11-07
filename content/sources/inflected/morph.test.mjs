@@ -109,13 +109,18 @@ test('C4 data: every item is inflected, points at a top-200 lemma and has suffix
 
 test('C4 data: all required suffix kinds are covered', () => {
   const kinds = new Set(items.flatMap((i) => i.tags));
-  for (const k of [...NOUN_FORMS, ...VERB_FORMS].map((f) => f.tag)) assert.ok(kinds.has(k), `no ${k} items`);
+  for (const k of [...NOUN_FORMS, ...VERB_FORMS].map((f) => f.tag))
+    assert.ok(kinds.has(k), `no ${k} items`);
   assert.ok(kinds.has('divergent-suffix'));
 });
 
 test('C4 data: divergent-suffix is exactly the present-continuous (-yap- vs -iyor-) items', () => {
   for (const it of items) {
-    assert.equal(it.tags.includes('divergent-suffix'), it.tags.includes('present-continuous'), it.id);
+    assert.equal(
+      it.tags.includes('divergent-suffix'),
+      it.tags.includes('present-continuous'),
+      it.id,
+    );
   }
 });
 

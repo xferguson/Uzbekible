@@ -37,7 +37,8 @@ const { values: args } = parseArgs({
     debug: { type: 'string' },
   },
 });
-for (const k of ['cv', 'uzcs', 'kaharjan', 'fst', 'ud']) if (!args[k]) throw new Error(`--${k} is required`);
+for (const k of ['cv', 'uzcs', 'kaharjan', 'fst', 'ud'])
+  if (!args[k]) throw new Error(`--${k} is required`);
 const TOP = Number(args.top);
 const KAHARJAN_LIMIT = Number(args['kaharjan-limit']);
 
@@ -67,18 +68,26 @@ function countCorpus(path) {
   }
   const propn = new Set();
   for (const [form, n] of nonInitial) {
-    if (n >= PROPN_MIN_NONINITIAL && (capNonInitial.get(form) ?? 0) / n > PROPN_CAP_RATIO) propn.add(form);
+    if (n >= PROPN_MIN_NONINITIAL && (capNonInitial.get(form) ?? 0) / n > PROPN_CAP_RATIO)
+      propn.add(form);
   }
   return { counts, propn, tokens, lines };
 }
 
 function readKaharjan(path) {
-  const cyrl = readFileSync(path, 'utf8').split('\n').map((w) => w.trim().normalize('NFC').toLowerCase()).filter(Boolean);
+  const cyrl = readFileSync(path, 'utf8')
+    .split('\n')
+    .map((w) => w.trim().normalize('NFC').toLowerCase())
+    .filter(Boolean);
   return { cyrl, attested: new Set(cyrl) };
 }
 
 function analyse(forms, fst) {
-  const r = spawnSync('hfst-lookup', ['-q', fst], { input: forms.join('\n') + '\n', maxBuffer: 1 << 30, encoding: 'utf8' });
+  const r = spawnSync('hfst-lookup', ['-q', fst], {
+    input: forms.join('\n') + '\n',
+    maxBuffer: 1 << 30,
+    encoding: 'utf8',
+  });
   if (r.status !== 0) throw new Error(`hfst-lookup failed: ${r.stderr}`);
   return parseAnalyses(r.stdout);
 }
@@ -86,9 +95,15 @@ function analyse(forms, fst) {
 const cv = countCorpus(args.cv);
 const uzcs = countCorpus(args.uzcs);
 const kah = readKaharjan(args.kaharjan);
-const kahTop = kah.cyrl.slice(0, KAHARJAN_LIMIT).map((c, i) => ({ rank: i + 1, latn: foldApostrophes(cyrlToLatn(c)) }));
+const kahTop = kah.cyrl
+  .slice(0, KAHARJAN_LIMIT)
+  .map((c, i) => ({ rank: i + 1, latn: foldApostrophes(cyrlToLatn(c)) }));
 
-const allForms = new Set([...cv.counts.keys(), ...uzcs.counts.keys(), ...kahTop.map((k) => k.latn)]);
+const allForms = new Set([
+  ...cv.counts.keys(),
+  ...uzcs.counts.keys(),
+  ...kahTop.map((k) => k.latn),
+]);
 const analyses = analyse([...allForms], args.fst);
 
 // Reviewed fixes: overrides.csv (surface form → lemma) and lemma-fixes.csv (block / merge / pos).
@@ -105,7 +120,8 @@ const { blocked } = fixes;
 const formMass = new Map();
 const addMass = (form, pm) => formMass.set(form, (formMass.get(form) ?? 0) + pm);
 for (const corpus of [cv, uzcs]) {
-  for (const [form, n] of corpus.counts) if (!corpus.propn.has(form)) addMass(form, (n / corpus.tokens) * 1e6);
+  for (const [form, n] of corpus.counts)
+    if (!corpus.propn.has(form)) addMass(form, (n / corpus.tokens) * 1e6);
 }
 for (const { rank, latn } of kahTop) addMass(latn, zipfPerMillion(rank, kah.cyrl.length));
 const priors = lemmaPriors(formMass, analyses, { blocked });
@@ -115,7 +131,8 @@ const lemmaOf = new Map();
 const unknown = new Map(); // form → combined evidence, for the report
 for (const form of allForms) {
   const c = choose(form, analyses.get(form) ?? []);
-  if (c) lemmaOf.set(form, { lemma: fixes.merges.get(citationForm(c)) ?? citationForm(c), pos: c.pos });
+  if (c)
+    lemmaOf.set(form, { lemma: fixes.merges.get(citationForm(c)) ?? citationForm(c), pos: c.pos });
 }
 
 // Per-source lemma frequencies (per million tokens) and raw counts.
@@ -152,7 +169,21 @@ for (const { rank, latn } of kahTop) credit(2, latn, zipfPerMillion(rank, kah.cy
 const merged = mergeSources(perMillion, { minSources: 2 });
 const top = merged.slice(0, TOP);
 
-const UPOS = { NOUN: 'noun', VERB: 'verb', AUX: 'aux', ADJ: 'adj', ADV: 'adv', PRON: 'pron', DET: 'det', ADP: 'adp', CCONJ: 'conj', SCONJ: 'conj', NUM: 'num', PART: 'part', INTJ: 'intj' };
+const UPOS = {
+  NOUN: 'noun',
+  VERB: 'verb',
+  AUX: 'aux',
+  ADJ: 'adj',
+  ADV: 'adv',
+  PRON: 'pron',
+  DET: 'det',
+  ADP: 'adp',
+  CCONJ: 'conj',
+  SCONJ: 'conj',
+  NUM: 'num',
+  PART: 'part',
+  INTJ: 'intj',
+};
 const udTokens = [];
 for (const p of args.ud.split(',')) {
   for (const line of readFileSync(p, 'utf8').split('\n')) {
@@ -194,15 +225,25 @@ const rows = top.map((m, i) => {
     source: m.present.map((p) => SOURCE_KEYS[p]).join(';'),
     cyrlAttested: kah.attested.has(cyrl),
     posFromUd: [...(udPos.get(m.key)?.values() ?? [])].reduce((a, b) => a + b, 0) >= UD_POS_MIN,
-    topForms: [...formsOf.get(m.key).entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([f]) => f),
+    topForms: [...formsOf.get(m.key).entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 3)
+      .map(([f]) => f),
     score: m.score,
   };
 });
 
-const csv = ['rank,lemma,cyrl,pos,count,source', ...rows.map((r) => [r.rank, r.lemma, r.cyrl, r.pos, r.count, r.source].join(','))];
+const csv = [
+  'rank,lemma,cyrl,pos,count,source',
+  ...rows.map((r) => [r.rank, r.lemma, r.cyrl, r.pos, r.count, r.source].join(',')),
+];
 writeFileSync(join(args.out, `uz-freq-top${TOP}.csv`), csv.join('\n') + '\n');
 if (args.debug) {
-  const dbg = rows.map((r) => [r.rank, r.lemma, r.pos, r.count, r.source, r.score.toFixed(1), r.topForms.join(' ')].join('\t'));
+  const dbg = rows.map((r) =>
+    [r.rank, r.lemma, r.pos, r.count, r.source, r.score.toFixed(1), r.topForms.join(' ')].join(
+      '\t',
+    ),
+  );
   writeFileSync(args.debug, dbg.join('\n') + '\n');
 }
 
@@ -233,7 +274,10 @@ const posDist = new Map();
 for (const r of rows) posDist.set(r.pos, (posDist.get(r.pos) ?? 0) + 1);
 const unattested = rows.filter((r) => !r.cyrlAttested);
 const topUnknown = [...unknown.entries()].sort((a, b) => b[1] - a[1]).slice(0, 40);
-const propnSample = [...cv.propn].filter((f) => (cv.counts.get(f) ?? 0) > 50).sort((a, b) => cv.counts.get(b) - cv.counts.get(a)).slice(0, 25);
+const propnSample = [...cv.propn]
+  .filter((f) => (cv.counts.get(f) ?? 0) > 50)
+  .sort((a, b) => cv.counts.get(b) - cv.counts.get(a))
+  .slice(0, 25);
 
 const report = `# C1 build report (generated by content/sources/freq/build.mjs; do not edit by hand)
 
@@ -255,10 +299,17 @@ Lemmas attested in ≥2 sources: ${merged.length}.
 - Output rows whose POS label comes from UD gold (lemma seen ≥ ${UD_POS_MIN}× in UD): ${rows.filter((r) => r.posFromUd).length}
 
 Most frequent lemma disagreements (many are gold-annotation conventions, e.g. UD keeping deb/edi as lemmas):
-${[...udErrors.entries()].sort((a, b) => b[1] - a[1]).slice(0, 25).map(([k, n]) => `- ${n}× ${k}`).join('\n')}
+${[...udErrors.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 25)
+  .map(([k, n]) => `- ${n}× ${k}`)
+  .join('\n')}
 
 ## Output (top ${TOP})
-POS: ${[...posDist.entries()].sort((a, b) => b[1] - a[1]).map(([p, n]) => `${p} ${n}`).join(', ')}
+POS: ${[...posDist.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .map(([p, n]) => `${p} ${n}`)
+  .join(', ')}
 
 Sources per lemma: all three ${rows.filter((r) => r.source.split(';').length === 3).length}, two ${rows.filter((r) => r.source.split(';').length === 2).length}.
 
@@ -268,7 +319,10 @@ ${unattested.length ? unattested.map((r) => `- ${r.rank} ${r.lemma} → ${r.cyrl
 ### Lemma → most frequent surface forms (first 100 ranks)
 | rank | lemma | pos | top forms |
 |---|---|---|---|
-${rows.slice(0, 100).map((r) => `| ${r.rank} | ${r.lemma} | ${r.pos} | ${r.topForms.join(', ')} |`).join('\n')}
+${rows
+  .slice(0, 100)
+  .map((r) => `| ${r.rank} | ${r.lemma} | ${r.pos} | ${r.topForms.join(', ')} |`)
+  .join('\n')}
 
 ### Highest-frequency forms with no analysis (excluded)
 ${topUnknown.map(([f, s]) => `- ${f} (${s.toFixed(0)} per million, summed over sources)`).join('\n')}
@@ -277,4 +331,6 @@ ${topUnknown.map(([f, s]) => `- ${f} (${s.toFixed(0)} per million, summed over s
 ${propnSample.join(', ')}
 `;
 writeFileSync(join(args.out, 'freq', 'report.md'), report);
-console.log(`wrote ${rows.length} rows; UD lemma agreement ${pct(udLemmaOk, udCovered)}, coverage ${pct(udCovered, udTokens.length)}`);
+console.log(
+  `wrote ${rows.length} rows; UD lemma agreement ${pct(udLemmaOk, udCovered)}, coverage ${pct(udCovered, udTokens.length)}`,
+);

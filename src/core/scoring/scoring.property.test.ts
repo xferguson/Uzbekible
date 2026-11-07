@@ -17,7 +17,13 @@ const config: ScoringConfig = {
 const time = fc.integer({ min: 0, max: 500_000 });
 const count = fc.integer({ min: 0, max: 40 });
 const mult = fc.array(fc.double({ min: 0, max: 4, noNaN: true }), { maxLength: 3 });
-const result = fc.record({ timeMs: time, mistakes: count, hints: count, combos: count, multipliers: mult });
+const result = fc.record({
+  timeMs: time,
+  mistakes: count,
+  hints: count,
+  combos: count,
+  multipliers: mult,
+});
 
 describe('score invariants', () => {
   it('is a non-negative integer', () => {
@@ -55,8 +61,10 @@ describe('score invariants', () => {
 
   it('more combos are never lower', () => {
     fc.assert(
-      fc.property(result, fc.integer({ min: 1, max: 10 }), (r, extra) =>
-        score({ ...r, combos: r.combos + extra }, config) >= score(r, config),
+      fc.property(
+        result,
+        fc.integer({ min: 1, max: 10 }),
+        (r, extra) => score({ ...r, combos: r.combos + extra }, config) >= score(r, config),
       ),
       opts,
     );

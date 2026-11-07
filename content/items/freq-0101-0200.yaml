@@ -12,7 +12,7 @@
       text: hayat
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: apertium-tur-uzb:hayat; wiktionary:hayot; wiktionary:hayat
     - lang: ar
       text: حياة
@@ -39,7 +39,7 @@
       text: üç
       relation: turkic-cognate
       confidence: high
-      correspondence: [ ü>u ]
+      correspondence: [ü>u]
       ref: apertium-tur-uzb:üç; wiktionary:üç
   tags: []
 - id: uz-yurmoq
@@ -53,7 +53,7 @@
       text: yürümek
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ mak>moq, ü>u ]
+      correspondence: [mak>moq, ü>u]
       ref: apertium-tur-uzb:yürümek
   tags: []
 - id: uz-osha
@@ -75,7 +75,7 @@
       text: başlamak
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o, mak>moq ]
+      correspondence: [a>o, mak>moq]
       ref: apertium-tur-uzb:başlamak
   tags: []
 - id: uz-barcha
@@ -97,7 +97,7 @@
       text: devlet
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: apertium-tur-uzb:devlet; wiktionary:davlat; wiktionary:devlet
     - lang: ar
       text: دولة
@@ -116,7 +116,7 @@
       text: gibi
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ g>k ]
+      correspondence: [g>k]
       ref: apertium-tur-uzb:gibi
   tags: []
 - id: uz-yordam
@@ -130,7 +130,7 @@
       text: yardım
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: apertium-tur-uzb:yardım
   tags: []
 - id: uz-faqat
@@ -144,7 +144,7 @@
       text: fakat
       relation: shared-arabic
       confidence: high
-      correspondence: [ k>q ]
+      correspondence: [k>q]
       ref: apertium-tur-uzb:fakat; wiktionary:faqat; wiktionary:fakat
     - lang: ar
       text: فقط
@@ -163,7 +163,7 @@
       text: dünya
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, ü>u ]
+      correspondence: [a>o, ü>u]
       ref: apertium-tur-uzb:dünya; wiktionary:dunyo; wiktionary:dünya
     - lang: ar
       text: دنيا
@@ -182,7 +182,7 @@
       text: bugün
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ ü>u ]
+      correspondence: [ü>u]
       ref: apertium-tur-uzb:bugün
   tags: []
 - id: uz-sotmoq
@@ -196,7 +196,7 @@
       text: satmak
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o, mak>moq ]
+      correspondence: [a>o, mak>moq]
       ref: apertium-tur-uzb:satmak; wiktionary:satmak
   tags: []
 - id: uz-ayol
@@ -231,7 +231,7 @@
       text: insan
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: apertium-tur-uzb:insan; wiktionary:insan
     - lang: ar
       text: إنسان
@@ -263,7 +263,7 @@
       text: kütüphane
       relation: shared-persian
       confidence: high
-      correspondence: [ a>o, e>a, h>x, p>b, ü>u ]
+      correspondence: [a>o, e>a, h>x, p>b, ü>u]
       ref: apertium-tur-uzb:kütüphane; wiktionary:kutubxona
     - lang: fa
       text: کتابخانه
@@ -282,7 +282,7 @@
       text: makine
       relation: other-loan
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: apertium-tur-uzb:makine; wiktionary:makine
     - lang: ru
       text: машина
@@ -314,7 +314,7 @@
       text: hareket
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: apertium-tur-uzb:hareket; wiktionary:hareket
     - lang: ar
       text: حركة
@@ -341,7 +341,7 @@
       text: yetmek
       relation: turkic-cognate
       confidence: high
-      correspondence: [ mak>moq ]
+      correspondence: [mak>moq]
       ref: apertium-tur-uzb:yetmek; wiktionary:yetmek
   tags: []
 - id: uz-yubormoq
@@ -363,7 +363,7 @@
       text: işitmek
       relation: turkic-cognate
       confidence: high
-      correspondence: [ mak>moq ]
+      correspondence: [mak>moq]
       ref: apertium-tur-uzb:işitmek; wiktionary:işitmek
   tags: []
 - id: uz-dost
@@ -377,7 +377,7 @@
       text: dost
       relation: shared-persian
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: apertium-tur-uzb:dost; wiktionary:doʻst; wiktionary:dost
     - lang: fa
       text: دوست
@@ -396,7 +396,7 @@
       text: şehir
       relation: shared-persian
       confidence: high
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: apertium-tur-uzb:şehir; wiktionary:shahar; wiktionary:şehir
     - lang: fa
       text: شهر
@@ -415,7 +415,7 @@
       text: oturmak
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ mak>moq, o>oʻ ]
+      correspondence: [mak>moq, o>oʻ]
       ref: apertium-tur-uzb:oturmak
   tags: []
 - id: uz-ochmoq
@@ -429,7 +429,7 @@
       text: açmak
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o, mak>moq ]
+      correspondence: [a>o, mak>moq]
       ref: apertium-tur-uzb:açmak; wiktionary:açmak
   tags: []
 - id: uz-organmoq
@@ -443,7 +443,7 @@
       text: öğrenmek
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ e>a, irregular, mak>moq, ö>oʻ ]
+      correspondence: [e>a, irregular, mak>moq, ö>oʻ]
       ref: apertium-tur-uzb:öğrenmek
   tags: []
 - id: uz-hozir
@@ -475,7 +475,7 @@
       text: mektep
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: wiktionary:maktab
     - lang: ar
       text: مكتب
@@ -494,7 +494,7 @@
       text: doğru
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ d>t, o>oʻ, ğ>gʻ ]
+      correspondence: [d>t, o>oʻ, ğ>gʻ]
       ref: apertium-tur-uzb:doğru
   tags: []
 - id: uz-korsatmoq
@@ -508,7 +508,7 @@
       text: göstermek
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ e>a, g>k, irregular, mak>moq, ö>oʻ ]
+      correspondence: [e>a, g>k, irregular, mak>moq, ö>oʻ]
       ref: apertium-tur-uzb:göstermek
   tags: []
 - id: uz-oy
@@ -522,7 +522,7 @@
       text: ay
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: apertium-tur-uzb:ay; wiktionary:oy; wiktionary:ay
   tags: []
 - id: uz-javob
@@ -536,7 +536,7 @@
       text: cevap
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o, e>a, p>b ]
+      correspondence: [a>o, e>a, p>b]
       ref: apertium-tur-uzb:cevap; wiktionary:javob; wiktionary:cevap
     - lang: ar
       text: جواب
@@ -573,7 +573,7 @@
       text: gece
       relation: turkic-cognate
       confidence: high
-      correspondence: [ e>a, g>k ]
+      correspondence: [e>a, g>k]
       ref: apertium-tur-uzb:gece; wiktionary:gece
   tags: []
 - id: uz-tashlamoq
@@ -621,7 +621,7 @@
       text: ara
       relation: turkic-cognate
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: apertium-tur-uzb:ara; wiktionary:ara
   tags: []
 - id: uz-da
@@ -656,7 +656,7 @@
       text: saat
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: apertium-tur-uzb:saat; wiktionary:saat
     - lang: ar
       text: ساعة
@@ -709,7 +709,7 @@
       text: hal
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: apertium-tur-uzb:hal; wiktionary:hal
     - lang: ar
       text: حال
@@ -736,7 +736,7 @@
       text: halk
       relation: shared-arabic
       confidence: high
-      correspondence: [ h>x, k>q ]
+      correspondence: [h>x, k>q]
       ref: apertium-tur-uzb:halk; wiktionary:halk
     - lang: ar
       text: خلق
@@ -755,7 +755,7 @@
       text: görünmek
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ g>k, mak>moq, ö>oʻ ]
+      correspondence: [g>k, mak>moq, ö>oʻ]
       ref: apertium-tur-uzb:görünmek
   tags: []
 - id: uz-tushunmoq
@@ -803,7 +803,7 @@
       text: fikir
       relation: shared-arabic
       confidence: high
-      correspondence: [ epenthesis ]
+      correspondence: [epenthesis]
       ref: apertium-tur-uzb:fikir; wiktionary:fikir
     - lang: ar
       text: فكر
@@ -840,7 +840,7 @@
       text: sıfat
       relation: shared-arabic
       confidence: medium
-      correspondence: [ ı>i ]
+      correspondence: [ı>i]
       ref: wiktionary:sıfat
     - lang: ar
       text: صفة
@@ -859,7 +859,7 @@
       text: oğul
       relation: turkic-cognate
       confidence: high
-      correspondence: [ o>oʻ, ğ>gʻ ]
+      correspondence: [o>oʻ, ğ>gʻ]
       ref: apertium-tur-uzb:oğul; wiktionary:oğul
   tags: []
 - id: uz-marta
@@ -881,7 +881,7 @@
       text: göre
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ e>a, g>k, ö>oʻ ]
+      correspondence: [e>a, g>k, ö>oʻ]
       ref: apertium-tur-uzb:göre
   tags: []
 - id: uz-oldin
@@ -903,7 +903,7 @@
       text: ama
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: apertium-tur-uzb:ama; wiktionary:ama
     - lang: ar
       text: أما
@@ -930,7 +930,7 @@
       text: tutmak
       relation: turkic-cognate
       confidence: high
-      correspondence: [ mak>moq ]
+      correspondence: [mak>moq]
       ref: apertium-tur-uzb:tutmak; wiktionary:tutmak
   tags: []
 - id: uz-yaqin
@@ -944,7 +944,7 @@
       text: yakın
       relation: turkic-cognate
       confidence: high
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: apertium-tur-uzb:yakın; wiktionary:yakın
   tags: []
 - id: uz-ich
@@ -971,7 +971,7 @@
       text: amel
       relation: shared-arabic
       confidence: low
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: curator:C2
     - lang: ar
       text: عمل
@@ -998,7 +998,7 @@
       text: on
       relation: turkic-cognate
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: apertium-tur-uzb:on; wiktionary:on
   tags: []
 - id: uz-xona
@@ -1012,7 +1012,7 @@
       text: hane
       relation: shared-persian
       confidence: high
-      correspondence: [ a>o, e>a, h>x ]
+      correspondence: [a>o, e>a, h>x]
       ref: apertium-tur-uzb:hane; wiktionary:hane
     - lang: fa
       text: خانه
@@ -1031,7 +1031,7 @@
       text: orta
       relation: turkic-cognate
       confidence: high
-      correspondence: [ o>oʻ ]
+      correspondence: [o>oʻ]
       ref: apertium-tur-uzb:orta; wiktionary:orta
   tags: []
 - id: uz-solmoq
@@ -1045,7 +1045,7 @@
       text: salmak
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o, mak>moq ]
+      correspondence: [a>o, mak>moq]
       ref: wiktionary:salmak
   tags: []
 - id: uz-ming
@@ -1059,7 +1059,7 @@
       text: bin
       relation: turkic-cognate
       confidence: high
-      correspondence: [ b>m, n>ng ]
+      correspondence: [b>m, n>ng]
       ref: apertium-tur-uzb:bin; wiktionary:bin
   tags: []
 - id: uz-kotarmoq
@@ -1073,7 +1073,7 @@
       text: götürmek
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ g>k, mak>moq, ö>oʻ ]
+      correspondence: [g>k, mak>moq, ö>oʻ]
       ref: wiktionary:götürmek
   tags: []
 - id: uz-ishonmoq
@@ -1095,7 +1095,7 @@
       text: yakmak
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o, k>q, mak>moq ]
+      correspondence: [a>o, k>q, mak>moq]
       ref: wiktionary:yakmak
   tags: []
 - id: uz-uzoq
@@ -1109,7 +1109,7 @@
       text: uzak
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ a>o, k>q ]
+      correspondence: [a>o, k>q]
       ref: apertium-tur-uzb:uzak
   tags: []
 - id: uz-qarshi
@@ -1123,7 +1123,7 @@
       text: karşı
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ k>q, ı>i ]
+      correspondence: [k>q, ı>i]
       ref: apertium-tur-uzb:karşı
   tags: []
 - id: uz-qabul
@@ -1137,7 +1137,7 @@
       text: kabul
       relation: shared-arabic
       confidence: high
-      correspondence: [ k>q ]
+      correspondence: [k>q]
       ref: apertium-tur-uzb:kabul; wiktionary:kabul
     - lang: ar
       text: قبول
@@ -1156,7 +1156,7 @@
       text: daima
       relation: shared-arabic
       confidence: high
-      correspondence: [ a>o ]
+      correspondence: [a>o]
       ref: apertium-tur-uzb:daima; wiktionary:daima
     - lang: ar
       text: دائم
@@ -1175,7 +1175,7 @@
       text: kurmak
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ k>q, mak>moq ]
+      correspondence: [k>q, mak>moq]
       ref: apertium-tur-uzb:kurmak
   tags: []
 - id: uz-gaplashmoq
@@ -1197,7 +1197,7 @@
       text: eser
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: apertium-tur-uzb:eser
     - lang: ar
       text: أثر
@@ -1216,7 +1216,7 @@
       text: çıkarmak
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ k>q, mak>moq, ı>i ]
+      correspondence: [k>q, mak>moq, ı>i]
       ref: apertium-tur-uzb:çıkarmak
   tags: []
 - id: uz-uchramoq
@@ -1246,7 +1246,7 @@
       text: son
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ n>ng, o>oʻ ]
+      correspondence: [n>ng, o>oʻ]
       ref: wiktionary:son
   tags: []
 - id: uz-payt
@@ -1268,7 +1268,7 @@
       text: vurmak
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ mak>moq, v>∅ ]
+      correspondence: [mak>moq, v>∅]
       ref: wiktionary:vurmak
   tags: []
 - id: uz-sabab
@@ -1282,7 +1282,7 @@
       text: sebep
       relation: shared-arabic
       confidence: high
-      correspondence: [ e>a, p>b ]
+      correspondence: [e>a, p>b]
       ref: apertium-tur-uzb:sebep; wiktionary:sebep
     - lang: ar
       text: سبب
@@ -1301,7 +1301,7 @@
       text: memleket
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: wiktionary:memleket
     - lang: ar
       text: مملكة
@@ -1352,7 +1352,7 @@
       text: teşkil
       relation: shared-arabic
       confidence: medium
-      correspondence: [ e>a ]
+      correspondence: [e>a]
       ref: apertium-tur-uzb:teşkil
     - lang: ar
       text: تشكيل
@@ -1384,6 +1384,6 @@
       text: ölmek
       relation: turkic-cognate
       confidence: medium
-      correspondence: [ mak>moq, ö>oʻ ]
+      correspondence: [mak>moq, ö>oʻ]
       ref: wiktionary:ölmek
   tags: []

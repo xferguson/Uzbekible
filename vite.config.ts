@@ -45,10 +45,24 @@ export default defineConfig({
     },
   },
   test: {
-    environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/test-setup.ts'],
-    include: ['src/**/*.test.{ts,tsx}', 'scripts/**/*.test.ts', 'content/**/*.test.{mjs,ts}'],
+    // Q4: core has no DOM, so its tests run under plain `node`; everything else gets jsdom.
+    projects: [
+      {
+        extends: true,
+        test: { name: 'core', environment: 'node', include: ['src/core/**/*.test.{ts,tsx}'] },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'app',
+          environment: 'jsdom',
+          include: ['src/**/*.test.{ts,tsx}', 'scripts/**/*.test.ts', 'content/**/*.test.{mjs,ts}'],
+          exclude: ['src/core/**', '**/node_modules/**'],
+        },
+      },
+    ],
     coverage: {
       provider: 'v8',
       include: ['src/**/*.{ts,tsx}'],

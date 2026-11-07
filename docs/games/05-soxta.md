@@ -1,6 +1,6 @@
 # Game 5: Soxta (False-Friend Swipe)
 
-> *soxta* (Uzbek) = fake, false (Turkish *sahte*). Working title. **Status: DRAFT, awaiting user approval.**
+> *soxta* (Uzbek) = fake, false (Turkish *sahte*). Working title. **Status: approved plan, backlog (build after Juft v1).**
 
 ## Pitch
 Two words sit on opposite sides of the screen: an **Uzbek** word on one side, a **Turkish** word on the other.
@@ -25,14 +25,18 @@ straight at the research question: where does Turkish help with Uzbek, and where
 Unlearning Turkish interference: recognising that a familiar-looking word means something different in Uzbek.
 Builds meaning-to-word recall for Uzbek false friends specifically.
 
-## Product-rule conflict (needs your decision)
-`CLAUDE.md` says **no English on game boards** (only a points-costing long-press hint). This game's clue *is*
-English. Options:
-- **A. Exempt this game** because English is the neutral third language that both words contrast with. Simplest,
-  and matches your description. *(recommended)*
-- **B. Use a picture or emoji as the clue** where one exists. Keeps the rule, but many false friends are abstract.
-- **C. Use Russian as the clue.** Keeps "no English" but changes who the game is for.
-If A, the rule becomes: "No English on game boards, except the Soxta clue", recorded in `CLAUDE.md` and the PRD.
+## Product-rule exception (decided)
+`CLAUDE.md` says no English on game boards. **Soxta is exempt**: its clue *is* the English meaning, because English
+is the neutral third language that both words contrast with. The exemption covers only the clue (and the reveal
+after an answer); the two words themselves are never glossed. Recorded in `CLAUDE.md`, the PRD and the design brief.
+
+## Decisions (approved)
+- **Timer:** a per-card countdown that tightens with the streak, plus **3 lives**. A timeout costs a life.
+- **Content:** reuse the existing false-friend data (`relation: false-friend` sources, the same entries the user
+  reviews in C6). No new research task. The one gap is the Turkish word's own English meaning, for the reveal and
+  for clues about the Turkish word; see J1.
+- **Control cards (later idea, worth trying):** mix in true cognates where *both* words fit, answered with a third
+  gesture (swipe up). It stops "always distrust" becoming a winning strategy. Not in v1.
 
 ## Dependencies on shared modules
 `core/session` (lives, run end), `core/scoring` (streak multiplier), `core/difficulty` (timer tightening, pair
@@ -41,15 +45,15 @@ pairs), `core/learning-log`; `ui/Tile`, HUD and results. **New:** `ui/useSwipe` 
 keyboard fallbacks, reduced-motion safe) and a false-friend field on content pairs.
 
 ## Content needs
-Juft **excludes** false friends from its boards, so this game needs its own set. Pairs need: Uzbek word (both
-scripts), Turkish word, the English meaning of each, and a difficulty tier. Illustrative, to be verified by the
-content task: Uzbek *toy* (wedding) vs Turkish *toy* (naive, inexperienced); Uzbek *boy* (rich) vs Turkish *boy* (height).
+Source: items in `content/items/` whose `sources` include `relation: false-friend` (about 70 today, mostly
+Turkish). Each yields a card: the Uzbek item (`uz`, `glossEn`) and the Turkish word (`sources[].text`). Juft keeps
+excluding these from its boards (`boardPool`), so Soxta has its own pool function. Needed addition: an optional
+English gloss on the Turkish source, so the clue can be the Turkish word's meaning too. Without it, cards fall back
+to Uzbek-meaning clues only.
 
 ## Open questions and risks
-- **Supply:** how many verified Turkish–Uzbek false friends exist at useful frequency? Possibly only 50–150.
-  Partial false friends (one shared sense, one not) could pad the set but muddy the "exactly one" rule.
-- **Control cards:** mix in true cognates where *both* words fit, answered with a third gesture (swipe up)? Adds
-  realism and stops "always distrust" becoming a strategy. Probably a later level.
-- **Timer shape:** per-card countdown plus lives (proposed), or one global clock with time bonuses?
-- **Reverse mode:** show the two words and ask for the meaning among English choices? Likely a later variant.
+- **Supply:** about 70 pairs is enough for a first version but a short run before repeats. Spaced repetition of
+  missed pairs (`core/scheduler`) helps. More pairs can come from C3/C4 follow-ups.
+- **Partial false friends** (one shared sense, one not) muddy the "exactly one" rule; exclude them from v1.
+- **Reverse mode:** show the two words and ask for the meaning among English choices. A later variant.
 - Add **Persian/Arabic/Russian** false-friend pairs later, reusing the same card.

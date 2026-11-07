@@ -7,6 +7,7 @@ export const tokens = {
     'on-cobalt': '#FFFFFF', 'on-deep': '#FFFFFF',
     crack: '#7A2E2E', text: '#13213F', 'text-muted': '#4B5878',
     'on-gold': '#0A1838', // D2: text on gold and turquoise fills
+    'cobalt-pale': '#DCE5F7', 'glaze-tint': '#EEF6F8', // I4: Uzbek-tinted letters (Oson), active row fill
   },
   dark: {
     ground: '#0B1A3A', surface: '#12254D', cobalt: '#5B86E8', 'cobalt-deep': '#0A1838', // cobalt: brief #3E6BD6
@@ -14,6 +15,7 @@ export const tokens = {
     'on-cobalt': '#0A1838', 'on-deep': '#EEF2FA',
     crack: '#E08A8A', text: '#EEF2FA', 'text-muted': '#A8B4CF',
     'on-gold': '#0A1838',
+    'cobalt-pale': '#1F3A78', 'glaze-tint': '#16305F',
   },
 };
 // [foreground, background, minimum ratio, use]
@@ -36,6 +38,12 @@ export const pairs = [
   // D2 additions
   ['on-gold', 'gold', 4.5, 'level badge, combo pill, new-best ribbon'],
   ['on-gold', 'turquoise', 4.5, 'number on a 2-star map cell'],
+  // I4 additions
+  ['text', 'cobalt-pale', 4.5, 'Uzbek-tinted letter (Oson)'],
+  ['cobalt', 'cobalt-pale', 3, 'its double edge'],
+  ['text', 'glaze-tint', 4.5, 'letter on an active row'],
+  ['gold', 'glaze-tint', 3, 'active / correct row border'],
+  ['crack', 'ground', 3, 'wrong-row edge and cracks'],
 ];
 const lum = (hex) => {
   const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)

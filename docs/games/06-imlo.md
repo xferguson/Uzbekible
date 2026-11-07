@@ -111,5 +111,23 @@ Turkish knowledge gets wrong in Uzbek (e.g. writing *isim* for *ism*).
 4. **Identical spellings** (e.g. *bu* ↔ *bu*) are excluded from the pool.
 5. **Slot count** shows the word length (kept as designed); one check covers both sides.
 
+## Approved decisions (screens, I4, approved by the user 2026-11-07)
+Reference mockup: `../design/mockups/I4-imlo-screens.html` (screens in `../design/mockups/screens/I4-*.png`).
+1. **Screens:** level map, ready card with the mode picker, board, pause, results, fail. Countdown, settings and home are Juft's.
+2. **Layout:** phone: source row, check star with the English clue under it, Uzbek row, bank. Desktop: rows left and right of the star, bank across the bottom. Nothing scrolls.
+3. **Active row:** 3 px gold outline, corner star, faint glaze fill. Next empty slot: dashed gold edge with a star.
+4. **Sockets:** used bank tiles leave dashed sockets; slots never reflow.
+5. **Check star "Tekshir"** (Cyrillic "Текшир"): dashed outline until every slot on both sides is full, then solid gold; when right it becomes the signature star with a ✓.
+6. **Correct:** both rows glaze gold with a ✓ badge, lock into the star, next pair slides in. **Wrong:** only the wrong row cracks and shakes, a right row glazes; letters stay; one life is lost.
+7. **Oson colouring:** source letters turquoise-tinted with a ◆, Uzbek letters cobalt-tinted with a ● and a double edge. New token `--color-cobalt-pale` (#DCE5F7 light, #1F3A78 dark); all pairs pass `contrast.mjs`.
+8. **Largest board fits:** 8 + 8 letters + 4 extras (20 tiles). Phone: slots 52/50/47/44 px by word length (2 px gaps at 8), bank tiles 46 × 50 px, 7 per row. Desktop: slots 64/60/56 px, bank 56 × 60 px. Nothing under 44 px.
+9. **Hint:** hold an empty slot 450 ms, a gold ring fills, the letter drops in and locks with a padlock and a −5 pop. No English, no life lost. Keyboard H.
+10. **Persian and Arabic:** RTL slot row, first letter at the right, isolated-form tiles, no joined preview.
+11. **Digraphs** (sh, ch, oʻ, gʻ, ng) are single tiles.
+12. **Level map:** four buildings of 15 levels: Madrasa (1–15), Masjid (16–30), Minora (31–45), Registon (46–60). Progress is kept per mode, with three tabs on the map.
+13. **In-level progress:** a row of octagons (done gold, current outlined with a dot, to do dashed) plus the mode name. HUD as in Juft.
+14. **Reduced motion:** every animation has an instant replacement that keeps its shape cue; pause hides the board instantly in every setting.
+15. **Results and fail** reuse Juft's layouts; results name the mode and multiplier, fail says same pairs, fresh shuffle.
+
 ## Out of scope (v1)
 Audio, free typing on the device keyboard (a hardware keyboard works through the bank), stats screen.

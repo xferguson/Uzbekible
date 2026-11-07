@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { scriptMeta, type Lang } from '@core/text';
+import { scriptMeta, type TextLang } from '@core/text';
 import { colors, type ThemeName } from '@design/tokens';
 import { PatternBg, RosetteBand, Star8 } from '@ui/motif';
 import styles from './Gallery.module.css';
@@ -7,7 +7,7 @@ import styles from './Gallery.module.css';
 export { isGalleryPath } from './route';
 const THEMES: ThemeName[] = ['light', 'dark'];
 
-const SPECIMENS: [Lang, string][] = [
+const SPECIMENS: [TextLang, string][] = [
   ['uz-Latn', 'Oʻzbekiston: gʻisht, qalʼa, shahar'],
   ['uz-Cyrl', 'Ўзбекистон: қалъа, ғишт, ҳаво'],
   ['tr', 'Türkiye: ığdır, şehir, İstanbul'],

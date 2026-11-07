@@ -3,7 +3,7 @@
  * drives the same definition through `toSimGame` (sim-adapter.ts). Types only: no shell, no logic.
  */
 import type { ComponentType } from 'react';
-import type { Lang } from '../core/content/index.ts';
+import type { SourceLang } from '../core/text/index.ts';
 import type { DifficultyConfig } from '../core/difficulty/index.ts';
 import type { Aggregate } from '../core/learning-log/index.ts';
 import type { Rng } from '../core/random/index.ts';
@@ -13,7 +13,7 @@ import type { GameEvent, Rules, Session, SessionState } from '../core/session/in
 /** The player settings that change what a level contains. */
 export interface GameSettings {
   /** Enabled source languages (order is irrelevant; it does not change the level seed). */
-  sourceLangs: readonly Lang[];
+  sourceLangs: readonly SourceLang[];
   /** Which Uzbek script the player reads. */
   script: 'latn' | 'cyrl';
 }

@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { scriptMeta, type Lang } from '@core/text';
+import { scriptMeta, type TextLang } from '@core/text';
 import { fontStacks } from '@design/tokens';
 import { render, screen } from '@testing-library/react';
 import { Gallery, isGalleryPath } from './Gallery';
@@ -19,7 +19,7 @@ describe('dev gallery', () => {
   });
 
   it('defines every font stack that scriptMeta refers to', () => {
-    const langs: Lang[] = ['uz-Latn', 'uz-Cyrl', 'tr', 'ru', 'fa', 'ar'];
+    const langs: TextLang[] = ['uz-Latn', 'uz-Cyrl', 'tr', 'ru', 'fa', 'ar'];
     for (const lang of langs) {
       const ref = /var\((--[\w-]+)\)/.exec(scriptMeta(lang).fontStack)?.[1];
       expect(ref, lang).toBeDefined();

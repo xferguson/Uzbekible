@@ -1,0 +1,158 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2);
+  block-size: 100%;
+  min-block-size: 0;
+  max-inline-size: 760px;
+  margin-inline: auto;
+  padding: var(--space-4) var(--space-4) var(--space-6);
+  box-sizing: border-box;
+  overflow: hidden; /* the board never scrolls */
+}
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  gap: var(--space-4);
+  flex: 1;
+  min-block-size: 0;
+  align-content: center;
+}
+@media (min-width: 720px) {
+  .columns {
+    gap: var(--space-6);
+  }
+}
+/* Tile height = available height / pairs, clamped to 44..96 px. */
+.column {
+  display: grid;
+  grid-template-rows: repeat(var(--n), minmax(var(--min-tile), var(--max-tile)));
+  gap: var(--gap);
+  min-inline-size: 0;
+  block-size: 100%;
+  min-block-size: 0;
+  align-content: center;
+  font-size: var(--fs);
+}
+.cell {
+  position: relative;
+  display: grid;
+  min-block-size: 0;
+}
+.cell > button {
+  inline-size: 100%;
+  block-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 0;
+  padding: var(--space-1) var(--space-2);
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.word {
+  display: block;
+  text-align: center;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+.badge {
+  position: absolute;
+  inset-block-start: 4px;
+  inset-inline-start: 6px;
+  z-index: 2;
+  padding: 2px 5px;
+  font: 700 11px/1 var(--font-ui);
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-text-muted);
+  border-radius: 4px;
+  pointer-events: none;
+}
+.badge[lang='fa'],
+.badge[lang='ar'] {
+  font: 600 14px/1 var(--font-naskh);
+}
+.socket {
+  border: 2px dashed var(--color-text-muted);
+  border-radius: var(--radius-tile);
+  opacity: 0.38;
+}
+.gloss {
+  position: absolute;
+  inset-block-end: calc(100% + 8px);
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  padding: 7px 10px;
+  font: 500 14px/1.2 var(--font-ui);
+  white-space: nowrap;
+  color: var(--color-ground);
+  background: var(--color-text);
+  border-radius: 8px;
+  animation: gloss 1780ms both;
+  pointer-events: none;
+}
+.fresh {
+  margin: 0;
+  text-align: center;
+  font: 600 15px var(--font-ui);
+  color: var(--color-text);
+}
+.column[data-fresh] .cell > button {
+  box-shadow:
+    0 0 0 4px var(--color-turquoise-pale),
+    0 0 22px 2px var(--color-turquoise);
+}
+.cell > button[data-state='selected'] {
+  border-color: var(--color-gold);
+  transform: translateY(-3px);
+}
+.cell > button[data-state='matched'] {
+  animation: bloom 450ms cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+.cell > button[data-state='wrong'] {
+  animation: shake 300ms linear;
+}
+@keyframes gloss {
+  0% {
+    opacity: 0;
+  }
+  7% {
+    opacity: 1;
+  }
+  91% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes bloom {
+  from {
+    transform: scale(0.92) rotate(-2deg);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes shake {
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gloss,
+  .cell > button[data-state] {
+    animation: none;
+    transition: none;
+  }
+  .cell > button[data-state='selected'] {
+    transform: none;
+  }
+}

@@ -1,4 +1,4 @@
-import { useId, type ReactNode } from 'react';
+import { useId, type KeyboardEvent, type ReactNode } from 'react';
 import { type LongPressHandlers } from '../hooks';
 import styles from './Tile.module.css';
 
@@ -11,6 +11,8 @@ export interface TileProps {
   state?: TileState;
   shape?: TileShape;
   onSelect?: () => void;
+  /** Extra key handling, e.g. a hint key. Enter/Space selection still works. */
+  onKeyDown?: (e: KeyboardEvent) => void;
   /** e.g. `useLongPress(...)` for the English hint. */
   pressHandlers?: Partial<LongPressHandlers>;
   children?: ReactNode;
@@ -31,6 +33,7 @@ export function Tile({
   state = 'idle',
   shape = 'rect',
   onSelect,
+  onKeyDown,
   pressHandlers,
   children,
 }: TileProps) {
@@ -48,6 +51,7 @@ export function Tile({
       aria-disabled={state === 'disabled' ? true : undefined}
       aria-describedby={cue ? descId : undefined}
       onClick={inert ? undefined : onSelect}
+      onKeyDown={onKeyDown}
       {...pressHandlers}
     >
       {cue && (

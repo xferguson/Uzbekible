@@ -205,8 +205,8 @@ _(no exports yet)_
 - `SourceTextProps` { lang: SourceLang; text: string; className?: string }
 - `Star8({ size, variant, className }: Star8Props): import("react").JSX.Element` - The signature star: {8/2} khatam, {8/3} turquoise interlace and a gold octagon centre. Decorative.
 - `Star8Props` { size?: number; variant?: 'full' | 'outline'; className?: string }
-- `Tile({ label, state, shape, onSelect, pressHandlers, children, }: TileProps): import("react").JSX.Element` - The shared game tile: states, rect or hex shape, keyboard (Enter/Space), never colour-only.
-- `TileProps` { label: string; state?: TileState; shape?: TileShape; onSelect?: () => void; pressHandlers?: Partial<LongPressHandlers>; children?: ReactNode }
+- `Tile({ label, state, shape, onSelect, onKeyDown, pressHandlers, children, }: TileProps): import("react").JSX.Element` - The shared game tile: states, rect or hex shape, keyboard (Enter/Space), never colour-only.
+- `TileProps` { label: string; state?: TileState; shape?: TileShape; onSelect?: () => void; onKeyDown?: (e: KeyboardEvent) => void; pressHandlers?: Partial<LongPressHandlers>; children?: ReactNode }
 - `TileShape` = `'rect' | 'hex'`
 - `TileState` = `'idle' | 'selected' | 'matched' | 'wrong' | 'cracked' | 'disabled'`
 - `Timer({ ms, script }: Common & { ms: number; }): import("react").JSX.Element`

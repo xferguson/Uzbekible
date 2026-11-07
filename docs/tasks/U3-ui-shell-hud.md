@@ -15,7 +15,7 @@ Everything every game gets for free.
 ## Acceptance criteria
 - [ ] `Timer`, `Lives` (cracking tiles), `Score`, `LevelBadge`, `Combo`
 - [ ] `Countdown`, `PauseOverlay` (hides board), `ResultsScreen` (stars, new best)
-- [ ] `GameShell` hosting a `GameDefinition`; `src/games/types.ts`; `src/games/registry.ts`
+- [ ] `GameShell` hosting a `GameDefinition`; `src/games/registry.ts` (contract types come from Q7)
 - [ ] Shell writes progress/best scores via `core/storage` and attempts via `core/learning-log`
 
 ## Test-first plan
@@ -25,5 +25,4 @@ Everything every game gets for free.
 - `src/ui/hud/**`
 - `src/ui/screens/**`
 - `src/shell/GameShell.tsx`
-- `src/games/types.ts`
 - `src/games/registry.ts`

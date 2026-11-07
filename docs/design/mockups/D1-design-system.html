@@ -1,0 +1,728 @@
+<title>Uzbekible Design System</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif+Display:wght@500;700&family=Noto+Naskh+Arabic:wght@400;600&family=Vazirmatn:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column of specimen plates; every plate shows light and dark side by side.
+   Colour tokens are named exactly as docs/design/brief.md §3 so U1 can lift them into src/design/tokens.ts.
+   Changes from the brief (contrast fixes) are marked "D1" in comments. */
+:root, .t-light {
+  --color-ground: #F7F4EC;
+  --color-surface: #FFFFFF;
+  --color-cobalt: #1B3F8F;
+  --color-cobalt-deep: #0F2A66;
+  --color-turquoise: #1FA3B5;
+  --color-turquoise-pale: #CDEFF2;
+  --color-gold: #B08423;          /* D1: brief #C99A2E → 2.58:1 on white, too faint for the selected border */
+  --color-ochre: #B5652B;
+  --color-crack: #7A2E2E;
+  --color-text: #13213F;
+  --color-text-muted: #4B5878;
+  --color-on-cobalt: #FFFFFF;     /* D1: new, label on cobalt fills */
+  --color-on-deep: #FFFFFF;       /* D1: new, text on cobalt-deep panels */
+  --color-heading: #0F2A66;
+  --glaze-hi: rgba(255,255,255,.95);
+  --glaze-tint: #EEF6F8;
+  --shadow: 0 2px 0 rgba(15,42,102,.18), 0 6px 14px rgba(15,42,102,.10);
+  --line: rgba(27,63,143,.16);
+  --pattern: rgba(27,63,143,.07);
+  color-scheme: light;
+}
+.t-dark {
+  --color-ground: #0B1A3A;
+  --color-surface: #12254D;
+  --color-cobalt: #5B86E8;        /* D1: brief #3E6BD6 → 3.06:1 on surface and could not carry a label */
+  --color-cobalt-deep: #0A1838;
+  --color-turquoise: #34C3D3;
+  --color-turquoise-pale: #164A57;
+  --color-gold: #E2B54C;
+  --color-ochre: #D88A4E;
+  --color-crack: #E08A8A;
+  --color-text: #EEF2FA;
+  --color-text-muted: #A8B4CF;
+  --color-on-cobalt: #0A1838;
+  --color-on-deep: #EEF2FA;
+  --color-heading: #EEF2FA;
+  --glaze-hi: rgba(255,255,255,.10);
+  --glaze-tint: #16305F;
+  --shadow: 0 2px 0 rgba(0,0,0,.35), 0 6px 14px rgba(0,0,0,.25);
+  --line: rgba(168,180,207,.18);
+  --pattern: rgba(91,134,232,.10);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-ground: #0B1A3A; --color-surface: #12254D; --color-cobalt: #5B86E8; --color-cobalt-deep: #0A1838;
+    --color-turquoise: #34C3D3; --color-turquoise-pale: #164A57; --color-gold: #E2B54C; --color-ochre: #D88A4E;
+    --color-crack: #E08A8A; --color-text: #EEF2FA; --color-text-muted: #A8B4CF; --color-on-cobalt: #0A1838;
+    --color-on-deep: #EEF2FA; --color-heading: #EEF2FA; --glaze-hi: rgba(255,255,255,.10); --glaze-tint: #16305F;
+    --shadow: 0 2px 0 rgba(0,0,0,.35), 0 6px 14px rgba(0,0,0,.25); --line: rgba(168,180,207,.18);
+    --pattern: rgba(91,134,232,.10); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --color-ground: #0B1A3A; --color-surface: #12254D; --color-cobalt: #5B86E8; --color-cobalt-deep: #0A1838;
+  --color-turquoise: #34C3D3; --color-turquoise-pale: #164A57; --color-gold: #E2B54C; --color-ochre: #D88A4E;
+  --color-crack: #E08A8A; --color-text: #EEF2FA; --color-text-muted: #A8B4CF; --color-on-cobalt: #0A1838;
+  --color-on-deep: #EEF2FA; --color-heading: #EEF2FA; --glaze-hi: rgba(255,255,255,.10); --glaze-tint: #16305F;
+  --shadow: 0 2px 0 rgba(0,0,0,.35), 0 6px 14px rgba(0,0,0,.25); --line: rgba(168,180,207,.18);
+  --pattern: rgba(91,134,232,.10); color-scheme: dark;
+}
+:root {
+  --font-display: "Noto Serif Display", "Noto Serif", Georgia, serif;
+  --font-ui: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-naskh: "Noto Naskh Arabic", "Geeza Pro", "Times New Roman", serif;
+  --font-fa: "Vazirmatn", "Noto Naskh Arabic", Tahoma, sans-serif;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+  --r-tile: 14px; --r-card: 16px;
+  --ease-set: cubic-bezier(.2,.9,.3,1.15);
+}
+* { box-sizing: border-box; }
+body { background: var(--color-ground); color: var(--color-text); font: 400 16px/1.55 var(--font-ui); }
+.t-light, .t-dark { background: var(--color-ground); color: var(--color-text); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 var(--s7); }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; color: var(--color-heading); }
+h2 { font-size: 30px; font-weight: 700; line-height: 1.15; }
+h3 { font-size: 20px; font-weight: 500; }
+p { margin: 0; max-width: 66ch; }
+.eyebrow { font: 600 12px/1 var(--font-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); }
+.muted { color: var(--color-text-muted); }
+code, .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .86em; }
+section.plate { display: grid; gap: var(--s5); padding-block: var(--s7) 0; }
+.plate-head { display: grid; gap: var(--s2); }
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: var(--s4); }
+.panel { border-radius: var(--r-card); padding: var(--s5); border: 1px solid var(--line); display: grid; gap: var(--s4); min-width: 0; }
+.panel > .eyebrow { display: flex; justify-content: space-between; }
+.scroll-x { overflow-x: auto; min-width: 0; }
+.note { font-size: 14px; color: var(--color-text-muted); border-left: 3px solid var(--color-turquoise); padding: var(--s1) 0 var(--s1) var(--s3); max-width: 70ch; }
+button.ctl { font: 600 14px var(--font-ui); min-height: 44px; padding: 0 var(--s4); border-radius: 12px; border: 2px solid var(--color-cobalt); background: var(--color-surface); color: var(--color-cobalt); cursor: pointer; }
+.t-dark button.ctl, button.ctl { color: var(--color-text); }
+button.ctl:focus-visible, .tile:focus-visible, a:focus-visible { outline: 3px solid var(--color-cobalt); outline-offset: 3px; }
+a { color: var(--color-cobalt); }
+
+/* ---------- masthead ---------- */
+.mast { background: var(--color-cobalt-deep); color: var(--color-on-deep); }
+.mast .inner { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: var(--s7) var(--s6); display: grid; gap: var(--s3); }
+.mast h1 { color: var(--color-on-deep) !important; font-size: clamp(36px, 7vw, 64px); font-weight: 700; line-height: 1.02; letter-spacing: -.01em; }
+.mast p { color: var(--color-on-deep); opacity: .86; }
+.mast .eyebrow { color: var(--color-gold); }
+.band { display: block; width: 100%; height: 56px; }
+
+/* ---------- palette ---------- */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--s3); }
+.sw { display: grid; grid-template-rows: 56px auto; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--color-surface); }
+.sw .chip { border-bottom: 1px solid var(--line); }
+.sw .meta { padding: var(--s2) var(--s3); display: grid; gap: 2px; font-size: 12px; }
+.sw .meta b { font: 600 12px ui-monospace, Menlo, monospace; }
+.sw .changed { color: var(--color-ochre); font-weight: 600; }
+table.ct { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+table.ct th, table.ct td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+table.ct th { font-weight: 600; color: var(--color-text-muted); font-size: 12px; }
+.sample { display: inline-grid; place-items: center; min-width: 64px; height: 28px; padding: 0 8px; border-radius: 6px; font-weight: 600; border: 1px solid var(--line); }
+.verdict { font-weight: 600; }
+.verdict::before { content: "✓ "; }
+.verdict.fail::before { content: "✕ "; }
+
+/* ---------- type ---------- */
+.specimen { display: grid; gap: var(--s4); }
+.spec-row { display: grid; grid-template-columns: 170px 1fr; gap: var(--s4); align-items: baseline; padding-block: var(--s3); border-bottom: 1px solid var(--line); }
+.spec-row .lbl { display: grid; gap: 2px; }
+.spec-row .big { font-size: 26px; line-height: 1.35; min-width: 0; overflow-wrap: anywhere; }
+.spec-row .letters { font-size: 15px; color: var(--color-text-muted); letter-spacing: .02em; display: block; margin-top: 4px; }
+[dir="rtl"].big { font-size: 30px; line-height: 1.7; }
+.fa { font-family: var(--font-fa); }
+.ar { font-family: var(--font-naskh); }
+@media (max-width: 560px) { .spec-row { grid-template-columns: 1fr; gap: var(--s1); } }
+.scale { display: grid; gap: var(--s3); }
+.scale > div { display: grid; grid-template-columns: 120px 1fr; gap: var(--s3); align-items: baseline; }
+.apos { display: flex; flex-wrap: wrap; gap: var(--s4); }
+.apos figure { margin: 0; display: grid; gap: 4px; justify-items: center; padding: var(--s3) var(--s4); border: 1px solid var(--line); border-radius: 12px; background: var(--color-surface); }
+.apos .g { font-size: 44px; line-height: 1; }
+.apos figcaption { font-size: 12px; color: var(--color-text-muted); text-align: center; }
+
+/* ---------- motifs ---------- */
+.motifs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--s4); }
+.motif { display: grid; gap: var(--s2); }
+.motif .art { aspect-ratio: 1; max-width: 100%; border-radius: 12px; background: var(--color-surface); border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
+.motif .art.wide { aspect-ratio: 3 / 1; }
+.motif svg { width: 100%; height: 100%; display: block; }
+.motif p { font-size: 14px; }
+.motif b { font-weight: 600; }
+
+/* ---------- tiles ---------- */
+.tile {
+  position: relative; display: inline-grid; place-items: center; min-width: 104px; min-height: 60px; padding: 10px 18px;
+  border-radius: var(--r-tile); border: 2px solid var(--color-cobalt);
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface) 55%, var(--glaze-tint) 100%);
+  box-shadow: inset 0 0 0 1px var(--glaze-hi), var(--shadow);
+  font: 600 20px/1.2 var(--font-ui); color: var(--color-text); cursor: pointer; user-select: none;
+  transition: transform 220ms var(--ease-set), border-color 180ms, background-color 180ms;
+}
+.tile .w { position: relative; z-index: 2; }
+.tile .badge { position: absolute; top: -9px; right: -9px; width: 22px; height: 22px; z-index: 3; }
+.tile.is-selected { border-color: var(--color-gold); border-width: 3px; padding: 9px 17px; transform: translateY(-3px); background: var(--color-turquoise-pale); }
+.tile.is-matched { border-color: var(--color-turquoise); background: var(--color-turquoise-pale); }
+.tile.is-matched .star-bg { position: absolute; inset: -14px; z-index: 1; width: calc(100% + 28px); height: calc(100% + 28px); }
+.tile.is-wrong { border-color: var(--color-crack); }
+.tile .cracks { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; border-radius: inherit; }
+.tile.is-disabled { border-style: dashed; border-color: var(--color-text-muted); background: var(--color-ground); color: var(--color-text-muted); box-shadow: none; opacity: .6; cursor: not-allowed; }
+.tile.is-focus { outline: 3px solid var(--color-cobalt); outline-offset: 3px; }
+.tile.rtl { font-family: var(--font-naskh); font-size: 24px; font-weight: 600; }
+.hint { position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: var(--color-text); color: var(--color-ground); font: 500 13px/1.2 var(--font-ui); padding: 6px 10px; border-radius: 8px; white-space: nowrap; z-index: 4; }
+.hint::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--color-text); }
+.hint b { font-weight: 700; }
+.states { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 64px var(--s4); padding-top: var(--s6); }
+.state { display: grid; gap: var(--s3); justify-items: center; text-align: center; }
+.state .cap { display: grid; gap: 2px; font-size: 12px; }
+.state .cap b { font-size: 13px; }
+
+/* lives */
+.lives { display: inline-flex; gap: 6px; align-items: center; }
+.life { width: 22px; height: 22px; }
+
+/* ---------- motion ---------- */
+.demos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--s4); }
+.demo { display: grid; gap: var(--s3); align-content: start; }
+.stage { position: relative; height: 150px; border-radius: 12px; border: 1px solid var(--line); background: var(--color-ground); display: grid; place-items: center; overflow: hidden; }
+.stage .tile { position: absolute; }
+.stage .pair-l { left: calc(50% - 124px); }
+.stage .pair-r { left: calc(50% + 20px); }
+.stage .bloom { position: absolute; width: 120px; height: 120px; left: calc(50% - 60px); top: calc(50% - 60px); opacity: 0; pointer-events: none; }
+.play .pair-l { animation: slideR 200ms var(--ease-set) forwards, dissolve 200ms 450ms ease-in forwards; }
+.play .pair-r { animation: slideL 200ms var(--ease-set) forwards, dissolve 200ms 450ms ease-in forwards; }
+.play .bloom { animation: bloom 250ms 200ms var(--ease-set) forwards, dissolve 200ms 450ms ease-in forwards; }
+@keyframes slideR { to { transform: translateX(52px); } }
+@keyframes slideL { to { transform: translateX(-52px); } }
+@keyframes bloom { from { opacity: 0; transform: scale(.3) rotate(-22.5deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes dissolve { to { opacity: 0; } }
+.play .shake { animation: shake 150ms ease-in-out 2; }
+@keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.cracks path { stroke-dasharray: 60; stroke-dashoffset: 0; }
+.play .cracks path { animation: draw 120ms ease-out both; }
+@keyframes draw { from { stroke-dashoffset: 60; } }
+.play .settle { animation: settle 220ms var(--ease-set) both; }
+@keyframes settle { from { transform: translateY(0); } 60% { transform: translateY(-5px); } to { transform: translateY(-3px); } }
+.rm-show { display: none; }
+.rm .rm-show { display: inline-grid; }
+.rm .rm-hide { display: none; }
+.rm .play *, .rm * { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+.toggle { display: inline-flex; gap: var(--s2); align-items: center; font-size: 14px; min-height: 44px; }
+.toggle input { width: 20px; height: 20px; accent-color: var(--color-cobalt); }
+
+/* ---------- icons ---------- */
+.icons { display: grid; gap: var(--s5); }
+.icon-row { display: flex; flex-wrap: wrap; gap: var(--s5); align-items: flex-end; padding-bottom: var(--s2); }
+.icon-row figure { margin: 0; display: grid; gap: var(--s2); justify-items: start; flex: none; }
+.icon-row figcaption { font-size: 12px; color: var(--color-text-muted); }
+.icon-row svg { display: block; border-radius: 0; max-width: 100%; height: auto; box-shadow: 0 0 0 1px var(--line), var(--shadow); }
+.mask-demo svg.ov { box-shadow: none; }
+.mask-demo { position: relative; width: 192px; height: 192px; }
+.mask-demo svg.ov { position: absolute; inset: 0; }
+.clip-circle { border-radius: 50% !important; overflow: hidden; }
+.clip-squircle { border-radius: 30% !important; overflow: hidden; }
+
+/* ---------- home screen ---------- */
+.frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--s5); align-items: start; }
+.fit { width: 100%; overflow: hidden; }
+.fit > .device { transform-origin: 0 0; }
+.device { border-radius: 36px; overflow: hidden; box-shadow: 0 0 0 1px var(--line), 0 20px 40px rgba(11,26,58,.18); position: relative; }
+.device.desk { border-radius: 14px; }
+.frame-cap { font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--s2); }
+.home { width: 100%; height: 100%; position: relative; background: var(--color-ground); color: var(--color-text); display: grid; grid-template-rows: auto 1fr; font-family: var(--font-ui); }
+.home .bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.home > * { position: relative; z-index: 1; }
+.home .bar { background: var(--color-cobalt-deep); color: var(--color-on-deep); }
+.home .bar-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 48px 16px 8px; }
+.desk .home .bar-top { padding: 14px 32px; }
+.home .brand { font: 700 26px/1 var(--font-display); letter-spacing: -.01em; color: var(--color-on-deep); display: flex; align-items: center; gap: 8px; }
+.home .brand svg { width: 28px; height: 28px; }
+.home .bar-actions { display: flex; gap: 6px; align-items: center; }
+.home .script { display: inline-flex; border: 1.5px solid rgba(255,255,255,.35); border-radius: 999px; overflow: hidden; font: 600 13px var(--font-ui); }
+.home .script span { padding: 0 12px; min-height: 36px; display: grid; place-items: center; color: var(--color-on-deep); }
+.home .script span.on { background: var(--color-gold); color: #0A1838; }
+.home .iconbtn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; color: var(--color-on-deep); }
+.home .iconbtn svg { width: 24px; height: 24px; }
+.home .band-s { display: block; width: 100%; height: 22px; }
+.home main { padding: 16px 16px 24px; display: grid; gap: 14px; align-content: start; }
+.phone .home .hello h2 { font-size: 28px; }
+.phone .home .facade svg { max-height: 168px; }
+.phone .home .game { min-height: 0; padding: 10px 12px; }
+.phone .home .game .gi { width: 32px; height: 32px; }
+.desk .home main { grid-template-columns: 1.05fr 1fr; gap: 28px; padding: 32px; align-items: start; }
+.home .hello h2 { font-size: 34px; font-weight: 700; }
+.home .hello p { color: var(--color-text-muted); font-size: 15px; }
+.home .facade { background: var(--color-surface); border-radius: var(--r-card); border: 1px solid var(--line); padding: 14px; display: grid; gap: 10px; box-shadow: var(--shadow); }
+.home .facade svg { width: 100%; height: auto; display: block; }
+.home .facade-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 14px; }
+.home .facade-meta b { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--color-text); }
+.home .games { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.home .game { background: var(--color-surface); border: 2px solid var(--color-cobalt); border-radius: var(--r-card); padding: 12px; display: grid; gap: 6px; box-shadow: inset 0 0 0 1px var(--glaze-hi), var(--shadow); min-height: 132px; align-content: start; }
+.home .game.lock { border-style: dashed; border-color: var(--color-text-muted); box-shadow: none; background: transparent; }
+.home .game .gi { width: 40px; height: 40px; }
+.home .game h4 { margin: 0; font: 700 19px/1.1 var(--font-display); color: var(--color-text); }
+.home .game .sub { font-size: 13px; color: var(--color-text-muted); line-height: 1.3; }
+.home .game .stars { display: flex; gap: 2px; }
+.home .game .stars svg { width: 16px; height: 16px; }
+.home .game .soon { display: inline-flex; gap: 4px; align-items: center; font-size: 12px; font-weight: 600; color: var(--color-text-muted); }
+.home .game .soon svg { width: 14px; height: 14px; }
+.home .cta { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; border-radius: 16px; background: var(--color-cobalt); color: var(--color-on-cobalt); font: 700 18px var(--font-ui); box-shadow: inset 0 0 0 1px var(--glaze-hi), var(--shadow); }
+.home .cta small { font-weight: 500; opacity: .85; font-size: 14px; }
+.home .right { display: grid; gap: 18px; }
+.home .streak { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--color-text-muted); }
+
+/* ---------- decisions ---------- */
+.decisions { display: grid; gap: var(--s3); counter-reset: d; padding: 0; margin: 0; list-style: none; }
+.decisions li { display: grid; grid-template-columns: 28px 1fr; gap: var(--s3); padding: var(--s3) 0; border-bottom: 1px solid var(--line); }
+.decisions li::before { counter-increment: d; content: counter(d); font: 700 18px/1.3 var(--font-display); color: var(--color-turquoise); }
+.decisions b { font-weight: 600; }
+</style>
+
+<header class="mast">
+  <svg class="band" data-band="rosette" aria-hidden="true"></svg>
+  <div class="inner">
+    <span class="eyebrow">Task D1 · proposal for approval</span>
+    <h1>Uzbekible design system</h1>
+    <p>Glazed white ground, cobalt and turquoise ornament, gold for what the player earns. Every motif here does a job in a game: the star is a match, the crack is a mistake, the facade is your progress.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ===================== PALETTE ===================== -->
+<section class="plate" id="palette">
+  <div class="plate-head">
+    <span class="eyebrow">Brief §3 · colour tokens</span>
+    <h2>Palette</h2>
+    <p class="muted">Token names follow the brief. Three changes, marked in ochre, came out of the contrast check: a deeper light gold, a lighter dark cobalt, and two "on-" tokens for text placed on cobalt fills.</p>
+  </div>
+  <div class="pair">
+    <div class="panel t-light"><span class="eyebrow"><span>Light</span><span>glaze white</span></span><div class="swatches" data-swatches></div></div>
+    <div class="panel t-dark"><span class="eyebrow"><span>Dark</span><span>night cobalt</span></span><div class="swatches" data-swatches></div></div>
+  </div>
+</section>
+
+<!-- ===================== CONTRAST ===================== -->
+<section class="plate" id="contrast">
+  <div class="plate-head">
+    <span class="eyebrow">Brief §3 rules · WCAG 2.2</span>
+    <h2>Contrast pairs</h2>
+    <p class="muted">Ratios are computed live from the tokens above. Text needs 4.5:1; borders, stars and crack lines are graphics and need 3:1. The same check runs in <code>docs/design/mockups/contrast.mjs</code>. Gold is never used for body text, and gold on cobalt (light) is not allowed (2.86:1). Gold sits on cobalt-deep instead.</p>
+  </div>
+  <div class="pair">
+    <div class="panel t-light scroll-x"><span class="eyebrow"><span>Light</span></span><table class="ct" data-contrast></table></div>
+    <div class="panel t-dark scroll-x"><span class="eyebrow"><span>Dark</span></span><table class="ct" data-contrast></table></div>
+  </div>
+</section>
+
+<!-- ===================== TYPE ===================== -->
+<section class="plate" id="type">
+  <div class="plate-head">
+    <span class="eyebrow">Brief §4 · typography</span>
+    <h2>Type in six scripts</h2>
+    <p class="muted"><b>Noto Serif Display</b> for titles and level numbers, <b>Noto Sans</b> for UI and Latin/Cyrillic tiles, <b>Noto Naskh Arabic</b> for Arabic and <b>Vazirmatn</b> for Persian. Philosopher, the brief's other display candidate, was rejected: it has no glyph for ʻ (U+02BB) or ҳ, both of which Uzbek needs on every board.</p>
+  </div>
+  <div class="pair">
+    <div class="panel t-light specimen" data-specimen></div>
+    <div class="panel t-dark specimen" data-specimen></div>
+  </div>
+  <div class="pair">
+    <div class="panel">
+      <span class="eyebrow">Type scale (4-based)</span>
+      <div class="scale">
+        <div><span class="mono muted">display 40/44</span><span style="font: 700 40px/1.1 var(--font-display)">Daraja 12</span></div>
+        <div><span class="mono muted">title 28/34</span><span style="font: 700 28px/1.2 var(--font-display)">Barakalla!</span></div>
+        <div><span class="mono muted">tile 20/24 600</span><span style="font: 600 20px/1.2 var(--font-ui)">koʻz · қўл · gʻisht</span></div>
+        <div><span class="mono muted">body 16/24</span><span style="font: 400 16px/1.5 var(--font-ui)">Match each word to its Uzbek pair.</span></div>
+        <div><span class="mono muted">label 12 caps +8%</span><span class="eyebrow">Level · score · lives</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <span class="eyebrow">The Uzbek apostrophes</span>
+      <div class="apos">
+        <figure><span class="g">oʻ</span><figcaption>U+02BB<br>turned comma (oʻ gʻ)</figcaption></figure>
+        <figure><span class="g">maʼno</span><figcaption>U+02BC<br>modifier apostrophe</figcaption></figure>
+        <figure><span class="g muted">o'</span><figcaption>U+0027, typed<br>folded to ʻ by core/text</figcaption></figure>
+        <figure><span class="g muted">o‘</span><figcaption>U+2018, autocorrect<br>folded to ʻ by core/text</figcaption></figure>
+      </div>
+      <p class="note">Tiles always render the canonical ʻ and ʼ. Input variants are folded in <code>src/core/text</code>, never in a component.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MOTIFS ===================== -->
+<section class="plate" id="motifs">
+  <div class="plate-head">
+    <span class="eyebrow">Brief §2 and §5 · motif = mechanic</span>
+    <h2>Motif library</h2>
+    <p class="muted">All shapes are generated from star-polygon maths in this page's script (the prototype for <code>core/motif</code>, task K9), not hand-drawn.</p>
+  </div>
+  <div class="pair">
+    <div class="panel t-light motifs" data-motifs></div>
+    <div class="panel t-dark motifs" data-motifs></div>
+  </div>
+</section>
+
+<!-- ===================== TILE STATES ===================== -->
+<section class="plate" id="tiles">
+  <div class="plate-head">
+    <span class="eyebrow">Brief §2 and §5 · majolica tile</span>
+    <h2>Tile states</h2>
+    <p class="muted">Radius 14 px, 2 px cobalt border, 1 px inner glaze highlight. Every state changes shape as well as colour: a thicker border and lift, a star, crack lines, a dashed outline, a focus ring. No English on the board; the English gloss only appears in the long-press hint, which costs points.</p>
+  </div>
+  <div class="pair">
+    <div class="panel t-light"><span class="eyebrow"><span>Light</span></span><div class="states" data-states></div></div>
+    <div class="panel t-dark"><span class="eyebrow"><span>Dark</span></span><div class="states" data-states></div></div>
+  </div>
+</section>
+
+<!-- ===================== MOTION ===================== -->
+<section class="plate" id="motion">
+  <div class="plate-head">
+    <span class="eyebrow">Brief §7 · motion</span>
+    <h2>Motion, and what replaces it</h2>
+    <p class="muted">Quick in, soft settle, like a tile pressed into mortar. Tap a demo to replay it. With reduced motion on (your system setting, or the switch below) every animation becomes an instant state change with a shape cue, and nothing shakes.</p>
+  </div>
+  <label class="toggle"><input type="checkbox" id="rm-toggle"> Preview reduced motion</label>
+  <div class="demos" id="demos">
+    <div class="demo">
+      <div class="stage" data-demo="select" role="button" tabindex="0" aria-label="Replay select animation"></div>
+      <h3>Select · 220 ms</h3>
+      <p class="note">Lift 3 px with a small overshoot, border turns gold and thickens. <b>Reduced:</b> no lift; the thick gold border and corner star appear at once.</p>
+    </div>
+    <div class="demo">
+      <div class="stage" data-demo="match" role="button" tabindex="0" aria-label="Replay match animation"></div>
+      <h3>Match · 200 + 250 + 200 ms</h3>
+      <p class="note">Tiles slide together, merge into a gold 8-point star that blooms, then dissolve. <b>Reduced:</b> both tiles show the star outline at once and become dashed (cleared).</p>
+    </div>
+    <div class="demo">
+      <div class="stage" data-demo="wrong" role="button" tabindex="0" aria-label="Replay wrong animation"></div>
+      <h3>Wrong · 150 ms shake, 120 ms crack</h3>
+      <p class="note">Crack lines draw across the glaze while the tile shakes twice; one HUD life tile cracks. <b>Reduced:</b> no shake; the cracks are shown fully drawn.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ICONS ===================== -->
+<section class="plate" id="icons">
+  <div class="plate-head">
+    <span class="eyebrow">Brief §6 · app icon</span>
+    <h2>Three icon concepts</h2>
+    <p class="muted">Shown at 512, 192 and 48 px, then at 192 with the maskable safe zone (the dashed circle, 80% of the width) and cropped as Android circle and squircle masks. Everything that matters sits inside the safe zone. D3 makes the final set from the concept you pick.</p>
+  </div>
+  <div class="icons" data-icons></div>
+</section>
+
+<!-- ===================== HOME ===================== -->
+<section class="plate" id="home">
+  <div class="plate-head">
+    <span class="eyebrow">Brief §9.5 · everything together</span>
+    <h2>Home screen</h2>
+    <p class="muted">The shell is in English (menus, settings) with Uzbek flourishes. The facade is the progress map in miniature: each glazed cell is a cleared level, and gold cells are three-star levels. Locked games use a dashed border and a lock, not just a grey tint.</p>
+  </div>
+  <div class="frames">
+    <div><div class="frame-cap">Phone 390 × 844 · light</div><div class="fit" data-w="390" data-h="844"><div class="device phone t-light" id="phone-light" style="width:390px;height:844px"></div></div></div>
+    <div><div class="frame-cap">Phone 390 × 844 · dark</div><div class="fit" data-w="390" data-h="844"><div class="device phone t-dark" id="phone-dark" style="width:390px;height:844px"></div></div></div>
+  </div>
+  <div class="frame-cap" style="margin-top: var(--s4)">Desktop 1280 × 800 · light</div>
+  <div class="fit" data-w="1280" data-h="800"><div class="device desk t-light" id="desk-light" style="width:1280px;height:800px"></div></div>
+  <div class="frame-cap" style="margin-top: var(--s4)">Desktop 1280 × 800 · dark</div>
+  <div class="fit" data-w="1280" data-h="800"><div class="device desk t-dark" id="desk-dark" style="width:1280px;height:800px"></div></div>
+</section>
+
+<!-- ===================== DECISIONS ===================== -->
+<section class="plate" id="decisions">
+  <div class="plate-head">
+    <span class="eyebrow">For your approval</span>
+    <h2>Decisions to approve</h2>
+    <p class="muted">Approving D1 records these in "Approved decisions" in <code>docs/design/brief.md</code>, and unlocks D2, D3 and U1.</p>
+  </div>
+  <ol class="decisions">
+    <li><span><b>Palette</b> as in the brief, with four changes: light gold <code>#B08423</code> (was #C99A2E), dark cobalt <code>#5B86E8</code> (was #3E6BD6), and new tokens <code>--color-on-cobalt</code> (#FFFFFF / #0A1838) and <code>--color-on-deep</code> (#FFFFFF / #EEF2FA). All 30 listed pairs pass.</span></li>
+    <li><span><b>Fonts:</b> Noto Serif Display (display), Noto Sans (UI and tiles), Noto Naskh Arabic (Arabic), Vazirmatn (Persian). Self-hosted and subset in U1.</span></li>
+    <li><span><b>Signature star:</b> the 8-point {8/2} khatam outline with a {8/3} turquoise interlace and a gold octagon centre. Used for a match, stars earned and the app icon.</span></li>
+    <li><span><b>Tile:</b> radius 14 px, 2 px cobalt border, 1 px glaze highlight; states as shown, each with a shape cue. Focus ring is 3 px cobalt with a 3 px offset.</span></li>
+    <li><span><b>Background:</b> the star-and-cross line pattern at 7–10% strength. It stops behind text panels.</span></li>
+    <li><span><b>App icon:</b> pick one of concepts A, B or C for D3.</span></li>
+  </ol>
+</section>
+
+</div>
+
+<script>
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  const TAU = Math.PI * 2;
+  const f = (n) => +n.toFixed(2);
+
+  /* ---------- geometry: prototype of core/motif ---------- */
+  // Outline of a {n/k} star polygon: 2n points alternating outer radius R and inner radius r.
+  function starPoints(cx, cy, R, n, k, rot = -Math.PI / 2) {
+    const r = R * Math.cos(Math.PI * k / n) / Math.cos(Math.PI * (k - 1) / n);
+    const pts = [];
+    for (let i = 0; i < 2 * n; i++) {
+      const a = rot + i * Math.PI / n;
+      const rad = i % 2 ? r : R;
+      pts.push([cx + rad * Math.cos(a), cy + rad * Math.sin(a)]);
+    }
+    return pts;
+  }
+  // Lines of a {n/k} star polygon: chords from vertex i to vertex i+k.
+  function starChords(cx, cy, R, n, k, rot = -Math.PI / 2) {
+    const v = [...Array(n)].map((_, i) => [cx + R * Math.cos(rot + i * TAU / n), cy + R * Math.sin(rot + i * TAU / n)]);
+    return v.map((p, i) => [p, v[(i + k) % n]]);
+  }
+  function polygon(cx, cy, R, n, rot = -Math.PI / 2 + Math.PI / n) {
+    return [...Array(n)].map((_, i) => [cx + R * Math.cos(rot + i * TAU / n), cy + R * Math.sin(rot + i * TAU / n)]);
+  }
+  const pathOf = (pts) => 'M' + pts.map((p) => f(p[0]) + ' ' + f(p[1])).join('L') + 'Z';
+  const chordsPath = (ch) => ch.map(([a, b]) => `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`).join('');
+
+  // The signature star: {8/2} outline, {8/3} interlace, gold octagon centre.
+  function signatureStar(cx, cy, R, o = {}) {
+    const fill = o.fill || 'var(--color-cobalt)';
+    const lace = o.lace || 'var(--color-turquoise)';
+    const gold = o.gold || 'var(--color-gold)';
+    const sw = o.sw || Math.max(1, R * 0.05);
+    return `<path d="${pathOf(starPoints(cx, cy, R, 8, 2, -Math.PI / 2 + Math.PI / 8))}" fill="${fill}"/>` +
+      `<path d="${chordsPath(starChords(cx, cy, R * 0.74, 8, 3, -Math.PI / 2 + Math.PI / 8))}" stroke="${lace}" stroke-width="${f(sw)}" fill="none" stroke-linecap="round"/>` +
+      `<path d="${pathOf(polygon(cx, cy, R * 0.25, 8))}" fill="${gold}"/>`;
+  }
+  // Star-and-cross background: {8/2} stars on a square lattice, tips touching.
+  function patternSVG(id, cell, stroke) {
+    const h = cell / 2;
+    const st = (x, y) => pathOf(starPoints(x, y, h, 8, 2, -Math.PI / 2 + Math.PI / 8));
+    const d = [st(h, h), st(0, 0), st(cell, 0), st(0, cell), st(cell, cell)].join('');
+    return `<defs><pattern id="${id}" width="${cell}" height="${cell}" patternUnits="userSpaceOnUse"><path d="${d}" fill="none" stroke="${stroke}" stroke-width="1.2"/></pattern></defs><rect width="100%" height="100%" fill="url(#${id})"/>`;
+  }
+  // Rosette band: alternating cobalt and turquoise stars in octagon frames, diamonds between.
+  function bandSVG(w, h, o = {}) {
+    const step = h * 1.25; const n = Math.ceil(w / step) + 1; let s = '';
+    s += `<rect width="${w}" height="${h}" fill="${o.ground || 'var(--color-cobalt-deep)'}"/>`;
+    s += `<rect y="1.5" width="${w}" height="1.5" fill="var(--color-gold)"/><rect y="${h - 3}" width="${w}" height="1.5" fill="var(--color-gold)"/>`;
+    for (let i = 0; i < n; i++) {
+      const cx = i * step + step / 2, cy = h / 2, R = h * 0.36;
+      s += `<path d="${pathOf(polygon(cx, cy, R * 1.12, 8))}" fill="none" stroke="var(--color-turquoise)" stroke-width="1.2" opacity=".6"/>`;
+      s += signatureStar(cx, cy, R, { fill: i % 2 ? 'var(--color-turquoise)' : '#FFFFFF', lace: i % 2 ? '#FFFFFF' : 'var(--color-cobalt)', sw: 1.4 });
+      const dx = cx + step / 2, dr = h * 0.12;
+      s += `<path d="M${f(dx)} ${f(cy - dr)}L${f(dx + dr)} ${f(cy)}L${f(dx)} ${f(cy + dr)}L${f(dx - dr)} ${f(cy)}Z" fill="var(--color-gold)"/>`;
+    }
+    return s;
+  }
+  // Crack lines across a tile (unit box 100×60), deterministic.
+  const CRACKS = 'M50 0 L46 14 L54 24 L44 38 L50 60 M46 14 L30 10 L18 18 M54 24 L72 20 L86 30 M44 38 L28 44 L14 40 M50 48 L64 52';
+  const crackSVG = () => `<svg class="cracks" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true"><path d="${CRACKS}" fill="none" stroke="var(--color-crack)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>`;
+  const miniStar = (fill = 'var(--color-gold)', stroke = 'var(--color-cobalt-deep)') =>
+    `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${pathOf(starPoints(12, 12, 11, 8, 2, -Math.PI / 2 + Math.PI / 8))}" fill="${fill}" stroke="${stroke}" stroke-width="1.2"/></svg>`;
+  const starBg = () => `<svg class="star-bg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="${pathOf(starPoints(50, 50, 50, 8, 2, -Math.PI / 2 + Math.PI / 8))}" fill="none" stroke="var(--color-gold)" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg>`;
+
+  /* ---------- palette ---------- */
+  const TOKENS = [
+    ['ground', 'page background'], ['surface', 'tiles, cards'], ['cobalt', 'primary, borders'], ['cobalt-deep', 'headers, panels'],
+    ['turquoise', 'secondary, success glow'], ['turquoise-pale', 'selected background'], ['gold', 'selection, stars, score'],
+    ['ochre', 'warnings, brick'], ['crack', 'error lines + shape'], ['text', 'body text'], ['text-muted', 'secondary text'],
+    ['on-cobalt', 'label on cobalt'], ['on-deep', 'text on cobalt-deep'],
+  ];
+  const CHANGED = { light: { gold: 'was #C99A2E', 'on-cobalt': 'new', 'on-deep': 'new' }, dark: { cobalt: 'was #3E6BD6', 'on-cobalt': 'new', 'on-deep': 'new' } };
+  const themeOf = (el) => el.closest('.t-dark') ? 'dark' : 'light';
+  const tok = (el, name) => getComputedStyle(el).getPropertyValue('--color-' + name).trim().toUpperCase();
+  document.querySelectorAll('[data-swatches]').forEach((el) => {
+    const th = themeOf(el);
+    el.innerHTML = TOKENS.map(([n, use]) => `<div class="sw"><div class="chip" style="background:var(--color-${n})"></div><div class="meta"><b>--color-${n}</b><span class="mono">${tok(el, n)}</span><span class="muted">${use}</span>${CHANGED[th][n] ? `<span class="changed">D1: ${CHANGED[th][n]}</span>` : ''}</div></div>`).join('');
+  });
+
+  /* ---------- contrast ---------- */
+  const lum = (hex) => { const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((v) => v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+  const PAIRS = [
+    ['text', 'ground', 4.5, 'body text on page'], ['text', 'surface', 4.5, 'tile / card text'], ['text', 'turquoise-pale', 4.5, 'selected tile text'],
+    ['text-muted', 'ground', 4.5, 'secondary text on page'], ['text-muted', 'surface', 4.5, 'secondary text on card'],
+    ['cobalt', 'surface', 3, 'tile border, large text'], ['cobalt', 'ground', 3, 'icons, focus ring'], ['crack', 'surface', 3, 'crack lines'],
+    ['gold', 'cobalt-deep', 3, 'stars / score in header'], ['gold', 'surface', 3, 'selected border'], ['gold', 'ground', 3, 'stars on page'],
+    ['turquoise', 'surface', 3, 'match ring'], ['ochre', 'surface', 3, 'warning accent'],
+    ['on-cobalt', 'cobalt', 4.5, 'primary button label'], ['on-deep', 'cobalt-deep', 4.5, 'header text'],
+  ];
+  document.querySelectorAll('[data-contrast]').forEach((el) => {
+    el.innerHTML = '<thead><tr><th>Sample</th><th>Foreground on background</th><th>Ratio</th><th>Needs</th><th>Use</th></tr></thead><tbody>' +
+      PAIRS.map(([fg, bg, min, use]) => {
+        const r = ratio(tok(el, fg), tok(el, bg)); const ok = r >= min;
+        return `<tr><td><span class="sample" style="color:var(--color-${fg});background:var(--color-${bg})">Oʻz ★</span></td><td class="mono">${fg} / ${bg}</td><td><b>${r.toFixed(2)}:1</b></td><td><span class="verdict ${ok ? '' : 'fail'}">${min}:1</span></td><td class="muted">${use}</td></tr>`;
+      }).join('') + '</tbody>';
+  });
+
+  /* ---------- type specimen ---------- */
+  const SPEC = [
+    ['Uzbek · Latin', 'uz-Latn', 'ltr', '', 'Samarqandning koʻk gumbazlari, togʻ havosi va sanʼati.', 'A B D E F G H I J K L M N O P Q R S T U V X Y Z Oʻ Gʻ Sh Ch Ng ʼ'],
+    ['Uzbek · Cyrillic', 'uz-Cyrl', 'ltr', '', 'Самарқанднинг кўк гумбазлари, тоғ ҳавоси ва санъати.', 'А Б В Г Ғ Д Е Ё Ж З И Й К Қ Л М Н О П Р С Т У Ў Ф Х Ҳ Ц Ч Ш Ъ Э Ю Я'],
+    ['Turkish', 'tr', 'ltr', '', 'Semerkant’ın mavi kubbeleri ve ılık dağ havası.', 'Ç ç Ğ ğ I ı İ i Ö ö Ş ş Ü ü'],
+    ['Russian', 'ru', 'ltr', '', 'Голубые купола Самарканда и тёплый горный воздух.', 'А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я'],
+    ['Persian · RTL', 'fa', 'rtl', 'fa', 'گنبدهای فیروزه‌ای سمرقند و هوای کوهستان.', 'پ چ ژ گ ک ی · ۱۲۳۴۵'],
+    ['Arabic · RTL', 'ar', 'rtl', 'ar', 'القِباب الزرقاء في سمرقند وهواء الجبال.', 'ب ت ث ج ح خ ة ى · ١٢٣٤٥'],
+  ];
+  document.querySelectorAll('[data-specimen]').forEach((el) => {
+    el.innerHTML = `<span class="eyebrow"><span>${themeOf(el) === 'dark' ? 'Dark' : 'Light'}</span></span>` +
+      `<div style="font:700 44px/1.05 var(--font-display);color:var(--color-text)">Oʻzbekcha · Ўзбекча</div>` +
+      SPEC.map(([l, lang, dir, cls, s, letters]) => `<div class="spec-row"><span class="lbl"><span class="eyebrow">${l}</span><span class="mono muted">lang="${lang}"</span></span><div class="big ${cls}" lang="${lang}" dir="${dir}">${s}<span class="letters">${letters}</span></div></div>`).join('');
+  });
+
+  /* ---------- motifs ---------- */
+  document.querySelectorAll('[data-motifs]').forEach((el, i) => {
+    const id = 'pat' + i;
+    el.innerHTML =
+      `<div class="motif"><div class="art"><svg viewBox="0 0 200 200" role="img" aria-label="8-point girih star">${signatureStar(100, 100, 82)}</svg></div><p><b>8-point girih star.</b> A correct match in Juft: two tiles merge into it, it glows gold and dissolves. Also stars earned and the app icon.</p></div>` +
+      `<div class="motif"><div class="art"><svg viewBox="0 0 200 200" role="img" aria-label="Star construction">` +
+        `<circle cx="100" cy="100" r="82" fill="none" stroke="var(--color-text-muted)" stroke-width="1" stroke-dasharray="3 4"/>` +
+        `<path d="${pathOf(polygon(100, 100, 82, 8, -Math.PI / 2))}" fill="none" stroke="var(--color-text-muted)" stroke-width="1"/>` +
+        `<path d="${chordsPath(starChords(100, 100, 82, 8, 2))}" fill="none" stroke="var(--color-cobalt)" stroke-width="2"/>` +
+        `<path d="${chordsPath(starChords(100, 100, 82, 8, 3))}" fill="none" stroke="var(--color-turquoise)" stroke-width="1.5"/>` +
+      `</svg></div><p><b>Construction.</b> Octagon on a circle; chords {8/2} in cobalt give the khatam, {8/3} in turquoise give the interlace. 10- and 12-fold use the same function.</p></div>` +
+      `<div class="motif"><div class="art"><svg viewBox="0 0 200 200" role="img" aria-label="12-fold rosette">${(() => { let s = ''; for (let j = 0; j < 12; j++) { const a = j * TAU / 12 - Math.PI / 2; s += `<path d="${pathOf(polygon(100 + 52 * Math.cos(a), 100 + 52 * Math.sin(a), 14, 6))}" fill="var(--color-turquoise-pale)" stroke="var(--color-cobalt)" stroke-width="1.5"/>`; } return s + `<path d="${pathOf(starPoints(100, 100, 40, 12, 5))}" fill="var(--color-cobalt)"/><circle cx="100" cy="100" r="12" fill="var(--color-gold)"/>`; })()}</svg></div><p><b>Rosette burst</b> (later games). Wordfall's zap: the tile bursts into a 12-fold rosette of shards.</p></div>` +
+      `<div class="motif"><div class="art"><svg viewBox="0 0 200 200" role="img" aria-label="Background pattern">${patternSVG(id, 50, 'var(--color-cobalt)')}</svg></div><p><b>Background pattern.</b> Star-and-cross lattice, shown here at full strength; used at 7–10% and never behind running text.</p></div>` +
+      `<div class="motif" style="grid-column: 1 / -1"><div class="art wide"><svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Rosette band">${bandSVG(600, 200)}</svg></div><p><b>Rosette band.</b> A minaret ornament band. It frames the app bar, and in Eshit the found word's cells glaze gold along a band like this one.</p></div>`;
+  });
+
+  /* ---------- tile states ---------- */
+  const STATES = (dark) => [
+    ['idle', '', 'koʻz', 'Idle', 'cobalt border, glaze'],
+    ['selected', 'is-selected settle', 'togʻ', 'Selected', 'gold 3 px border, lift, corner star'],
+    ['matched', 'is-matched', 'suv', 'Matched', 'star outline, then dissolves'],
+    ['wrong', 'is-wrong', 'uy', 'Wrong', 'crack lines + shake'],
+    ['disabled', 'is-disabled', 'qoʻl', 'Disabled', 'dashed, faded (cleared)'],
+    ['focus', 'is-focus', 'бош', 'Focus', '3 px cobalt ring, offset'],
+    ['hint', '', 'koʻz', 'Long-press hint', 'English gloss, costs points'],
+    ['rtl', 'rtl', 'کتاب', 'Persian tile', 'Naskh/Vazirmatn, RTL'],
+  ];
+  document.querySelectorAll('[data-states]').forEach((el) => {
+    el.innerHTML = STATES().map(([k, cls, w, name, how]) => {
+      let inner = `<span class="w"${k === 'rtl' ? ' lang="fa" dir="rtl" style="font-family:var(--font-fa)"' : (k === 'focus' ? ' lang="uz-Cyrl"' : ' lang="uz-Latn"')}>${w}</span>`;
+      if (k === 'selected') inner += `<span class="badge">${miniStar()}</span>`;
+      if (k === 'matched') inner += starBg() + `<span class="badge">${miniStar('var(--color-turquoise)')}</span>`;
+      if (k === 'wrong') inner += crackSVG();
+      if (k === 'hint') inner += `<span class="hint" lang="en">eye <b>−5</b></span>`;
+      return `<div class="state"><div class="tile ${cls}" tabindex="-1" aria-disabled="${k === 'disabled'}">${inner}</div><div class="cap"><b>${name}</b><span class="muted">${how}</span></div></div>`;
+    }).join('') +
+    `<div class="state"><div class="lives" aria-label="2 of 3 lives">${[0, 1, 2].map((j) => `<svg class="life" viewBox="0 0 22 22"><rect x="1" y="1" width="20" height="20" rx="5" fill="var(--color-surface)" stroke="var(--color-cobalt)" stroke-width="2"/>${j === 2 ? '<path d="M11 1 L9 8 L13 12 L10 21 M9 8 L3 7 M13 12 L20 13" fill="none" stroke="var(--color-crack)" stroke-width="1.6"/>' : '<path d="' + pathOf(starPoints(11, 11, 6, 8, 2, -Math.PI / 2 + Math.PI / 8)) + '" fill="var(--color-turquoise)"/>'}</svg>`).join('')}</div><div class="cap"><b>Lives (HUD)</b><span class="muted">one tile cracks per mistake</span></div></div>`;
+  });
+
+  /* ---------- motion demos ---------- */
+  const stages = {
+    select: () => `<div class="tile is-selected settle"><span class="w" lang="uz-Latn">togʻ</span><span class="badge">${miniStar()}</span></div>`,
+    match: () => `<div class="tile pair-l"><span class="w" lang="tr">göz</span></div><div class="tile pair-r"><span class="w" lang="uz-Latn">koʻz</span></div>` +
+      `<svg class="bloom rm-hide" viewBox="0 0 120 120" aria-hidden="true"><path d="${pathOf(polygon(60, 60, 58, 16))}" fill="var(--color-gold)" opacity=".25"/>${signatureStar(60, 60, 50, { fill: 'var(--color-gold)', lace: '#FFFFFF', gold: 'var(--color-cobalt-deep)' })}</svg>`,
+    wrong: () => `<div class="tile is-wrong shake"><span class="w" lang="uz-Latn">uy</span>${crackSVG()}</div>`,
+  };
+  const rmStages = {
+    match: () => `<div class="tile is-matched is-disabled pair-l" style="left:calc(50% - 124px)"><span class="w" lang="tr">göz</span>${starBg()}</div><div class="tile is-matched is-disabled pair-r"><span class="w" lang="uz-Latn">koʻz</span>${starBg()}</div>`,
+  };
+  const root = document.getElementById('demos');
+  function play(st) {
+    const k = st.dataset.demo; const rm = root.classList.contains('rm');
+    st.classList.remove('play');
+    st.innerHTML = rm && rmStages[k] ? rmStages[k]() : stages[k]();
+    void st.offsetWidth; st.classList.add('play');
+  }
+  root.querySelectorAll('.stage').forEach((st) => {
+    st.addEventListener('click', () => play(st));
+    st.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(st); } });
+    st.innerHTML = stages[st.dataset.demo]();
+    if (st.dataset.demo === 'match') st.innerHTML = rmStages.match();
+  });
+  document.getElementById('rm-toggle').addEventListener('change', (e) => {
+    root.classList.toggle('rm', e.target.checked);
+    root.querySelectorAll('.stage').forEach(play);
+  });
+
+  /* ---------- icons ---------- */
+  const G = '#F7F4EC', C = '#1B3F8F', CD = '#0F2A66', T = '#1FA3B5', GO = '#B08423', GL = '#C99A2E';
+  const ICONS = [
+    ['A', 'Pure star', 'The signature star alone. Strongest at 48 px; reads as "the star game".',
+      `<rect width="512" height="512" fill="${G}"/>${signatureStar(256, 256, 190, { fill: C, lace: T, gold: GL, sw: 9 })}`],
+    ['B', 'Star in an iwan arch', 'A Registan portal frames the star. Most "place"; the arch is still clear at 48 px.',
+      `<rect width="512" height="512" fill="${G}"/><path d="M126 416 V250 C126 170 196 116 256 70 C316 116 386 170 386 250 V416 Z" fill="${CD}"/>` +
+      `<path d="M150 416 V256 C150 186 210 140 256 102 C302 140 362 186 362 256 V416 Z" fill="none" stroke="${T}" stroke-width="6"/>` +
+      `<rect x="110" y="404" width="292" height="22" rx="4" fill="${T}"/>${signatureStar(256, 278, 82, { fill: '#FFFFFF', lace: T, gold: GL, sw: 5 })}`],
+    ['C', 'U of girih strapwork', 'A double-strand U ending in a star. Spells the brand; busiest at 48 px.',
+      `<rect width="512" height="512" fill="${G}"/><path d="M160 104 V276 A96 96 0 0 0 352 276 V104" fill="none" stroke="${C}" stroke-width="56" stroke-linecap="butt"/>` +
+      `<path d="M160 104 V276 A96 96 0 0 0 352 276 V104" fill="none" stroke="${T}" stroke-width="10"/>` +
+      `<rect x="126" y="96" width="68" height="16" fill="${GO}"/><rect x="318" y="96" width="68" height="16" fill="${GO}"/>${signatureStar(256, 372, 54, { fill: C, lace: T, gold: GL, sw: 4 })}` +
+      `<path d="${pathOf(starPoints(256, 372, 54, 8, 2, -Math.PI / 2 + Math.PI / 8))}" fill="none" stroke="${G}" stroke-width="6"/>`],
+  ];
+  const iconSVG = (body, size, cls = '') => `<svg class="${cls}" width="${size}" height="${size}" viewBox="0 0 512 512" role="img">${body}</svg>`;
+  document.querySelector('[data-icons]').innerHTML = ICONS.map(([k, name, why, body]) =>
+    `<div class="panel"><div class="plate-head"><span class="eyebrow">Concept ${k}</span><h3>${name}</h3><p class="muted" style="font-size:14px">${why}</p></div>` +
+    `<div class="scroll-x"><div class="icon-row">` +
+      `<figure>${iconSVG(body, 512)}<figcaption>512 px</figcaption></figure>` +
+      `<figure>${iconSVG(body, 192)}<figcaption>192 px</figcaption></figure>` +
+      `<figure>${iconSVG(body, 48)}<figcaption>48 px</figcaption></figure>` +
+      `<figure><div class="mask-demo">${iconSVG(body, 192)}<svg class="ov" viewBox="0 0 512 512" aria-hidden="true"><rect x="1" y="1" width="510" height="510" fill="none" stroke="${CD}" stroke-width="2"/><circle cx="256" cy="256" r="204.8" fill="none" stroke="#B5652B" stroke-width="4" stroke-dasharray="14 10"/></svg></div><figcaption>maskable safe zone</figcaption></figure>` +
+      `<figure>${iconSVG(body, 192, 'clip-circle')}<figcaption>circle mask</figcaption></figure>` +
+      `<figure>${iconSVG(body, 192, 'clip-squircle')}<figcaption>squircle mask</figcaption></figure>` +
+    `</div></div></div>`).join('');
+
+  /* ---------- home screen ---------- */
+  function facadeSVG() {
+    // Iwan portal with a grid of mosaic cells (one cell = one level), dome behind, two minarets.
+    const cols = 6, rows = 5, cw = 22, x0 = 94, y0 = 92; let cells = '';
+    const done = [3, 3, 2, 3, 1, 2, 3, 2, 2, 1, 3, 2]; // stars per cleared level
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const i = (rows - 1 - r) * cols + c; const s = done[i];
+      const x = x0 + c * cw, y = y0 + r * cw;
+      const fill = s === 3 ? 'var(--color-gold)' : s === 2 ? 'var(--color-cobalt)' : s === 1 ? 'var(--color-turquoise)' : 'none';
+      cells += `<rect x="${x + 1.5}" y="${y + 1.5}" width="${cw - 3}" height="${cw - 3}" rx="3" fill="${fill}" stroke="${s ? 'none' : 'var(--color-text-muted)'}" stroke-width="1" ${s ? '' : 'stroke-dasharray="2 2" opacity=".6"'}/>`;
+      if (s === 3) cells += `<path d="${pathOf(starPoints(x + cw / 2, y + cw / 2, 6, 8, 2, -Math.PI / 2 + Math.PI / 8))}" fill="var(--color-cobalt-deep)"/>`;
+    }
+    const minaret = (x) => `<rect x="${x}" y="40" width="26" height="170" rx="4" fill="var(--color-turquoise-pale)" stroke="var(--color-cobalt)" stroke-width="2"/>` +
+      `<rect x="${x - 4}" y="34" width="34" height="10" rx="2" fill="var(--color-cobalt)"/>` +
+      [70, 110, 150].map((y) => `<rect x="${x}" y="${y}" width="26" height="6" fill="var(--color-turquoise)"/>`).join('');
+    return `<svg viewBox="0 0 320 220" role="img" aria-label="Facade progress: 12 of 30 levels glazed">` +
+      `<path d="M106 92 C106 40 214 40 214 92 Z" fill="var(--color-turquoise)"/><path d="M106 92 C106 40 214 40 214 92" fill="none" stroke="var(--color-cobalt)" stroke-width="2"/>` +
+      `<path d="M120 70 C140 50 180 50 200 70" fill="none" stroke="var(--color-surface)" stroke-width="2" opacity=".6"/>` +
+      `<rect x="160" y="26" width="2" height="18" fill="var(--color-gold)"/>` +
+      minaret(40) + minaret(254) +
+      `<rect x="86" y="86" width="148" height="124" rx="4" fill="var(--color-surface)" stroke="var(--color-cobalt)" stroke-width="2"/>` +
+      cells + `<rect x="30" y="208" width="260" height="6" rx="3" fill="var(--color-ochre)"/></svg>`;
+  }
+  const ICON = {
+    juft: `<svg class="gi" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="12" width="14" height="16" rx="3" fill="none" stroke="var(--color-cobalt)" stroke-width="2"/><rect x="24" y="12" width="14" height="16" rx="3" fill="none" stroke="var(--color-cobalt)" stroke-width="2"/><path d="${pathOf(starPoints(20, 20, 8, 8, 2, -Math.PI / 2 + Math.PI / 8))}" fill="var(--color-gold)"/></svg>`,
+    qosh: `<svg class="gi" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 12 H20 V17 a3 3 0 0 1 0 6 V28 H4 Z" fill="none" stroke="var(--color-text-muted)" stroke-width="2"/><path d="M24 12 H36 V28 H24 V23 a3 3 0 0 0 0 -6 Z" fill="none" stroke="var(--color-text-muted)" stroke-width="2"/></svg>`,
+    fall: `<svg class="gi" viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="4" width="11" height="11" rx="2" fill="none" stroke="var(--color-text-muted)" stroke-width="2"/><rect x="22" y="14" width="11" height="11" rx="2" fill="none" stroke="var(--color-text-muted)" stroke-width="2"/><rect x="10" y="26" width="11" height="11" rx="2" fill="none" stroke="var(--color-text-muted)" stroke-width="2"/></svg>`,
+    eshit: `<svg class="gi" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 16 v8 M11 12 v16 M16 17 v6" stroke="var(--color-text-muted)" stroke-width="2" stroke-linecap="round"/><path d="M22 10 h12 v20 h-12 Z M22 17 h12 M22 23 h12 M28 10 v20" fill="none" stroke="var(--color-text-muted)" stroke-width="2"/></svg>`,
+  };
+  const lock = `<svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="6" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 6 V4.5 a2.5 2.5 0 0 1 5 0 V6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
+  const stars = (n) => `<span class="stars" aria-label="${n} of 3 stars">${[0, 1, 2].map((i) => `<svg viewBox="0 0 24 24"><path d="${pathOf(starPoints(12, 12, 11, 8, 2, -Math.PI / 2 + Math.PI / 8))}" fill="${i < n ? 'var(--color-gold)' : 'none'}" stroke="${i < n ? 'var(--color-gold)' : 'var(--color-text-muted)'}" stroke-width="1.6"/></svg>`).join('')}</span>`;
+  function home(dev, idx) {
+    const desk = dev.classList.contains('desk');
+    const pid = 'hp' + idx;
+    const hello = `<div class="hello"><h2>Salom!</h2><p>Pick up where you left off.</p></div>`;
+    const facade = `<div class="facade">${facadeSVG()}<div class="facade-meta"><b>Registon</b><span class="muted">12 / 30 tiles · 26 ★</span></div></div>`;
+    const cta = `<div class="cta">Davom et <small>· Juft, level 13</small></div>`;
+    const games = `<div class="games">` +
+      `<div class="game">${ICON.juft}<h4>Juft</h4><span class="sub">Match the pairs</span>${stars(2)}</div>` +
+      `<div class="game lock">${ICON.qosh}<h4>Qoʻsh</h4><span class="sub">Build words</span><span class="soon">${lock} Soon</span></div>` +
+      `<div class="game lock">${ICON.fall}<h4>Wordfall</h4><span class="sub">Say it to zap it</span><span class="soon">${lock} Soon</span></div>` +
+      `<div class="game lock">${ICON.eshit}<h4>Eshit</h4><span class="sub">Hear it, find it</span><span class="soon">${lock} Soon</span></div></div>`;
+    const streak = `<div class="streak">${miniStar('var(--color-gold)', 'var(--color-gold)').replace('<svg', '<svg width="18" height="18"')} 5-day streak · Yana!</div>`;
+    dev.innerHTML = `<div class="home"><svg class="bg" aria-hidden="true">${patternSVG(pid, 64, 'var(--pattern)')}</svg>` +
+      `<header class="bar"><div class="bar-top"><span class="brand">${miniStar('var(--color-gold)', 'var(--color-gold)')}Uzbekible</span><div class="bar-actions"><span class="script" role="group" aria-label="Uzbek script"><span class="on">Lotin</span><span>Кирилл</span></span><span class="iconbtn" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg></span></div></div>` +
+      `<svg class="band-s" viewBox="0 0 ${desk ? 1280 : 390} 22" preserveAspectRatio="xMinYMid slice">${bandSVG(desk ? 1280 : 390, 22)}</svg></header>` +
+      (desk ? `<main><div class="right">${hello}${facade}</div><div class="right">${games}${cta}${streak}</div></main>`
+            : `<main>${hello}${facade}${cta}${games}</main>`) + `</div>`;
+  }
+  document.querySelectorAll('.device').forEach(home);
+
+  /* ---------- bands ---------- */
+  document.querySelectorAll('[data-band]').forEach((svg) => {
+    const w = 1600; svg.setAttribute('viewBox', `0 0 ${w} 56`); svg.setAttribute('preserveAspectRatio', 'xMinYMid slice'); svg.innerHTML = bandSVG(w, 56);
+  });
+
+  /* ---------- fit frames to their column ---------- */
+  function fit() {
+    document.querySelectorAll('.fit').forEach((box) => {
+      const w = +box.dataset.w, h = +box.dataset.h; const s = Math.min(1, box.clientWidth / w);
+      box.firstElementChild.style.transform = `scale(${s})`; box.style.height = (h * s) + 'px';
+    });
+  }
+  fit(); addEventListener('resize', fit);
+})();
+</script>

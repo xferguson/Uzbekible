@@ -1,0 +1,153 @@
+# Seed fixture (C5): inflected forms and a few items outside the top-1000 so downstream tasks can work with the schema.
+# Every source here is unverified (confidence low, ref curator:C5); C4/C6 replace or confirm them.
+# Items that C4 also generates (uyda, uyga, uyim, kitobda, kitobim, maktabda, maktabga) were removed: C4's versions are the verified ones.
+- id: uz-uyimiz
+  uz: { latn: uyimiz, cyrl: уйимиз }
+  freqRank: 58
+  form: inflected
+  lemma: uz-uy
+  suffixes: [ -imiz ]
+  pos: noun
+  glossEn: our house
+  sources:
+    - lang: tr
+      text: evimiz
+      relation: turkic-cognate
+      confidence: low
+      ref: curator:C5
+  tags: [ seed ]
+- id: uz-menga
+  uz: { latn: menga, cyrl: менга }
+  freqRank: 4
+  form: inflected
+  lemma: uz-men
+  suffixes: [ -ga ]
+  pos: pron
+  glossEn: to me
+  sources:
+    - lang: tr
+      text: bana
+      relation: turkic-cognate
+      confidence: low
+      ref: curator:C5
+  tags: [ seed ]
+- id: uz-senga
+  uz: { latn: senga, cyrl: сенга }
+  freqRank: 71
+  form: inflected
+  lemma: uz-sen
+  suffixes: [ -ga ]
+  pos: pron
+  glossEn: to you
+  sources:
+    - lang: tr
+      text: sana
+      relation: turkic-cognate
+      confidence: low
+      ref: curator:C5
+  tags: [ seed ]
+- id: uz-bizga
+  uz: { latn: bizga, cyrl: бизга }
+  freqRank: 29
+  form: inflected
+  lemma: uz-biz
+  suffixes: [ -ga ]
+  pos: pron
+  glossEn: to us
+  sources:
+    - lang: tr
+      text: bize
+      relation: turkic-cognate
+      confidence: low
+      ref: curator:C5
+  tags: [ seed ]
+- id: uz-kitobni
+  uz: { latn: kitobni, cyrl: китобни }
+  freqRank: 81
+  form: inflected
+  lemma: uz-kitob
+  suffixes: [ -ni ]
+  pos: noun
+  glossEn: the book (object)
+  sources:
+    - lang: tr
+      text: kitabı
+      relation: shared-arabic
+      confidence: low
+      ref: curator:C5
+  tags: [ seed ]
+- id: uz-oltmish
+  uz: { latn: oltmish, cyrl: олтмиш }
+  freqRank: 1001
+  form: lemma
+  pos: num
+  glossEn: sixty
+  sources:
+    - lang: tr
+      text: altmış
+      relation: turkic-cognate
+      confidence: low
+      ref: curator:C5
+  tags: [ seed ]
+- id: uz-yetmish
+  uz: { latn: yetmish, cyrl: етмиш }
+  freqRank: 1002
+  form: lemma
+  pos: num
+  glossEn: seventy
+  sources:
+    - lang: tr
+      text: yetmiş
+      relation: turkic-cognate
+      confidence: low
+      ref: curator:C5
+  tags: [ seed ]
+- id: uz-sakson
+  uz: { latn: sakson, cyrl: саксон }
+  freqRank: 1003
+  form: lemma
+  pos: num
+  glossEn: eighty
+  sources:
+    - lang: tr
+      text: seksen
+      relation: turkic-cognate
+      confidence: low
+      ref: curator:C5
+  tags: [ seed ]
+- id: uz-radio
+  uz: { latn: radio, cyrl: радио }
+  freqRank: 1005
+  form: lemma
+  pos: noun
+  glossEn: radio
+  sources:
+    - lang: tr
+      text: radyo
+      relation: other-loan
+      confidence: low
+      ref: curator:C5
+    - lang: ru
+      text: радио
+      relation: russian-loan
+      confidence: low
+      ref: curator:C5
+  tags: [ seed ]
+- id: uz-daftar
+  uz: { latn: daftar, cyrl: дафтар }
+  freqRank: 1006
+  form: lemma
+  pos: noun
+  glossEn: notebook
+  sources:
+    - lang: tr
+      text: defter
+      relation: shared-persian
+      confidence: low
+      ref: curator:C5
+    - lang: fa
+      text: دفتر
+      relation: persian-loan
+      confidence: low
+      ref: curator:C5
+  tags: [ seed ]

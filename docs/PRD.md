@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Status | v0.1 (planning). Game 1 approved for build, behind the design gates |
+| Status | v1.0.0: Juft (Game 1) released |
 | Owner | Alexander Ferguson |
 | Last updated | 2026-11-07 |
 

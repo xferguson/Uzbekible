@@ -1,0 +1,5 @@
+form,stem,pos,reason
+deb,de,verb,"converb of de- (UD Uzbek: lemma de, VERB); the analyser also offers a bare conjunction reading"
+deya,de,verb,"converb of de-, same as deb"
+boʻlib,boʻl,verb,"converb of boʻl-; the analyser's det reading is a lexicon artefact"
+bor,bor,adj,"existential 'there is' (UD: ADJ); the prior would otherwise send it to the imperative of bormoq"

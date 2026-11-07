@@ -91,6 +91,8 @@ export function latnToCyrl(word) {
   let i = 0;
   outer: while (i < w.length) {
     for (const [lat, cyr] of L2C_DIGRAPHS) {
+      // yoʻ is й + ў, not ё + ʻ
+      if (lat === 'yo' && w[i + 2] === OKINA) continue;
       if (w.startsWith(lat, i)) {
         out += cyr;
         i += lat.length;
@@ -129,19 +131,16 @@ export function parseAnalyses(text) {
 }
 
 const POS_OF_TAG = {
-  n: 'noun', v: 'verb', vaux: 'aux', adj: 'adj', adv: 'adv', prn: 'pron', det: 'det', post: 'adp', postadv: 'adv',
+  n: 'noun', v: 'verb', vaux: 'verb', adj: 'adj', adv: 'adv', prn: 'pron', det: 'det', post: 'adp', postadv: 'adv',
   cnjcoo: 'conj', cnjsub: 'conj', cnjadv: 'conj', num: 'num', ij: 'intj', cop: 'aux', mod: 'part', qst: 'part',
   emph: 'part', part: 'part',
 };
-// Lower is preferred when several readings survive (see METHOD in SOURCES.md).
-const POS_PRIORITY = ['aux', 'pron', 'adp', 'conj', 'num', 'det', 'adv', 'adj', 'noun', 'verb', 'intj', 'part'];
+// Lower is preferred when several readings of the same lemma survive (see the method in SOURCES.md).
+const POS_PRIORITY = ['aux', 'num', 'pron', 'adp', 'conj', 'det', 'part', 'adv', 'adj', 'noun', 'verb', 'intj'];
+// A whole-word reading in one of these classes is taken as is (va, uchun, emas), before any prior.
+const CLOSED = new Set(['aux', 'num', 'pron', 'adp', 'conj', 'det', 'part']);
+export const DEFAULT_MARGIN = 4; // tuned on UD Uzbek gold: 2 → 91.4%, 4 → 91.6%, 8 → 91.5%, 16 → 91.1%
 const EXCLUDED_TAGS = new Set(['np', 'abbr', 'sent', 'cm', 'guio', 'lquot', 'rquot', 'apos']);
-
-// Forms whose closed-class reading the analyser offers but which UD Uzbek annotates as a verb form.
-const OVERRIDES = new Map([
-  ['deb', { stem: 'de', pos: 'verb' }],
-  ['deya', { stem: 'de', pos: 'verb' }],
-]);
 
 function copulaLemma(tags) {
   if (tags.includes('neg')) return 'emas';
@@ -156,30 +155,74 @@ function toCandidate(form, { stem, tags }) {
   if (!pos) return null;
   const lemma = tags[0] === 'cop' ? copulaLemma(tags) : stem.toLowerCase();
   const whole = lemma === form;
+  // Very short non-verb stems mostly come from spurious segmentations (yoshga → yo+…, hali → ha+…);
+  // pronoun (u, men) and verb (ol-, de-) stems are real.
+  if (!whole && lemma.length <= 2 && pos !== 'pron' && pos !== 'verb') return null;
   // 0: whole-word non-verb reading; 1: whole-word verb (imperative); 2: segmented reading.
   const shape = whole ? (pos === 'verb' ? 1 : 0) : 2;
-  return { stem: lemma, pos, shape, rank: POS_PRIORITY.indexOf(pos), ntags: tags.length };
+  const imperative = tags.includes('imp');
+  return { stem: lemma, pos, key: citationForm({ stem: lemma, pos }), whole, shape, imperative, rank: POS_PRIORITY.indexOf(pos), ntags: tags.length };
 }
 
-/** Pick one { stem, pos } for a surface form from its analyses, or null (proper noun, abbreviation, unknown). */
-export function chooseCandidate(form, analyses) {
-  if (OVERRIDES.has(form) && analyses.length > 0) return { ...OVERRIDES.get(form) };
-  const cands = analyses.map((a) => toCandidate(form, a)).filter(Boolean);
+/** Candidate readings of a surface form, with proper nouns, abbreviations and punctuation removed. */
+export function candidates(form, analyses) {
+  return analyses.map((a) => toCandidate(form, a)).filter(Boolean);
+}
+
+const cmp = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
+/**
+ * Pick one { stem, pos } for a surface form from its analyses, or null (proper noun, abbreviation, unknown).
+ * Cascade: reviewed override → whole-word closed-class reading → lemma with the largest prior (then reading
+ * shape, then longer lemma) → POS within that lemma (an inflected form prefers noun, a bare form adj/adv).
+ */
+export function chooseCandidate(form, analyses, { priors, overrides, margin = DEFAULT_MARGIN } = {}) {
+  const cands = candidates(form, analyses);
   if (cands.length === 0) return null;
-  cands.sort(
-    (a, b) =>
-      a.shape - b.shape ||
-      a.rank - b.rank ||
-      b.stem.length - a.stem.length ||
-      a.ntags - b.ntags ||
-      (a.stem < b.stem ? -1 : a.stem > b.stem ? 1 : 0),
+  if (overrides?.has(form)) return { ...overrides.get(form) };
+
+  const closed = cands.filter((c) => c.whole && CLOSED.has(c.pos)).sort((a, b) => a.rank - b.rank);
+  if (closed.length) return { stem: closed[0].stem, pos: closed[0].pos };
+
+  const byKey = new Map();
+  for (const c of cands) {
+    const k = byKey.get(c.key) ?? { key: c.key, prior: priors?.get(c.key) ?? 0, shape: c.shape, imperative: true, cands: [] };
+    k.shape = Math.min(k.shape, c.shape);
+    k.imperative &&= c.imperative;
+    k.cands.push(c);
+    byKey.set(c.key, k);
+  }
+  const groups = [...byKey.values()].sort(
+    (a, b) => b.prior - a.prior || a.shape - b.shape || b.key.length - a.key.length || cmp(a.key, b.key),
   );
-  return { stem: cands[0].stem, pos: cands[0].pos };
+  // A whole-word reading stands unless a non-imperative segmentation is `margin` times more frequent overall.
+  const whole = groups.find((g) => g.shape === 0);
+  const challenger = groups.find((g) => g.shape === 2 && !g.imperative);
+  let best = groups[0];
+  if (whole) best = challenger && challenger.prior >= margin * Math.max(whole.prior, Number.MIN_VALUE) ? challenger : whole;
+
+  const inflected = !best.cands[0].whole;
+  const posOrder = (c) => (inflected && c.pos === 'noun' ? -1 : c.rank);
+  const pick = best.cands.sort((a, b) => posOrder(a) - posOrder(b) || a.ntags - b.ntags)[0];
+  return { stem: pick.stem, pos: pick.pos };
 }
 
 /** Dictionary citation form: verbs as the -moq infinitive (kel → kelmoq), everything else as the stem. */
 export function citationForm({ stem, pos }) {
   return pos === 'verb' ? `${stem}moq` : stem;
+}
+
+/**
+ * Corpus prior for each lemma (citation form): every form's mass split evenly across the distinct lemmas
+ * its analyses allow. Used by chooseCandidate to resolve segmentation ambiguity (oldi → olmoq, uning → u).
+ */
+export function lemmaPriors(formMass, analyses) {
+  const priors = new Map();
+  for (const [form, mass] of formMass) {
+    const keys = [...new Set(candidates(form, analyses.get(form) ?? []).map((c) => c.key))];
+    for (const k of keys) priors.set(k, (priors.get(k) ?? 0) + mass / keys.length);
+  }
+  return priors;
 }
 
 // ---------------------------------------------------------------------------------------------------------

@@ -17,6 +17,7 @@ import {
   parseAnalyses,
   chooseCandidate,
   citationForm,
+  lemmaPriors,
   zipfPerMillion,
   mergeSources,
 } from './lib.mjs';
@@ -87,10 +88,27 @@ const kahTop = kah.cyrl.slice(0, KAHARJAN_LIMIT).map((c, i) => ({ rank: i + 1, l
 const allForms = new Set([...cv.counts.keys(), ...uzcs.counts.keys(), ...kahTop.map((k) => k.latn)]);
 const analyses = analyse([...allForms], args.fst);
 
+// Reviewed overrides (form → lemma) from overrides.csv.
+const overrides = new Map();
+for (const line of readFileSync(new URL('./overrides.csv', import.meta.url), 'utf8').split('\n').slice(1)) {
+  const [form, stem, pos] = line.split(',');
+  if (form) overrides.set(foldApostrophes(form), { stem: foldApostrophes(stem), pos });
+}
+
+// Form mass (per million, summed over sources) → lemma priors for disambiguation.
+const formMass = new Map();
+const addMass = (form, pm) => formMass.set(form, (formMass.get(form) ?? 0) + pm);
+for (const corpus of [cv, uzcs]) {
+  for (const [form, n] of corpus.counts) if (!corpus.propn.has(form)) addMass(form, (n / corpus.tokens) * 1e6);
+}
+for (const { rank, latn } of kahTop) addMass(latn, zipfPerMillion(rank, kah.cyrl.length));
+const priors = lemmaPriors(formMass, analyses);
+const choose = (form, a) => chooseCandidate(form, a, { priors, overrides });
+
 const lemmaOf = new Map();
 const unknown = new Map(); // form → combined evidence, for the report
 for (const form of allForms) {
-  const c = chooseCandidate(form, analyses.get(form) ?? []);
+  const c = choose(form, analyses.get(form) ?? []);
   if (c) lemmaOf.set(form, { lemma: citationForm(c), pos: c.pos });
 }
 
@@ -128,28 +146,6 @@ for (const { rank, latn } of kahTop) credit(2, latn, zipfPerMillion(rank, kah.cy
 const merged = mergeSources(perMillion, { minSources: 2 });
 const top = merged.slice(0, TOP);
 
-const argmax = (m) => [...m.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0][0];
-const rows = top.map((m, i) => {
-  const cyrl = latnToCyrl(m.key);
-  return {
-    rank: i + 1,
-    lemma: m.key,
-    cyrl,
-    pos: argmax(posVotes.get(m.key)),
-    count: rawCount.get(m.key) ?? 0,
-    source: m.present.map((p) => SOURCE_KEYS[p]).join(';'),
-    cyrlAttested: kah.attested.has(cyrl),
-    topForms: [...formsOf.get(m.key).entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([f]) => f),
-    score: m.score,
-  };
-});
-
-const csv = ['rank,lemma,cyrl,pos,count,source', ...rows.map((r) => [r.rank, r.lemma, r.cyrl, r.pos, r.count, r.source].join(','))];
-writeFileSync(join(args.out, `uz-freq-top${TOP}.csv`), csv.join('\n') + '\n');
-
-// ---------------------------------------------------------------------------------------------------------
-// Report: lemmatiser accuracy on UD gold, coverage, and items needing a human look.
-
 const UPOS = { NOUN: 'noun', VERB: 'verb', AUX: 'aux', ADJ: 'adj', ADV: 'adv', PRON: 'pron', DET: 'det', ADP: 'adp', CCONJ: 'conj', SCONJ: 'conj', NUM: 'num', PART: 'part', INTJ: 'intj' };
 const udTokens = [];
 for (const p of args.ud.split(',')) {
@@ -161,13 +157,54 @@ for (const p of args.ud.split(',')) {
     udTokens.push({ form, lemma: foldApostrophes(f[2]).toLowerCase(), upos: UPOS[f[3]] });
   }
 }
+// Gold POS per lemma (citation form) where UD has it ≥ UD_POS_MIN times.
+const UD_POS_MIN = 3;
+const udPos = new Map();
+for (const t of udTokens) {
+  const key = citationForm({ stem: t.lemma, pos: t.upos });
+  const m = udPos.get(key) ?? new Map();
+  m.set(t.upos, (m.get(t.upos) ?? 0) + 1);
+  udPos.set(key, m);
+}
+
+const argmax = (m) => [...m.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0][0];
+function posLabel(key) {
+  const gold = udPos.get(key);
+  if (gold) {
+    const n = [...gold.values()].reduce((a, b) => a + b, 0);
+    if (n >= UD_POS_MIN) return argmax(gold);
+  }
+  return argmax(posVotes.get(key));
+}
+const rows = top.map((m, i) => {
+  const cyrl = latnToCyrl(m.key);
+  return {
+    rank: i + 1,
+    lemma: m.key,
+    cyrl,
+    pos: posLabel(m.key),
+    count: rawCount.get(m.key) ?? 0,
+    source: m.present.map((p) => SOURCE_KEYS[p]).join(';'),
+    cyrlAttested: kah.attested.has(cyrl),
+    posFromUd: [...(udPos.get(m.key)?.values() ?? [])].reduce((a, b) => a + b, 0) >= UD_POS_MIN,
+    topForms: [...formsOf.get(m.key).entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([f]) => f),
+    score: m.score,
+  };
+});
+
+const csv = ['rank,lemma,cyrl,pos,count,source', ...rows.map((r) => [r.rank, r.lemma, r.cyrl, r.pos, r.count, r.source].join(','))];
+writeFileSync(join(args.out, `uz-freq-top${TOP}.csv`), csv.join('\n') + '\n');
+
+// ---------------------------------------------------------------------------------------------------------
+// Report: lemmatiser accuracy on UD gold, coverage, and items needing a human look.
+
 const udAnalyses = analyse([...new Set(udTokens.map((t) => t.form))], args.fst);
 let udLemmaOk = 0;
 let udPosOk = 0;
 let udCovered = 0;
 const udErrors = new Map();
 for (const t of udTokens) {
-  const c = chooseCandidate(t.form, udAnalyses.get(t.form) ?? []);
+  const c = chooseCandidate(t.form, udAnalyses.get(t.form) ?? [], { priors, overrides });
   if (!c) continue;
   udCovered++;
   if (c.stem === t.lemma) udLemmaOk++;
@@ -201,7 +238,8 @@ Lemmas attested in ≥2 sources: ${merged.length}.
 - Tokens with an alphabetic form and a content UPOS: ${udTokens.length}
 - Covered by the analyser (non-null choice): ${udCovered} (${pct(udCovered, udTokens.length)})
 - Lemma agreement on covered tokens: ${udLemmaOk} (${pct(udLemmaOk, udCovered)})
-- POS agreement on covered tokens: ${udPosOk} (${pct(udPosOk, udCovered)})
+- POS agreement on covered tokens (analyser choice, before the UD relabelling of output rows): ${udPosOk} (${pct(udPosOk, udCovered)})
+- Output rows whose POS label comes from UD gold (lemma seen ≥ ${UD_POS_MIN}× in UD): ${rows.filter((r) => r.posFromUd).length}
 
 Most frequent lemma disagreements (many are gold-annotation conventions, e.g. UD keeping deb/edi as lemmas):
 ${[...udErrors.entries()].sort((a, b) => b[1] - a[1]).slice(0, 25).map(([k, n]) => `- ${n}× ${k}`).join('\n')}

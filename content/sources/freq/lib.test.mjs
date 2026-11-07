@@ -264,3 +264,11 @@ test('mergeSources: ties break by key so the output is deterministic', () => {
   const merged = mergeSources([new Map([['b', 1], ['a', 1]]), new Map([['b', 1], ['a', 1]])], { minSources: 1 });
   assert.deepEqual(merged.map((m) => m.key), ['a', 'b']);
 });
+
+test('chooseCandidate: segmentations into a 1–2 letter non-pronoun stem are not readings (yoshga ≠ yo + …)', () => {
+  const priors = new Map([['yo', 1e6], ['yosh', 10], ['ha', 1e6], ['hali', 1]]);
+  assert.deepEqual(chooseCandidate('yoshga', [A('yo', 'cnjcoo'), A('yosh', 'adj', 'subst', 'dat'), A('yosh', 'n', 'dat')], { priors }), { stem: 'yosh', pos: 'noun' });
+  assert.deepEqual(chooseCandidate('hali', [A('ha', 'n', 'px3sp', 'nom'), A('hali', 'adv')], { priors }), { stem: 'hali', pos: 'adv' });
+  // pronoun stems stay: uning → u
+  assert.deepEqual(chooseCandidate('unga', [A('u', 'prn', 'pers', 'p3', 'sg', 'dat'), A('unga', 'n', 'nom')], { priors: new Map([['u', 100]]) }), { stem: 'u', pos: 'pron' });
+});

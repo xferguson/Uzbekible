@@ -18,7 +18,10 @@ export default defineConfig({
   },
   projects: [
     { name: 'phone', use: { ...devices['iPhone 13'], defaultBrowserType: 'chromium' } },
-    { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 } } },
+    {
+      name: 'desktop',
+      use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 } },
+    },
   ],
   webServer: {
     // Test build (mode "e2e") exposes window.__uzbekibleTest.

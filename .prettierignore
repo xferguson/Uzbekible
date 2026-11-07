@@ -3,4 +3,7 @@ coverage
 playwright-report
 test-results
 package-lock.json
-docs/design/mockups
+docs
+.claude
+.github
+*.md

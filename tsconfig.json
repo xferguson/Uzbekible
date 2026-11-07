@@ -15,12 +15,11 @@
     "skipLibCheck": true,
     "noEmit": true,
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
-    "baseUrl": ".",
     "paths": {
-      "@core/*": ["src/core/*"],
-      "@ui/*": ["src/ui/*"],
-      "@design/*": ["src/design/*"],
-      "@games/*": ["src/games/*"]
+      "@core/*": ["./src/core/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@design/*": ["./src/design/*"],
+      "@games/*": ["./src/games/*"]
     }
   },
   "include": ["src", "e2e", "scripts", "*.config.ts"]

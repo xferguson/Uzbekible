@@ -127,16 +127,12 @@ _(no exports yet)_
 
 ## `core/sim`
 
-- `CliArgs` { game: string; levels: number[]; profiles: string[]; runs: number; seed: number }
-- `LevelRow` { level: number; profile: string; runs: number; completionRate: number; medianTimeMs: number | null; medianScore: number; stars: [number, number, number, number] }
+- `LevelRow` { level: number; profile: string; runs: number; completionRate: number; medianTimeMs: number | null; medianScore: number; medianMistakes: number; medianHints: number; medianCombos: number; stars: [number, n…
 - `PROFILES`: `Record<string, SimProfile>`
 - `SimGame<S, A>` { id: string; scoring: ScoringConfig; lives(level: number): number; countdownMs: number; createRules(level: number): Rules<S, A, GameEvent>; nextStep(state: S, level: number, rng: Rng): SimStep<A> } - …
 - `SimOptions<S, A>` { game: SimGame<S, A>; profiles: readonly (string | SimProfile)[]; levels: readonly number[]; runs: number; seed: number; maxActions?: number }
-- `SimProfile` { name: string; accuracy: { low: number; high: number }; responseMs: { median: number; spread: number } }
-- `SimStep<A>` { transparency: number; correct: A; wrong: A } - What the bot faces next: how transparent the item is (0..1) and the two actions it can take.
-- `formatTable(rows: readonly LevelRow[]): string`
-- `parseArgs(argv: readonly string[]): CliArgs`
-- `runCli(argv: readonly string[], games: Record<string, SimGame<unknown, unknown>>): string`
+- `SimProfile` { name: string; accuracy: { low: number; high: number }; responseMs: { median: number; spread: number }; scanMsPerChoice?: number }
+- `SimStep<A>` { transparency: number; correct: A; wrong: A; choices?: number } - What the bot faces next: how transparent the item is (0..1) and the two actions it can take.
 - `simulate<S, A>(opts: SimOptions<S, A>): LevelRow[]`
 
 ## `core/similarity`

@@ -63,7 +63,7 @@ _(no exports yet)_
 - `DEFAULT_CAP`: `5000`
 - `LearningLog` { log(event: LogEventInput): void; events(): readonly LogEvent[]; aggregates(): Aggregate[]; exportJson(): string; exportCsv(): string; clear(): void }
 - `LearningLogOptions` { clock: Clock; sessionId: string; cap?: number; storage?: StoreOptions; store?: Store<LogState> }
-- `LogEvent` = `Base & ( | { type: 'level_start'; level?: number } | { type: 'match_correct'; itemId: string; sourceLang: SourceLang; relation: Relation; rtMs: number } | { type: 'match_wrong'; leftItemId: string; right…
+- `LogEvent` = `Base & ( | { type: 'level_start'; level?: number } | { type: 'match_correct'; itemId: string; sourceLang: SourceLang; relation: Relation; rtMs: number; } | { type: 'match_wrong'; leftItemId: string; righ…
 - `LogEventInput` = `DistributiveOmit<LogEvent, 'ts' | 'sessionId'>` - What a game passes to `log`: `ts` and `sessionId` are filled in by the log.
 - `aggregateEvents(events: readonly LogEvent[]): Aggregate[]` - Aggregates of a full event history: the reference the rolled-over log must match.
 - `createLearningLog(options: LearningLogOptions): LearningLog`

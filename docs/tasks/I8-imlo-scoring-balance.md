@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | I Imlo |
 | Depends on | [I3](I3-imlo-rules.md), [K10](K10-core-sim.md) |
 | Read first | `docs/games/06-imlo.md` ("Rules", "Level progression"), `src/games/juft/scoring.config.ts`, `src/games/juft/balance.ts` |

@@ -5,7 +5,7 @@
 import type { ComponentType } from 'react';
 import type { SourceLang } from '../core/text/index.ts';
 import type { DifficultyConfig } from '../core/difficulty/index.ts';
-import type { Aggregate } from '../core/learning-log/index.ts';
+import type { Aggregate, LogEventInput } from '../core/learning-log/index.ts';
 import type { Rng } from '../core/random/index.ts';
 import type { ScoringConfig } from '../core/scoring/index.ts';
 import type { GameEvent, Rules, Session, SessionState } from '../core/session/index.ts';
@@ -57,7 +57,18 @@ export interface GameDefinition<Params, State, Action, E extends GameEvent = nev
    */
   createRules(spec: LevelSpec<Params>, attemptRng: Rng): Rules<State, Action, E | GameEvent>;
   scoring: ScoringConfig;
+  /** Per-level scoring (par and star thresholds often scale with the board). Falls back to `scoring`. */
+  scoringFor?(spec: LevelSpec<Params>, settings: GameSettings): ScoringConfig;
+  /** Score multipliers the settings earn (e.g. Cyrillic hard mode). */
+  multipliers?(settings: GameSettings): readonly number[];
+  /**
+   * Learning-log events for one rules event. `rtMs` is the time since the previous rules event (or the start).
+   * `level_start`, `level_complete` and `level_failed` are written by the shell.
+   */
+  logEvents?(spec: LevelSpec<Params>, event: GameEvent, rtMs: number): LogEventInput[];
   difficulty: DifficultyConfig;
+  /** The level map's buildings (name in Latin spelling, number of levels each). */
+  chapters?: readonly { id: string; name: string; levels: number }[];
   Board: ComponentType<BoardProps<Params, State, Action, E>>;
   requires?: { audio?: boolean; microphone?: boolean };
 }

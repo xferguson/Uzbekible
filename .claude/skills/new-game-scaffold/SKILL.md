@@ -19,6 +19,8 @@ src/games/<id>/
   difficulty.config.ts   # parameters for core/difficulty
   Board.tsx              # layout composed from src/ui components
   <id>.e2e.ts            # Playwright happy path (see e2e-visual-check)
+e2e/states/<id>.ts       # screen states for npm run shots / layout checks, spread into e2e/states.ts
+docs/design/frames.json  # one entry per state -> the game's approved mockup frames
 docs/games/<NN>-<id>.md  # product spec (must exist first)
 ```
 
@@ -63,3 +65,7 @@ progress/best scores, learning-log writes, and settings. A game never imports an
 2. Break the game into task files (`docs/tasks/_TEMPLATE.md`): rules, levels, scoring config, board, wiring, e2e.
 3. Implement each with the `tdd-task` skill. Tune numbers with `game-balance-tuning`.
 4. Register in `src/games/registry.ts`; add to the home screen via the registry (no hardcoded lists).
+5. Add the game's screen states (`e2e/states/<id>.ts`: map, ready, countdown, each board size, wrong, hint, pause,
+   results 1/2/3 stars, fail, plus any game-specific screen) and map them in `docs/design/frames.json`; a
+   `scripts/shots.test.ts` check fails until you do. Then `npm run shots -- --games <id>` and compare against the
+   mockups before the board/wiring PRs merge.

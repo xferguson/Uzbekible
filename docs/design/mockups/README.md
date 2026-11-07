@@ -13,3 +13,6 @@
 Published for review: D1 https://claude.ai/artifact/5znuW6aHUn9NkYXe9MfLzP · D2 https://claude.ai/artifact/GneG7ZrPFZ1nCyaBfBhb2G · I4 https://claude.ai/artifact/2AN25RgzmLzxFuQwA5tdfe
 
 The HTML files have no `<html>`/`<head>` wrapper, because the Artifact host adds one. `screenshot.mjs` and `screenshot-d2.mjs` add the same wrapper locally.
+
+`docs/design/frames.json` maps each app screen state (`e2e/states.ts`) to these frames. `npm run shots` puts the app
+next to them in `shots/compare.html` (see the `e2e-visual-check` skill). A new game's design task adds its frames there.

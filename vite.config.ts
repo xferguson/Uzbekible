@@ -18,12 +18,17 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/test-setup.ts'],
-    include: ['src/**/*.test.{ts,tsx}'],
+    include: ['src/**/*.test.{ts,tsx}', 'scripts/**/*.test.ts'],
     coverage: {
       provider: 'v8',
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['src/**/*.test.{ts,tsx}', 'src/test-setup.ts', 'src/main.tsx', 'src/**/index.ts'],
       reporter: ['text-summary', 'lcov'],
+      // CI fails below these (docs/architecture.md quality bar). Never lower them.
+      thresholds: {
+        'src/core/**': { lines: 95, branches: 95 },
+        'src/ui/**': { lines: 80, branches: 80 },
+      },
     },
   },
 });

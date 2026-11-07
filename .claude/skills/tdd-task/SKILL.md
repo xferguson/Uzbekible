@@ -8,13 +8,9 @@ description: Use when starting any docs/tasks/ task (T00, K1, E3, U4, C5…) or 
 Every code change in this repo is test-first. A task is not done until its tests prove it.
 
 ## 1. Load the task
-1. Read `docs/tasks/README.md` → find the task row. Check that every dependency is **merged to `main`**
-   (`git log origin/main --oneline`, and the `Status` row of each dependency's task file). If a dependency is not merged, stop and
-   tell the user; do not re-implement another task's scope.
-2. Read the task file `docs/tasks/<ID>-*.md` fully: goal, acceptance criteria, test plan, files touched.
-3. Read the docs in the task's `Read first` row (not the whole `docs/` tree), plus the `docs/architecture.md`
-   row of any shared module you will use.
-4. Create the branch: `task/<ID>-<short-slug>` (unless the session assigns a branch — then use that).
+Follow CLAUDE.md "Do <ID>" (read the task file and its `Read first` docs, check dependencies with `npm run tasks`,
+branch `task/<ID>-<slug>` unless one was assigned). Also read the `docs/architecture.md` row of any shared module you
+will use. Never re-implement another task's scope.
 
 ## 2. Red
 - Translate each acceptance criterion into one or more failing tests **before** writing implementation.
@@ -23,14 +19,14 @@ Every code change in this repo is test-first. A task is not done until its tests
   (`foo.property.test.ts`). Required for: text/transliteration, random/shuffle, scoring, difficulty,
   storage migrations, motif geometry.
 - UI → Testing Library tests (`Component.test.tsx`), asserting behaviour via roles/labels, not classes.
-- Run `npm test -- <path>` and **paste the failing output** into your notes / PR body ("Red evidence").
+- Run `npm test -- <path>` and note the failing test names plus the summary line (e.g. `Tests 3 failed | 41 passed`) for the PR body ("Red evidence").
 - Commit: `test(<area>): <behaviour> [<ID>]`.
 
 ## 3. Green
 - Write the minimum code to pass. No speculative options.
 - Reuse shared modules (`core/text`, `core/random`, `core/clock`, `core/session`, `core/scoring`, ...) —
   never re-implement shuffle, timers, normalization, scoring maths or storage in a game folder.
-- Run the test again, paste the passing output ("Green evidence").
+- Run the test again and note the summary line ("Green evidence").
 - Commit: `feat(<area>): <behaviour> [<ID>]`.
 
 ## 4. Refactor
@@ -39,7 +35,7 @@ Every code change in this repo is test-first. A task is not done until its tests
 
 - If you changed a module's exports (added, removed or re-signed), run `npm run api` and commit `docs/api.md`; CI fails on a stale digest.
 
-## 5. Before opening the PR — run the full fast gate
+## 5. Before opening the PR — run the fast gate
 ```bash
 npm run gate   # quiet lint → typecheck → test+coverage → build; ends in GATE OK
 ```

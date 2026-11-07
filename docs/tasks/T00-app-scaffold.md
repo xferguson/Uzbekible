@@ -6,7 +6,6 @@
 | Lane | A Foundation |
 | Read first | `docs/technical-design.md` §1–2, §8–9 (other docs only if needed) |
 | Depends on | none |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `pr-flow`, `e2e-visual-check` |
 | Branch | `task/T00-app-scaffold` |
 
@@ -37,8 +36,3 @@ Create the runnable app skeleton and turn on CI code jobs, so every later task h
 - `src/**`
 - `e2e/smoke.e2e.ts`
 - `.nvmrc`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task T00 (App scaffold (Vite + React + TS, Vitest, Playwright, lint)). Read CLAUDE.md and docs/tasks/T00-app-scaffold.md first, and follow the skills it lists (tdd-task, pr-flow, e2e-visual-check). Confirm that its dependencies (none) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

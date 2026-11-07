@@ -6,7 +6,6 @@
 | Lane | Q Quality |
 | Read first | `docs/technical-design.md`, `docs/architecture.md` (other docs only if needed) |
 | Depends on | none |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `pr-flow` |
 | Branch | `task/Q9-docs-drift` |
 
@@ -24,8 +23,3 @@ Bring the engineering docs back in line with what is built, so new sessions don'
 ## Files likely touched
 - `docs/technical-design.md`
 - `docs/architecture.md`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task Q9 (Fix docs drift in technical design and architecture). Read CLAUDE.md and docs/tasks/Q9-docs-drift.md first, and follow the skills it lists (pr-flow). Confirm that its dependencies (none) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

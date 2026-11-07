@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | X Harness |
 | Read first | `CLAUDE.md`, `.claude/skills/tdd-task/SKILL.md`, `.claude/skills/pr-flow/SKILL.md`, `docs/tasks/_TEMPLATE.md` (other docs only if needed) |
 | Depends on | [X1](X1-gate-script.md) |

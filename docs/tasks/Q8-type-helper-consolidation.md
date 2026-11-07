@@ -6,7 +6,6 @@
 | Lane | Q Quality |
 | Read first | `docs/architecture.md` (`text`, `content`, `scheduler` rows) (other docs only if needed) |
 | Depends on | [Q1](Q1-node-runnable-core.md) |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `pr-flow` |
 | Branch | `task/Q8-type-helper-consolidation` |
 
@@ -26,8 +25,3 @@ Remove small duplications before more games copy them: two different `Lang` type
 ## Files likely touched
 - `src/core/{text,content,scheduler,learning-log}/**`
 - `src/games/juft/rules.ts`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task Q8 (Consolidate duplicated types and helpers). Read CLAUDE.md and docs/tasks/Q8-type-helper-consolidation.md first, and follow the skills it lists (tdd-task, pr-flow). Confirm that its dependencies (Q1) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

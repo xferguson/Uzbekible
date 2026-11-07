@@ -6,7 +6,6 @@
 | Lane | B Design |
 | Read first | `docs/design/brief.md` (other docs only if needed) |
 | Depends on | [D1](D1-design-system-mockups.md) |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `design-mockup`, `pr-flow`, `uzbek-text-rules` |
 | Branch | `task/D2-juft-mockups` |
 
@@ -29,8 +28,3 @@ Design every Juft screen and interaction using the approved design system, for u
 ## Files likely touched
 - `docs/design/mockups/D2-*.html`
 - `docs/games/01-juft.md`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task D2 (Game 1 (Juft) screen mockups (GATE)). Read CLAUDE.md and docs/tasks/D2-juft-mockups.md first, and follow the skills it lists (design-mockup, pr-flow, uzbek-text-rules). Confirm that its dependencies (D1) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

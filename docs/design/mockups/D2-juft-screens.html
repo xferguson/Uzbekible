@@ -142,6 +142,7 @@ a { color: var(--color-cobalt); }
 .lvl { position: relative; width: 44px; height: 44px; display: grid; place-items: center; font: 700 17px/1 var(--font-display); color: var(--on-gold); flex: none; }
 .lvl svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .lvl span { position: relative; }
+.lvl span.d3 { font-size: 14px; }
 .grow { flex: 1; }
 .hs { display: inline-flex; align-items: center; gap: 6px; font: 600 18px/1 var(--font-ui); font-variant-numeric: tabular-nums; color: var(--color-on-deep); }
 .hs svg { width: 18px; height: 18px; flex: none; }
@@ -158,7 +159,7 @@ a { color: var(--color-cobalt); }
 /* ---------- board and tiles ---------- */
 .board { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 16px 16px 46px; align-content: center; }
 .desk .board { width: 100%; max-width: 760px; margin-inline: auto; gap: 24px; padding: 24px 32px 32px; }
-.bcol { display: grid; gap: 10px; grid-auto-rows: var(--th, 72px); min-width: 0; }
+.bcol { display: grid; gap: var(--gap, 10px); grid-auto-rows: var(--th, 72px); min-width: 0; }
 .tile {
   position: relative; display: grid; place-items: center; min-width: 0; width: 100%; height: 100%; padding: 6px 12px;
   border-radius: var(--r-tile); border: 2px solid var(--color-cobalt);
@@ -222,6 +223,35 @@ a { color: var(--color-cobalt); }
 .soon svg { width: 13px; height: 13px; }
 
 /* ---------- level map ---------- */
+.sky { display: grid; gap: 6px; }
+.sky-row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px; align-items: end; padding: 8px 6px 0; border-radius: 12px; background: var(--color-surface); border: 1px solid var(--line); }
+.bld { display: grid; justify-items: center; gap: 3px; min-height: 44px; padding: 4px 0 6px; border-radius: 8px; position: relative; }
+.bld svg { width: 100%; max-width: 40px; height: 40px; }
+.bld i { font: 700 10px/1 var(--font-ui); font-style: normal; color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.bld.on { background: var(--color-turquoise-pale); box-shadow: inset 0 0 0 2px var(--color-gold); }
+.bld.on i { color: var(--color-text); }
+.bld.done i::before { content: "✓"; color: var(--color-turquoise); margin-right: 1px; }
+.sky-cap { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.sky-cap b { font: 700 16px/1.2 var(--font-display); color: var(--color-text); }
+.chlist { display: grid; gap: 6px; align-content: start; }
+.chrow { display: grid; grid-template-columns: 40px 1fr auto; gap: 2px 10px; align-items: center; padding: 6px 10px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--color-surface); min-height: 48px; }
+.chrow svg { width: 40px; height: 40px; grid-row: span 2; }
+.chrow b { font: 700 15px/1.1 var(--font-display); color: var(--color-text); }
+.chrow span { font-size: 12px; color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.chrow em { font: 600 12px var(--font-ui); font-style: normal; color: var(--color-text-muted); grid-row: span 2; grid-column: 3; font-variant-numeric: tabular-nums; }
+.chrow.on { border: 3px solid var(--color-gold); padding: 4px 8px; }
+.chrow.lock { border-style: dashed; background: transparent; }
+.chrow.lock svg, .chrow.lock b { opacity: .7; }
+.reg { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+.reg .domes { width: 330px; height: 64px; display: block; flex: none; }
+.reg .portals { display: flex; gap: 8px; align-items: flex-end; }
+.portal { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 30px 10px 10px; background: var(--color-turquoise-pale); border: 2px solid var(--color-cobalt); border-bottom: 0; border-radius: 48px 48px 0 0; position: relative; }
+.portal.mid { padding-top: 46px; border-radius: 56px 56px 0 0; background: var(--color-surface); }
+.portal::before { content: ""; position: absolute; top: 8px; left: 50%; width: 14px; height: 14px; margin-left: -7px; background: var(--color-gold); clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); }
+.portal.mid::before { top: 14px; width: 20px; height: 20px; margin-left: -10px; }
+.reg .base { width: 340px; height: 14px; background: var(--color-cobalt); border-radius: 4px 4px 0 0; }
+.reg .ground { width: 100%; max-width: 360px; height: 6px; border-radius: 3px; background: var(--color-ochre); }
+.reg .cell { width: 60px; height: 44px; font-size: 16px; }
 .chapters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .chap { display: grid; justify-items: center; gap: 2px; padding: 8px 4px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--color-surface); font-size: 12px; text-align: center; min-height: 44px; }
 .chap svg { width: 40px; height: 34px; }
@@ -231,13 +261,13 @@ a { color: var(--color-cobalt); }
 .chap.done span::before { content: "✓ "; color: var(--color-turquoise); font-weight: 700; }
 .chap.lock { border-style: dashed; background: transparent; opacity: .7; }
 .mnr { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
-.mnr .cap { width: 222px; height: 80px; display: block; flex: none; }
-.mnr .shaft { width: 202px; display: flex; flex-direction: column; align-items: center; background: var(--color-turquoise-pale); border: 2px solid var(--color-cobalt); border-bottom: 0; border-radius: 6px 6px 0 0; }
+.mnr .cap { width: 252px; height: 70px; display: block; flex: none; }
+.mnr .shaft { width: 232px; display: flex; flex-direction: column; align-items: center; background: var(--color-turquoise-pale); border: 2px solid var(--color-cobalt); border-bottom: 0; border-radius: 6px 6px 0 0; }
 .mnr .ringb { height: 6px; align-self: stretch; background: repeating-linear-gradient(90deg, var(--color-cobalt) 0 8px, var(--color-surface) 8px 12px, var(--color-gold) 12px 20px, var(--color-surface) 20px 24px); border-block: 1.5px solid var(--color-cobalt); }
 .mnr .lrow { display: flex; gap: 10px; padding: 6px 0; justify-content: center; align-self: stretch; }
-.mnr .base { width: 222px; height: 16px; background: var(--color-cobalt); border-radius: 4px 4px 0 0; }
+.mnr .base { width: 252px; height: 16px; background: var(--color-cobalt); border-radius: 4px 4px 0 0; }
 .mnr .ground { width: 100%; max-width: 340px; height: 6px; border-radius: 3px; background: var(--color-ochre); }
-.cell { width: 64px; height: 52px; border-radius: 10px; display: grid; place-items: center; align-content: center; gap: 1px; font: 700 18px/1 var(--font-display); color: var(--color-text); border: 2px solid var(--color-cobalt); background: var(--color-surface); position: relative; }
+.cell { width: 60px; height: 46px; border-radius: 10px; display: grid; place-items: center; align-content: center; gap: 1px; font: 700 18px/1 var(--font-display); color: var(--color-text); border: 2px solid var(--color-cobalt); background: var(--color-surface); position: relative; }
 .cell .pips { display: flex; gap: 2px; }
 .cell .pips svg { width: 10px; height: 10px; }
 .cell.s1 { background: var(--color-surface); }
@@ -313,7 +343,7 @@ a { color: var(--color-cobalt); }
 .snote { font-size: 13px; color: var(--color-text-muted); padding: 0 16px 14px; }
 
 /* ---------- desktop variants ---------- */
-.desk .split { display: grid; grid-template-columns: 260px 1fr 360px; gap: 28px; flex: 1; min-height: 0; }
+.desk .split { display: grid; grid-template-columns: 300px 1fr 340px; gap: 28px; flex: 1; min-height: 0; }
 .desk .split .chapters { grid-template-columns: 1fr; align-content: start; }
 .desk .split .chap { grid-template-columns: 48px 1fr; justify-items: start; text-align: start; padding: 10px 12px; column-gap: 10px; }
 .desk .split .chap svg { grid-row: span 2; }
@@ -377,6 +407,10 @@ kbd { font: 600 13px ui-monospace, Menlo, monospace; padding: 1px 6px; border-ra
 .tryframe.rm *, .tryframe.rm *::before { animation: none !important; transition: none !important; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
+/* ---------- curve ---------- */
+table.tm td.ico svg { width: 36px; height: 36px; display: block; }
+table.tm tr.top td { background: var(--color-turquoise-pale); }
+
 /* ---------- timings ---------- */
 .tscroll { overflow-x: auto; min-width: 0; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--color-surface); }
 table.tm { border-collapse: collapse; width: 100%; font-size: 14px; }
@@ -421,6 +455,15 @@ table.tm tr.sub td { padding-top: 16px; font: 700 15px var(--font-display); colo
     <li class="side"><a href="#g-pause">Pause</a></li>
     <li class="side"><a href="#g-settings">Settings</a></li>
   </ol>
+</section>
+
+<section class="plate" id="curve">
+  <div class="plate-head">
+    <span class="eyebrow">Docs/games/01-juft.md · level progression</span>
+    <h2>Eight buildings, 120 levels, up to 12 pairs</h2>
+    <p class="muted">The board grows by about one pair per building until Registon, where every level is a full 12 × 12 board. From there the game gets harder through content instead: less transparent pairs, more suffixed forms, a tighter par time. Every fifth level stays a one-pair "hard pair" breather. These are starting values for <code>difficulty.config.ts</code>; the simulator (E3) tunes them.</p>
+  </div>
+  <div class="tscroll"><table class="tm" id="curve-table"></table></div>
 </section>
 
 <section class="plate" id="phone">
@@ -502,7 +545,8 @@ table.tm tr.sub td { padding-top: 16px; font: 700 15px var(--font-display); colo
   <ol class="decisions">
     <li><span><b>Screens and flow</b> as shown: home, level map, ready, countdown, board, pause, results, fail, settings. On desktop the map and the ready card share one view.</span></li>
     <li><span><b>HUD is numbers and icons only:</b> pause, level octagon, three life tiles, timer, combo, score. No words, so nothing on the board screen is English. Screen-reader labels are the exception.</span></li>
-    <li><span><b>Columns:</b> source on the left, Uzbek on the right, for every language, RTL included. Each column is shuffled on its own. Tile height adapts to the pair count (1 pair: 96 px; 8 pairs: 66 px on a phone).</span></li>
+    <li><span><b>Board size tops out at 12 pairs</b> (Registon, levels 106–120). Tile height adapts to the pair count: 96 px for 1 pair, 66 px at 8, 46 px at 12 on a 390 × 844 phone (49 px on desktop), never below 44 px. From 10 pairs, gaps tighten to 6 px and tile type steps down to 17 px.</span></li>
+    <li><span><b>Columns:</b> source on the left, Uzbek on the right, for every language, RTL included. Each column is shuffled on its own. All pairs are always on screen: the board never scrolls, because scanning it is the game.</span></li>
     <li><span><b>Matched tiles leave a dashed socket.</b> Nothing reflows, so no target moves under the thumb.</span></li>
     <li><span><b>Input is never locked.</b> Other tiles stay tappable while a match or a crack plays.</span></li>
     <li><span><b>Hidden tiles are face-down glazed tiles</b> (cobalt-deep with a star) during the countdown and pause. Pausing hides them instantly in every motion setting.</span></li>
@@ -510,7 +554,7 @@ table.tm tr.sub td { padding-top: 16px; font: 700 15px var(--font-display); colo
     <li><span><b>Mixed languages:</b> a small badge in the language's own script (TR, РУ, فا, عر) on the source tile, at the inline-start corner.</span></li>
     <li><span><b>Hard pair</b> (open question 1): a one-pair board, no distractors, with a turquoise "Yangi naqsh" (new pattern) glow.</span></li>
     <li><span><b>Combo counter visible</b> (open question 2): a gold ×N pill in the HUD from the second correct match in a row; it resets on a mistake.</span></li>
-    <li><span><b>Level map:</b> one building per chapter: Gumbaz (dome) 1–10, Minora (minaret) 11–20, Ayvon (iwan) 21–30, Registon 31+. Levels climb upward. A cleared cell's glaze shows its stars: white 1, turquoise 2, gold 3, with star pips as the shape cue.</span></li>
+    <li><span><b>Level map:</b> a city of eight buildings, 15 levels each (120 in all): Gumbaz, Minora, Ayvon, Darvoza, Madrasa, Maqbara, Masjid, Registon. A skyline of all eight sits above the current building's facade; on desktop it becomes a chapter list. Levels climb upward. A cleared cell's glaze shows its stars: white 1, turquoise 2, gold 3, with star pips as the shape cue.</span></li>
     <li><span><b>Results:</b> Next, Replay, Map; a gold "Yangi rekord!" ribbon for a new best. <b>Fail:</b> Try again (same words, new shuffle) or Map; no score is saved.</span></li>
     <li><span><b>Settings:</b> source languages named in their own script; the last one on cannot be turned off. Uzbek script as Lotin / Кирилл, with Cyrillic tagged hard mode. Motion and theme follow the system unless set.</span></li>
     <li><span><b>One new token,</b> <code>--on-gold</code> (#0A1838 in both themes): dark text on gold and turquoise fills (level badge, combo pill, new-best ribbon, glazed map cells). 5.14:1 or better in every case; added to <code>contrast.mjs</code>.</span></li>
@@ -597,7 +641,8 @@ table.tm tr.sub td { padding-top: 16px; font: 700 15px var(--font-display); colo
 
   /* ---------- content: real pairs (source, uz-Latn, uz-Cyrl, English gloss for the hint) ---------- */
   const W = {
-    tr: [['göz', 'koʻz', 'кўз', 'eye'], ['su', 'suv', 'сув', 'water'], ['dağ', 'togʻ', 'тоғ', 'mountain'], ['taş', 'tosh', 'тош', 'stone'], ['yol', 'yoʻl', 'йўл', 'road'], ['gün', 'kun', 'кун', 'day'], ['kitap', 'kitob', 'китоб', 'book'], ['şehir', 'shahar', 'шаҳар', 'city']],
+    tr: [['göz', 'koʻz', 'кўз', 'eye'], ['su', 'suv', 'сув', 'water'], ['dağ', 'togʻ', 'тоғ', 'mountain'], ['taş', 'tosh', 'тош', 'stone'], ['yol', 'yoʻl', 'йўл', 'road'], ['gün', 'kun', 'кун', 'day'], ['kitap', 'kitob', 'китоб', 'book'], ['şehir', 'shahar', 'шаҳар', 'city'],
+      ['yıl', 'yil', 'йил', 'year'], ['kız', 'qiz', 'қиз', 'girl'], ['evde', 'uyda', 'уйда', 'at home'], ['geldim', 'keldim', 'келдим', 'I came']],
     ru: [['автобус', 'avtobus', 'автобус', 'bus'], ['поезд', 'poyezd', 'поезд', 'train'], ['стол', 'stol', 'стол', 'table'], ['телефон', 'telefon', 'телефон', 'phone']],
     fa: [['شهر', 'shahar', 'шаҳар', 'city'], ['گل', 'gul', 'гул', 'flower'], ['دوست', 'doʻst', 'дўст', 'friend'], ['باغ', 'bogʻ', 'боғ', 'garden']],
     ar: [['كتاب', 'kitob', 'китоб', 'book'], ['قلم', 'qalam', 'қалам', 'pen'], ['وقت', 'vaqt', 'вақт', 'time'], ['صبر', 'sabr', 'сабр', 'patience']],
@@ -635,15 +680,17 @@ table.tm tr.sub td { padding-top: 16px; font: 700 15px var(--font-display); colo
     const stOf = (side, pi) => (done.has(pi) ? 'socket' : (o[side] || {})[pi]);
     const left = pairs.map((p, i) => tileHTML({ w: p[0], lang: p[4] || o.src || 'tr', badge: o.badges ? (p[4] || o.src) : null, gloss: p[3], st: stOf('L', i) }));
     const right = orderR.map((pi) => { const p = pairs[pi]; return tileHTML({ w: script === 'uz-Cyrl' ? p[2] : p[1], lang: script, gloss: p[3], st: stOf('R', pi) }); });
-    const th = o.th || (n === 1 ? 96 : Math.min(88, Math.floor(((o.avail || 600) - (n - 1) * 10) / n)));
-    const fs = o.fs || (n >= 7 ? 19 : 20);
-    return `<div class="board" style="--th:${th}px;--fs:${fs}px"><div class="bcol">${left.join('')}</div><div class="bcol">${right.join('')}</div></div>`;
+    // Density: gaps tighten from 10 pairs, type steps down from 7 and 10 pairs. Tiles never drop below 44 px.
+    const gap = n >= 10 ? 6 : 10;
+    const th = o.th || (n === 1 ? 96 : Math.max(44, Math.min(88, Math.floor(((o.avail || 600) - (n - 1) * gap) / n))));
+    const fs = o.fs || (n >= 10 ? 17 : n >= 7 ? 19 : 20);
+    return `<div class="board" style="--th:${th}px;--fs:${fs}px;--gap:${gap}px"><div class="bcol">${left.join('')}</div><div class="bcol">${right.join('')}</div></div>`;
   }
   // Phone: pause, level, lives on the top line; time, combo, score below. Desktop: one line.
   function hudHTML(o = {}, desk = false) {
     const combo = o.combo > 1 ? `<span class="combo" aria-label="Combo ${o.combo}">${miniStar('var(--on-gold)', 'none')}×${o.combo}</span>` : '<span class="combo off" aria-hidden="true">×1</span>';
     const delta = o.delta ? `<span class="delta${o.delta > 0 ? ' up' : ''}">${o.delta > 0 ? '+' : '−'}${Math.abs(o.delta)}</span>` : '';
-    const lead = `<span class="ib" role="button" aria-label="Pause">${I.pause}</span><span class="lvl" aria-label="Level ${o.level || 17}">${octagon()}<span>${o.level || 17}</span></span>`;
+    const lead = `<span class="ib" role="button" aria-label="Pause">${I.pause}</span><span class="lvl" aria-label="Level ${o.level || 24}">${octagon()}<span${(o.level || 24) > 99 ? ' class="d3"' : ''}>${o.level || 24}</span></span>`;
     const stats = `<span class="hs" aria-label="Time">${I.clock}${o.time || '0:23'}</span>${combo}<span class="hs score" aria-label="Score">${delta}${miniStar('var(--color-gold)', 'none')}${num(o.score ?? 1240)}</span>`;
     const lv = lives(o.lives ?? 3);
     if (desk) return `<header class="hud"><div class="top">${lead}${stats}<span class="grow"></span>${lv}</div></header>`;
@@ -655,92 +702,131 @@ table.tm tr.sub td { padding-top: 16px; font: 700 15px var(--font-display); colo
   const appbar = (title, opts = {}, desk = false) => `<header class="appbar"><div class="top">${opts.back ? `<span class="ib" role="button" aria-label="Back">${I.back}</span>` : ''}<span class="ttl">${opts.brand ? miniStar('var(--color-gold)', 'var(--color-gold)') : ''}${title}</span>${opts.meta || ''}${opts.gear ? `<span class="ib" role="button" aria-label="Settings">${I.gear}</span>` : ''}</div>${band(desk ? 1280 : 390)}</header>`;
 
   /* ---------- level map pieces ---------- */
-  const CH = [
-    ['Gumbaz', '1–10', 'done', `<path d="M6 30 V20 a14 12 0 0 1 28 0 V30 Z" fill="var(--color-turquoise)" stroke="var(--color-cobalt)" stroke-width="1.6"/><rect x="19" y="2" width="2" height="7" fill="var(--color-gold)"/><rect x="2" y="29" width="36" height="3" rx="1" fill="var(--color-ochre)"/>`],
-    ['Minora', '11–20', 'on', `<path d="M15 30 L16.5 9 H23.5 L25 30 Z" fill="var(--color-turquoise-pale)" stroke="var(--color-cobalt)" stroke-width="1.6"/><path d="M14 9 h12 l-2 -4 h-8 Z" fill="var(--color-cobalt)"/><path d="M16 16 h8 M15.6 23 h8.8" stroke="var(--color-gold)" stroke-width="1.6"/><rect x="2" y="29" width="36" height="3" rx="1" fill="var(--color-ochre)"/>`],
-    ['Ayvon', '21–30', 'lock', `<rect x="6" y="6" width="28" height="24" fill="none" stroke="var(--color-text-muted)" stroke-width="1.6"/><path d="M13 30 V18 a7 8 0 0 1 14 0 V30" fill="none" stroke="var(--color-text-muted)" stroke-width="1.6"/><rect x="2" y="29" width="36" height="3" rx="1" fill="var(--color-text-muted)"/>`],
-    ['Registon', '31+', 'lock', `<path d="M3 30 V12 h10 V30 M15 30 V8 h10 V30 M27 30 V12 h10 V30" fill="none" stroke="var(--color-text-muted)" stroke-width="1.6"/><rect x="2" y="29" width="36" height="3" rx="1" fill="var(--color-text-muted)"/>`],
+  // Eight buildings, 15 levels each. Board size ramps from 1 pair to 12 (Registon).
+  const G = (c) => `fill="${c.f}" stroke="${c.s}" stroke-width="1.6" stroke-linejoin="round"`;
+  const SIL = {
+    gumbaz: (c) => `<path d="M7 36 V24 a13 12 0 0 1 26 0 V36 Z" ${G(c)}/><rect x="19" y="4" width="2" height="8" fill="${c.a}"/>`,
+    minora: (c) => `<path d="M15 36 L16.5 12 H23.5 L25 36 Z" ${G(c)}/><path d="M14 12 h12 l-2 -5 h-8 Z" fill="${c.s}"/><path d="M16 19 h8 M15.6 27 h8.8" stroke="${c.a}" stroke-width="1.6"/>`,
+    ayvon: (c) => `<rect x="6" y="10" width="28" height="26" ${G(c)}/><path d="M13 36 V22 a7 8 0 0 1 14 0 V36" fill="none" stroke="${c.s}" stroke-width="1.6"/>`,
+    darvoza: (c) => `<path d="M4 36 V14 h8 V36 M28 36 V14 h8 V36" ${G(c)}/><path d="M12 36 V20 h16 V36" ${G(c)}/><path d="M16 36 v-8 a4 4 0 0 1 8 0 v8" fill="none" stroke="${c.s}" stroke-width="1.6"/>`,
+    madrasa: (c) => `<rect x="9" y="12" width="22" height="24" ${G(c)}/><path d="M15 36 V24 a5 6 0 0 1 10 0 V36" fill="none" stroke="${c.s}" stroke-width="1.6"/><path d="M4 36 V8 h3 V36 M33 36 V8 h3 V36" ${G(c)}/>`,
+    maqbara: (c) => `<path d="M10 36 V22 h20 V36 Z" ${G(c)}/><path d="M11 22 C11 8 29 8 29 22 Z" ${G(c)}/><path d="M16 21 C16 13 20 11 20 11 M24 21 C24 13 20 11 20 11" fill="none" stroke="${c.a}" stroke-width="1.2"/>`,
+    masjid: (c) => `<path d="M8 36 V18 h24 V36 Z" ${G(c)}/><path d="M12 18 a8 9 0 0 1 16 0 Z" ${G(c)}/><path d="M16 36 V26 a4 5 0 0 1 8 0 V36" fill="none" stroke="${c.s}" stroke-width="1.6"/><rect x="19" y="5" width="2" height="5" fill="${c.a}"/>`,
+    registon: (c) => `<path d="M2 36 V16 h11 V36 M14 36 V10 h12 V36 M27 36 V16 h11 V36" ${G(c)}/><path d="M17 36 v-9 a3 4 0 0 1 6 0 v9" fill="none" stroke="${c.s}" stroke-width="1.4"/>`,
+  };
+  const CH = [ // name, key, first, last, pairs, content
+    ['Gumbaz', 'gumbaz', 1, 15, '1 → 4', 'Very transparent cognates, pronouns, numbers'],
+    ['Minora', 'minora', 16, 30, '4 → 6', 'Top-frequency cognates and shared loans'],
+    ['Ayvon', 'ayvon', 31, 45, '6 → 7', 'Next frequency bands; less transparent pairs start'],
+    ['Darvoza', 'darvoza', 46, 60, '7 → 8', 'Russian, Persian and Arabic loans in the mix'],
+    ['Madrasa', 'madrasa', 61, 75, '8 → 9', 'Suffixed forms begin (evde ↔ uyda)'],
+    ['Maqbara', 'maqbara', 76, 90, '9 → 10', 'More suffixed forms; opaque cognates (ev ↔ uy)'],
+    ['Masjid', 'masjid', 91, 105, '10 → 11', 'Lower transparency, shorter par time'],
+    ['Registon', 'registon', 106, 120, '12', 'Full board: the hardest mix, the tightest par'],
   ];
-  const chaptersHTML = () => `<nav class="chapters" aria-label="Chapters">${CH.map(([n, r, s, svg]) => `<div class="chap ${s}"${s === 'on' ? ' aria-current="true"' : ''}><svg viewBox="0 0 40 34" aria-hidden="true">${svg}</svg><b>${n}</b><span>${s === 'done' ? '10/10' : s === 'on' ? '6/10 · ' + r : r}</span></div>`).join('')}</nav>`;
-  const STARS = { 11: 3, 12: 2, 13: 3, 14: 1, 15: 3, 16: 2 };
+  const silCol = (st) => st === 'lock' ? { f: 'none', s: 'var(--color-text-muted)', a: 'var(--color-text-muted)' } : st === 'on' ? { f: 'var(--color-turquoise-pale)', s: 'var(--color-cobalt)', a: 'var(--color-gold)' } : { f: 'var(--color-turquoise)', s: 'var(--color-cobalt)', a: 'var(--color-gold)' };
+  const sil = (key, st) => `<svg viewBox="0 0 40 40" aria-hidden="true">${SIL[key](silCol(st))}<rect x="1" y="36" width="38" height="3" rx="1" fill="${st === 'lock' ? 'var(--color-text-muted)' : 'var(--color-ochre)'}"/></svg>`;
+  // cur: the player's current level; chapters before it are done, after it locked.
+  const chState = (i, cur) => cur > CH[i][3] ? 'done' : cur >= CH[i][2] ? 'on' : 'lock';
+  const doneIn = (i, cur) => Math.max(0, Math.min(15, cur - CH[i][2]));
+  function skylineHTML(cur) {
+    const ci = CH.findIndex((c) => cur >= c[2] && cur <= c[3]);
+    return `<nav class="sky" aria-label="Chapters"><div class="sky-row">${CH.map((c, i) => { const st = chState(i, cur); return `<div class="bld ${st}" role="button" aria-label="${c[0]}, levels ${c[2]}–${c[3]}${st === 'lock' ? ', locked' : ''}"${st === 'on' ? ' aria-current="true"' : ''}>${sil(c[1], st)}<i>${i + 1}</i></div>`; }).join('')}</div>` +
+      `<div class="sky-cap"><b>${CH[ci][0]}</b><span>chapter ${ci + 1} of 8 · levels ${CH[ci][2]}–${CH[ci][3]} · ${doneIn(ci, cur)}/15</span></div></nav>`;
+  }
+  const chListHTML = (cur) => `<nav class="chlist" aria-label="Chapters">${CH.map((c, i) => { const st = chState(i, cur); return `<div class="chrow ${st}"${st === 'on' ? ' aria-current="true"' : ''}>${sil(c[1], st)}<b>${c[0]}</b><span>${c[2]}–${c[3]} · ${c[4].replace(/ /g, '')} pairs</span><em>${st === 'done' ? '✓ 15/15' : st === 'on' ? doneIn(i, cur) + '/15' : ''}${st === 'lock' ? I.lock.replace('<svg', '<svg style="width:14px;height:14px"') : ''}</em></div>`; }).join('')}</nav>`;
+  const STARS = { 16: 3, 17: 2, 18: 3, 19: 1, 20: 3, 21: 2, 22: 3, 23: 2, 106: 3, 107: 2, 108: 3, 109: 3, 110: 2, 111: 1, 112: 3 };
+  let CUR = 24;
   function cellHTML(lv, cls = '') {
     const s = STARS[lv];
     if (s) return `<div class="cell s${s} ${cls}" role="button" aria-label="Level ${lv}, ${s} stars">${lv}${pips(s)}</div>`;
-    if (lv === 17) return `<div class="cell cur ${cls}" role="button" aria-label="Level 17, next">${lv}<svg class="pl" viewBox="0 0 24 24" fill="var(--color-gold)"><path d="M8 5v14l11-7z"/></svg></div>`;
+    if (lv === CUR) return `<div class="cell cur ${cls}" role="button" aria-label="Level ${lv}, next">${lv}<svg class="pl" viewBox="0 0 24 24" fill="var(--color-gold)"><path d="M8 5v14l11-7z"/></svg></div>`;
     return `<div class="cell lk ${cls}" aria-label="Level ${lv}, locked" aria-disabled="true">${lv}${I.lock}</div>`;
   }
   function minaretHTML(scale = 1) {
-    const rows = [[19, 20], [17, 18], [15, 16], [13, 14], [11, 12]];
-    const cap = `<svg class="cap" viewBox="0 0 222 80" aria-hidden="true">` +
-      `<rect x="110" y="0" width="2" height="7" fill="var(--color-gold)"/><path d="M76 31 a35 26 0 0 1 70 0 Z" fill="var(--color-turquoise)" stroke="var(--color-cobalt)" stroke-width="2"/>` +
-      `<rect x="76" y="31" width="70" height="31" fill="var(--color-surface)" stroke="var(--color-cobalt)" stroke-width="2"/>` +
-      [84, 104, 124].map((x) => `<path d="M${x} 60 V45 a7 7 0 0 1 14 0 V60" fill="var(--color-cobalt-deep)"/>`).join('') +
-      `<path d="M0 62 H222 L212 80 H10 Z" fill="var(--color-cobalt)"/>` +
-      [...Array(11)].map((_, i) => `<path d="${pathOf(starPoints(21 + i * 18, 71, 3.6, 8, 2, ROT8))}" fill="var(--color-gold)"/>`).join('') + `</svg>`;
+    const rows = [[28, 29, 30], [25, 26, 27], [22, 23, 24], [19, 20, 21], [16, 17, 18]];
+    const cap = `<svg class="cap" viewBox="0 0 252 70" aria-hidden="true">` +
+      `<rect x="125" y="0" width="2" height="6" fill="var(--color-gold)"/><path d="M93 26 a33 22 0 0 1 66 0 Z" fill="var(--color-turquoise)" stroke="var(--color-cobalt)" stroke-width="2"/>` +
+      `<rect x="93" y="26" width="66" height="28" fill="var(--color-surface)" stroke="var(--color-cobalt)" stroke-width="2"/>` +
+      [100, 119, 138].map((x) => `<path d="M${x} 52 V39 a7 7 0 0 1 14 0 V52" fill="var(--color-cobalt-deep)"/>`).join('') +
+      `<path d="M0 54 H252 L242 70 H10 Z" fill="var(--color-cobalt)"/>` +
+      [...Array(13)].map((_, i) => `<path d="${pathOf(starPoints(18 + i * 18, 62, 3.4, 8, 2, ROT8))}" fill="var(--color-gold)"/>`).join('') + `</svg>`;
     const shaft = rows.map((r, i) => `${i ? '<div class="ringb"></div>' : ''}<div class="lrow">${r.map((lv) => cellHTML(lv)).join('')}</div>`).join('');
     return `<div class="mnr" style="${scale !== 1 ? `zoom:${scale}` : ''}">${cap}<div class="shaft">${shaft}<div class="ringb"></div></div><div class="base"></div><div class="ground"></div></div>`;
+  }
+  // Registon: three portals of five cells each (106–110, 111–115, 116–120), climbing upward.
+  function registonHTML() {
+    const col = (a) => [4, 3, 2, 1, 0].map((k) => cellHTML(a + k)).join('');
+    const dome = (cx, r, h) => `<path d="M${cx - r} 64 a${r} ${h} 0 0 1 ${2 * r} 0 Z" fill="var(--color-turquoise)" stroke="var(--color-cobalt)" stroke-width="2"/><rect x="${cx - 1}" y="${64 - h - 8}" width="2" height="8" fill="var(--color-gold)"/>`;
+    return `<div class="reg"><svg class="domes" viewBox="0 0 330 64" aria-hidden="true">${dome(77, 26, 24)}${dome(165, 34, 34)}${dome(253, 26, 24)}` +
+      `<rect x="26" y="10" width="7" height="54" fill="var(--color-turquoise-pale)" stroke="var(--color-cobalt)" stroke-width="1.5"/><rect x="297" y="10" width="7" height="54" fill="var(--color-turquoise-pale)" stroke="var(--color-cobalt)" stroke-width="1.5"/></svg>` +
+      `<div class="portals"><div class="portal">${col(106)}</div><div class="portal mid">${col(111)}</div><div class="portal">${col(116)}</div></div><div class="base"></div><div class="ground"></div></div>`;
   }
   const legend = () => `<div class="legend"><span><i style="background:var(--color-surface)"></i>1 ★</span><span><i style="background:var(--color-turquoise)"></i>2 ★</span><span><i style="background:var(--color-gold)"></i>3 ★</span><span><i style="border:3px solid var(--color-gold)"></i>next</span><span><i style="border-style:dashed;border-color:var(--color-text-muted)"></i>locked</span></div>`;
 
   /* ---------- screens: each returns the inside of a device ---------- */
   const J_ICON = `<svg class="gi" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="12" width="14" height="16" rx="3" fill="none" stroke="var(--color-cobalt)" stroke-width="2"/><rect x="24" y="12" width="14" height="16" rx="3" fill="none" stroke="var(--color-cobalt)" stroke-width="2"/><path d="${pathOf(starPoints(20, 20, 8, 8, 2, ROT8))}" fill="var(--color-gold)"/></svg>`;
   const lockCard = (n, sub) => `<div class="gcard lock"><h4>${n}</h4><span class="sub">${sub}</span><span class="soon">${I.lock} Soon</span></div>`;
-  const readyCard = () => `<div class="ready">` +
-    `<span class="eyebrow">Minora · level</span><div class="big-lvl">${starOcta()}<span>17</span></div>` +
+  const readyCard = (lv = 24) => `<div class="ready">` +
+    `<span class="eyebrow">${CH.find((c) => lv >= c[2] && lv <= c[3])[0]} · level</span><div class="big-lvl">${starOcta()}<span${lv > 99 ? ' style="font-size:44px"' : ''}>${lv}</span></div>` +
     `<h2>Tayyormisiz?</h2>` +
-    `<div class="facts"><div class="fact"><span class="eyebrow">Pairs</span><b>6</b></div><div class="fact"><span class="eyebrow">Par</span><b>0:45</b></div><div class="fact"><span class="eyebrow">Best</span><b>—</b></div></div>` +
+    `<div class="facts"><div class="fact"><span class="eyebrow">Pairs</span><b>${lv > 105 ? 12 : 6}</b></div><div class="fact"><span class="eyebrow">Par</span><b>${lv > 105 ? '1:20' : '0:45'}</b></div><div class="fact"><span class="eyebrow">Best</span><b>—</b></div></div>` +
     `<div class="chips"><span class="chip">TR <span class="muted">Türkçe</span></span><span class="chip">→ Lotin</span></div>` +
     `<div class="btn pri" role="button" style="width:100%">${I.play} Start</div></div>`;
   const SCREENS = {
     home: (desk) => {
-      const juft = `<div class="gcard" role="button">${J_ICON}<h4>Juft</h4><span class="sub">Match the pairs</span><div class="prog"><span>Level 17 · Minora</span><span>${starsS(2)} 39 ★</span></div></div>`;
+      const juft = `<div class="gcard" role="button">${J_ICON}<h4>Juft</h4><span class="sub">Match the pairs</span><div class="prog"><span>Level 24 · Minora</span><span>${starsS(2)} 58 ★</span></div></div>`;
       const others = `<div class="locks">${lockCard('Qoʻsh', 'Build words')}${lockCard('Wordfall', 'Zap it')}${lockCard('Eshit', 'Hear it')}</div>`;
-      const cta = `<div class="btn pri" role="button">${I.play} Davom et <small>· Juft, level 17</small></div>`;
+      const cta = `<div class="btn pri" role="button">${I.play} Davom et <small>· Juft, level 24</small></div>`;
       const hello = `<div class="hello"><h2>Salom!</h2><p>Pick a game, or carry on where you stopped.</p></div>`;
-      const body = desk ? `<div class="home-grid"><div class="col-c" style="max-width:none">${hello}${juft}${cta}</div><div class="col-c" style="max-width:none"><span class="eyebrow">Coming later</span>${others}<div class="card"><span class="eyebrow">Your facade</span>${chaptersHTML()}</div></div></div>`
+      const body = desk ? `<div class="home-grid"><div class="col-c" style="max-width:none">${hello}${juft}${cta}</div><div class="col-c" style="max-width:none"><span class="eyebrow">Coming later</span>${others}<div class="card"><span class="eyebrow">Your city</span>${skylineHTML(24)}</div></div></div>`
         : `${hello}${juft}${cta}<span class="eyebrow">Coming later</span>${others}`;
       return `${bg()}${appbar('Uzbekible', { brand: 1, gear: 1 }, desk)}<main>${body}</main>`;
     },
-    map: (desk) => {
-      const meta = `<span class="meta">${miniStar('var(--color-gold)', 'none')}39</span>`;
-      if (desk) return `${bg()}${appbar('Juft', { back: 1, meta }, true)}<main><div class="split">${chaptersHTML()}<div style="display:flex;flex-direction:column;gap:12px;min-height:0">${minaretHTML(1.06)}${legend()}</div><div class="card" style="align-self:center">${readyCard()}</div></div></main>`;
-      return `${bg()}${appbar('Juft', { back: 1, meta })}<main style="gap:12px">${chaptersHTML()}${minaretHTML()}${legend()}<div class="btn pri" role="button">${I.play} Level 17</div></main>`;
+    map: (desk, o) => {
+      const late = o && o.late; CUR = late ? 113 : 24;
+      const meta = `<span class="meta">${miniStar('var(--color-gold)', 'none')}${late ? 298 : 58}</span>`;
+      const facade = late ? registonHTML() : minaretHTML();
+      let out;
+      if (desk) out = `${bg()}${appbar('Juft', { back: 1, meta }, true)}<main><div class="split">${chListHTML(CUR)}<div style="display:flex;flex-direction:column;gap:12px;min-height:0">${late ? facade : minaretHTML(1.04)}${legend()}</div><div class="card" style="align-self:center">${readyCard(CUR)}</div></div></main>`;
+      else out = `${bg()}${appbar('Juft', { back: 1, meta })}<main style="gap:10px">${skylineHTML(CUR)}${facade}${legend()}<div class="btn pri" role="button">${I.play} Level ${CUR}</div></main>`;
+      CUR = 24; return out;
     },
     ready: () => `${bg()}${appbar('Juft', { back: 1 })}<main>${readyCard()}</main>`,
     count: (desk, o) => {
       const backs = Array(6).fill(0).map(() => ['tr', 'k', 'k', 'x']);
-      const b = boardHTML(backs, { L: { 0: 'back', 1: 'back', 2: 'back', 3: 'back', 4: 'back', 5: 'back' }, R: { 0: 'back', 1: 'back', 2: 'back', 3: 'back', 4: 'back', 5: 'back' }, avail: desk ? 560 : 600 });
+      const b = boardHTML(backs, { L: { 0: 'back', 1: 'back', 2: 'back', 3: 'back', 4: 'back', 5: 'back' }, R: { 0: 'back', 1: 'back', 2: 'back', 3: 'back', 4: 'back', 5: 'back' }, avail: desk ? 664 : 628 });
       return `${bg()}${hudHTML({ time: '0:00', score: 0 }, desk)}${band(desk ? 1280 : 390)}${b}<div class="overlay"><div class="count">${starOcta()}<span class="${o.go ? 'go' : ''}"${o.go ? ' lang="uz-Latn"' : ''}>${o.go ? 'Boshla!' : '3'}</span></div></div>`;
     },
-    board: (desk, o) => `${bg()}${hudHTML(o.hud || {}, desk)}${band(desk ? 1280 : 390)}${o.pre || ''}${boardHTML(o.pairs, Object.assign({ avail: desk ? 560 : (o.pre ? 560 : 600) }, o.b))}${o.post || ''}`,
+    board: (desk, o) => `${bg()}${hudHTML(o.hud || {}, desk)}${band(desk ? 1280 : 390)}${o.pre || ''}${boardHTML(o.pairs, Object.assign({ avail: desk ? 664 : (o.pre ? 580 : 628) }, o.b))}${o.post || ''}`,
     pause: (desk) => {
       const backs = Array(6).fill(0).map(() => ['tr', 'k', 'k', 'x']);
       const all = { 0: 'back', 1: 'back', 2: 'back', 3: 'back', 4: 'back', 5: 'back' };
-      const b = boardHTML(backs, { L: all, R: all, done: [1, 4], avail: desk ? 560 : 600 });
+      const b = boardHTML(backs, { L: all, R: all, done: [1, 4], avail: desk ? 664 : 628 });
       return `${bg()}${hudHTML({ time: '0:19', score: 640, combo: 2 }, desk)}${band(desk ? 1280 : 390)}${b}<div class="overlay"><div class="ovcard"><span class="eyebrow">The clock is stopped</span><h3>Tanaffus</h3><p class="muted" style="font-size:14px">Tiles stay hidden until you resume.</p><div class="btn pri" role="button">${I.play} Resume</div><div class="btns"><div class="btn" role="button">${I.replay} Restart</div><div class="btn" role="button">${I.map} Map</div></div></div></div>`;
     },
     results: (desk, o) => {
       const s = o.stars;
       const heads = { 3: 'Barakalla!', 2: 'Yaxshi!', 1: 'Oʻtdingiz!' };
       const subs = { 3: 'Well done', 2: 'Good', 1: 'You passed' };
-      const card = `<div class="res"><span class="eyebrow">Level 17 · cleared</span><h2 lang="uz-Latn">${heads[s]}</h2><span class="muted" style="margin-top:-8px">${subs[s]}</span>` +
+      const card = `<div class="res"><span class="eyebrow">Level 24 · cleared</span><h2 lang="uz-Latn">${heads[s]}</h2><span class="muted" style="margin-top:-8px">${subs[s]}</span>` +
         `<div class="bigstars">${bigStar(s >= 1)}${bigStar(s >= 2, 'mid')}${bigStar(s >= 3)}</div>` +
         (o.best ? `<span class="ribbon">${miniStar('var(--on-gold)', 'none')}Yangi rekord! <small>· New best</small></span>` : '') +
         `<div class="bigscore">${num(o.score)}<small>points${o.best ? ' · was ' + num(o.was) : ' · best ' + num(o.was)}</small></div>` +
         `<div class="stats"><div class="stat"><b>${o.time}</b><span>time · par 0:45</span></div><div class="stat"><b>${o.mis}</b><span>mistakes</span></div><div class="stat"><b>${o.hints}</b><span>hints</span></div><div class="stat"><b>×${o.combo}</b><span>best combo</span></div></div>` +
-        `<div class="glazed">${cellHTML(17).replace('cell cur', 'cell s' + s).replace(/<svg class="pl"[\s\S]*?<\/svg>/, pips(s, 8))} Minora cell 17 glazed · level 18 open</div>` +
+        `<div class="glazed">${cellHTML(24).replace('cell cur', 'cell s' + s).replace(/<svg class="pl"[\s\S]*?<\/svg>/, pips(s, 8))} Minora cell 24 glazed · level 25 open</div>` +
         `<div class="btns"><div class="btn pri" role="button">Next ${I.next}</div><div class="btn" role="button">${I.replay} Replay</div><div class="btn" role="button">${I.map} Map</div></div></div>`;
       if (desk) {
-        return `${bg()}${hudHTML({ time: o.time, score: o.score, combo: o.combo }, true)}${band(1280)}${boardHTML(W.tr.slice(0, 6), { done: [0, 1, 2, 3, 4, 5], avail: 560 })}<div class="overlay"><div class="ovcard" style="width:440px;text-align:center">${card}</div></div>`;
+        return `${bg()}${hudHTML({ time: o.time, score: o.score, combo: o.combo }, true)}${band(1280)}${boardHTML(W.tr.slice(0, 6), { done: [0, 1, 2, 3, 4, 5], avail: 664 })}<div class="overlay"><div class="ovcard" style="width:440px;text-align:center">${card}</div></div>`;
       }
       return `${bg()}${appbar('Juft', { back: 1 })}<main>${card}</main>`;
     },
     fail: (desk) => {
-      const card = `<div class="res"><span class="eyebrow">Level 17 · three cracks</span><div class="cracked" role="img" aria-label="No lives left">${[0, 1, 2].map(() => life('cracked').replace('class="life"', 'class="life" style="width:64px;height:64px"')).join('')}</div><h2 lang="uz-Latn">Yana!</h2><p class="muted" style="margin-inline:auto">Again. No score is saved this time. You get the same six words in a new order.</p>` +
+      const card = `<div class="res"><span class="eyebrow">Level 24 · three cracks</span><div class="cracked" role="img" aria-label="No lives left">${[0, 1, 2].map(() => life('cracked').replace('class="life"', 'class="life" style="width:64px;height:64px"')).join('')}</div><h2 lang="uz-Latn">Yana!</h2><p class="muted" style="margin-inline:auto">Again. No score is saved this time. You get the same six words in a new order.</p>` +
         `<div class="stats" style="grid-template-columns:repeat(3,1fr)"><div class="stat"><b>4 / 6</b><span>pairs matched</span></div><div class="stat"><b>0:31</b><span>time</span></div><div class="stat"><b>3</b><span>mistakes</span></div></div>` +
         `<div class="btns"><div class="btn pri" role="button">${I.replay} Try again</div><div class="btn" role="button" style="grid-column:1/-1">${I.map} Map</div></div></div>`;
       if (desk) {
-        return `${bg()}${hudHTML({ time: '0:31', score: 380, lives: 0 }, true)}${band(1280)}${boardHTML(W.tr.slice(0, 6), { done: [0, 2, 4, 5], L: { 1: 'wrong dim', 3: 'dim' }, R: { 1: 'dim', 3: 'wrong dim' }, avail: 560 })}<div class="overlay"><div class="ovcard" style="width:440px">${card}</div></div>`;
+        return `${bg()}${hudHTML({ time: '0:31', score: 380, lives: 0 }, true)}${band(1280)}${boardHTML(W.tr.slice(0, 6), { done: [0, 2, 4, 5], L: { 1: 'wrong dim', 3: 'dim' }, R: { 1: 'dim', 3: 'wrong dim' }, avail: 664 })}<div class="overlay"><div class="ovcard" style="width:440px">${card}</div></div>`;
       }
       return `${bg()}${appbar('Juft', { back: 1 })}<main>${card}</main>`;
     },
@@ -756,17 +842,20 @@ table.tm tr.sub td { padding-top: 16px; font: 700 15px var(--font-display); colo
   };
 
   /* ---------- screen catalogue ---------- */
-  const tr6 = W.tr.slice(0, 6), tr3 = W.tr.slice(0, 3);
+  const tr6 = W.tr.slice(0, 6), tr3 = W.tr.slice(0, 3), tr10 = W.tr.slice(0, 10), tr12 = W.tr;
   const PHONE = [
     ['g-home', 'Home and game picker', 'Juft is the only live game; the others are dashed with a lock. "Davom et" (carry on) jumps straight to the next level.', [['home']]],
-    ['g-map', 'Level map: the Minora', 'Each chapter is a building, and its levels are the tiles of its facade. Levels climb from the base of the minaret to the lantern. Glaze depth shows stars, with pips as the non-colour cue. Every cell is 64 × 52 px.', [['map']]],
+    ['g-map', 'Level map: a city of eight buildings', 'The skyline at the top is the whole game: eight buildings, 15 levels each, 120 in all. Tap a building to see its facade; each level is one tile of it, climbing from the base upward. Glaze depth shows stars, with pips as the non-colour cue. Cells are 60 × 46 px. Shown at level 24 (Minora, chapter 2) and late in the game at level 113 (Registon, the 12-pair finale).', [['map', {}, 'Minora · levels 16–30'], ['map', { late: 1 }, 'Registon · levels 106–120']]],
     ['g-ready', 'Ready', 'Shell screen, so English is allowed. It shows what the level will ask: pair count, par time, best, and which languages and script are in play.', [['ready']]],
     ['g-count', 'Countdown', 'The board is laid out face down, so the player sees the shape of the level but no words. 3, 2, 1, then "Boshla!" (start), and the tiles turn over.', [['count', { go: 0 }, '“3”'], ['count', { go: 1 }, '“Boshla!”']]],
-    ['g-board', 'Board: 1, 3, 6 and 8 pairs', 'The HUD is numbers and icons only. Tile height scales with the pair count; the 8-pair board still gives 66 px tiles. Mid-play states shown: selected, cleared sockets, a crack with a life lost, the combo pill.', [
+    ['g-board', 'Board: from 1 pair up to 12', 'The HUD is numbers and icons only. Tile height scales with the pair count: 96 px for one pair, 66 px at 8, and 46 px at 12, still above the 44 px tap minimum. From 10 pairs the gaps tighten to 6 px and the type steps down to 17 px. At 12 pairs the scan itself is the challenge, and the content adds suffixed forms (evde ↔ uyda, geldim ↔ keldim). Mid-play states shown: selected, cleared sockets, a crack with a life lost, the combo pill.', [
       ['board', { hud: { level: 5, time: '0:02', score: 0, combo: 0 }, pairs: [HARD], b: { L: { 0: 'fresh' }, R: { 0: 'fresh' } }, pre: `<div class="fresh-tag" style="padding-top:28px" lang="uz-Latn">${miniStar('var(--color-turquoise)', 'var(--color-cobalt)')}Yangi naqsh</div>`, post: '' }, '1 pair · hard pair'],
-      ['board', { hud: { level: 2, time: '0:04', score: 100, combo: 0 }, pairs: tr3, b: { L: { 1: 'sel' } } }, '3 pairs · one selected'],
+      ['board', { hud: { level: 8, time: '0:04', score: 100, combo: 0 }, pairs: tr3, b: { L: { 1: 'sel' } } }, '3 pairs · one selected'],
       ['board', { hud: { time: '0:19', score: 640, combo: 3, delta: 140 }, pairs: tr6, b: { done: [1, 4], L: { 2: 'sel' }, R: { 5: 'focus' } } }, '6 pairs · combo ×3, focus ring'],
-      ['board', { hud: { level: 24, time: '0:41', score: 1180, lives: 2, delta: -20 }, pairs: W.tr, b: { done: [0, 5], L: { 3: 'wrong' }, R: { 1: 'wrong' } } }, '8 pairs · wrong, life cracks'],
+      ['board', { hud: { level: 58, time: '0:41', score: 1180, lives: 2, delta: -20 }, pairs: W.tr.slice(0, 8), b: { done: [0, 5], L: { 3: 'wrong' }, R: { 1: 'wrong' } } }, '8 pairs · wrong, life cracks'],
+      ['board', { hud: { level: 84, time: '0:52', score: 1460, combo: 2 }, pairs: tr10, b: { done: [2, 6, 9], L: { 4: 'sel' } } }, '10 pairs · Maqbara'],
+      ['board', { hud: { level: 112, time: '0:07', score: 0 }, pairs: tr12 }, '12 pairs · Registon, start'],
+      ['board', { hud: { level: 112, time: '1:04', score: 1980, combo: 4, lives: 2 }, pairs: tr12, b: { done: [0, 3, 6, 9, 11], L: { 7: 'sel' }, R: { 1: 'focus' } } }, '12 pairs · mid-play'],
       ['board', { hud: { time: '0:12', score: 395, delta: -5 }, pairs: tr6, b: { done: [0], R: { 2: 'hint' } } }, 'Long-press hint (the only English)'],
     ]],
     ['g-pause', 'Pause', 'The timer stops and every live tile turns face down at once, in every motion setting, so pausing can never be used to study the board. Cleared sockets stay visible.', [['pause']]],
@@ -781,7 +870,9 @@ table.tm tr.sub td { padding-top: 16px; font: 700 15px var(--font-display); colo
   const DESK = [
     ['Home', 'home', {}], ['Level map with ready card', 'map', {}], ['Countdown', 'count', { go: 0 }],
     ['Board · 6 pairs', 'board', { hud: { time: '0:19', score: 640, combo: 3, delta: 140 }, pairs: tr6, b: { done: [1, 4], L: { 2: 'sel' } } }],
-    ['Board · 8 pairs, mixed languages', 'board', { hud: { level: 24, time: '0:41', score: 1180, lives: 2 }, pairs: [['телефон', 'telefon', 'телефон', 'phone', 'ru'], ['باغ', 'bogʻ', 'боғ', 'garden', 'fa'], ['göz', 'koʻz', 'кўз', 'eye', 'tr'], ['كتاب', 'kitob', 'китоб', 'book', 'ar'], ['su', 'suv', 'сув', 'water', 'tr'], ['دوست', 'doʻst', 'дўст', 'friend', 'fa'], ['поезд', 'poyezd', 'поезд', 'train', 'ru'], ['dağ', 'togʻ', 'тоғ', 'mountain', 'tr']], b: { badges: 1, done: [2] } }],
+    ['Board · 8 pairs, mixed languages', 'board', { hud: { level: 58, time: '0:41', score: 1180, lives: 2 }, pairs: [['телефон', 'telefon', 'телефон', 'phone', 'ru'], ['باغ', 'bogʻ', 'боғ', 'garden', 'fa'], ['göz', 'koʻz', 'кўз', 'eye', 'tr'], ['كتاب', 'kitob', 'китоб', 'book', 'ar'], ['su', 'suv', 'сув', 'water', 'tr'], ['دوست', 'doʻst', 'дўст', 'friend', 'fa'], ['поезд', 'poyezd', 'поезд', 'train', 'ru'], ['dağ', 'togʻ', 'тоғ', 'mountain', 'tr']], b: { badges: 1, done: [2] } }],
+    ['Board · 12 pairs', 'board', { hud: { level: 112, time: '1:04', score: 1980, combo: 4, lives: 2 }, pairs: tr12, b: { done: [0, 3, 6, 9, 11], L: { 7: 'sel' } } }],
+    ['Late-game map: Registon', 'map', { late: 1 }],
     ['Pause', 'pause', {}],
     ['Results · 3 ★, new best', 'results', { stars: 3, best: 1, score: 1420, was: 1180, time: '0:38', mis: 0, hints: 0, combo: 6 }],
     ['Fail', 'fail', {}], ['Settings', 'settings', {}],
@@ -796,7 +887,7 @@ table.tm tr.sub td { padding-top: 16px; font: 700 15px var(--font-display); colo
     `<div class="group" id="${id}"><div class="group-head"><h3>${title}</h3><p class="muted" style="font-size:15px">${why}</p></div><div class="frames">` +
     list.map(([k, o, cap]) => ['light', 'dark'].map((t) => frame(k, t, false, o, cap || title)).join('')).join('') + `</div></div>`).join('');
   document.getElementById('desk-groups').innerHTML = DESK.map(([title, k, o]) =>
-    `<div class="group" id="d-${k}${o.pairs && o.pairs.length === 8 ? '-8' : ''}"><div class="group-head"><h3>${title}</h3></div><div class="frames desk-frames">${['light', 'dark'].map((t) => frame(k, t, true, o, title)).join('')}</div></div>`).join('');
+    `<div class="group" id="d-${k}${o.pairs && o.pairs.length !== 6 ? '-' + o.pairs.length : ''}${o.late ? '-late' : ''}"><div class="group-head"><h3>${title}</h3></div><div class="frames desk-frames">${['light', 'dark'].map((t) => frame(k, t, true, o, title)).join('')}</div></div>`).join('');
 
   /* ---------- board samples ---------- */
   const SAMPLES = [
@@ -855,6 +946,10 @@ table.tm tr.sub td { padding-top: 16px; font: 700 15px var(--font-display); colo
   ];
   document.getElementById('storyboards').innerHTML = STORY.map(([title, sub, motion, rm]) =>
     `<div class="sbrow"><h3>${title} <small>${sub}</small></h3><div class="sbstrip">${motion.join('')}</div><span class="rmtag">Reduced motion</span><div class="sbstrip">${rm.join('')}</div></div>`).join('');
+
+  /* ---------- curve table ---------- */
+  document.getElementById('curve-table').innerHTML = '<thead><tr><th></th><th>Chapter</th><th>Levels</th><th>Pairs</th><th>Content</th></tr></thead><tbody>' +
+    CH.map((c, i) => `<tr${i === 7 ? ' class="top"' : ''}><td class="ico">${sil(c[1], 'done')}</td><td>${i + 1}. ${c[0]}</td><td class="ms">${c[2]}–${c[3]}</td><td class="ms">${c[4]}</td><td>${c[5]}</td></tr>`).join('') + '</tbody>';
 
   /* ---------- timings table ---------- */
   const TM = [

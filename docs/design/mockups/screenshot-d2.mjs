@@ -40,7 +40,7 @@ await wide.close();
 
 // Page sections on desktop.
 const desk = await open(1280, 900, 'light');
-for (const id of ['flow', 'samples', 'story', 'try', 'timings', 'decisions']) await desk.locator(`#${id}`).screenshot({ path: join(out, `D2-section-${id}.png`) });
+for (const id of ['flow', 'curve', 'samples', 'story', 'try', 'timings', 'decisions']) await desk.locator(`#${id}`).screenshot({ path: join(out, `D2-section-${id}.png`) });
 await desk.close();
 
 // The page itself on a phone, in the viewer's dark theme.

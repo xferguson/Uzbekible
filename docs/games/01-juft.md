@@ -35,15 +35,26 @@ crack your tiles, clear the level, and watch your mosaic grow. No lessons, just 
 | Pause | Pausing freezes the timer and **hides the tiles** (so pausing can't be used to cheat) |
 
 ## Level progression (initial curve, validated by simulation)
-| Levels | Pairs on board | Content |
-|---|---|---|
-| 1 | 1 | Very transparent cognates (men ↔ ben) |
-| 2–3 | 2 | Pronouns, numbers |
-| 4–10 | 3 → 5 | Top-frequency cognates and shared loans |
-| every ~5th | 1 | A **hard pair**: an irregular or opaque cognate (ev ↔ uy), as a breather that teaches |
-| 11–30 | 5 → 8 | More frequency bands. Lower-"transparency" pairs come in gradually |
-| 31+ | 6 → 8 | **Suffixed forms** (evde ↔ uyda, geldim ↔ keldim) mixed with lemmas |
+120 levels in eight chapters of 15. Each chapter is one building on the level map. The board grows to a maximum of
+**12 pairs** (12 source tiles × 12 Uzbek tiles); after that, difficulty comes from content and par time, not size.
+Revised in D2 at the user's request (was 8 pairs maximum).
 
+| Chapter | Levels | Pairs on board | Content |
+|---|---|---|---|
+| 1 Gumbaz (dome) | 1–15 | 1 → 4 | Very transparent cognates (men ↔ ben), pronouns, numbers |
+| 2 Minora (minaret) | 16–30 | 4 → 6 | Top-frequency cognates and shared loans |
+| 3 Ayvon (iwan) | 31–45 | 6 → 7 | Next frequency bands; lower-"transparency" pairs come in gradually |
+| 4 Darvoza (gate) | 46–60 | 7 → 8 | Russian, Persian and Arabic loans in the mix |
+| 5 Madrasa | 61–75 | 8 → 9 | **Suffixed forms** begin (evde ↔ uyda, geldim ↔ keldim), mixed with lemmas |
+| 6 Maqbara (mausoleum) | 76–90 | 9 → 10 | More suffixed forms; opaque cognates |
+| 7 Masjid (mosque) | 91–105 | 10 → 11 | Lower transparency, shorter par time |
+| 8 Registon | 106–120 | 12 | Full board: hardest transparency mix, highest suffixed share, tightest par |
+| every ~5th | | 1 | A **hard pair**: an irregular or opaque cognate (ev ↔ uy), as a breather that teaches |
+
+- **Board fit:** all pairs are always on screen; the board never scrolls. On a 390 × 844 phone, 12 pairs give
+  46 px tiles (gaps 6 px, tile type 17 px from 10 pairs up). Tiles never go below 44 px. See the D2 mockup.
+- **Content volume:** 120 levels average about 8 pairs, roughly 950 board slots. The top-1000 lemmas plus the
+  suffixed-forms set cover this, with `core/scheduler` re-showing missed items.
 - **Item order:** Uzbek frequency rank (top 1000), filtered to items with at least one source in the **enabled**
   source languages. Items the player missed are re-shown by `core/scheduler` in later levels.
 - **Difficulty knobs** (`core/difficulty`): pair count, the "transparency" mix (from `core/similarity`), par

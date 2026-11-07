@@ -204,6 +204,8 @@ _(no exports yet)_
 - `RosetteBand({ width, height, className }: RosetteBandProps): import("react").JSX.Element` - Horizontal band: alternating stars in octagon frames with gold diamonds between, on cobalt-deep.
 - `RosetteBandProps` { width?: number; height?: number; className?: string }
 - `Score({ value, script }: Common & { value: number; }): import("react").JSX.Element`
+- `ScreenBar({ title, onBack, onHome, script }: ScreenBarProps): import("react").JSX.Element` - Top bar on every screen but home, so there is always a visible way out.
+- `ScreenBarProps` { title?: string; onBack: () => void; onHome?: () => void; script?: Script }
 - `Script` = `'latn' | 'cyrl'` - Uzbek script a label is shown in.
 - `ScriptProvider({ script, children }: { script: UzScript; children: ReactNode; }): import("react").JSX.Element` - Supplies the player's Uzbek script setting to every `UzText` below.
 - `SettingsPanel(p: SettingsPanelProps): import("react").JSX.Element`

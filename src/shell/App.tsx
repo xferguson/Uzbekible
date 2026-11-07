@@ -7,7 +7,7 @@ import type { StorageBackend } from '@core/storage';
 import { getGame, GAMES, type AnyGameDefinition } from '@games/registry';
 import { registerJuft } from '@games/juft/definition';
 import type { GameSettings } from '@games/types';
-import { LevelMap, SettingsPanel, type Script } from '@ui/index';
+import { LevelMap, ScreenBar, SettingsPanel, type Script } from '@ui/index';
 import { label } from '../ui/labels';
 import { isGalleryPath } from '../dev/gallery/route';
 import { GameShell } from './GameShell';
@@ -113,9 +113,7 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
   if (screen.name === 'settings') {
     body = (
       <main className={styles.page}>
-        <button type="button" className={styles.secondary} onClick={home}>
-          {t('Orqaga')}
-        </button>
+        <ScreenBar onBack={home} script={script} />
         <SettingsPanel
           languages={settings.languages}
           script={settings.script}
@@ -140,19 +138,28 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
       body = null;
     } else if (screen.name === 'play') {
       const { level } = screen;
+      const toMap = () => setScreen({ name: 'map', gameId: def.id });
       body = (
-        <GameShell
-          definition={def}
-          level={level}
-          settings={gameSettings}
-          history={log.aggregates()}
-          clock={clock}
-          progress={progress}
-          log={log}
-          countdownMs={countdownMs}
-          onNext={() => setScreen({ name: 'play', gameId: def.id, level: level + 1 })}
-          onMap={() => setScreen({ name: 'map', gameId: def.id })}
-        />
+        <main className={`${styles.page} ${styles.wide}`}>
+          <ScreenBar
+            title={script === 'cyrl' ? def.title.uzCyrl : def.title.uzLatn}
+            onBack={toMap}
+            onHome={home}
+            script={script}
+          />
+          <GameShell
+            definition={def}
+            level={level}
+            settings={gameSettings}
+            history={log.aggregates()}
+            clock={clock}
+            progress={progress}
+            log={log}
+            countdownMs={countdownMs}
+            onNext={() => setScreen({ name: 'play', gameId: def.id, level: level + 1 })}
+            onMap={toMap}
+          />
+        </main>
       );
     } else {
       body = (
@@ -220,9 +227,11 @@ function MapScreen({
   const chapters = def.chapters ?? [{ id: def.id, name: def.title.uzLatn, levels: 30 }];
   return (
     <main className={styles.page}>
-      <button type="button" className={styles.secondary} onClick={onBack}>
-        {label(script, 'Orqaga')}
-      </button>
+      <ScreenBar
+        title={script === 'cyrl' ? def.title.uzCyrl : def.title.uzLatn}
+        onBack={onBack}
+        script={script}
+      />
       <LevelMap chapters={chapters} progress={current} script={script} onSelect={onSelect} />
     </main>
   );

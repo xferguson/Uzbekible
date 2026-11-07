@@ -75,3 +75,13 @@ test('results: the card and its buttons fit on a phone', async ({ page }) => {
   await expectNoHorizontalOverflow(page);
   await expectInsideViewport(page, 'h2, dt, dd, button');
 });
+
+test('a way out stays visible on every screen, even over the pause overlay', async ({ page }) => {
+  await page.getByRole('button', { name: 'Juft' }).click();
+  await expect(page.getByRole('button', { name: 'Orqaga' })).toBeVisible();
+  await page.getByRole('button', { name: '1-daraja, joriy' }).click();
+  await expect(page.getByTestId('col-left')).toBeVisible({ timeout: 10_000 });
+  await page.getByRole('button', { name: 'Pauza' }).click();
+  await page.getByRole('button', { name: 'Bosh sahifa' }).click();
+  await expect(page.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeVisible();
+});

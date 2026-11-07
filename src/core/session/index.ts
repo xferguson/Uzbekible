@@ -18,8 +18,7 @@ export interface Rules<S, A> {
 }
 
 export type SessionEvent =
-  | { type: 'phase'; phase: Phase; at: number }
-  | (RulesEvent & { at: number });
+  { type: 'phase'; phase: Phase; at: number } | (RulesEvent & { at: number });
 
 export interface SessionState<S> {
   phase: Phase;
@@ -51,7 +50,8 @@ export interface Session<S, A> {
 
 export function createSession<S, A>(opts: SessionOptions<S, A>): Session<S, A> {
   const { rules, clock, countdownMs } = opts;
-  if (!Number.isInteger(opts.lives) || opts.lives < 1) throw new RangeError('lives must be an integer >= 1');
+  if (!Number.isInteger(opts.lives) || opts.lives < 1)
+    throw new RangeError('lives must be an integer >= 1');
   if (!(countdownMs >= 0)) throw new RangeError('countdownMs must be >= 0');
 
   let phase: Phase = 'ready';

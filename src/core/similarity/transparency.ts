@@ -40,7 +40,8 @@ export function bestMatch(
   let best: Match | undefined;
   candidates.forEach((value, index) => {
     const d = letterDistance(typed, lettersOf(value, script));
-    if (d <= threshold && (best === undefined || d < best.distance)) best = { value, index, distance: d };
+    if (d <= threshold && (best === undefined || d < best.distance))
+      best = { value, index, distance: d };
   });
   return best;
 }

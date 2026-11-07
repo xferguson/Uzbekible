@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { createFakeClock, frameLoop, systemClock } from './index';
+import { FRAME_MS, createFakeClock, frameLoop, systemClock, type FrameClock } from './index';
 
 describe('createFakeClock', () => {
   it('starts at the given time and advances', () => {
@@ -74,5 +74,78 @@ describe('systemClock', () => {
     } finally {
       vi.useRealTimers();
     }
+  });
+});
+
+describe('systemClock without requestAnimationFrame', () => {
+  it('uses requestAnimationFrame when the platform has it, and cancels via cancelAnimationFrame', () => {
+    const raf = vi.fn((cb: FrameRequestCallback) => {
+      cb(0);
+      return 7;
+    });
+    const caf = vi.fn();
+    vi.stubGlobal('requestAnimationFrame', raf);
+    vi.stubGlobal('cancelAnimationFrame', caf);
+    try {
+      const cb = vi.fn();
+      const cancel = systemClock.requestFrame(cb);
+      expect(raf).toHaveBeenCalledTimes(1);
+      expect(cb).toHaveBeenCalledTimes(1);
+      cancel();
+      expect(caf).toHaveBeenCalledWith(7);
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+});
+
+describe('systemClock on a platform with only timers', () => {
+  it('falls back to setTimeout and clearTimeout', () => {
+    vi.useFakeTimers();
+    vi.stubGlobal('requestAnimationFrame', undefined);
+    try {
+      const cb = vi.fn();
+      systemClock.requestFrame(cb);
+      vi.advanceTimersByTime(FRAME_MS);
+      expect(cb).toHaveBeenCalledTimes(1);
+      const cb2 = vi.fn();
+      systemClock.requestFrame(cb2)();
+      vi.advanceTimersByTime(100);
+      expect(cb2).not.toHaveBeenCalled();
+    } finally {
+      vi.unstubAllGlobals();
+      vi.useRealTimers();
+    }
+  });
+});
+
+describe('frameLoop on a clock whose cancel is a no-op', () => {
+  it('ignores a frame that still fires after stop', () => {
+    let fire: (now: number) => void = () => {};
+    const clock: FrameClock = {
+      now: () => 0,
+      requestFrame(cb) {
+        fire = cb;
+        return () => {};
+      },
+    };
+    const cb = vi.fn();
+    const stop = frameLoop(clock, cb);
+    stop();
+    fire(16);
+    expect(cb).not.toHaveBeenCalled();
+  });
+});
+
+describe('frameLoop stopped from inside its own callback', () => {
+  it('does not schedule another frame', () => {
+    const clock = createFakeClock();
+    let calls = 0;
+    const stop = frameLoop(clock, () => {
+      calls += 1;
+      stop();
+    });
+    clock.advance(100);
+    expect(calls).toBe(1);
   });
 });

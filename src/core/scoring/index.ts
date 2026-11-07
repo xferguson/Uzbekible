@@ -27,7 +27,8 @@ export interface ScoringConfig {
 export type Stars = 0 | 1 | 2 | 3;
 
 function assertCount(name: string, value: number): void {
-  if (!Number.isFinite(value) || value < 0) throw new RangeError(`${name} must be a finite number >= 0`);
+  if (!Number.isFinite(value) || value < 0)
+    throw new RangeError(`${name} must be a finite number >= 0`);
 }
 
 function timePoints(timeMs: number, config: ScoringConfig): number {

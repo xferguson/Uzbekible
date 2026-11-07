@@ -90,4 +90,37 @@ settings), with Uzbek flourishes ("Barakalla!" = well done, "Yana!" = again). **
 5. A sample screen (home) to show everything together.
 
 ## Approved decisions
-_(Filled in when the user approves D1.)_
+Approved by the user on 2026-11-07 (task D1, PR #5). Reference mockup: `mockups/D1-design-system.html`.
+These values override the proposals in §3, §4 and §6 where they differ.
+
+**Palette.** The tokens in §3, with these changes from the contrast check (`mockups/contrast.mjs`, all 30 pairs pass):
+| Token | Light | Dark | Note |
+|---|---|---|---|
+| `--color-gold` | `#B08423` | `#E2B54C` | light was `#C99A2E` (2.58:1 on white) |
+| `--color-cobalt` | `#1B3F8F` | `#5B86E8` | dark was `#3E6BD6` (3.06:1 on surface) |
+| `--color-on-cobalt` | `#FFFFFF` | `#0A1838` | new: labels on cobalt fills |
+| `--color-on-deep` | `#FFFFFF` | `#EEF2FA` | new: text on cobalt-deep panels and headers |
+
+Gold never sits on cobalt in the light theme (2.86:1); it goes on cobalt-deep instead.
+
+**Fonts.** Noto Serif Display for display, Noto Sans for UI and Latin/Cyrillic tiles, Noto Naskh Arabic for Arabic and
+Vazirmatn for Persian. Philosopher is rejected: it has no ʻ (U+02BB) or ҳ.
+Type scale: display 40/44, title 28/34, tile 20/24 at weight 600, body 16/24, label 12 in capitals with +8% tracking.
+
+**Signature star.** An 8-point {8/2} khatam outline, a {8/3} turquoise interlace and a gold octagon centre. It marks a
+match, stars earned and the app icon. 10- and 12-fold rosettes come from the same star-polygon function (`core/motif`).
+
+**Tile.** 14 px radius, 2 px cobalt border, 1 px inner glaze highlight. Every state carries a shape cue as well as a colour:
+- selected: 3 px gold border, a 3 px lift and a corner star
+- matched: star outline, then the tile dissolves
+- wrong: crack lines and a shake
+- disabled or cleared: dashed outline, faded
+- focus: 3 px cobalt ring at a 3 px offset
+
+The English gloss appears only in the long-press hint, which costs points.
+
+**Background.** Star-and-cross line lattice at 7–10% strength, never behind running text. A rosette band frames the app bar.
+
+**Motion.** As in §7. With reduced motion, animations become instant state changes with the same shape cues, and nothing shakes.
+
+**App icon.** Concept A, the pure star (signature star on glaze white, inside the maskable safe zone). D3 produces the final set.

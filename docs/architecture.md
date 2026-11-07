@@ -58,3 +58,9 @@ shell  ──►  games/*  ──►  ui  ──►  design
 | Design | `design-mockup` skill + `docs/design/brief.md` + the `needs-approval` gate |
 | New game | `new-game-scaffold` skill |
 | Balance | `core/sim` + `game-balance-tuning` skill |
+
+## Quality gates (enforced in CI)
+- **Boundaries:** `eslint.config.js` encodes the rules above with `eslint-plugin-boundaries`; `scripts/lint-boundaries.test.ts` proves a bad import is reported. A new top-level folder or game must be classified there.
+- **Accessibility:** `eslint-plugin-jsx-a11y` (recommended) runs on all `.tsx`.
+- **Coverage:** `vite.config.ts` thresholds fail `npm test -- --coverage` below 95% lines and branches for `src/core/**` and 80% for `src/ui/**`. Never lower them.
+- **Property tests:** invariants go in `<module>.property.test.ts` next to the unit test, using `fast-check` with a fixed `seed` (see `src/core/_example/`).

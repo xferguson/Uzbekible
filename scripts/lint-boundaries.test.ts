@@ -66,3 +66,24 @@ describe('jsx-a11y', () => {
     expect(m.some((x) => x.startsWith('jsx-a11y/alt-text'))).toBe(true);
   });
 });
+
+describe('Node-runnable imports (Q1)', () => {
+  const extensionless = async (filePath: string, code: string) =>
+    (await messages(filePath, code)).some((m) => m.startsWith('no-restricted-syntax'));
+
+  it('rejects extensionless relative imports in core and games', async () => {
+    expect(await extensionless('src/core/text/x.ts', "import { a } from './index';\n")).toBe(true);
+    expect(await extensionless('src/core/text/x.ts', "import { a } from '../random';\n")).toBe(true);
+    expect(await extensionless('src/core/text/x.ts', "export { a } from './rules';\n")).toBe(true);
+    expect(await extensionless('src/core/text/x.ts', "export * from './rules';\n")).toBe(true);
+    expect(await extensionless('src/games/juft/x.ts', "import type { A } from '../../core/session';\n")).toBe(true);
+  });
+  it('accepts explicit .ts extensions and package or alias specifiers', async () => {
+    expect(await extensionless('src/core/text/x.ts', "import { a } from './index.ts';\n")).toBe(false);
+    expect(await extensionless('src/core/text/x.ts', "import { a } from '../random/index.ts';\n")).toBe(false);
+    expect(await extensionless('src/games/juft/x.tsx', "import { a } from 'react';\n")).toBe(false);
+  });
+  it('does not apply outside core and games', async () => {
+    expect(await extensionless('src/ui/x.ts', "import { a } from './index';\n")).toBe(false);
+  });
+});

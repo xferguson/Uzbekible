@@ -1,8 +1,8 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
-import { createRng } from '../../core/random';
-import { createSession, tallyScoreInput, type SessionEvent } from '../../core/session';
-import { createJuftRules, type JuftEvent, type JuftAction } from './rules';
+import { createRng } from '../../core/random/index.ts';
+import { createSession, tallyScoreInput, type SessionEvent } from '../../core/session/index.ts';
+import { createJuftRules, type JuftEvent, type JuftAction } from './rules.ts';
 
 const ids = ['a', 'b', 'c', 'd', 'e'];
 const sides = fc.constantFrom('left' as const, 'right' as const);

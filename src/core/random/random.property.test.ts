@@ -1,6 +1,6 @@
 import fc from 'fast-check';
 import { describe, it } from 'vitest';
-import { createRng, sample, shuffle, weightedPick } from './index';
+import { createRng, sample, shuffle, weightedPick } from './index.ts';
 
 const opts = { seed: 20240607, numRuns: 200 };
 const sorted = (xs: number[]) => [...xs].sort((a, b) => a - b);

@@ -1,4 +1,4 @@
-import { canonicalizeUz, toLetters, type UzScript } from '../text';
+import { canonicalizeUz, toLetters, type UzScript } from '../text/index.ts';
 
 /** Game letters of a word after NFC, canonical Uzbek apostrophes and lower-casing. */
 export function lettersOf(word: string, script: UzScript = 'uz-Latn'): string[] {

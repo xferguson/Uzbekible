@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { makeItem } from './fixtures';
-import { ItemSchema, type Item } from './schema';
-import { boardPool, validateItems, type IssueCode } from './validate';
-import { buildPack, serializePack } from './build';
-import { loadItems } from './load';
-import { itemConfidence, renderReview } from './review';
+import { makeItem } from './fixtures.ts';
+import { ItemSchema, type Item } from './schema.ts';
+import { boardPool, validateItems, type IssueCode } from './validate.ts';
+import { buildPack, serializePack } from './build.ts';
+import { loadItems } from './load.ts';
+import { itemConfidence, renderReview } from './review.ts';
 
 const codes = (items: unknown[]): IssueCode[] => validateItems(items).issues.map((i) => i.code);
 const src = (over: Partial<Item['sources'][number]>): Item['sources'] => [

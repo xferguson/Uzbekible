@@ -1,6 +1,6 @@
 import fc from 'fast-check';
 import { describe, it } from 'vitest';
-import { paramsFor, type DifficultyConfig } from './index';
+import { paramsFor, type DifficultyConfig } from './index.ts';
 
 const opts = { seed: 20240607, numRuns: 300 };
 

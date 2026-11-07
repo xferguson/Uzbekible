@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { FRAME_MS, createFakeClock, frameLoop, systemClock, type FrameClock } from './index';
+import { FRAME_MS, createFakeClock, frameLoop, systemClock, type FrameClock } from './index.ts';
 
 describe('createFakeClock', () => {
   it('starts at the given time and advances', () => {

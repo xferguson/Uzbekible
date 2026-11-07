@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { paramsFor, type DifficultyConfig } from './index';
+import { paramsFor, type DifficultyConfig } from './index.ts';
 
 const config: DifficultyConfig = {
   params: {

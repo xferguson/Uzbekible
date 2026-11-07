@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createRng, sample, seedFrom, shuffle, weightedPick } from './index';
+import { createRng, sample, seedFrom, shuffle, weightedPick } from './index.ts';
 
 describe('seedFrom', () => {
   it('is stable and distinguishes strings', () => {

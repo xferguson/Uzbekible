@@ -1,6 +1,6 @@
-// Unit tests for the C1 frequency-list helpers. Run: node --test content/sources/freq/lib.test.mjs
-// Plain node:test because the app scaffold (T00, Vitest) and core/text (K1) are not on main yet.
-import { test } from 'node:test';
+// Unit tests for the C1 frequency-list helpers (run by Vitest: npm test).
+// core/text (K1) is not on main yet, so the helpers under test are local; see README.md.
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import {
   foldApostrophes,

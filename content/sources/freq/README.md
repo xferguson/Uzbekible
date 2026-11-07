@@ -6,7 +6,7 @@ the method are documented in [`../SOURCES.md`](../SOURCES.md).
 | file | what |
 |---|---|
 | `lib.mjs` | pure helpers: apostrophe folding, tokeniser, Uzbek Latin↔Cyrillic, analysis parsing, lemma choice, priors, Zipf, merging, CSV |
-| `lib.test.mjs` | unit tests (`node --test content/sources/freq/lib.test.mjs`) |
+| `lib.test.mjs` | unit tests (Vitest, `npm test`) |
 | `build.mjs` | the pipeline CLI |
 | `overrides.csv` | reviewed surface-form → lemma decisions |
 | `lemma-fixes.csv` | reviewed lemma-level `block` / `merge` / `pos` fixes |
@@ -17,7 +17,7 @@ it should swap in the `core/text` normaliser and transliterator and keep these t
 
 ## Reproduce
 
-Needs Node ≥ 20, git, and HFST (`apt-get install hfst`). Inputs are pinned in `SOURCES.md`.
+Needs Node ≥ 22, git, and HFST (`apt-get install hfst`). Inputs are pinned in `SOURCES.md`.
 
 ```bash
 W=$(mktemp -d)

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { createRng } from '../../core/random/index.ts';
-import { createSession, tallyScoreInput } from '../../core/session/index.ts';
+import { createRng } from '@core/random/index.ts';
+import { createSession, tallyScoreInput } from '@core/session/index.ts';
 import { createJuftRules, type JuftAction, type JuftEvent, type JuftState } from './rules.ts';
-import type { RulesEvent } from '../../core/session/index.ts';
+import type { RulesEvent } from '@core/session/index.ts';
 
 type Ev = RulesEvent<JuftEvent>;
 

@@ -1,5 +1,6 @@
 import { canonicalizeUz, latnToCyrl } from '../text/index.ts';
-import { ItemSchema, type Item, type Lang } from './schema.ts';
+import { ItemSchema, type Item } from './schema.ts';
+import type { SourceLang } from '../text/index.ts';
 
 export type IssueCode =
   | 'schema'
@@ -31,7 +32,7 @@ export interface Validation {
 const CYRILLIC = /^[\p{Script=Cyrillic}\s'ʼ-]+$/u;
 const LATIN = /^[\p{Script=Latin}ʻʼ\s'-]+$/u;
 const ARABIC = /^[\p{Script=Arabic}‌\s]+$/u;
-const SCRIPT_OF: Record<Lang, { re: RegExp; name: string }> = {
+const SCRIPT_OF: Record<SourceLang, { re: RegExp; name: string }> = {
   tr: { re: LATIN, name: 'Latin' },
   ru: { re: CYRILLIC, name: 'Cyrillic' },
   fa: { re: ARABIC, name: 'Arabic script' },

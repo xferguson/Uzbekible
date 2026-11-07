@@ -1,0 +1,721 @@
+rank	lemma	tr	relation	dictionary	etymology	confidence	correspondence
+1	va	ve	shared-arabic	yes	no	medium	e>a
+2	u	o	turkic-cognate	yes	no	medium	
+3	boʻlmoq	olmak	turkic-cognate	yes	yes	high	mak>moq o>oʻ ∅>b
+4	men	ben	turkic-cognate	yes	yes	high	b>m
+5	ham	hem	shared-persian	yes	no	medium	e>a
+6	bu	bu	turkic-cognate	yes	no	medium	
+7	qilmoq	kılmak	turkic-cognate	yes	yes	high	k>q mak>moq ı>i
+8	bilan	ile	turkic-cognate	yes	no	medium	e>a ∅>b
+9	bir	bir	turkic-cognate	yes	yes	high	
+10	olmoq	almak	turkic-cognate	yes	yes	high	a>o mak>moq
+11	demoq	demek	turkic-cognate	yes	yes	high	mak>moq
+12	uchun	için	turkic-cognate	yes	no	medium	irregular
+13	edi	idi	turkic-cognate	none	yes	medium	
+14	oʻz	öz	turkic-cognate	yes	no	medium	ö>oʻ
+15	kelmoq	gelmek	turkic-cognate	yes	yes	high	g>k mak>moq
+16	siz	siz	turkic-cognate	yes	no	medium	
+17	bermoq	vermek	turkic-cognate	yes	yes	high	mak>moq v>b
+18	bor	var	turkic-cognate	yes	yes	high	a>o v>b
+19	shu	şu	turkic-cognate	yes	no	medium	
+20	kerak	gerek	turkic-cognate	yes	yes	high	e>a g>k
+22	koʻrmoq	görmek	turkic-cognate	yes	yes	high	g>k mak>moq ö>oʻ
+23	qolmoq	kalmak	turkic-cognate	yes	no	medium	a>o k>q mak>moq
+24	ketmoq	gitmek	turkic-cognate	yes	yes	high	g>k mak>moq
+25	ular	onlar	turkic-cognate	yes	no	medium	irregular
+26	etmoq	etmek	turkic-cognate	yes	yes	high	mak>moq
+27	har	her	shared-persian	yes	no	medium	e>a
+29	biz	biz	turkic-cognate	yes	no	medium	
+30	nima	ne	turkic-cognate	yes	no	medium	e>a irregular
+31	bilmoq	bilmek	turkic-cognate	yes	yes	high	mak>moq
+32	ish	iş	turkic-cognate	yes	yes	high	
+33	yoʻq	yok	turkic-cognate	yes	yes	high	k>q o>oʻ
+34	hech	hiç	shared-persian	yes	yes	high	
+37	odam	adam	shared-arabic	yes	yes	high	a>o
+38	bormoq	varmak	turkic-cognate	yes	yes	high	a>o mak>moq v>b
+40	mumkin	mümkün	shared-arabic	yes	yes	high	ü>u
+41	kun	gün	turkic-cognate	yes	yes	high	g>k ü>u
+42	yer	yer	turkic-cognate	yes	yes	high	
+43	chiqmoq	çıkmak	turkic-cognate	yes	no	medium	k>q mak>moq ı>i
+44	turmoq	durmak	turkic-cognate	yes	no	medium	d>t mak>moq
+45	ikki	iki	turkic-cognate	yes	yes	high	
+49	yil	yıl	turkic-cognate	yes	yes	high	ı>i
+50	boshqa	başka	turkic-cognate	yes	no	medium	a>o k>q
+51	qoʻymoq	koymak	turkic-cognate	yes	no	medium	k>q mak>moq o>oʻ
+52	kim	kim	turkic-cognate	yes	no	medium	
+53	yoki	ya da	shared-persian	other	no	low	a>o irregular
+54	til	dil	turkic-cognate	yes	yes	high	d>t
+56	esa	ise	turkic-cognate	yes	no	medium	e>a
+58	uy	ev	turkic-cognate	yes	yes	high	irregular
+59	eng	en	turkic-cognate	yes	yes	high	n>ng
+61	yoʻl	yol	turkic-cognate	yes	yes	high	o>oʻ
+62	yana	yine	turkic-cognate	yes	yes	high	e>a
+63	vaqt	vakit	shared-arabic	yes	yes	high	epenthesis k>q
+64	bosh	baş	turkic-cognate	yes	yes	high	a>o
+65	ona	ana	turkic-cognate	other	yes	medium	a>o
+66	koʻz	göz	turkic-cognate	yes	yes	high	g>k ö>oʻ
+69	qoʻl	kol	false-friend	yes	yes	low	
+70	haqida	hakkında	shared-arabic	yes	no	medium	irregular k>q ı>i
+71	sen	sen	turkic-cognate	yes	no	medium	
+72	yangi	yeni	turkic-cognate	yes	yes	high	e>a n>ng
+73	tushmoq	düşmek	turkic-cognate	yes	yes	high	d>t mak>moq ü>u
+75	topmoq	tapmak	false-friend	other	no	low	
+76	ishlamoq	işlemek	turkic-cognate	other	no	low	e>a mak>moq
+77	lekin	lakin	shared-arabic	yes	yes	high	
+78	yosh	yaş	turkic-cognate	yes	yes	high	a>o
+79	oʻylamoq	oylamak	false-friend	other	no	low	
+80	ota	ata	turkic-cognate	other	yes	medium	a>o
+81	kitob	kitap	shared-arabic	yes	yes	high	a>o p>b
+82	kirmoq	girmek	turkic-cognate	yes	no	medium	g>k mak>moq
+83	oʻqimoq	okumak	turkic-cognate	yes	yes	high	k>q mak>moq o>oʻ
+84	yuz	yüz	turkic-cognate	yes	yes	high	ü>u
+85	qiz	kız	turkic-cognate	yes	yes	high	k>q ı>i
+86	kishi	kişi	turkic-cognate	yes	yes	high	
+87	soʻz	söz	turkic-cognate	yes	yes	high	ö>oʻ
+88	soʻramoq	sormak	turkic-cognate	yes	no	medium	mak>moq o>oʻ
+89	suv	su	turkic-cognate	yes	no	medium	
+91	yashamoq	yaşamak	turkic-cognate	yes	yes	high	mak>moq
+94	pul	pul	false-friend	other	no	low	
+95	agar	eğer	shared-persian	yes	yes	high	e>a ğ>g
+99	yozmoq	yazmak	turkic-cognate	yes	yes	high	a>o mak>moq
+101	hayot	hayat	shared-arabic	yes	yes	high	a>o
+103	uch	üç	turkic-cognate	yes	yes	high	ü>u
+104	yurmoq	yürümek	turkic-cognate	yes	no	medium	mak>moq ü>u
+106	boshlamoq	başlamak	turkic-cognate	yes	no	medium	a>o mak>moq
+108	davlat	devlet	shared-arabic	yes	yes	high	e>a
+109	kabi	gibi	turkic-cognate	yes	no	medium	g>k
+110	yordam	yardım	turkic-cognate	yes	no	medium	a>o
+111	faqat	fakat	shared-arabic	yes	yes	high	k>q
+112	dunyo	dünya	shared-arabic	yes	yes	high	a>o ü>u
+113	bugun	bugün	turkic-cognate	yes	no	medium	ü>u
+114	sotmoq	satmak	turkic-cognate	yes	yes	high	a>o mak>moq
+117	inson	insan	shared-arabic	yes	yes	high	a>o
+118	kutmoq	gütmek	false-friend	other	yes	medium	
+119	kutubxona	kütüphane	shared-persian	yes	yes	high	a>o e>a h>x p>b ü>u
+120	mashina	makine	other-loan	yes	yes	high	e>a
+121	tez	tez	turkic-cognate	yes	yes	high	
+122	harakat	hareket	shared-arabic	yes	yes	high	e>a
+124	yetmoq	yetmek	turkic-cognate	yes	yes	high	mak>moq
+126	eshitmoq	işitmek	turkic-cognate	yes	yes	high	mak>moq
+127	doʻst	dost	shared-persian	yes	yes	high	o>oʻ
+128	shahar	şehir	shared-persian	yes	yes	high	e>a
+129	oʻtirmoq	oturmak	turkic-cognate	yes	no	medium	mak>moq o>oʻ
+130	ochmoq	açmak	turkic-cognate	yes	yes	high	a>o mak>moq
+131	oʻrganmoq	öğrenmek	turkic-cognate	yes	no	medium	e>a irregular mak>moq ö>oʻ
+132	hozir	hazır	false-friend	yes	yes	low	
+133	maktab	mektep	shared-arabic	other	yes	medium	e>a p>b
+134	toʻgʻri	doğru	turkic-cognate	yes	no	medium	d>t o>oʻ ğ>gʻ
+135	koʻrsatmoq	göstermek	turkic-cognate	yes	no	medium	e>a g>k irregular mak>moq ö>oʻ
+136	oy	ay	turkic-cognate	yes	yes	high	a>o
+137	javob	cevap	shared-arabic	yes	yes	high	a>o e>a p>b
+138	hali	hâlâ	shared-arabic	yes	yes	high	
+139	kecha	gece	turkic-cognate	yes	yes	high	e>a g>k
+140	tashlamoq	taşlamak	false-friend	yes	no	low	
+141	birinchi	birinci	turkic-cognate	none	no	low	
+143	ora	ara	turkic-cognate	yes	yes	high	a>o
+144	da	da	turkic-cognate	yes	no	medium	
+146	soat	saat	shared-arabic	yes	yes	high	a>o
+147	ushbu	işbu	turkic-cognate	yes	no	medium	
+149	yomon	yaman	false-friend	yes	yes	low	
+150	hol	hal	shared-arabic	yes	yes	high	a>o
+152	xalq	halk	shared-arabic	yes	yes	high	h>x k>q
+153	koʻrinmoq	görünmek	turkic-cognate	yes	no	medium	g>k mak>moq ö>oʻ
+154	tushunmoq	düşünmek	false-friend	none	yes	low	
+155	iltimos	iltimas	false-friend	yes	no	low	
+157	fikr	fikir	shared-arabic	yes	yes	high	epenthesis
+158	muammo	muamma	false-friend	yes	no	low	
+159	sifat	sıfat	shared-arabic	other	yes	medium	ı>i
+160	oʻgʻil	oğul	turkic-cognate	yes	yes	high	o>oʻ ğ>gʻ
+162	koʻra	göre	turkic-cognate	yes	no	medium	e>a g>k ö>oʻ
+164	ammo	ama	shared-arabic	yes	yes	high	a>o
+166	tutmoq	tutmak	turkic-cognate	yes	yes	high	mak>moq
+167	yaqin	yakın	turkic-cognate	yes	yes	high	k>q ı>i
+168	ich	iç	turkic-cognate	yes	no	medium	
+169	amal	amel	shared-arabic	other	no	low	e>a
+171	oʻn	on	turkic-cognate	yes	yes	high	o>oʻ
+172	xona	hane	shared-persian	yes	yes	high	a>o e>a h>x
+173	oʻrta	orta	turkic-cognate	yes	yes	high	o>oʻ
+174	solmoq	salmak	turkic-cognate	other	yes	medium	a>o mak>moq
+175	ming	bin	turkic-cognate	yes	yes	high	b>m n>ng
+176	koʻtarmoq	götürmek	turkic-cognate	other	yes	medium	g>k mak>moq ö>oʻ
+178	yoqmoq	yakmak	turkic-cognate	none	yes	medium	a>o k>q mak>moq
+179	uzoq	uzak	turkic-cognate	yes	no	medium	a>o k>q
+180	qarshi	karşı	turkic-cognate	yes	no	medium	k>q ı>i
+181	qabul	kabul	shared-arabic	yes	yes	high	k>q
+182	doim	daima	shared-arabic	yes	yes	high	a>o
+183	qurmoq	kurmak	turkic-cognate	yes	no	medium	k>q mak>moq
+185	asar	eser	shared-arabic	yes	no	medium	e>a
+186	chiqarmoq	çıkarmak	turkic-cognate	yes	no	medium	k>q mak>moq ı>i
+189	soʻng	son	turkic-cognate	other	yes	medium	n>ng o>oʻ
+191	urmoq	vurmak	turkic-cognate	other	yes	medium	mak>moq v>∅
+192	sabab	sebep	shared-arabic	yes	yes	high	e>a p>b
+193	mamlakat	memleket	shared-arabic	other	yes	medium	e>a
+198	tashkil	teşkil	shared-arabic	yes	no	medium	e>a
+199	it	it	turkic-cognate	other	yes	medium	
+200	oʻlmoq	ölmek	turkic-cognate	none	yes	medium	mak>moq ö>oʻ
+201	savol	sual	shared-arabic	other	yes	medium	a>o irregular
+203	oʻynamoq	oynamak	turkic-cognate	yes	no	medium	mak>moq o>oʻ
+204	xotin	hatun	turkic-cognate	yes	yes	high	a>o h>x
+205	butun	bütün	turkic-cognate	yes	yes	high	ü>u
+206	ichmoq	içmek	turkic-cognate	yes	yes	high	mak>moq
+207	boʻyicha	boyunca	turkic-cognate	yes	no	medium	irregular o>oʻ
+208	davom	devam	shared-arabic	yes	yes	high	a>o e>a
+209	xizmat	hizmet	shared-arabic	yes	yes	high	e>a h>x
+210	muhim	mühim	shared-arabic	yes	yes	high	ü>u
+211	yotmoq	yatmak	turkic-cognate	yes	yes	high	a>o mak>moq
+212	his	his	shared-arabic	other	no	low	
+213	balki	belki	shared-persian	yes	yes	high	e>a
+215	aql	akıl	shared-arabic	yes	yes	high	epenthesis k>q
+216	besh	beş	turkic-cognate	yes	no	medium	
+217	eshik	eşik	false-friend	other	no	low	
+219	davr	devir	shared-arabic	yes	no	medium	e>a epenthesis
+221	haqiqat	hakikat	shared-arabic	yes	yes	high	k>q
+222	yon	yan	turkic-cognate	other	no	low	a>o
+223	oyoq	ayak	turkic-cognate	yes	yes	high	a>o k>q
+224	taklif	teklif	shared-arabic	yes	yes	high	e>a
+225	tortmoq	tartmak	false-friend	yes	yes	low	
+226	chunki	çünkü	shared-persian	yes	yes	high	ü>u
+227	mavjud	mevcut	shared-arabic	yes	yes	high	e>a t>d
+228	yemoq	yemek	turkic-cognate	yes	yes	high	mak>moq
+229	oila	aile	shared-arabic	yes	yes	high	a>o e>a
+230	jon	can	shared-persian	yes	no	medium	a>o
+231	tashqari	dışarı	turkic-cognate	yes	no	medium	d>t irregular ı>i
+232	nom	nam	shared-persian	other	yes	medium	a>o
+233	qoʻrqmoq	korkmak	turkic-cognate	none	no	low	k>q mak>moq o>oʻ
+234	yigit	yiğit	turkic-cognate	other	no	low	ğ>g
+235	ingliz	İngiliz	other-loan	yes	yes	high	irregular n>ng
+236	istamoq	istemek	turkic-cognate	none	no	low	e>a mak>moq
+237	erishmoq	erişmek	turkic-cognate	yes	no	medium	mak>moq
+239	havo	hava	shared-arabic	yes	yes	high	a>o
+242	masala	mesele	shared-arabic	yes	yes	high	e>a
+243	tanimoq	tanımak	turkic-cognate	yes	no	medium	mak>moq ı>i
+244	maʼlum	malum	shared-arabic	none	no	low	tutuq
+245	yurak	yürek	turkic-cognate	yes	yes	high	e>a ü>u
+246	sevmoq	sevmek	turkic-cognate	yes	yes	high	mak>moq
+247	qism	kısım	shared-arabic	yes	yes	high	epenthesis k>q ı>i
+248	maʼlumot	malumat	shared-arabic	none	yes	medium	a>o tutuq
+250	asosiy	esas	shared-arabic	other	yes	medium	a>o e>a irregular
+252	xabar	haber	shared-arabic	yes	yes	high	e>a h>x
+253	foydalanmoq	faydalanmak	shared-arabic	yes	no	medium	a>o mak>moq
+254	ot	at	turkic-cognate	yes	yes	high	a>o
+255	keltirmoq	getirmek	turkic-cognate	yes	no	medium	g>k mak>moq
+256	yaratmoq	yaratmak	turkic-cognate	yes	no	medium	mak>moq
+258	ust	üst	turkic-cognate	yes	no	medium	ü>u
+259	daraja	derece	shared-arabic	yes	yes	high	e>a
+260	qishloq	kışla	false-friend	other	yes	medium	
+261	koʻngil	gönül	turkic-cognate	yes	yes	high	g>k n>ng ö>oʻ
+262	qaror	karar	shared-arabic	yes	no	medium	a>o k>q
+263	ost	alt	turkic-cognate	yes	no	medium	a>o
+264	bosmoq	basmak	turkic-cognate	other	no	low	a>o mak>moq
+265	asos	esas	shared-arabic	yes	yes	high	a>o e>a
+266	tugʻmoq	doğmak	turkic-cognate	none	no	low	d>t mak>moq ğ>gʻ
+268	kuch	güç	turkic-cognate	yes	yes	high	g>k ü>u
+269	turli	türlü	turkic-cognate	yes	no	medium	ü>u
+270	boshlanmoq	başlanmak	turkic-cognate	none	no	low	a>o mak>moq
+272	munosabat	münasebet	shared-arabic	other	no	low	a>o e>a ü>u
+274	paydo	peyda	shared-persian	yes	no	medium	a>o e>a
+275	eʼtibor	itibar	shared-arabic	none	no	low	a>o irregular
+278	talab	talep	shared-arabic	yes	yes	high	e>a p>b
+279	ism	isim	shared-arabic	yes	yes	high	epenthesis
+281	taʼsir	tesir	shared-arabic	none	no	low	e>a tutuq
+282	natija	netice	shared-arabic	other	no	low	e>a
+283	bajarmoq	becermek	turkic-cognate	yes	no	medium	e>a mak>moq
+284	yolgʻiz	yalnız	turkic-cognate	yes	no	medium	a>o ı>i
+285	yuqori	yukarı	turkic-cognate	yes	no	medium	a>o k>q ı>i
+286	qoʻshmoq	koşmak	false-friend	other	no	low	
+287	erkak	erkek	turkic-cognate	yes	no	medium	e>a
+288	xato	hata	shared-arabic	other	yes	medium	a>o h>x
+289	yigʻlamoq	ağlamak	turkic-cognate	none	no	low	mak>moq ğ>gʻ ∅>y
+290	yomgʻir	yağmur	turkic-cognate	yes	yes	high	a>o irregular
+291	baʼzi	bazı	shared-arabic	none	yes	medium	tutuq ı>i
+293	qattiq	katı	turkic-cognate	yes	no	medium	irregular k>q ı>i
+296	hafta	hafta	shared-persian	yes	yes	high	
+297	gul	gül	shared-persian	yes	yes	high	ü>u
+298	shaxs	şahıs	shared-arabic	yes	yes	high	epenthesis h>x
+299	albatta	elbette	shared-arabic	yes	no	medium	e>a
+300	oshirmoq	aşırmak	false-friend	yes	no	low	
+301	vazifa	vazife	shared-arabic	other	no	low	e>a
+302	buzmoq	bozmak	turkic-cognate	yes	no	medium	mak>moq
+303	baxt	baht	shared-persian	yes	yes	high	h>x
+305	toʻrt	dört	turkic-cognate	yes	yes	high	d>t ö>oʻ
+306	orqa	arka	turkic-cognate	yes	yes	high	a>o k>q
+307	umid	ümit	shared-persian	other	yes	medium	t>d ü>u
+310	beri	beri	turkic-cognate	yes	no	medium	
+311	kichik	küçük	turkic-cognate	yes	yes	high	irregular
+313	avval	evvel	shared-arabic	other	yes	medium	e>a
+314	hatto	hatta	shared-arabic	other	no	low	a>o
+316	viloyat	vilayet	shared-arabic	yes	yes	high	a>o e>a
+317	kechirmoq	geçirmek	turkic-cognate	yes	no	medium	g>k mak>moq
+318	unutmoq	unutmak	turkic-cognate	yes	yes	high	mak>moq
+319	xat	hat	false-friend	other	yes	medium	
+320	uchmoq	uçmak	turkic-cognate	yes	yes	high	mak>moq
+321	shart	şart	shared-arabic	yes	yes	high	
+323	yaʼni	yani	shared-arabic	none	yes	medium	tutuq
+324	qon	kan	turkic-cognate	yes	yes	high	a>o k>q
+325	uzmoq	üzmek	false-friend	other	yes	medium	
+327	nazar	nazar	shared-arabic	other	no	low	
+328	kulmoq	gülmek	turkic-cognate	yes	no	medium	g>k mak>moq ü>u
+329	iborat	ibaret	shared-arabic	yes	no	medium	a>o e>a
+330	maʼno	mana	shared-arabic	none	yes	medium	a>o tutuq
+332	urush	vuruş	false-friend	other	no	low	
+334	tur	tür	turkic-cognate	yes	no	medium	ü>u
+335	daryo	derya	false-friend	other	yes	medium	
+336	togʻ	dağ	turkic-cognate	yes	yes	high	a>o d>t ğ>gʻ
+338	hamda	hem de	shared-persian	yes	no	medium	e>a
+339	el	el	false-friend	yes	no	low	
+341	faoliyat	faaliyet	shared-arabic	yes	no	medium	a>o e>a
+342	kiymoq	giymek	turkic-cognate	none	no	low	g>k mak>moq
+343	tuman	duman	false-friend	other	yes	medium	
+345	atrof	etraf	shared-arabic	yes	no	medium	a>o e>a
+346	telefon	telefon	other-loan	yes	yes	high	
+348	saqlamoq	saklamak	turkic-cognate	yes	no	medium	k>q mak>moq
+349	oʻzbek	Özbek	turkic-cognate	yes	no	medium	ö>oʻ
+350	maqsad	maksat	shared-arabic	yes	no	medium	k>q t>d
+352	talaba	talebe	shared-arabic	other	yes	medium	e>a
+353	bogʻ	bağ	shared-persian	other	yes	medium	a>o ğ>gʻ
+354	hal	hal	shared-arabic	yes	yes	high	
+356	rang	renk	shared-persian	yes	yes	high	e>a n>ng
+357	qora	kara	turkic-cognate	yes	yes	high	a>o k>q
+358	tosh	taş	turkic-cognate	yes	yes	high	a>o
+361	qalb	kalp	shared-arabic	yes	yes	high	k>q p>b
+362	shoir	şair	shared-arabic	yes	yes	high	a>o
+363	qadar	kadar	shared-arabic	yes	yes	high	k>q
+364	kiyim	giyim	turkic-cognate	yes	no	medium	g>k
+365	quyosh	güneş	turkic-cognate	yes	yes	high	irregular ü>u
+366	sodir	sadır	shared-arabic	none	no	low	a>o ı>i
+367	umr	ömür	shared-arabic	yes	yes	high	epenthesis ö>u
+368	tartib	tertip	shared-arabic	yes	no	medium	e>a p>b
+369	jamiyat	cemiyet	shared-arabic	yes	no	medium	e>a
+371	oz	az	turkic-cognate	yes	yes	high	a>o
+372	vafot	vefat	shared-arabic	yes	yes	high	a>o e>a
+373	sovuq	soğuk	turkic-cognate	yes	yes	high	k>q
+374	ortiq	artık	turkic-cognate	yes	no	medium	a>o k>q ı>i
+376	keng	geniş	turkic-cognate	yes	no	medium	epenthesis g>k n>ng
+377	son	son	false-friend	other	yes	medium	
+378	qonun	kanun	shared-arabic	yes	yes	high	a>o k>q
+380	oʻyin	oyun	turkic-cognate	yes	no	medium	o>oʻ
+381	erta	erken	turkic-cognate	other	no	low	e>a irregular
+383	chekmoq	çekmek	turkic-cognate	other	no	low	mak>moq
+384	jumla	cümle	shared-arabic	yes	yes	high	e>a ü>u
+385	boy	boy	false-friend	other	no	low	
+386	voqea	vaka	shared-arabic	yes	no	medium	a>o k>q
+388	kuchli	güçlü	turkic-cognate	yes	yes	high	g>k ü>u
+390	yolgʻon	yalan	turkic-cognate	yes	yes	high	a>o
+391	bogʻliq	bağlı	turkic-cognate	yes	no	medium	a>o ğ>gʻ ı>i
+393	lozim	lazım	shared-arabic	yes	no	medium	a>o ı>i
+394	oʻlim	ölüm	turkic-cognate	yes	no	medium	ö>oʻ
+396	yopmoq	yapmak	false-friend	other	yes	medium	
+399	tarix	tarih	shared-arabic	yes	yes	high	h>x
+401	yogʻmoq	yağmak	turkic-cognate	other	yes	medium	a>o mak>moq ğ>gʻ
+403	goʻzal	güzel	turkic-cognate	yes	yes	high	e>a
+404	qochmoq	kaçmak	turkic-cognate	yes	yes	high	a>o k>q mak>moq
+406	soha	saha	shared-arabic	yes	yes	high	a>o
+407	yurt	yurt	turkic-cognate	yes	no	medium	
+409	oʻldirmoq	öldürmek	turkic-cognate	none	no	low	mak>moq ö>oʻ
+410	ishlatmoq	işletmek	turkic-cognate	other	no	low	e>a mak>moq
+411	aholi	ahali	shared-arabic	other	yes	medium	a>o
+412	na	ne	shared-persian	yes	yes	high	e>a
+413	imkoniyat	imkân	shared-arabic	yes	no	medium	a>o irregular
+414	tan	ten	shared-persian	yes	yes	high	e>a
+415	quloq	kulak	turkic-cognate	yes	yes	high	a>o k>q
+416	eski	eski	turkic-cognate	yes	yes	high	
+417	oshmoq	aşmak	turkic-cognate	other	no	low	a>o mak>moq
+418	biroz	biraz	turkic-cognate	yes	no	medium	a>o
+421	nisbatan	nispeten	shared-arabic	yes	no	medium	e>a p>b
+422	toʻlamoq	dolamak	false-friend	other	yes	medium	
+423	suzmoq	süzmek	false-friend	yes	yes	low	
+424	taʼlim	talim	shared-arabic	none	no	low	tutuq
+425	milliy	millî	shared-arabic	yes	yes	high	
+427	muvaffaqiyat	muvaffakiyet	shared-arabic	other	no	low	e>a k>q
+429	hosil	hasıl	shared-arabic	other	no	low	a>o ı>i
+430	sheʼr	şiir	shared-arabic	none	yes	medium	irregular
+431	tun	dün	false-friend	none	yes	low	
+432	ajoyib	acayip	shared-arabic	yes	yes	high	a>o p>b
+433	bozor	pazar	shared-persian	yes	yes	high	a>o p>b
+434	yigʻmoq	yığmak	turkic-cognate	none	yes	medium	mak>moq ğ>gʻ ı>i
+435	otmoq	atmak	turkic-cognate	yes	yes	high	a>o mak>moq
+437	ogʻir	ağır	turkic-cognate	yes	yes	high	a>o ğ>gʻ ı>i
+438	mashhur	meşhur	shared-arabic	yes	yes	high	e>a
+439	ijtimoiy	içtimai	shared-arabic	other	no	low	a>o ç>j
+440	markaz	merkez	shared-arabic	yes	yes	high	e>a
+441	soch	saç	turkic-cognate	yes	yes	high	a>o
+444	narx	narh	shared-persian	other	no	low	h>x
+446	chaqirmoq	çağırmak	turkic-cognate	yes	no	medium	mak>moq ı>i
+449	ruxsat	ruhsat	shared-arabic	other	no	low	h>x
+450	hikoya	hikâye	shared-arabic	yes	yes	high	a>o e>a
+451	tugamoq	tükenmek	turkic-cognate	none	no	low	e>a irregular mak>moq ü>u
+452	bildirmoq	bildirmek	turkic-cognate	yes	yes	high	mak>moq
+453	xos	has	shared-arabic	yes	yes	high	a>o h>x
+454	yuza	yüzey	turkic-cognate	yes	yes	high	e>a ü>u
+455	asr	asır	shared-arabic	other	yes	medium	epenthesis
+456	er	er	turkic-cognate	other	yes	medium	
+458	qor	kar	turkic-cognate	yes	yes	high	a>o k>q
+459	oq	ak	turkic-cognate	yes	yes	high	a>o k>q
+460	yarim	yarım	turkic-cognate	yes	no	medium	ı>i
+461	hisob	hesap	shared-arabic	yes	yes	high	a>o p>b
+462	janob	cenap	shared-arabic	other	no	low	a>o e>a p>b
+463	kuzatmoq	gözetmek	turkic-cognate	yes	no	medium	e>a g>k mak>moq ö>u
+465	tush	düş	turkic-cognate	yes	yes	high	d>t ü>u
+466	orzu	arzu	shared-persian	yes	yes	high	a>o
+469	imkon	imkân	shared-arabic	yes	no	medium	a>o
+470	hudud	hudut	shared-arabic	yes	yes	high	t>d
+471	vaziyat	vaziyet	shared-arabic	other	yes	medium	e>a
+472	ochiq	açık	turkic-cognate	yes	yes	high	a>o k>q ı>i
+473	dada	dede	false-friend	none	no	low	
+474	buyurmoq	buyurmak	turkic-cognate	yes	yes	high	mak>moq
+475	film	film	other-loan	yes	yes	high	
+476	dengiz	deniz	turkic-cognate	yes	yes	high	n>ng
+477	haqda	hakkında	shared-arabic	none	no	low	irregular k>q
+480	tugatmoq	tüketmek	turkic-cognate	other	no	low	e>a mak>moq ü>u
+481	sir	sır	shared-arabic	yes	yes	high	ı>i
+482	tuzmoq	düzmek	turkic-cognate	other	no	low	d>t mak>moq ü>u
+483	qush	kuş	turkic-cognate	yes	yes	high	k>q
+484	buyuk	büyük	turkic-cognate	yes	yes	high	ü>u
+485	mahsulot	mahsul	shared-arabic	other	no	low	irregular
+486	doʻkon	dükkân	shared-arabic	yes	yes	high	a>o irregular
+487	olti	altı	turkic-cognate	yes	no	medium	a>o ı>i
+488	daqiqa	dakika	shared-arabic	yes	yes	high	k>q
+489	hodisa	hadise	shared-arabic	other	no	low	a>o e>a
+491	rahmat	rahmet	false-friend	other	no	low	
+492	avtobus	otobüs	other-loan	yes	yes	high	irregular ü>u
+494	baliq	balık	turkic-cognate	yes	yes	high	k>q ı>i
+496	ort	art	turkic-cognate	other	yes	medium	a>o
+497	majbur	mecbur	shared-arabic	yes	no	medium	e>a
+498	baxtli	bahtlı	shared-persian	yes	no	medium	h>x ı>i
+499	surat	suret	shared-arabic	yes	no	medium	e>a
+502	xayol	hayal	shared-arabic	yes	no	medium	a>o h>x
+505	oʻt	ot	turkic-cognate	other	yes	medium	o>oʻ
+506	fuqaro	fukara	false-friend	other	yes	medium	
+508	tarjima	tercüme	shared-arabic	yes	no	medium	e>a
+509	devor	duvar	shared-persian	yes	no	medium	a>o
+510	safar	sefer	shared-arabic	yes	yes	high	e>a
+512	umuman	umumen	shared-arabic	yes	no	medium	e>a
+513	sayohat	seyahat	shared-arabic	yes	yes	high	a>o e>a
+514	hayvon	hayvan	shared-arabic	yes	yes	high	a>o
+516	issiq	sıcak	turkic-cognate	yes	yes	high	irregular k>q
+518	hisoblanmoq	hesaplanmak	shared-arabic	yes	no	medium	a>o mak>moq p>b
+519	boqmoq	bakmak	turkic-cognate	other	yes	medium	a>o k>q mak>moq
+520	foyda	fayda	shared-arabic	yes	yes	high	a>o
+521	bogʻlamoq	bağlamak	turkic-cognate	yes	no	medium	a>o mak>moq ğ>gʻ
+524	maslahat	maslahat	false-friend	none	no	low	
+525	rasm	resim	shared-arabic	yes	yes	high	e>a epenthesis
+526	kesmoq	kesmek	turkic-cognate	yes	yes	high	mak>moq
+527	bank	banka	other-loan	yes	yes	high	
+529	oddiy	adi	shared-arabic	yes	yes	high	a>o irregular
+530	kechmoq	geçmek	turkic-cognate	yes	yes	high	g>k mak>moq
+531	oʻrgatmoq	öğretmek	turkic-cognate	none	no	low	e>a irregular mak>moq ö>oʻ
+535	olim	âlim	shared-arabic	yes	yes	high	a>o
+536	zarur	zaruri	shared-arabic	other	yes	medium	
+537	rahbar	rehber	shared-persian	yes	yes	high	e>a
+539	sezmoq	sezmek	turkic-cognate	none	no	low	mak>moq
+540	musiqa	musiki	shared-arabic	other	no	low	k>q
+541	ilm	ilim	shared-arabic	yes	yes	high	epenthesis
+543	shakl	şekil	shared-arabic	yes	yes	high	e>a epenthesis
+544	bino	bina	shared-arabic	yes	yes	high	a>o
+547	ajratmoq	ayırmak	turkic-cognate	yes	yes	high	irregular mak>moq
+548	ila	ile	turkic-cognate	other	no	low	e>a
+549	yulduz	yıldız	turkic-cognate	yes	yes	high	irregular
+550	farq	fark	shared-arabic	yes	yes	high	k>q
+551	tashrif	teşrif	shared-arabic	none	no	low	e>a
+552	sanʼat	sanat	shared-arabic	none	yes	medium	tutuq
+553	zamon	zaman	shared-persian	yes	yes	high	a>o
+554	hukumat	hükûmet	shared-arabic	other	yes	medium	e>a ü>u
+555	haq	hak	shared-arabic	yes	yes	high	k>q
+556	haqiqiy	hakiki	shared-arabic	yes	yes	high	k>q
+557	tikmoq	dikmek	turkic-cognate	yes	yes	high	d>t mak>moq
+559	muddat	müddet	shared-arabic	other	no	low	e>a ü>u
+560	qogʻoz	kâğıt	shared-persian	yes	no	medium	a>o irregular k>q ğ>gʻ
+561	yonmoq	yanmak	turkic-cognate	other	yes	medium	a>o mak>moq
+562	fan	fen	shared-arabic	yes	yes	high	e>a
+563	teng	denk	turkic-cognate	yes	yes	high	d>t n>ng
+565	roman	roman	other-loan	yes	yes	high	
+566	elektron	elektron	other-loan	yes	yes	high	
+567	loyiha	layiha	false-friend	none	no	low	
+568	kurashmoq	güreşmek	turkic-cognate	yes	no	medium	e>a g>k mak>moq ü>u
+569	bobo	baba	false-friend	none	no	low	
+570	vosita	vasıta	shared-arabic	other	no	low	a>o ı>i
+571	sinf	sınıf	shared-arabic	yes	yes	high	epenthesis ı>i
+572	tarz	tarz	shared-persian	yes	no	medium	
+574	oʻquvchi	okuyucu	turkic-cognate	yes	no	medium	irregular k>q o>oʻ
+575	vazir	vezir	shared-arabic	yes	yes	high	e>a
+578	shoshmoq	şaşmak	false-friend	none	yes	low	
+579	qizil	kızıl	turkic-cognate	yes	yes	high	k>q ı>i
+580	odat	adet	shared-arabic	other	yes	medium	a>o e>a
+581	qoʻshni	komşu	turkic-cognate	none	yes	medium	irregular k>q o>oʻ
+582	eʼlon	ilan	shared-arabic	none	no	low	a>o irregular
+583	qoida	kaide	shared-arabic	other	no	low	a>o e>a k>q
+584	hujjat	hüccet	shared-arabic	yes	no	medium	e>a ü>u
+585	hokim	hâkim	false-friend	yes	yes	low	
+587	kelajak	gelecek	turkic-cognate	none	no	low	e>a g>k
+588	dars	ders	shared-arabic	yes	yes	high	e>a
+589	kompaniya	kumpanya	false-friend	other	no	low	
+590	kech	geç	turkic-cognate	yes	yes	high	g>k
+591	jihat	cihet	shared-arabic	other	no	low	e>a
+592	aloqa	alaka	shared-arabic	yes	yes	high	a>o k>q
+593	nafas	nefes	shared-arabic	yes	yes	high	e>a
+594	jahon	cihan	shared-persian	other	yes	medium	a>o
+597	guruh	güruh	false-friend	other	no	low	
+599	zarar	zarar	shared-arabic	yes	yes	high	
+600	ustiga	üstüne	turkic-cognate	other	no	low	e>a irregular ü>u
+601	adabiyot	edebiyat	shared-arabic	yes	yes	high	a>o e>a
+602	umumiy	umumi	shared-arabic	yes	no	medium	
+604	dard	dert	shared-persian	yes	no	medium	e>a t>d
+606	nur	nur	shared-arabic	yes	yes	high	
+607	dushman	düşman	shared-persian	yes	yes	high	ü>u
+608	choy	çay	other-loan	yes	yes	high	a>o
+609	ahvol	ahval	shared-arabic	yes	no	medium	a>o
+610	anglamoq	anlamak	turkic-cognate	none	yes	medium	mak>moq n>ng
+611	tajriba	tecrübe	shared-arabic	yes	yes	high	e>a
+613	himoya	himaye	shared-arabic	yes	no	medium	a>o e>a
+615	oqibat	akıbet	shared-arabic	yes	no	medium	a>o e>a k>q ı>i
+616	hayron	hayran	shared-arabic	yes	no	medium	a>o
+617	yagona	yegâne	shared-persian	yes	no	medium	a>o e>a
+618	tish	diş	turkic-cognate	yes	yes	high	d>t
+619	ayrim	ayrım	false-friend	other	no	low	
+620	qisqa	kısa	turkic-cognate	yes	yes	high	k>q ı>i
+622	vaʼda	vaat	shared-arabic	none	yes	medium	irregular t>d
+624	boʻyi	boyu	turkic-cognate	none	no	low	o>oʻ
+625	aʼzo	aza	shared-arabic	none	no	low	a>o tutuq
+626	kema	gemi	turkic-cognate	yes	yes	high	g>k
+629	ahmoq	ahmak	shared-arabic	none	yes	medium	mak>moq
+630	muhabbat	muhabbet	false-friend	yes	yes	low	
+631	savdo	sevda	false-friend	other	yes	medium	
+632	ahamiyat	ehemmiyet	shared-arabic	other	yes	medium	e>a
+634	aks	aks	shared-arabic	other	no	low	
+636	aslida	aslında	shared-arabic	none	no	low	ı>i
+637	toʻla	dolu	turkic-cognate	yes	no	medium	d>t o>oʻ
+641	tuygʻu	duygu	turkic-cognate	yes	no	medium	d>t
+642	jamoa	cemaat	shared-arabic	other	yes	medium	a>o e>a
+643	gaz	gaz	other-loan	yes	no	medium	
+645	uzun	uzun	turkic-cognate	yes	yes	high	
+648	odatda	âdette	shared-arabic	other	no	low	a>o e>a t>d
+649	dil	dil	false-friend	yes	yes	low	
+651	yapon	Japon	other-loan	yes	yes	high	
+652	tong	tan	turkic-cognate	other	no	low	a>o n>ng
+653	asosan	esasen	shared-arabic	other	no	low	a>o e>a
+654	usul	usul	shared-arabic	other	no	low	
+656	maxsus	mahsus	shared-arabic	yes	yes	high	h>x
+657	toʻlmoq	dolmak	turkic-cognate	none	no	low	d>t mak>moq o>oʻ
+658	oltin	altın	turkic-cognate	yes	yes	high	a>o ı>i
+659	ilmiy	ilmî	shared-arabic	other	yes	medium	
+660	yetti	yedi	turkic-cognate	yes	yes	high	irregular
+661	tushirmoq	düşürmek	turkic-cognate	yes	no	medium	d>t mak>moq ü>u
+664	yozuvchi	yazıcı	false-friend	other	no	low	
+665	tegmoq	değmek	turkic-cognate	none	yes	medium	d>t mak>moq ğ>g
+666	siyosiy	siyasi	shared-arabic	yes	no	medium	a>o
+667	tark	terk	shared-arabic	yes	no	medium	e>a
+668	yirik	iri	turkic-cognate	yes	no	medium	∅>y
+671	hurmat	hürmet	shared-arabic	other	no	low	e>a ü>u
+673	tinglamoq	dinlemek	turkic-cognate	none	yes	medium	d>t e>a mak>moq n>ng
+674	olma	elma	turkic-cognate	other	no	low	
+675	tasavvur	tasavvur	shared-arabic	yes	no	medium	
+676	qimmat	kıymet	false-friend	none	no	low	
+677	huquq	hukuk	shared-arabic	yes	yes	high	k>q
+679	ehtimol	ihtimal	shared-arabic	none	no	low	a>o
+681	hayrat	hayret	shared-arabic	none	no	low	e>a
+682	sut	süt	turkic-cognate	yes	no	medium	ü>u
+685	ajramoq	ayrılmak	turkic-cognate	none	no	low	irregular mak>moq
+686	suhbat	sohbet	shared-arabic	none	yes	medium	e>a
+688	navbat	nöbet	shared-persian	yes	no	medium	e>a irregular
+689	hisoblamoq	hesaplamak	shared-arabic	none	no	low	a>o mak>moq p>b
+690	tomosha	temaşa	shared-arabic	other	no	low	a>o
+691	ichki	içki	false-friend	other	no	low	
+693	borlik	varlık	turkic-cognate	yes	yes	high	a>o v>b ı>i
+694	harbiy	harbî	shared-arabic	other	no	low	
+696	televizor	televizyon	other-loan	yes	yes	high	irregular
+697	sevgi	sevgi	turkic-cognate	none	no	low	
+699	jiddiy	ciddi	shared-arabic	yes	yes	high	
+701	qoʻy	koyun	turkic-cognate	yes	no	medium	epenthesis k>q o>oʻ
+702	ustoz	üstat	shared-persian	other	no	low	a>o ü>u
+703	baʼzan	bazen	shared-arabic	yes	no	medium	e>a tutuq
+704	och	aç	turkic-cognate	yes	no	medium	a>o
+705	shubha	şüphe	shared-arabic	none	yes	medium	e>a p>b ü>u
+706	din	din	shared-arabic	yes	yes	high	
+708	koʻylak	gömlek	turkic-cognate	other	yes	medium	e>a g>k ö>oʻ
+709	boʻylab	boyunca	turkic-cognate	yes	no	medium	irregular o>oʻ
+710	maydon	meydan	shared-persian	yes	yes	high	a>o e>a
+713	tarkib	terkip	shared-arabic	yes	no	medium	e>a p>b
+717	madaniyat	medeniyet	shared-arabic	yes	no	medium	e>a
+718	izlamoq	izlemek	false-friend	none	no	low	
+719	musulmon	Müslüman	shared-persian	yes	yes	high	a>o irregular ü>u
+720	tashkilot	teşkilat	shared-arabic	other	yes	medium	a>o e>a
+721	ilk	ilk	turkic-cognate	yes	yes	high	
+723	bilim	bilim	turkic-cognate	other	yes	medium	
+724	gazeta	gazete	other-loan	yes	yes	high	e>a
+726	oliy	âli	shared-arabic	other	yes	medium	a>o
+727	tabiiy	tabii	shared-arabic	yes	yes	high	
+729	bekor	bekâr	false-friend	yes	yes	low	
+730	ayb	ayıp	shared-arabic	yes	no	medium	epenthesis p>b
+732	chuqur	çukur	false-friend	yes	yes	low	
+733	sekin	sakin	false-friend	yes	no	low	
+734	misol	misal	shared-arabic	other	no	low	a>o
+735	qish	kış	turkic-cognate	yes	yes	high	k>q ı>i
+737	mavzu	mevzu	shared-arabic	yes	yes	high	e>a
+738	murojaat	müracaat	shared-arabic	yes	yes	high	a>o ü>u
+739	nihoyat	nihayet	shared-arabic	other	yes	medium	a>o e>a
+740	tabiat	tabiat	shared-arabic	yes	yes	high	
+741	toʻplam	toplam	turkic-cognate	other	no	low	o>oʻ
+742	butunlay	bütünüyle	turkic-cognate	yes	no	medium	e>a irregular ü>u
+746	muhokama	muhakeme	false-friend	none	no	low	
+748	ogʻriq	ağrı	turkic-cognate	none	no	low	a>o ğ>gʻ ı>i
+749	oqmoq	akmak	turkic-cognate	yes	yes	high	a>o k>q mak>moq
+750	gʻalati	galat	false-friend	other	no	low	
+752	jinoyat	cinayet	false-friend	other	no	low	
+753	yoʻqlik	yokluk	turkic-cognate	none	no	low	k>q o>oʻ
+754	belgilanmoq	belirlenmek	turkic-cognate	other	no	low	e>a irregular mak>moq
+756	mol	mal	shared-arabic	yes	yes	high	a>o
+757	sevimli	sevimli	turkic-cognate	none	no	low	
+758	avlod	evlat	false-friend	yes	yes	low	
+759	jang	cenk	shared-persian	other	no	low	e>a n>ng
+761	koʻk	gök	turkic-cognate	other	yes	medium	g>k ö>oʻ
+762	shirin	şirin	false-friend	yes	yes	low	
+763	rozi	razı	shared-arabic	yes	no	medium	a>o ı>i
+764	imtihon	imtihan	shared-arabic	none	no	low	a>o
+766	kalit	kilit	false-friend	none	no	low	
+767	rais	reis	shared-arabic	other	yes	medium	e>a
+769	ruh	ruh	shared-arabic	yes	yes	high	
+770	tirik	diri	turkic-cognate	yes	no	medium	d>t
+772	keraklik	gereklilik	turkic-cognate	none	no	low	e>a g>k irregular
+775	qalam	kalem	shared-arabic	none	no	low	e>a k>q
+776	yoz	yaz	turkic-cognate	yes	yes	high	a>o
+777	on	an	shared-arabic	yes	yes	high	a>o
+778	boʻsh	boş	turkic-cognate	yes	no	medium	o>oʻ
+779	aynan	aynen	shared-arabic	yes	no	medium	e>a
+780	zot	zat	shared-arabic	yes	no	medium	a>o
+781	maʼqul	makul	shared-arabic	none	no	low	k>q tutuq
+782	mulk	mülk	shared-arabic	yes	yes	high	ü>u
+785	meva	meyve	shared-persian	yes	yes	high	e>a
+787	oʻrmon	orman	turkic-cognate	yes	yes	high	a>o o>oʻ
+788	yigirma	yirmi	turkic-cognate	yes	yes	high	irregular
+790	uylanmoq	evlenmek	turkic-cognate	none	no	low	e>a irregular mak>moq
+791	modda	madde	shared-arabic	yes	yes	high	a>o e>a
+794	chora	çare	shared-persian	yes	no	medium	a>o e>a
+795	bahor	bahar	shared-persian	yes	yes	high	a>o
+796	olov	alev	shared-persian	yes	yes	high	a>o
+797	pishirmoq	pişirmek	turkic-cognate	none	no	low	mak>moq
+798	bayram	bayram	turkic-cognate	yes	yes	high	
+800	qozonmoq	kazanmak	turkic-cognate	yes	yes	high	a>o k>q mak>moq
+804	yo	ya	shared-persian	none	yes	medium	a>o
+805	atamoq	atamak	false-friend	yes	no	low	
+806	iz	iz	turkic-cognate	yes	no	medium	
+807	salom	selam	shared-arabic	yes	yes	high	a>o e>a
+808	darhol	derhal	shared-persian	yes	no	medium	a>o e>a
+809	ettirmoq	ettirmek	turkic-cognate	yes	no	medium	mak>moq
+812	iqtisodiy	iktisadi	shared-arabic	other	no	low	a>o k>q
+814	gʻoya	gaye	false-friend	none	no	low	
+815	yod	yad	shared-persian	other	no	low	a>o
+816	ishtirok	iştirak	shared-arabic	yes	no	medium	a>o
+818	vujud	vücut	shared-arabic	yes	yes	high	t>d ü>u
+820	dastur	düstur	false-friend	other	no	low	
+822	elektr	elektrik	other-loan	yes	yes	high	epenthesis
+824	doimo	daima	shared-arabic	yes	yes	high	a>o
+826	aro	ara	turkic-cognate	none	yes	medium	a>o
+827	xotira	hatıra	shared-arabic	yes	yes	high	a>o h>x ı>i
+828	oʻrtoq	ortak	turkic-cognate	none	yes	medium	a>o k>q o>oʻ
+831	tarbiya	terbiye	shared-arabic	yes	no	medium	e>a
+832	sabr	sabır	shared-arabic	yes	no	medium	epenthesis
+833	sari	sarı	false-friend	yes	yes	low	
+834	tashqi	dış	turkic-cognate	yes	no	medium	d>t irregular
+835	universitet	üniversite	other-loan	yes	yes	high	ü>u
+836	belgi	belge	false-friend	other	no	low	
+837	oʻq	ok	turkic-cognate	other	yes	medium	k>q o>oʻ
+839	yoʻnalish	yönelim	turkic-cognate	other	no	low	e>a ö>oʻ
+840	mahalla	mahalle	shared-arabic	yes	yes	high	e>a
+841	qurol	kural	false-friend	yes	no	low	
+844	ijod	icat	false-friend	yes	no	low	
+845	nazorat	nezaret	shared-arabic	other	no	low	a>o e>a
+847	oʻpmoq	öpmek	turkic-cognate	yes	no	medium	mak>moq ö>oʻ
+850	uyqu	uyku	turkic-cognate	none	no	low	k>q
+852	kechikmoq	gecikmek	turkic-cognate	none	no	low	g>k mak>moq
+857	quti	kutu	turkic-cognate	none	no	low	k>q
+858	ozod	azat	shared-persian	yes	yes	high	a>o t>d
+860	uygʻonmoq	uyanmak	turkic-cognate	none	yes	medium	a>o mak>moq
+862	partiya	parti	other-loan	yes	yes	high	irregular
+864	surmoq	sürmek	turkic-cognate	yes	no	medium	mak>moq ü>u
+865	yillik	yıllık	turkic-cognate	yes	no	medium	ı>i
+867	taraf	taraf	shared-arabic	none	yes	medium	
+868	hukm	hüküm	shared-arabic	yes	yes	high	epenthesis ü>u
+869	iloj	ilaç	false-friend	none	no	low	
+870	azob	azap	shared-arabic	yes	yes	high	a>o p>b
+872	avtomobil	otomobil	other-loan	yes	yes	high	irregular
+873	kelin	gelin	turkic-cognate	yes	yes	high	g>k
+874	shaxsiy	şahsi	shared-arabic	other	yes	medium	h>x
+875	millat	millet	shared-arabic	yes	yes	high	e>a
+876	sizlar	sizler	turkic-cognate	other	no	low	e>a
+879	demak	demek	turkic-cognate	yes	yes	high	e>a
+882	siyosat	siyaset	shared-arabic	yes	yes	high	a>o e>a
+884	olam	âlem	shared-arabic	yes	yes	high	a>o e>a
+886	barmoq	parmak	turkic-cognate	none	yes	medium	mak>moq p>b
+888	rad	ret	shared-arabic	yes	no	medium	e>a t>d
+889	organ	organ	other-loan	yes	no	medium	
+892	miqdor	miktar	shared-arabic	yes	no	medium	a>o k>q t>d
+893	politsiya	polis	other-loan	none	yes	medium	irregular
+894	rus	Rus	other-loan	yes	no	medium	
+895	toʻldirmoq	doldurmak	turkic-cognate	none	no	low	d>t mak>moq o>oʻ
+897	raqs	raks	shared-arabic	yes	no	medium	k>q
+899	ehtiyot	ihtiyat	shared-arabic	yes	no	medium	a>o
+900	ayni	aynı	shared-arabic	yes	yes	high	ı>i
+901	oid	ait	shared-arabic	yes	no	medium	a>o t>d
+905	tuproq	toprak	turkic-cognate	yes	yes	high	a>o k>q
+907	lugʻat	lügat	shared-arabic	none	yes	medium	ü>u
+908	ulugʻ	ulu	turkic-cognate	yes	no	medium	
+910	tuzatmoq	düzeltmek	turkic-cognate	none	no	low	d>t e>a mak>moq ü>u
+912	foydali	faydalı	shared-arabic	other	yes	medium	a>o ı>i
+913	yangilik	yenilik	turkic-cognate	none	no	low	e>a n>ng
+914	tozalamoq	tazelemek	false-friend	yes	no	low	
+916	ilgari	ileri	false-friend	other	yes	medium	
+917	burmoq	burmak	turkic-cognate	none	no	low	mak>moq
+918	adolat	adalet	shared-arabic	yes	yes	high	a>o e>a
+919	mazkur	mezkûr	shared-arabic	yes	no	medium	e>a
+920	sanoat	sanayi	shared-arabic	yes	yes	high	a>o irregular
+921	oʻttiz	otuz	turkic-cognate	yes	yes	high	irregular o>oʻ
+922	gunoh	günah	shared-persian	yes	yes	high	a>o ü>u
+926	manzil	menzil	false-friend	none	no	low	
+927	ziyofat	ziyafet	shared-arabic	none	no	low	a>o e>a
+928	osmoq	asmak	turkic-cognate	other	yes	medium	a>o mak>moq
+929	ogʻrimoq	ağrımak	turkic-cognate	none	yes	medium	a>o mak>moq ğ>gʻ ı>i
+930	askar	asker	shared-arabic	yes	yes	high	e>a
+931	yoʻqolmoq	yok olmak	turkic-cognate	none	no	low	k>q mak>moq o>oʻ
+932	yuk	yük	turkic-cognate	yes	yes	high	ü>u
+933	joriy	cari	shared-arabic	other	no	low	a>o
+934	zoʻr	zor	false-friend	none	yes	low	
+936	vakil	vekil	shared-arabic	yes	yes	high	e>a
+937	sport	spor	other-loan	yes	yes	high	
+938	sakkiz	sekiz	turkic-cognate	yes	yes	high	e>a
+939	sarflamoq	sarfetmek	shared-arabic	none	no	low	irregular mak>moq
+940	temir	demir	turkic-cognate	yes	yes	high	d>t
+941	tushuncha	düşünce	false-friend	yes	no	low	
+945	halok	helak	shared-arabic	yes	no	medium	a>o e>a
+946	anglatmoq	anlatmak	turkic-cognate	yes	no	medium	mak>moq n>ng
+948	shartnoma	şartname	false-friend	yes	no	low	
+949	tepa	tepe	turkic-cognate	yes	yes	high	e>a
+951	qahramon	kahraman	shared-persian	yes	yes	high	a>o k>q
+952	xususiyat	hususiyet	shared-arabic	yes	no	medium	e>a h>x
+953	goʻyo	güya	shared-persian	yes	no	medium	a>o
+954	mutlaqo	mutlaka	shared-arabic	yes	no	medium	a>o k>q
+957	qahva	kahve	shared-arabic	yes	yes	high	e>a k>q
+961	diqqat	dikkat	shared-arabic	yes	no	medium	k>q
+962	ishq	aşk	shared-arabic	yes	yes	high	k>q
+965	dahshatli	dehşetli	shared-arabic	none	no	low	e>a
+966	rivoyat	rivayet	shared-arabic	yes	no	medium	a>o e>a
+967	amerikalik	Amerikalı	other-loan	yes	no	medium	ı>i
+968	toza	taze	false-friend	other	yes	medium	
+971	boʻlim	bölüm	turkic-cognate	yes	no	medium	ö>oʻ
+972	taqdir	takdir	shared-arabic	none	yes	medium	k>q
+974	masalan	mesela	shared-arabic	yes	yes	high	e>a
+975	pochta	posta	other-loan	none	no	low	
+976	tinch	dinç	false-friend	other	no	low	
+978	teatr	tiyatro	other-loan	yes	yes	high	irregular
+979	koʻchmoq	göçmek	turkic-cognate	yes	yes	high	g>k mak>moq ö>oʻ
+980	sayr	seyir	shared-arabic	none	no	low	e>a epenthesis
+981	maqola	makale	shared-arabic	yes	yes	high	a>o e>a k>q
+984	idora	idare	shared-arabic	yes	yes	high	a>o e>a
+985	namoz	namaz	shared-persian	yes	yes	high	a>o
+986	tavsiya	tavsiye	shared-arabic	yes	yes	high	e>a
+988	yiqilmoq	yıkılmak	turkic-cognate	none	no	low	k>q mak>moq ı>i
+989	qadr	kadir	shared-arabic	none	yes	medium	epenthesis k>q
+990	koʻl	göl	turkic-cognate	yes	yes	high	g>k ö>oʻ
+991	boʻy	boy	turkic-cognate	yes	no	medium	o>oʻ
+992	saqlanmoq	saklanmak	turkic-cognate	yes	no	medium	k>q mak>moq
+996	ekmoq	ekmek	turkic-cognate	yes	no	medium	mak>moq
+999	voz	vaz	shared-arabic	none	no	low	a>o

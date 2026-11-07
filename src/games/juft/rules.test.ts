@@ -104,8 +104,7 @@ describe('juft rules', () => {
   });
 
   it('three mismatches lose the session (K3 integration)', () => {
-    let t = 0;
-    const session = createSession({ rules, lives: 3, countdownMs: 0, clock: { now: () => t } });
+    const session = createSession({ rules, lives: 3, countdownMs: 0, clock: { now: () => 0 } });
     session.start();
     for (let i = 0; i < 3; i++) {
       session.dispatch({ type: 'select', side: 'left', tileId: 'a' });

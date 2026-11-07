@@ -1,4 +1,4 @@
-import { canonicalizeUz, toLowerTr } from '../text';
+import { canonicalizeUz, toLowerTr } from '../text/index.ts';
 
 /** Where in the Turkish word a rule may fire. */
 export type RuleContext = {

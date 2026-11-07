@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { rosette, starPolygon, tilePattern } from './index';
+import { rosette, starPolygon, tilePattern } from './index.ts';
 
 const dist = (p: { x: number; y: number }) => Math.hypot(p.x, p.y);
 

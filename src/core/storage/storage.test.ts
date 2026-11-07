@@ -5,7 +5,7 @@ import {
   storageKey,
   type StorageBackend,
   type StoreWarning,
-} from './index';
+} from './index.ts';
 
 interface V2 {
   coins: number;

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { score, stars, starsForScore, type ScoreInput, type ScoringConfig } from './index';
+import { score, stars, starsForScore, type ScoreInput, type ScoringConfig } from './index.ts';
 
 const config: ScoringConfig = {
   basePoints: 1000,

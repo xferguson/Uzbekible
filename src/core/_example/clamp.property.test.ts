@@ -3,7 +3,7 @@
 // Seeds are fixed so runs are deterministic (no Math.random in tests).
 import fc from 'fast-check';
 import { describe, it } from 'vitest';
-import { clamp } from './clamp';
+import { clamp } from './clamp.ts';
 
 const opts = { seed: 20240607, numRuns: 200 };
 

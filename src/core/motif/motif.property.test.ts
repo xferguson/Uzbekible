@@ -1,6 +1,6 @@
 import fc from 'fast-check';
 import { describe, it } from 'vitest';
-import { rosette, starPolygon, tilePattern, type Point } from './index';
+import { rosette, starPolygon, tilePattern, type Point } from './index.ts';
 
 const opts = { seed: 20240607, numRuns: 200 };
 const EPS = 1e-6;

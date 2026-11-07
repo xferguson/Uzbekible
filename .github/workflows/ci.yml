@@ -102,6 +102,10 @@ jobs:
       - run: npm run typecheck
       - run: npm run api -- --check
       - run: npm test -- --coverage
+      - name: Node-runnable core (CLI smoke)
+        run: |
+          npm run content:validate
+          npm run sim -- --game demo --levels 1-2 --runs 5
       - run: npm run build
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium

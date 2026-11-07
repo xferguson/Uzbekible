@@ -1,6 +1,6 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
-import { applyRules, distance, transparency } from './index';
+import { applyRules, distance, transparency } from './index.ts';
 
 const word = fc.stringMatching(/^[a-zçğıöşü]{0,8}$/);
 const uzWord = fc.stringMatching(/^[a-z]{0,8}$/);

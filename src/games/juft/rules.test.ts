@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { createRng } from '../../core/random';
-import { createSession } from '../../core/session';
-import { createJuftRules, type JuftAction, type JuftState } from './rules';
-import type { RulesEvent } from '../../core/session';
+import { createRng } from '../../core/random/index.ts';
+import { createSession } from '../../core/session/index.ts';
+import { createJuftRules, type JuftAction, type JuftState } from './rules.ts';
+import type { RulesEvent } from '../../core/session/index.ts';
 
 const ids = ['a', 'b', 'c', 'd'];
 const rules = createJuftRules({ pairIds: ids, rng: createRng(1) });

@@ -97,4 +97,18 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    // Q1: core and games must run under plain Node (--experimental-strip-types), which does not
+    // resolve extensionless or directory imports. Write './x.ts' and './dir/index.ts'.
+    files: ['src/core/**/*.{ts,tsx}', 'src/games/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        ...['ImportDeclaration', 'ExportNamedDeclaration', 'ExportAllDeclaration'].map((node) => ({
+          selector: `${node}[source.value=/^\\.{1,2}(\\/.*)?$/]:not(${node}[source.value=/\\.(ts|tsx|css|json|mjs)$/])`,
+          message: 'Relative imports in core and games need an explicit extension (e.g. ./index.ts) so plain Node can run them.',
+        })),
+      ],
+    },
+  },
 );

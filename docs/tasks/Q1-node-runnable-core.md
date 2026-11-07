@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | Q Quality |
 | Read first | `docs/technical-design.md` §2–3, `docs/architecture.md` (Quality gates) (other docs only if needed) |
 | Depends on | none |
@@ -14,10 +14,10 @@
 Make every `src/core` and `src/games` module importable by plain Node (`--experimental-strip-types`), so `npm run content:*` and `npm run sim` work, and make CI prove it stays that way. Today `npm run content:validate` crashes with `ERR_MODULE_NOT_FOUND …/similarity/distance`.
 
 ## Acceptance criteria
-- [ ] All relative imports in `src/core/**` and `src/games/**` use explicit `.ts` extensions (e.g. `core/similarity`, `core/session`, `games/juft`)
-- [ ] An ESLint rule (e.g. `import/extensions` or `no-restricted-syntax` on extensionless relative specifiers) fails on an extensionless relative import in those folders; `scripts/lint-boundaries.test.ts` (or a sibling test) proves it
-- [ ] CI `app` job runs `npm run content:validate` and `npm run sim -- --game demo --levels 1-2 --runs 5` after the unit tests
-- [ ] `scripts/stub.mjs` deleted (no script references it)
+- [x] All relative imports in `src/core/**` and `src/games/**` use explicit `.ts` extensions (e.g. `core/similarity`, `core/session`, `games/juft`)
+- [x] An ESLint rule (e.g. `import/extensions` or `no-restricted-syntax` on extensionless relative specifiers) fails on an extensionless relative import in those folders; `scripts/lint-boundaries.test.ts` (or a sibling test) proves it
+- [x] CI `app` job runs `npm run content:validate` and `npm run sim -- --game demo --levels 1-2 --runs 5` after the unit tests
+- [x] `scripts/stub.mjs` deleted (no script references it)
 
 ## Test-first plan
 - Red: CI step `npm run content:validate` fails on `main` (paste the `ERR_MODULE_NOT_FOUND` output); lint test for the extension rule fails before the rule exists

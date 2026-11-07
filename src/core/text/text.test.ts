@@ -9,7 +9,7 @@ import {
   toLetters,
   toLowerTr,
   toUpperTr,
-} from './index';
+} from './index.ts';
 
 const O = 'oʻ';
 const G = 'gʻ';

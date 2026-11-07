@@ -1,6 +1,6 @@
 import fc from 'fast-check';
 import { describe, it } from 'vitest';
-import { createMemoryBackend, createStore } from './index';
+import { createMemoryBackend, createStore } from './index.ts';
 
 const opts = { seed: 20240607, numRuns: 200 };
 const isNum = (v: unknown): v is number => typeof v === 'number';

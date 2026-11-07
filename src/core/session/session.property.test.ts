@@ -1,7 +1,7 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
-import { createFakeClock } from '../clock';
-import { createSession, type Rules } from './index';
+import { createFakeClock } from '../clock/index.ts';
+import { createSession, type Rules } from './index.ts';
 
 type Act = 'add' | 'miss' | 'finish';
 const rules: Rules<number, Act> = {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { createFakeClock } from '../clock';
-import { createSession, type Rules, type SessionEvent } from './index';
+import { createFakeClock } from '../clock/index.ts';
+import { createSession, type Rules, type SessionEvent } from './index.ts';
 
 type Act = { type: 'add'; n: number } | { type: 'miss' } | { type: 'finish' };
 const rules: Rules<number, Act> = {

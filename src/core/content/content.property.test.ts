@@ -1,7 +1,7 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
-import { makeItem } from './fixtures';
-import { buildPack, serializePack } from './build';
+import { makeItem } from './fixtures.ts';
+import { buildPack, serializePack } from './build.ts';
 
 const itemArb = fc
   .record({

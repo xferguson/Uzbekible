@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { clamp } from './clamp';
+import { clamp } from './clamp.ts';
 
 describe('clamp', () => {
   it('clamps below, above and inside the range', () => {

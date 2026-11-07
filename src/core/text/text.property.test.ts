@@ -1,6 +1,6 @@
 import fc from 'fast-check';
 import { describe, it } from 'vitest';
-import { canonicalizeUz, cyrlToLatn, foldApostrophes, latnToCyrl, normalize, toLetters } from './index';
+import { canonicalizeUz, cyrlToLatn, foldApostrophes, latnToCyrl, normalize, toLetters } from './index.ts';
 
 const opts = { seed: 20240607, numRuns: 300 };
 

@@ -2,7 +2,7 @@
  * Generic game lifecycle: ready → countdown → playing ⇄ paused → won | lost.
  * A game supplies a rules reducer; the session owns phase, lives, elapsed time and the event stream.
  */
-import type { Clock } from '../clock';
+import type { Clock } from '../clock/index.ts';
 
 export type Phase = 'ready' | 'countdown' | 'playing' | 'paused' | 'won' | 'lost';
 

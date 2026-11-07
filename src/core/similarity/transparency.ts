@@ -1,6 +1,6 @@
-import type { UzScript } from '../text';
-import { letterDistance, lettersOf } from './distance';
-import { applyRules } from './rules';
+import type { UzScript } from '../text/index.ts';
+import { letterDistance, lettersOf } from './distance.ts';
+import { applyRules } from './rules.ts';
 
 /**
  * How transparent a Turkish→Uzbek pair is for someone who knows the sound correspondences, in [0, 1]:

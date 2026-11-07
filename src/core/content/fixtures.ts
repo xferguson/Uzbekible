@@ -1,4 +1,4 @@
-import type { Item } from './schema';
+import type { Item } from './schema.ts';
 
 /** A small valid item for tests; override fields per case. */
 export function makeItem(over: Partial<Item> = {}): Item {

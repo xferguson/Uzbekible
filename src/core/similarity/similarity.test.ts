@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyRules, bestMatch, distance, RULES, transparency } from './index';
+import { applyRules, bestMatch, distance, RULES, transparency } from './index.ts';
 
 describe('distance', () => {
   it('counts substitutions, insertions, deletions and adjacent transpositions as 1', () => {

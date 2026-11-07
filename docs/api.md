@@ -181,4 +181,9 @@ _(no exports yet)_
 
 ## `ui`
 
-_(no exports yet)_
+- `PatternBg({ strength, cell, className }: PatternBgProps): import("react").JSX.Element` - Star-and-cross line lattice that fills its container. Decorative, low contrast.
+- `PatternBgProps` { strength?: number; cell?: number; className?: string }
+- `RosetteBand({ width, height, className }: RosetteBandProps): import("react").JSX.Element` - Horizontal band: alternating stars in octagon frames with gold diamonds between, on cobalt-deep.
+- `RosetteBandProps` { width?: number; height?: number; className?: string }
+- `Star8({ size, variant, className }: Star8Props): import("react").JSX.Element` - The signature star: {8/2} khatam, {8/3} turquoise interlace and a gold octagon centre. Decorative.
+- `Star8Props` { size?: number; variant?: 'full' | 'outline'; className?: string }

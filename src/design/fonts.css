@@ -1,0 +1,21 @@
+/* Self-hosted fonts (precached by the service worker). Subsets cover Latin incl. ʻ ʼ, Turkish, Uzbek Cyrillic, Russian, Persian, Arabic. */
+@import '@fontsource/noto-sans/latin-400.css';
+@import '@fontsource/noto-sans/latin-ext-400.css';
+@import '@fontsource/noto-sans/cyrillic-400.css';
+@import '@fontsource/noto-sans/cyrillic-ext-400.css';
+@import '@fontsource/noto-sans/latin-600.css';
+@import '@fontsource/noto-sans/latin-ext-600.css';
+@import '@fontsource/noto-sans/cyrillic-600.css';
+@import '@fontsource/noto-sans/cyrillic-ext-600.css';
+@import '@fontsource/noto-serif-display/latin-400.css';
+@import '@fontsource/noto-serif-display/latin-ext-400.css';
+@import '@fontsource/noto-serif-display/cyrillic-400.css';
+@import '@fontsource/noto-serif-display/cyrillic-ext-400.css';
+@import '@fontsource/noto-serif-display/latin-700.css';
+@import '@fontsource/noto-serif-display/latin-ext-700.css';
+@import '@fontsource/noto-serif-display/cyrillic-700.css';
+@import '@fontsource/noto-serif-display/cyrillic-ext-700.css';
+@import '@fontsource/noto-naskh-arabic/arabic-400.css';
+@import '@fontsource/noto-naskh-arabic/arabic-600.css';
+@import '@fontsource/vazirmatn/arabic-400.css';
+@import '@fontsource/vazirmatn/arabic-600.css';

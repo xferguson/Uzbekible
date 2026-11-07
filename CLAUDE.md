@@ -17,7 +17,7 @@ PWA of arcade-style games that use Uzbek as the medium of play: **a game, not a 
 
 ## Non-negotiables
 1. **Red-green TDD** (`tdd-task`). **One task per PR**, merged into `main` through a PR (`pr-flow`).
-2. **Merging:** the agent merges its own PR once CI is green. 🔒 tasks (D1, D2, J4, I4, C6, S1, S2, R1) wait for the user's
+2. **Merging:** the agent merges its own PR once CI is green. 🔒 tasks (D1, D2, J4, I4, C6, S1, S2, R1, V8, V9, V10) wait for the user's
    explicit approval in the session.
 3. **Before every push, merge the latest `main` into your branch** (`git fetch origin main && git merge origin/main`),
    resolve conflicts, re-run the fast gate. Merge, don't rebase or force-push.

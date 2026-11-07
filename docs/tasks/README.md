@@ -11,6 +11,7 @@ unmerged dependencies can run **in parallel**. Each task's **Status** row lives 
 - **J4** Soxta mockups → user approval → unlocks **J5** (J lane on hold until after R1)
 - **I4** Imlo mockups → user approval → unlocks **I6**
 - **C6** content review, **S1**/**S2** spikes and **R1** release also need explicit approval.
+- **V8**, **V9**, **V10** (Juft screens to D2) → user approval after seeing the mockup comparison page
 
 Engine (K, E) and content (C) lanes don't wait for the design gates.
 
@@ -36,6 +37,10 @@ Q Quality:    Q1 ─┬─ Q2      Q5 ─┬─ Q6        Q3 · Q4 · Q9 (indepe
 X Harness:    X1 ─┬─ X5 ──┐      X2 ── X4 (also Q4)
                   └─ X7   ├─ X8  X3 (independent)
               X6 ─────────┘
+V Visual:     V1 ─┬─ V2 ──────────┐
+                  ├─ V4         ├─ V8 🔒 / V9 🔒 / V10 🔒 ── V11
+                  └─ V5 ── V7 ──┘
+              V3 · V6 (independent)
 ```
 **Start right away, in parallel:** T00, D1, C1, S1, S2. After T00: T01, T02, K1, K2, K4, K5, K9.
 
@@ -47,6 +52,14 @@ subagents, and leaner task/skill docs. Harness-only; none are gated. Start X1, X
 (broken content CLI, missing transparency, coverage that skipped `index.ts`, mismatched event names, an unsettled
 game contract). E1, E3 and U3 now wait on the Q tasks they build on. Q4's one-time Prettier pass touches many files,
 so merge it while few branches are open.
+
+**V lane (added after Juft v1, from the post-release visual bugs):** v1 shipped screens that were visibly broken on
+phones and far from the approved D2 mockups. U8's own screenshots showed the bugs, but no step compared the build
+with the mockups, and the tests check behaviour, not layout. V adds a screenshot-vs-mockup page (`npm run shots`),
+layout checks for every screen, a PR evidence check, frame ownership in tasks, an independent design reviewer, a
+visual release checklist, the Juft fidelity pass, and then visual-regression baselines. Heavy runs (shots, full
+layout matrix, visual regression) happen in the agent's cloud session; CI only adds a small layout subset and a
+seconds-long PR-body check with no GitHub API calls. **Queued for later:** nothing starts until the user says "Do V…".
 
 ## Tasks
 | ID | Title | Lane | Depends on |
@@ -118,6 +131,17 @@ so merge it while few branches are open.
 | [I6](I6-imlo-board.md) | Imlo board UI | I Imlo | I4, I3 |
 | [I7](I7-imlo-wiring-e2e.md) | Imlo wiring, registry entry and e2e | I Imlo | I6, I5, I8 |
 | [I8](I8-imlo-scoring-balance.md) | Imlo scoring config and balance pass | I Imlo | I3, K10 |
+| [V1](V1-shots-script.md) | `npm run shots`: app screenshots paired with D2 frames | V Visual quality | none |
+| [V2](V2-layout-invariants.md) | Layout-invariant e2e suite for every screen state | V Visual quality | V1 |
+| [V3](V3-pr-evidence-check.md) | PR evidence check: UI changes need a mockup comparison | V Visual quality | none |
+| [V4](V4-ui-task-rules.md) | UI task rules: mockup frames in tasks, frame ownership, CLAUDE.md rule | V Visual quality | V1 |
+| [V5](V5-design-review-skill.md) | `design-fidelity-review` skill + independent `design-reviewer` subagent | V Visual quality | V1 |
+| [V6](V6-release-checklist.md) | Release checklist: visual QA and a real-device play-through | V Visual quality | none |
+| [V7](V7-juft-fidelity-audit.md) | Juft design-fidelity audit against D2 | V Visual quality | V1, V5 |
+| [V8](V8-juft-frame-home-settings.md) 🔒 | App frame, home and settings to D2 (GATE) | V Visual quality | V2, V7 |
+| [V9](V9-juft-level-map.md) 🔒 | Level map to D2 (GATE) | V Visual quality | V2, V7 |
+| [V10](V10-juft-results-overlays-board.md) 🔒 | Results, countdown, pause, fail and board polish to D2 (GATE) | V Visual quality | V2, V7 |
+| [V11](V11-visual-regression.md) | Visual-regression baselines, run in the cloud session | V Visual quality | V8, V9, V10 |
 
 ## Writing new tasks
 Copy [`_TEMPLATE.md`](_TEMPLATE.md). Keep a task small enough for one PR (about ≤ 400 lines of non-generated

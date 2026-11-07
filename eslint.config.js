@@ -19,6 +19,8 @@ const elements = [
   { type: 'core', pattern: 'src/core' },
   { type: 'design', pattern: 'src/design' },
   { type: 'ui', pattern: 'src/ui' },
+  // Helpers several games share; listed before `game` so it is not treated as a game folder.
+  { type: 'games-shared', pattern: 'src/games/shared' },
   // One element per game folder: src/games/<name>/**
   { type: 'game', pattern: 'src/games/*', capture: ['name'] },
   { type: 'shell', pattern: 'src/shell' },
@@ -83,7 +85,14 @@ export default tseslint.config(
                   },
                 },
                 { to: { file: { categories: 'games-root' } } },
-                { to: { element: { types: ['core', 'ui', 'design'] } } },
+                { to: { element: { types: ['core', 'ui', 'design', 'games-shared'] } } },
+              ],
+            },
+            {
+              from: { element: { type: 'games-shared' } },
+              allow: [
+                { to: { element: { types: ['games-shared', 'core'] } } },
+                { to: { file: { categories: 'games-root' } } },
               ],
             },
             {

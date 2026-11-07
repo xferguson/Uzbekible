@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | on hold: audio deferred, see [docs/spikes/S1-audio.md](../spikes/S1-audio.md) |
 | Lane | H Spikes |
 | Depends on | none |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |

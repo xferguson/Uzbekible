@@ -15,7 +15,8 @@ Set Juft scoring/stars parameters and validate the curve with the simulator.
 
 ## Acceptance criteria
 - [ ] `scoring.config.ts` (par time per pair, penalties, hint cost, combo, Cyrillic multiplier)
-- [ ] `docs/games/01-juft-balance.md` with sim tables for levels 1–40 × 3 profiles
+- [ ] `docs/games/01-juft-balance.md` with sim tables for levels 1–120 × 3 profiles (the curve goes up to 12-pair boards)
+- [ ] Par time and star thresholds scale with pair count up to 12 pairs; check that scan time on 10–12-pair boards is modelled (the bot's response time grows with tiles on screen)
 - [ ] Targets: novice clears levels 1–5 with ≥1 star; b1-turkish failure rate 10–25% on levels 10–30
 
 ## Test-first plan

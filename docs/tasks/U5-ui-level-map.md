@@ -15,6 +15,7 @@ Mosaic facade progress map with replay of any unlocked level.
 
 ## Acceptance criteria
 - [ ] Facade cells per level; stars set glaze depth; locked/unlocked/current states
+- [ ] 120 levels in 8 chapters (buildings) of 15, per D2: a skyline of all eight buildings above the current building's facade on phone, a chapter list on desktop; chapters and level counts come from config, not hard-coded
 - [ ] Select any unlocked level; shows best score
 - [ ] Keyboard navigable; screen-reader labels “Level 7, 2 stars, best 1840”
 

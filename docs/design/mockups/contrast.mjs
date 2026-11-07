@@ -6,12 +6,14 @@ export const tokens = {
     turquoise: '#1FA3B5', 'turquoise-pale': '#CDEFF2', gold: '#B08423', ochre: '#B5652B', // gold: brief #C99A2E was 2.58:1 on white
     'on-cobalt': '#FFFFFF', 'on-deep': '#FFFFFF',
     crack: '#7A2E2E', text: '#13213F', 'text-muted': '#4B5878',
+    'on-gold': '#0A1838', // D2: text on gold and turquoise fills
   },
   dark: {
     ground: '#0B1A3A', surface: '#12254D', cobalt: '#5B86E8', 'cobalt-deep': '#0A1838', // cobalt: brief #3E6BD6
     turquoise: '#34C3D3', 'turquoise-pale': '#164A57', gold: '#E2B54C', ochre: '#D88A4E',
     'on-cobalt': '#0A1838', 'on-deep': '#EEF2FA',
     crack: '#E08A8A', text: '#EEF2FA', 'text-muted': '#A8B4CF',
+    'on-gold': '#0A1838',
   },
 };
 // [foreground, background, minimum ratio, use]
@@ -31,6 +33,9 @@ export const pairs = [
   ['gold', 'ground', 3, 'stars on page (graphic)'],
   ['on-cobalt', 'cobalt', 4.5, 'primary button label'],
   ['on-deep', 'cobalt-deep', 4.5, 'header / dark-panel text'],
+  // D2 additions
+  ['on-gold', 'gold', 4.5, 'level badge, combo pill, new-best ribbon'],
+  ['on-gold', 'turquoise', 4.5, 'number on a 2-star map cell'],
 ];
 const lum = (hex) => {
   const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)

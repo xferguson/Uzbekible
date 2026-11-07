@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | in review |
+| Status | done |
 | Lane | D Core |
 | Read first | `docs/architecture.md` (your module's row) (other docs only if needed) |
 | Depends on | [K5](K5-core-storage.md) |

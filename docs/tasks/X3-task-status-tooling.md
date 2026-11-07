@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | X Harness |
 | Read first | `docs/tasks/README.md`, `.claude/skills/pr-flow/SKILL.md` (After merge) (other docs only if needed) |
 | Depends on | none |

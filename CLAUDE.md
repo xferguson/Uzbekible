@@ -11,7 +11,7 @@ PWA of arcade-style games that use Uzbek as the medium of play: **a game, not a 
 ## "Do <ID>" (how sessions start)
 "Do D1", "Do C1", "work on K3" = a task ID from `docs/tasks/`:
 1. Read `docs/tasks/<ID>-*.md` in full; read only the docs in its `Read first` row.
-2. Check its dependencies are merged to `main` (their task files' `Status`, `git log origin/main`). If not, say which and stop.
+2. Check its dependencies are merged to `main` with `npm run tasks` (task must be in **Ready next**; run on up-to-date `main`). If not, say which and stop.
 3. Follow the skills it lists (always `tdd-task` and `pr-flow`) on branch `task/<ID>-<slug>`, unless a branch was assigned.
 4. Finish: PR, CI green, set the task file's `Status` to `done` in that PR, merge it (or wait for approval if the task is 🔒). A merged task must never be left `in review`.
 

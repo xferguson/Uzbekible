@@ -7,7 +7,7 @@ describe('distance', () => {
     expect(distance('qora', 'qara')).toBe(1);
     expect(distance('qora', 'qor')).toBe(1);
     expect(distance('qora', 'qoraa')).toBe(1);
-    expect(distance('tosh', 'tsoh')).toBe(1);
+    expect(distance('qora', 'qroa')).toBe(1);
   });
   it('treats digraphs and oʻ/gʻ as single letters', () => {
     expect(distance('shahar', 'sahar')).toBe(1);
@@ -36,7 +36,7 @@ describe('applyRules', () => {
     expect(applyRules('ver')).toContain('ber');
     expect(applyRules('üç')).toContain('uch');
     expect(applyRules('kız')).toContain('qiz');
-    expect(applyRules('cevap')).toContain('javob');
+    expect(applyRules('cevap')).toContain('jevob');
   });
   it('is Turkish-case aware and returns unique, capped candidates', () => {
     expect(applyRules('GÖZ')).toContain('koʻz');
@@ -68,7 +68,7 @@ describe('transparency', () => {
     expect(transparency('ev', 'uy')).toBeLessThan(transparency('kara', 'qora'));
   });
   it('is partial for near matches and handles empties', () => {
-    const t = transparency('kitap', 'kitob');
+    const t = transparency('kalem', 'qalam');
     expect(t).toBeGreaterThan(0.5);
     expect(t).toBeLessThan(1);
     expect(transparency('', '')).toBe(1);

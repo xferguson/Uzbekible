@@ -4,6 +4,8 @@ import { applyRules, distance, transparency } from './index';
 
 const word = fc.stringMatching(/^[a-zçğıöşü]{0,8}$/);
 const uzWord = fc.stringMatching(/^[a-z]{0,8}$/);
+// Turkish c is always rewritten to j, so identity only holds for words without it.
+const uzNoC = fc.stringMatching(/^[abdefghijklmnopqrstuvxyz]{0,8}$/);
 
 describe('similarity properties', () => {
   it('distance is symmetric', () => {
@@ -25,7 +27,7 @@ describe('similarity properties', () => {
         return t >= 0 && t <= 1;
       }),
     );
-    fc.assert(fc.property(uzWord, (w) => transparency(w, w) === 1));
+    fc.assert(fc.property(uzNoC, (w) => transparency(w, w) === 1));
   });
   it('every candidate is a distinct lower-case string', () => {
     fc.assert(

@@ -1,48 +1,13 @@
 import fc from 'fast-check';
 import { describe, it } from 'vitest';
-import {
-  canonicalizeUz,
-  cyrlToLatn,
-  foldApostrophes,
-  latnToCyrl,
-  normalize,
-  toLetters,
-} from './index';
+import { canonicalizeUz, cyrlToLatn, foldApostrophes, latnToCyrl, normalize, toLetters } from './index';
 
 const opts = { seed: 20240607, numRuns: 300 };
 
 // Native-Uzbek Latin "letters" (no loan-only ts; e after a vowel is excluded because it is not native).
 const letters = [
-  'a',
-  'b',
-  'd',
-  'e',
-  'f',
-  'g',
-  'h',
-  'i',
-  'j',
-  'k',
-  'l',
-  'm',
-  'n',
-  'o',
-  'p',
-  'q',
-  'r',
-  's',
-  't',
-  'u',
-  'v',
-  'x',
-  'y',
-  'z',
-  'sh',
-  'ch',
-  'ng',
-  'oʻ',
-  'gʻ',
-  'ʼ',
+  'a', 'b', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z',
+  'sh', 'ch', 'ng', 'oʻ', 'gʻ', 'ʼ',
 ];
 
 const nativeWord = fc
@@ -70,10 +35,7 @@ const anyText = fc.string({ unit: 'binary', maxLength: 30 });
 
 describe('text properties', () => {
   it('normalize is idempotent', () => {
-    fc.assert(
-      fc.property(anyText, (s) => normalize(normalize(s)) === normalize(s)),
-      opts,
-    );
+    fc.assert(fc.property(anyText, (s) => normalize(normalize(s)) === normalize(s)), opts);
   });
 
   it('canonicalizeUz is idempotent and fold-equivalent to its input', () => {
@@ -87,10 +49,7 @@ describe('text properties', () => {
   });
 
   it('cyrlToLatn(latnToCyrl(x)) === x for native words', () => {
-    fc.assert(
-      fc.property(nativeWord, (w) => cyrlToLatn(latnToCyrl(w)) === w),
-      opts,
-    );
+    fc.assert(fc.property(nativeWord, (w) => cyrlToLatn(latnToCyrl(w)) === w), opts);
   });
 
   it('latnToCyrl(cyrlToLatn(x)) is stable once converted', () => {

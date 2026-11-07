@@ -17,12 +17,7 @@ describe('similarity properties', () => {
   });
   it('distance obeys the triangle inequality', () => {
     fc.assert(
-      fc.property(
-        uzWord,
-        uzWord,
-        uzWord,
-        (a, b, c) => distance(a, c) <= distance(a, b) + distance(b, c),
-      ),
+      fc.property(uzWord, uzWord, uzWord, (a, b, c) => distance(a, c) <= distance(a, b) + distance(b, c)),
     );
   });
   it('transparency stays within [0, 1] and is 1 for identical forms', () => {

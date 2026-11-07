@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | Q Quality |
 | Read first | `docs/technical-design.md` §5, `docs/architecture.md` (`session`, `scoring`, `sim` rows) (other docs only if needed) |
 | Depends on | none |

@@ -24,27 +24,11 @@ export interface Rule {
   note: string;
 }
 
-const optional = (
-  id: string,
-  pattern: string,
-  replacement: string,
-  context: RuleContext,
-  note: string,
-): Rule => ({
-  id,
-  pattern,
-  replacement,
-  context,
-  mandatory: false,
-  note,
+const optional = (id: string, pattern: string, replacement: string, context: RuleContext, note: string): Rule => ({
+  id, pattern, replacement, context, mandatory: false, note,
 });
 const spelling = (pattern: string, replacement: string): Rule => ({
-  id: `${pattern}>${replacement}`,
-  pattern,
-  replacement,
-  context: { at: 'any' },
-  mandatory: true,
-  note: 'orthography',
+  id: `${pattern}>${replacement}`, pattern, replacement, context: { at: 'any' }, mandatory: true, note: 'orthography',
 });
 
 /** Turkish→Uzbek correspondences (see the `cognate-research` skill, section 4). Data, not code. */
@@ -98,8 +82,7 @@ function optionsAt(chars: readonly string[], i: number): Option[] {
     text: r.replacement,
     shifts: r.mandatory ? 0 : 1,
   }));
-  if (!matching.some((r) => r.mandatory))
-    options.push({ take: 1, text: chars[i] as string, shifts: 0 });
+  if (!matching.some((r) => r.mandatory)) options.push({ take: 1, text: chars[i] as string, shifts: 0 });
   return options;
 }
 

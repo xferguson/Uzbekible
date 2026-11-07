@@ -19,10 +19,11 @@ const MODIFIER_APOSTROPHE = 'ʼ'; // ʼ: tutuq belgisi
 const ZWNJ = '‌';
 const APOSTROPHES = "'‘’`ʻʼ";
 
-const isApostrophe = (ch: string | undefined): boolean =>
-  ch !== undefined && ch !== '' && APOSTROPHES.includes(ch);
-const isLetter = (ch: string | undefined): boolean => ch !== undefined && /[\p{L}ʻʼ]/u.test(ch);
-const isUpper = (ch: string | undefined): boolean => ch !== undefined && ch !== ch.toLowerCase();
+const isApostrophe = (ch: string | undefined): boolean => ch !== undefined && ch !== '' && APOSTROPHES.includes(ch);
+const isLetter = (ch: string | undefined): boolean =>
+  ch !== undefined && /[\p{L}ʻʼ]/u.test(ch);
+const isUpper = (ch: string | undefined): boolean =>
+  ch !== undefined && ch !== ch.toLowerCase();
 const lower = (ch: string | undefined): string => (ch ?? '').toLowerCase();
 
 /** Unicode NFC. */
@@ -89,66 +90,16 @@ const VOWELS_LATN = new Set(['a', 'e', 'i', 'o', 'u']);
 const VOWELS_CYRL = new Set([...'аеёэиоуўюя']);
 
 const LATN_TO_CYRL: Record<string, string> = {
-  a: 'а',
-  b: 'б',
-  d: 'д',
-  f: 'ф',
-  g: 'г',
-  h: 'ҳ',
-  i: 'и',
-  j: 'ж',
-  k: 'к',
-  l: 'л',
-  m: 'м',
-  n: 'н',
-  o: 'о',
-  p: 'п',
-  q: 'қ',
-  r: 'р',
-  s: 'с',
-  t: 'т',
-  u: 'у',
-  v: 'в',
-  x: 'х',
-  y: 'й',
-  z: 'з',
+  a: 'а', b: 'б', d: 'д', f: 'ф', g: 'г', h: 'ҳ', i: 'и', j: 'ж', k: 'к', l: 'л', m: 'м', n: 'н',
+  o: 'о', p: 'п', q: 'қ', r: 'р', s: 'с', t: 'т', u: 'у', v: 'в', x: 'х', y: 'й', z: 'з',
   [MODIFIER_APOSTROPHE]: 'ъ',
 };
 
 const CYRL_TO_LATN: Record<string, string> = {
-  а: 'a',
-  б: 'b',
-  в: 'v',
-  г: 'g',
-  д: 'd',
-  ё: 'yo',
-  ж: 'j',
-  з: 'z',
-  и: 'i',
-  й: 'y',
-  к: 'k',
-  л: 'l',
-  м: 'm',
-  н: 'n',
-  о: 'o',
-  п: 'p',
-  р: 'r',
-  с: 's',
-  т: 't',
-  у: 'u',
-  ф: 'f',
-  х: 'x',
-  ц: 'ts',
-  ч: 'ch',
-  ш: 'sh',
-  ъ: MODIFIER_APOSTROPHE,
-  э: 'e',
-  ю: 'yu',
-  я: 'ya',
-  ў: `o${MODIFIER_TURNED_COMMA}`,
-  қ: 'q',
-  ғ: `g${MODIFIER_TURNED_COMMA}`,
-  ҳ: 'h',
+  а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', ё: 'yo', ж: 'j', з: 'z', и: 'i', й: 'y', к: 'k', л: 'l',
+  м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'x', ц: 'ts',
+  ч: 'ch', ш: 'sh', ъ: MODIFIER_APOSTROPHE, э: 'e', ю: 'yu', я: 'ya',
+  ў: `o${MODIFIER_TURNED_COMMA}`, қ: 'q', ғ: `g${MODIFIER_TURNED_COMMA}`, ҳ: 'h',
 };
 
 const lettersOf = (s: string): string => s.replace(/[^\p{L}]/gu, '');
@@ -183,11 +134,7 @@ export function latnToCyrl(text: string): string {
     } else if (c === 'y' && next === 'e') {
       src = ch + chars[i + 1]!;
       cyrl = 'е';
-    } else if (
-      c === 'y' &&
-      chars[i + 2] !== MODIFIER_TURNED_COMMA &&
-      (next === 'o' || next === 'u' || next === 'a')
-    ) {
+    } else if (c === 'y' && chars[i + 2] !== MODIFIER_TURNED_COMMA && (next === 'o' || next === 'u' || next === 'a')) {
       src = ch + chars[i + 1]!;
       cyrl = { o: 'ё', u: 'ю', a: 'я' }[next];
     } else if (c + next === 'sh' || c + next === 'ch') {

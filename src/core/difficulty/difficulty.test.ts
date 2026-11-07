@@ -3,14 +3,7 @@ import { paramsFor, type DifficultyConfig } from './index';
 
 const config: DifficultyConfig = {
   params: {
-    pairs: {
-      type: 'step',
-      steps: [
-        { fromLevel: 1, value: 4 },
-        { fromLevel: 4, value: 6 },
-        { fromLevel: 10, value: 12 },
-      ],
-    },
+    pairs: { type: 'step', steps: [{ fromLevel: 1, value: 4 }, { fromLevel: 4, value: 6 }, { fromLevel: 10, value: 12 }] },
     transparency: { type: 'linear', fromLevel: 1, toLevel: 11, from: 1, to: 0 },
     parMs: { type: 'logistic', min: 30_000, max: 90_000, midpoint: 10, steepness: 0.5 },
     lives: { type: 'linear', fromLevel: 1, toLevel: 5, from: 3, to: 5.4, round: true },
@@ -60,25 +53,13 @@ describe('paramsFor', () => {
   });
 
   it('handles a degenerate linear range (fromLevel === toLevel)', () => {
-    const c: DifficultyConfig = {
-      params: { x: { type: 'linear', fromLevel: 3, toLevel: 3, from: 2, to: 8 } },
-    };
+    const c: DifficultyConfig = { params: { x: { type: 'linear', fromLevel: 3, toLevel: 3, from: 2, to: 8 } } };
     expect(paramsFor(2, c).x).toBe(2);
     expect(paramsFor(3, c).x).toBe(8);
   });
 
   it('sorts unsorted steps and rejects empty ones', () => {
-    const c: DifficultyConfig = {
-      params: {
-        x: {
-          type: 'step',
-          steps: [
-            { fromLevel: 5, value: 9 },
-            { fromLevel: 1, value: 1 },
-          ],
-        },
-      },
-    };
+    const c: DifficultyConfig = { params: { x: { type: 'step', steps: [{ fromLevel: 5, value: 9 }, { fromLevel: 1, value: 1 }] } } };
     expect(paramsFor(2, c).x).toBe(1);
     expect(paramsFor(5, c).x).toBe(9);
     expect(() => paramsFor(1, { params: { x: { type: 'step', steps: [] } } })).toThrow(RangeError);

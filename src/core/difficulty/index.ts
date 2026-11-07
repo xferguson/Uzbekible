@@ -45,10 +45,7 @@ function evaluate(curve: Curve, level: number): number {
     }
     case 'linear': {
       if (curve.toLevel <= curve.fromLevel) return level >= curve.toLevel ? curve.to : curve.from;
-      const t = Math.min(
-        1,
-        Math.max(0, (level - curve.fromLevel) / (curve.toLevel - curve.fromLevel)),
-      );
+      const t = Math.min(1, Math.max(0, (level - curve.fromLevel) / (curve.toLevel - curve.fromLevel)));
       return curve.from + (curve.to - curve.from) * t;
     }
     case 'logistic': {
@@ -58,10 +55,7 @@ function evaluate(curve: Curve, level: number): number {
   }
 }
 
-export function paramsFor<K extends string>(
-  level: number,
-  config: DifficultyConfig<K>,
-): Record<K, number> {
+export function paramsFor<K extends string>(level: number, config: DifficultyConfig<K>): Record<K, number> {
   if (!Number.isInteger(level)) throw new RangeError('level must be an integer');
   const out = {} as Record<K, number>;
   for (const key of Object.keys(config.params) as K[]) {

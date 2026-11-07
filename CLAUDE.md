@@ -5,7 +5,7 @@ PWA of arcade-style games that use Uzbek as the medium of play: **a game, not a 
 
 ## Where things are (read on demand, not up front)
 `docs/PRD.md` product · `docs/games/` game specs · `docs/design/brief.md` look · `docs/technical-design.md` and
-`docs/architecture.md` engineering · `docs/tasks/` work queue (status lives in each task file) ·
+`docs/architecture.md` engineering · `docs/api.md` generated export signatures (read this instead of opening `src/core/*/index.ts`; `npm run api` regenerates) · `docs/tasks/` work queue (status lives in each task file) ·
 `.claude/skills.md` skill index (skills load automatically).
 
 ## "Do <ID>" (how sessions start)

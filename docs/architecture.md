@@ -16,7 +16,7 @@ shell  ──►  games/*  ──►  ui  ──►  design
 - `content/scripts` imports `core` only (shared schema and text rules).
 
 ## Shared core modules
-| Module | Responsibility | Key exports (sketch) | Tests | Used by |
+| Module | Responsibility | Key exports (sketch; source of truth: [`docs/api.md`](api.md)) | Tests | Used by |
 |---|---|---|---|---|
 | `text` | NFC, apostrophe folding, Turkish case, Uzbek letters, Latin↔Cyrillic, `scriptMeta` | `normalize`, `foldApostrophes`, `toLowerTr`, `toLetters`, `latnToCyrl`, `cyrlToLatn`, `scriptMeta` | unit + **property** (round-trip, idempotence) | all games, content, ui |
 | `random` | seeded RNG, shuffle, sample, weighted pick, seed from string | `createRng(seed)`, `shuffle`, `sample`, `weightedPick`, `seedFrom` | **property** (permutation, determinism) | all games, sim |

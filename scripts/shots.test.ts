@@ -43,7 +43,7 @@ describe('state → frame mapping (docs/design/frames.json)', () => {
   it('reports missing states, stale entries and missing files', () => {
     const states = [
       { id: 'home', game: null },
-      { id: 'pause', game: 'juft' },
+      { id: 'juft-pause', game: 'juft' },
     ];
     const f = {
       states: {
@@ -53,7 +53,7 @@ describe('state → frame mapping (docs/design/frames.json)', () => {
     };
     const problems = checkFrames(states, f, (p: string) => p === 'a-light.png');
     expect(problems).toEqual([
-      'pause: no entry in frames.json',
+      'juft-pause: no entry in frames.json',
       'gone: entry in frames.json but no such state',
       'home: frame file a-dark.png does not exist',
     ]);
@@ -81,14 +81,14 @@ describe('shots runner helpers', () => {
   it('--states matches ids and id prefixes; --games matches game ids (shell for shell screens)', () => {
     const all = [
       { id: 'home', game: null },
-      { id: 'map-early', game: 'juft' },
-      { id: 'map-late', game: 'juft' },
+      { id: 'juft-map-early', game: 'juft' },
+      { id: 'juft-map-late', game: 'juft' },
       { id: 'mapx', game: 'other' },
     ];
     const ids = (r: { id: string }[]) => r.map((s) => s.id);
-    expect(ids(selectStates(all, { states: ['map'], games: null }))).toEqual([
-      'map-early',
-      'map-late',
+    expect(ids(selectStates(all, { states: ['juft-map'], games: null }))).toEqual([
+      'juft-map-early',
+      'juft-map-late',
     ]);
     expect(ids(selectStates(all, { states: null, games: ['shell'] }))).toEqual(['home']);
     expect(ids(selectStates(all, { states: null, games: null }))).toHaveLength(4);
@@ -115,14 +115,14 @@ describe('shots runner helpers', () => {
         frames: ['frames/x.png'],
       },
       {
-        state: { id: 'pause', title: 'Pause' },
+        state: { id: 'juft-pause', title: 'Pause' },
         width: 1280,
         scheme: 'dark',
         shot: 'pause-1280-dark.png',
         frames: [],
       },
       {
-        state: { id: 'fail', title: 'Fail' },
+        state: { id: 'juft-fail', title: 'Fail' },
         width: 360,
         scheme: 'dark',
         shot: null,

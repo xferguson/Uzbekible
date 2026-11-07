@@ -1,0 +1,421 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  block-size: 100%;
+  min-block-size: 0;
+  max-inline-size: 1280px;
+  margin-inline: auto;
+  padding: var(--space-3) 8px var(--space-5);
+  box-sizing: border-box;
+  overflow: hidden; /* the board never scrolls */
+  outline: none;
+}
+.progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.dots {
+  display: flex;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dot {
+  flex: none;
+  inline-size: 22px;
+  block-size: 22px;
+  box-sizing: border-box;
+  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  border: 2px dashed var(--color-text-muted);
+  background: transparent;
+}
+.dot[data-state='done'] {
+  background: var(--color-gold);
+  border: 0;
+}
+.dot[data-state='current'] {
+  background:
+    radial-gradient(circle, var(--color-cobalt) 24%, transparent 26%), var(--color-surface);
+  border: 2px solid var(--color-cobalt);
+}
+.mode {
+  padding: 4px 14px;
+  font: 700 15px var(--font-ui);
+  color: var(--color-text);
+  border: 2px solid var(--color-cobalt);
+  border-radius: 999px;
+  background: var(--color-surface);
+}
+
+/* Phone: source row, star + clue, Uzbek row. Desktop: side by side. */
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  inline-size: 100%;
+  animation: slide-in 320ms ease-out both;
+}
+@media (min-width: 900px) {
+  .stage {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--space-6);
+  }
+  .stage > .row {
+    order: 0;
+  }
+  .stage > .center {
+    order: 1;
+  }
+  .stage > .row:last-child {
+    order: 2;
+  }
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+.star {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 124px;
+  block-size: 124px;
+  padding: 0;
+  font: 700 17px var(--font-ui);
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.starShape {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 4;
+  stroke-linejoin: round;
+}
+.star[data-ready],
+.star[data-solved] {
+  color: var(--on-gold, #fff);
+}
+.star[data-ready] .starShape,
+.star[data-solved] .starShape {
+  fill: var(--color-gold);
+  stroke: var(--color-cobalt);
+  stroke-width: 3;
+  stroke-dasharray: none;
+}
+.starInner {
+  display: none;
+}
+.star[data-ready] .starInner,
+.star[data-solved] .starInner {
+  display: block;
+  fill: none;
+  stroke: var(--color-cobalt);
+  stroke-width: 1.5;
+  opacity: 0.55;
+}
+.star:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+.star[data-solved] {
+  animation: pop 300ms ease-out;
+}
+.starLabel,
+.star > span[aria-hidden] {
+  position: relative;
+  grid-area: 1 / 1;
+}
+.star[data-solved] .starLabel {
+  display: none;
+}
+.star > span[aria-hidden] {
+  font-size: 44px;
+}
+.clue span::before {
+  content: '“';
+}
+.clue span::after {
+  content: '”';
+}
+.clue {
+  margin: 0;
+  font: 600 24px var(--font-display, var(--font-ui));
+  color: var(--color-text);
+  text-align: center;
+}
+
+.row {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--gap, 8px);
+  padding: 14px 8px 12px;
+  border: 3px solid var(--color-text-muted);
+  border-color: color-mix(in srgb, var(--color-text-muted) 35%, transparent);
+  border-radius: 18px;
+  box-sizing: border-box;
+  max-inline-size: 100%;
+}
+.row[data-active] {
+  border-color: var(--color-gold);
+  background: color-mix(in srgb, var(--color-turquoise-pale) 40%, transparent);
+}
+.row[data-active]::after {
+  content: '✸';
+  position: absolute;
+  inset-block-start: -14px;
+  inset-inline-end: -10px;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--color-gold);
+}
+.row[data-result='right'] {
+  border-color: var(--color-gold);
+  background: color-mix(in srgb, var(--color-gold) 22%, transparent);
+}
+.row[data-result='right'] .slot > button {
+  background: color-mix(in srgb, var(--color-gold) 38%, var(--color-surface));
+  border-color: var(--color-cobalt);
+}
+.row[data-result='right']::after {
+  content: none;
+}
+.rightBadge {
+  position: absolute;
+  inset-block-start: -13px;
+  inset-inline-end: -10px;
+  display: grid;
+  place-items: center;
+  inline-size: 28px;
+  block-size: 28px;
+  font: 700 17px/1 var(--font-ui);
+  color: var(--on-gold, #fff);
+  background: var(--color-gold);
+  border: 2px solid var(--color-cobalt);
+  border-radius: 50%;
+}
+.crack {
+  position: absolute;
+  inset: 22px 6px 14px;
+  inline-size: calc(100% - 12px);
+  block-size: calc(100% - 36px);
+  fill: none;
+  stroke: var(--color-crack);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+  z-index: 2;
+}
+.crack polyline {
+  vector-effect: non-scaling-stroke;
+}
+.slot[data-locked='true'] > button {
+  border-color: var(--color-gold);
+}
+.cost {
+  position: absolute;
+  inset-block-end: -18px;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  padding: 1px 8px;
+  font: 700 13px/1.3 var(--font-ui);
+  color: var(--color-text);
+  background: var(--color-turquoise-pale);
+  border: 1.5px solid var(--color-turquoise);
+  border-radius: 999px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: pop 300ms ease-out;
+}
+.row[data-result='wrong'] {
+  border-color: var(--color-crack);
+  border-style: solid;
+  animation: shake 300ms linear;
+}
+.badge {
+  position: absolute;
+  inset-block-start: -12px;
+  inset-inline-start: 12px;
+  padding: 2px 7px;
+  font: 700 12px/1.2 var(--font-ui);
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  background: var(--color-ground);
+  border: 1px solid var(--color-text-muted);
+  border-radius: 6px;
+}
+.slot {
+  display: grid;
+  /* Shrinks in width (never height) so the longest word still fits the screen. */
+  inline-size: min(
+    var(--slot-phone),
+    calc((100vw - 38px - (var(--n) - 1) * var(--gap)) / var(--n))
+  );
+  block-size: var(--slot-phone);
+  flex: none;
+}
+@media (min-width: 900px) {
+  .slot {
+    inline-size: min(
+      var(--slot-desk),
+      calc(((100vw - 16px - 124px - 64px) / 2 - 22px - (var(--n) - 1) * var(--gap)) / var(--n))
+    );
+    block-size: var(--slot-desk);
+  }
+}
+.slot > button {
+  inline-size: 100%;
+  block-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 0;
+  padding: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.empty {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 2px dashed var(--color-text-muted);
+  border-radius: var(--radius-tile);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+}
+.empty:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+.slot[data-next] > .empty {
+  border-color: var(--color-gold);
+}
+.nextStar {
+  font-size: 22px;
+  color: var(--color-gold);
+}
+.lock {
+  position: absolute;
+  inset-block-end: 2px;
+  inset-inline-end: 3px;
+  font-size: 14px;
+  line-height: 1;
+}
+.letter {
+  pointer-events: none;
+}
+
+.bank {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-inline-size: 420px;
+}
+@media (min-width: 900px) {
+  .bank {
+    max-inline-size: 900px;
+  }
+}
+.bankCell,
+.socket {
+  inline-size: 46px;
+  block-size: 50px;
+  display: grid;
+}
+@media (min-width: 900px) {
+  .bankCell,
+  .socket {
+    inline-size: 56px;
+    block-size: 60px;
+  }
+}
+.bankCell > button {
+  inline-size: 100%;
+  block-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.socket {
+  border: 2px dashed var(--color-text-muted);
+  border-radius: var(--radius-tile);
+  opacity: 0.38;
+  box-sizing: border-box;
+}
+.bankCell[data-tint='source'] > button {
+  background: var(--color-turquoise-pale);
+  border-color: var(--color-turquoise);
+}
+.bankCell[data-tint='uz'] > button {
+  background: var(--color-cobalt-pale, var(--color-surface));
+  border-style: double;
+  border-width: 4px;
+}
+.cue {
+  position: absolute;
+  inset-block-start: 3px;
+  inset-inline-start: 5px;
+  font-size: 9px;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+@keyframes pop {
+  50% {
+    transform: scale(1.12);
+  }
+}
+@keyframes shake {
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage,
+  .star[data-solved],
+  .row[data-result='wrong'] {
+    animation: none;
+  }
+}
+
+.slot[data-tint='source'] > button {
+  background: var(--color-turquoise-pale);
+  border-color: var(--color-turquoise);
+}
+.slot[data-tint='uz'] > button {
+  background: var(--color-cobalt-pale, var(--color-surface));
+  border-style: double;
+  border-width: 4px;
+}

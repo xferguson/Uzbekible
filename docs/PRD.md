@@ -36,7 +36,7 @@ Secondary personas, later: Russian speakers learning Uzbek, and heritage learner
 ## 4. Product principles
 1. **Game first.** If a feature feels like homework, redesign it as a mechanic.
 2. **Leverage what you know.** Pair Uzbek with Turkish, Russian, Persian or Arabic. **No English on game boards.**
-   English appears only as a long-press hint that costs points. **Exception: Soxta (Game 5)**, whose clue is an English meaning.
+   English appears only as a long-press hint that costs points. **Exceptions: Soxta (Game 5) and Imlo (Game 6)**, whose clues are an English meaning.
 3. **Frequency first.** Introduce the most useful words first.
 4. **The motif is the mechanic.** Uzbek tilework (cobalt, turquoise, white, gold) isn't decoration: matched tiles
    form girih stars, and progress builds a mosaic facade. See `design/brief.md`.
@@ -52,6 +52,7 @@ Secondary personas, later: Russian speakers learning Uzbek, and heritage learner
 | 3 | [**Wordfall** (Say it!)](games/03-wordfall.md) | Words fall across a tilework sky; say them aloud to zap them | Reading speed, pronunciation | Backlog (speech-to-text risk) |
 | 4 | [**Eshit** (Listen & Search)](games/04-listen-search.md) | Hear a word, then find it in a letter grid | Listening, sound-to-spelling | Backlog (needs audio) |
 | 5 | [**Soxta** (False-Friend Swipe)](games/05-soxta.md) | Swipe toward the word (Uzbek or Turkish) that matches an English meaning | Unlearning false friends | Backlog (approved plan; content already exists) |
+| 6 | [**Imlo** (Cognate Spelling)](games/06-imlo.md) | Spell both sides of one cognate pair from a shared, shuffled letter bank, given an English meaning | Spelling production, exact sound correspondences | **Next** (approved plan; reuses Juft's content) |
 
 More game ideas will be added here as they come up.
 
@@ -62,7 +63,7 @@ More game ideas will be added here as they come up.
 3. **Game 2, Qoʻsh** (proposed). It needs the morphology engine and the suffix content from Game 1's later levels.
 4. **Game 3, Wordfall** (proposed). It carries the biggest technical risk: speech recognition for Uzbek (spike S2).
 
-The order of Games 2–5 is to be confirmed after Game 1 ships. Soxta is cheap once Juft ships: the content already exists.
+The order of Games 2–5 is to be confirmed after Game 1 ships. Imlo (Game 6) comes next, then Soxta: both reuse existing content, and Imlo also reuses Juft's pool and settings.
 
 ## 6. Cross-cutting requirements
 | Area | Requirement |
@@ -71,7 +72,7 @@ The order of Games 2–5 is to be confirmed after Game 1 ships. Soxta is cheap o
 | Persistence | localStorage only, versioned with migrations. No accounts, no server |
 | Scripts | Uzbek Latin ↔ Cyrillic toggle. Source languages in their native scripts. RTL support |
 | Source languages | Turkish, Russian, Persian, Arabic toggles (each can be on or off) |
-| English | Never on boards. Long-press hint only, and it costs points. Exception: the Soxta clue |
+| English | Never on boards. Long-press hint only, and it costs points. Exceptions: the Soxta and Imlo clues |
 | Audio | None in Game 1 v1. Required for Games 3 and 4 (see the audio plan in the technical design) |
 | Learning log | Every game logs attempts locally. CSV/JSON export in Settings |
 | Accessibility | WCAG 2.2 AA contrast, keyboard play, reduced-motion alternatives, state never shown by colour alone |

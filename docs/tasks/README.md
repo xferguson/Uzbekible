@@ -9,6 +9,7 @@ unmerged dependencies can run **in parallel**. Each task's **Status** row lives 
 - **D1** general design system → user approval (`needs-approval` label) → unlocks **D2**, **D3** and **U1**
 - **D2** Juft mockups → user approval → unlocks **U4** and **U5**
 - **J4** Soxta mockups → user approval → unlocks **J5** (J lane on hold until after R1)
+- **I4** Imlo mockups → user approval → unlocks **I6**
 - **C6** content review, **S1**/**S2** spikes and **R1** release also need explicit approval.
 - **V8**, **V9**, **V10** (Juft screens to D2) → user approval after seeing the mockup comparison page
 
@@ -29,6 +30,8 @@ B Design:     **D1 🔒 ── D2 🔒** ── (U4, U5)      D1 ── D3
 E Juft:       E1 (C5,K7,K8,K4,Q2,Q7) · E2 (K3) · E3 (K4,E2,K10,Q5,Q6)
 F UI:         U1 (D1,T00,K9) ── U2 / U3 / U5 / U6 ── U4 ── **U7 ── U8 ── R1**  (U3 also needs Q7)
 J Soxta:      J1 (C5) ── J2 (K3,K4,J1) ─┐   J3 (U1) ─┤   J4 🔒 (D1) ── J5 ── J6   ON HOLD until after R1
+I Imlo:       I1 (K1) + I5 (U7) ── I2 ── I3 ─┬─ I6 (also I4) ─┬─ I7   next, before Soxta
+              I4 🔒 (D1)                    └─ I8 (K10) ──────┘
 Q Quality:    Q1 ─┬─ Q2      Q5 ─┬─ Q6        Q3 · Q4 · Q9 (independent)
                   └─ Q8         └─ Q7
 X Harness:    X1 ─┬─ X5 ──┐      X2 ── X4 (also Q4)
@@ -120,6 +123,14 @@ seconds-long PR-body check with no GitHub API calls. **Queued for later:** nothi
 | [J4](J4-soxta-mockups.md) 🔒 | Soxta screen mockups (GATE) (on hold) | J Soxta | D1 |
 | [J5](J5-soxta-board.md) | Soxta board UI (on hold) | J Soxta | J4, J2, J3, U2, U3 |
 | [J6](J6-soxta-wiring-e2e.md) | Soxta wiring, registry entry and e2e (on hold) | J Soxta | J5, U6, T01 |
+| [I1](I1-core-text-source-letters.md) | core/text: source-language letter splitter | I Imlo | K1 |
+| [I2](I2-imlo-levels.md) | Imlo level generator and letter bank | I Imlo | I1, I5 |
+| [I3](I3-imlo-rules.md) | Imlo spelling rules on core/session | I Imlo | I2 |
+| [I4](I4-imlo-mockups.md) 🔒 | Imlo screen mockups (GATE) | I Imlo | D1 |
+| [I5](I5-game-modes.md) | Per-game difficulty modes in contract and shell | I Imlo | U7 |
+| [I6](I6-imlo-board.md) | Imlo board UI | I Imlo | I4, I3 |
+| [I7](I7-imlo-wiring-e2e.md) | Imlo wiring, registry entry and e2e | I Imlo | I6, I5, I8 |
+| [I8](I8-imlo-scoring-balance.md) | Imlo scoring config and balance pass | I Imlo | I3, K10 |
 | [V1](V1-shots-script.md) | `npm run shots`: app screenshots paired with D2 frames | V Visual quality | none |
 | [V2](V2-layout-invariants.md) | Layout-invariant e2e suite for every screen state | V Visual quality | V1 |
 | [V3](V3-pr-evidence-check.md) | PR evidence check: UI changes need a mockup comparison | V Visual quality | none |

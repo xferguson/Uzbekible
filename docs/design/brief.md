@@ -80,7 +80,7 @@ Script coverage is required: **Latin (incl. U+02BB ʻ and U+02BC ʼ), Uzbek Cyri
 
 ## 8. Voice and tone
 Playful, a little celebratory, and never instructive. Interface microcopy is in English for the shell (menus,
-settings), with Uzbek flourishes ("Barakalla!" = well done, "Yana!" = again). **Boards carry no English** (exception: the Soxta clue).
+settings), with Uzbek flourishes ("Barakalla!" = well done, "Yana!" = again). **Boards carry no English** (exceptions: the Soxta and Imlo clues).
 
 ## 9. D1 deliverables (see `../tasks/D1-design-system-mockups.md`)
 1. Palette swatches in light and dark, with contrast pairs.

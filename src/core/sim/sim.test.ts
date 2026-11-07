@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { formatTable, parseArgs, runCli, simulate, PROFILES, type SimGame } from './sim.ts';
+import fc from 'fast-check';
+import { simulate, PROFILES, type SimGame } from './sim.ts';
 
 /** Trivial game: `level` items, each wrong answer costs a life. Items are fully transparent unless level > 3. */
 type S = { done: number };
@@ -101,65 +102,6 @@ describe('simulate', () => {
   });
 });
 
-describe('formatTable', () => {
-  it('prints a markdown table with one row per result', () => {
-    const md = formatTable(simulate(base));
-    const lines = md.trim().split('\n');
-    expect(lines[0]).toMatch(/^\| Level \| Profile \| Runs \| Completion/);
-    expect(lines[1]).toMatch(/^\|[ -:|]+\|$/);
-    expect(lines).toHaveLength(2 + 2);
-  });
-});
-
-describe('cli', () => {
-  it('parses flags with ranges and lists', () => {
-    expect(
-      parseArgs([
-        '--game',
-        'demo',
-        '--levels',
-        '2-4',
-        '--profiles',
-        'novice,expert',
-        '--runs',
-        '10',
-        '--seed',
-        '3',
-      ]),
-    ).toEqual({
-      game: 'demo',
-      levels: [2, 3, 4],
-      profiles: ['novice', 'expert'],
-      runs: 10,
-      seed: 3,
-    });
-  });
-  it('applies defaults', () => {
-    expect(parseArgs(['--game', 'demo'])).toEqual({
-      game: 'demo',
-      levels: [1, 2, 3, 4, 5],
-      profiles: ['novice', 'b1-turkish', 'expert'],
-      runs: 100,
-      seed: 1,
-    });
-  });
-  it('rejects missing game and malformed values', () => {
-    expect(() => parseArgs([])).toThrow(/--game/);
-    expect(() => parseArgs(['--game', 'x', '--levels', '5-2'])).toThrow(/levels/);
-    expect(() => parseArgs(['--game', 'x', '--runs', 'abc'])).toThrow(/runs/);
-    expect(() => parseArgs(['--game', 'x', '--bogus', '1'])).toThrow(/--bogus/);
-  });
-  it('runs a registered game and errors for unknown ones', () => {
-    const out = runCli(['--game', 'fake', '--levels', '1-2', '--runs', '5'], {
-      fake: fake as SimGame<unknown, unknown>,
-    });
-    expect(out).toContain('| Level |');
-    expect(() => runCli(['--game', 'zzz'], { fake: fake as SimGame<unknown, unknown> })).toThrow(
-      /Unknown game "zzz".*fake/,
-    );
-  });
-});
-
 describe('edge cases', () => {
   it('tallies hint events as score penalties', () => {
     const hinting: SimGame<S, A> = {
@@ -185,7 +127,7 @@ describe('edge cases', () => {
     expect(hinted!.medianScore).toBe(plain!.medianScore - 50);
   });
 
-  it('averages the two middle values for an even number of runs and shows "–" when nothing completed', () => {
+  it('averages the two middle values for an even number of runs; nothing completed gives null time', () => {
     const hopeless = {
       name: 'h',
       accuracy: { low: 0, high: 0 },
@@ -193,16 +135,112 @@ describe('edge cases', () => {
     };
     const rows = simulate({ ...base, profiles: [hopeless], levels: [1], runs: 2 });
     expect(rows[0]!.medianTimeMs).toBeNull();
-    expect(formatTable(rows)).toContain('| – |');
+  });
+});
+
+describe('scan time', () => {
+  const scanner = {
+    name: 'scanner',
+    accuracy: { low: 1, high: 1 },
+    responseMs: { median: 1000, spread: 0.3 },
+    scanMsPerChoice: 100,
+  };
+  const withChoices = (choices: number | undefined): SimGame<S, A> => ({
+    ...fake,
+    nextStep: (s, l, r) => ({
+      ...fake.nextStep(s, l, r),
+      ...(choices === undefined ? {} : { choices }),
+    }),
+  });
+  const medianTime = (choices: number | undefined, seed = 7) =>
+    simulate({ ...base, game: withChoices(choices), profiles: [scanner], levels: [3], seed })[0]!
+      .medianTimeMs!;
+
+  it('takes strictly longer with 24 tiles on screen than with 2 (same seed)', () => {
+    expect(medianTime(24)).toBeGreaterThan(medianTime(2));
   });
 
-  it('parses a single level and rejects a flag without a value or a non-numeric level', () => {
-    expect(parseArgs(['--game', 'x', '--levels', '3']).levels).toEqual([3]);
-    expect(() => parseArgs(['--game'])).toThrow(/missing value/);
-    expect(() => parseArgs(['--game', 'x', '--levels', 'abc'])).toThrow(/levels/);
+  it('adds exactly scanMsPerChoice per tile for a constant-time profile', () => {
+    const flat = { ...scanner, responseMs: { median: 1000, spread: 0 } };
+    const [row] = simulate({ ...base, game: withChoices(10), profiles: [flat], levels: [2] });
+    expect(row!.medianTimeMs).toBe(2 * (1000 + 10 * 100));
   });
 
-  it('names (none) when no games are registered', () => {
-    expect(() => runCli(['--game', 'x'], {})).toThrow(/\(none\)/);
+  it('is non-decreasing in choices for a fixed seed and profile', () => {
+    fc.assert(
+      fc.property(
+        fc.integer({ min: 0, max: 40 }),
+        fc.integer({ min: 0, max: 40 }),
+        fc.integer(),
+        (a, b, seed) => {
+          const [lo, hi] = a <= b ? [a, b] : [b, a];
+          expect(medianTime(hi, seed)).toBeGreaterThanOrEqual(medianTime(lo, seed));
+        },
+      ),
+      { numRuns: 25 },
+    );
+  });
+
+  it('leaves tables unchanged when choices is absent, even for profiles with a scan term', () => {
+    const plain = { ...scanner, scanMsPerChoice: undefined };
+    expect(simulate({ ...base, game: withChoices(undefined), profiles: [scanner] })).toEqual(
+      simulate({ ...base, game: withChoices(undefined), profiles: [plain] }),
+    );
+  });
+
+  it('defines a scan term on every built-in profile, growing as skill falls', () => {
+    const scan = (n: string) => PROFILES[n]!.scanMsPerChoice!;
+    expect(scan('expert')).toBeGreaterThan(0);
+    expect(scan('novice')).toBeGreaterThan(scan('b1-turkish'));
+    expect(scan('b1-turkish')).toBeGreaterThan(scan('expert'));
+  });
+});
+
+describe('Juft-shaped game', () => {
+  type JS = { matched: number };
+  type JA = { pair: number; right: boolean };
+  type JEvent = { type: 'pairMatched'; pair: number } | { type: 'tileShake' };
+  const juft: SimGame<JS, JA> = {
+    ...fake,
+    id: 'juft-shaped',
+    lives: () => 100,
+    createRules: (level) => ({
+      init: { matched: 0 },
+      reduce: (s, a) => {
+        if (!a.right) {
+          const events: JEvent[] = [{ type: 'tileShake' }];
+          return { state: s, events: [...events, { type: 'mistake' }, { type: 'lifeLost' }] };
+        }
+        const matched = s.matched + 1;
+        return {
+          state: { matched },
+          events: [
+            { type: 'pairMatched', pair: matched } as JEvent,
+            { type: 'hint' },
+            { type: 'combo' },
+            ...(matched >= level ? [{ type: 'complete' as const }] : []),
+          ],
+        };
+      },
+    }),
+    nextStep: (s, level) => ({
+      transparency: 0.5,
+      choices: 2 * (level - s.matched),
+      correct: { pair: s.matched + 1, right: true },
+      wrong: { pair: 0, right: false },
+    }),
+  };
+
+  it('reports non-zero mistakes, hints and combos for a fallible bot', () => {
+    const [row] = simulate({
+      game: juft,
+      profiles: ['novice'],
+      levels: [6],
+      runs: 30,
+      seed: 3,
+    });
+    expect(row!.medianMistakes).toBeGreaterThan(0);
+    expect(row!.medianHints).toBeGreaterThan(0);
+    expect(row!.medianCombos).toBeGreaterThan(0);
   });
 });

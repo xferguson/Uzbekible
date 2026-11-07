@@ -1,6 +1,7 @@
 // npm run sim -- --game <id> --levels a-b --profiles novice,b1-turkish,expert --runs n --seed s
 // Prints a markdown balance table. Games register their SimGame in GAMES below as they land.
-import { runCli, type SimGame } from '../src/core/sim/index.ts';
+import type { SimGame } from '../src/core/sim/index.ts';
+import { runCli } from './sim-cli.ts';
 
 type DemoState = { done: number };
 type DemoAction = { correct: boolean };

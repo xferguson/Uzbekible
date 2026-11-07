@@ -42,6 +42,7 @@ _(no exports yet)_
 - `isFalseFriend(item: Item): boolean`
 - `isPooled(item: Item): boolean` - Items tagged `pool:<game>` are drawn onto boards; those must not contain false friends.
 - `itemConfidence(item: Item): Confidence` - An item is as trustworthy as its weakest source; no sources at all counts as low.
+- `itemTransparency(item: Item): Partial<Record<Lang, number>>` - Per-language transparency of an item for the build (`Item.transparency`). Only Turkish is scored:
 - `loadItems(json: unknown): Item[]` - Parses a decoded items.v1.json; throws a ZodError if the pack is not a valid version 1 pack.
 - `renderReview(items: readonly Item[], issues: readonly Issue[]): string` - docs/content/review.md: items grouped by confidence (lowest first) for spot-checking, plus validator warnings.
 - `serializePack(pack: Pack): string` - The exact bytes written to public/content/items.v1.json.

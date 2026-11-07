@@ -54,7 +54,7 @@ interface SourceForm { lang: Lang; text: string; relation: Relation;
 interface Item { id: string; uz: { latn: string; cyrl: string }; freqRank: number;
   form: 'lemma'|'inflected'; lemma?: string; suffixes?: string[]; pos?: string;
   glossEn: string; sources: SourceForm[]; tags: string[]; deprecated?: boolean;
-  transparency?: Partial<Record<Lang, number>> }   // computed at build by core/similarity
+  transparency?: Partial<Record<Lang, number>> }   // computed at build by core/content `itemTransparency` (tr only: best score over tr sources; other langs omitted)
 ```
 Pipeline (`npm run content:*`): **fetch → normalize → enrich (transparency, transliteration check) → validate →
 review sheet (`docs/content/review.md`) → build (`public/content/items.v1.json`)**. The app loads the JSON

@@ -106,6 +106,8 @@ jobs:
       - name: Node-runnable core (CLI smoke)
         run: |
           npm run content:validate
+          npm run content:build
+          git diff --exit-code public/content
           npm run sim -- --game demo --levels 1-2 --runs 5
       - run: npm run build
       - name: Install Playwright browser

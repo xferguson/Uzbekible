@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | in review |
 | Lane | B Design |
 | Read first | `docs/design/brief.md` (other docs only if needed) |
 | Depends on | [D1](D1-design-system-mockups.md) |

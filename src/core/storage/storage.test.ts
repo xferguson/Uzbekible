@@ -159,12 +159,22 @@ describe('createStore backend edge cases', () => {
   });
 
   it('falls back to memory when reading localStorage itself throws', () => {
-    vi.spyOn(window, 'localStorage', 'get').mockImplementation(() => {
-      throw new Error('blocked');
+    // Core tests run in node (no window), so put the throwing getter on globalThis itself.
+    const original = Object.getOwnPropertyDescriptor(globalThis, 'localStorage');
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      get: () => {
+        throw new Error('blocked');
+      },
     });
-    const s = createStore('p', schema, migrations);
-    s.set({ coins: 6, name: '' });
-    expect(s.get().coins).toBe(6);
+    try {
+      const s = createStore('p', schema, migrations);
+      s.set({ coins: 6, name: '' });
+      expect(s.get().coins).toBe(6);
+    } finally {
+      if (original) Object.defineProperty(globalThis, 'localStorage', original);
+      else delete (globalThis as { localStorage?: Storage }).localStorage;
+    }
   });
 
   it('warns about an unavailable backend only once', () => {

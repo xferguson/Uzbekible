@@ -14,7 +14,7 @@ import tseslint from 'typescript-eslint';
 // - core imports only core.
 // - design imports only design. ui imports core and design, never games or shell.
 // - games/<a> never imports games/<b>. Games import core, ui, design and games/types.
-// - scripts (content tooling) import core only.
+// - scripts (repo tooling) and content/scripts (content pipeline) import core only.
 const elements = [
   { type: 'core', pattern: 'src/core' },
   { type: 'design', pattern: 'src/design' },
@@ -23,6 +23,8 @@ const elements = [
   { type: 'game', pattern: 'src/games/*', capture: ['name'] },
   { type: 'shell', pattern: 'src/shell' },
   { type: 'dev', pattern: 'src/dev' },
+  // Listed before `scripts` so content/scripts is not classified as repo tooling.
+  { type: 'content-scripts', pattern: 'content/scripts' },
   { type: 'scripts', pattern: 'scripts' },
 ];
 
@@ -47,7 +49,7 @@ export default tseslint.config(
     ...jsxA11y.flatConfigs.recommended,
   },
   {
-    files: ['src/**/*.{ts,tsx}', 'scripts/**/*.{ts,mjs}'],
+    files: ['src/**/*.{ts,tsx}', 'scripts/**/*.{ts,mjs}', 'content/scripts/**/*.ts'],
     plugins: { boundaries },
     settings: {
       'boundaries/elements': elements,
@@ -92,8 +94,37 @@ export default tseslint.config(
               from: { element: { type: 'scripts' } },
               allow: { to: { element: { types: ['scripts', 'core'] } } },
             },
+            {
+              from: { element: { type: 'content-scripts' } },
+              allow: { to: { element: { types: ['content-scripts', 'core'] } } },
+            },
           ],
         },
+      ],
+    },
+  },
+  {
+    // Non-negotiable 5: time and randomness come from injected Clock and Rng, so games and tests
+    // stay deterministic. Only the real Clock (core/clock) and the app shell touch the platform.
+    files: ['src/**/*.{ts,tsx}'],
+    ignores: ['src/core/clock/**', 'src/shell/**'],
+    rules: {
+      'no-restricted-properties': [
+        'error',
+        { object: 'Math', property: 'random', message: 'Use an injected Rng (core/random).' },
+        { object: 'Date', property: 'now', message: 'Use an injected Clock (core/clock).' },
+        ...['window', 'globalThis', 'self'].flatMap((object) =>
+          ['setTimeout', 'setInterval'].map((property) => ({
+            object,
+            property,
+            message: 'Use an injected Clock (core/clock), not real timers.',
+          })),
+        ),
+      ],
+      'no-restricted-globals': [
+        'error',
+        { name: 'setTimeout', message: 'Use an injected Clock (core/clock), not real timers.' },
+        { name: 'setInterval', message: 'Use an injected Clock (core/clock), not real timers.' },
       ],
     },
   },

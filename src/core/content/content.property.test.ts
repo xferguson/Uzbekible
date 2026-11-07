@@ -1,7 +1,7 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
 import { makeItem } from './fixtures.ts';
-import { buildPack, serializePack } from './build.ts';
+import { buildPack, compareByFrequency, serializePack } from './build.ts';
 
 const itemArb = fc
   .record({
@@ -33,6 +33,18 @@ describe('build output (property)', () => {
         const once = serializePack(buildPack(items));
         const twice = serializePack(buildPack(JSON.parse(once).items));
         expect(twice).toBe(once);
+      }),
+    );
+  });
+});
+
+describe('compareByFrequency (property)', () => {
+  it('is a total order: antisymmetric and transitive', () => {
+    fc.assert(
+      fc.property(itemArb, itemArb, itemArb, (a, b, c) => {
+        expect(Math.sign(compareByFrequency(a, b))).toBe(-Math.sign(compareByFrequency(b, a)));
+        if (compareByFrequency(a, b) <= 0 && compareByFrequency(b, c) <= 0)
+          expect(compareByFrequency(a, c)).toBeLessThanOrEqual(0);
       }),
     );
   });

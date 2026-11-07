@@ -7,14 +7,16 @@
  * replacement from missed items with weight (1 - mastery), so the worst-known items return most often.
  */
 import type { Aggregate } from '../learning-log/index.ts';
-import type { Item, Lang } from '../content/schema.ts';
+import { boardPool, compareByFrequency } from '../content/index.ts';
+import type { Item } from '../content/schema.ts';
+import type { SourceLang } from '../text/index.ts';
 import { weightedPick, type Rng } from '../random/index.ts';
 
 export interface SchedulerOptions {
   /** Fraction of the level reserved for re-showing missed items, 0..1. Default 0.3. */
   reviewRatio?: number;
   /** Enabled source languages; items need a source in one of them. Omit for all. */
-  enabledLangs?: readonly Lang[];
+  enabledLangs?: readonly SourceLang[];
 }
 
 export const DEFAULT_REVIEW_RATIO = 0.3;
@@ -41,11 +43,11 @@ export function nextItems(
   if (!(ratio >= 0 && ratio <= 1))
     throw new RangeError(`reviewRatio must be in [0, 1], got ${ratio}`);
   const langs = opts.enabledLangs;
-  const enabled = (l: Lang): boolean => !langs || langs.includes(l);
+  const enabled = (l: SourceLang): boolean => !langs || langs.includes(l);
 
-  const eligible = pool
-    .filter((it) => !it.deprecated && it.sources.some((s) => enabled(s.lang)))
-    .sort((a, b) => a.freqRank - b.freqRank || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  const eligible = boardPool(pool)
+    .filter((it) => it.sources.some((s) => enabled(s.lang)))
+    .sort(compareByFrequency);
   const want = Math.min(Math.max(0, Math.floor(n)), eligible.length);
   if (want === 0) return [];
 

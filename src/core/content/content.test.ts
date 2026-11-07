@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { makeItem } from './fixtures.ts';
 import { ItemSchema, type Item } from './schema.ts';
 import { boardPool, validateItems, type IssueCode } from './validate.ts';
-import { buildPack, serializePack } from './build.ts';
+import { buildPack, compareByFrequency, serializePack } from './build.ts';
 import { loadItems } from './load.ts';
 import { itemConfidence, renderReview } from './review.ts';
 
@@ -193,5 +193,14 @@ describe('edge cases', () => {
     expect(md).toContain('## High confidence (0)');
     expect(md.indexOf('uz-x')).toBeLessThan(md.indexOf('uz-y'));
     expect(md).not.toContain('uz-e:');
+  });
+});
+
+describe('compareByFrequency', () => {
+  it('orders by rank, then id', () => {
+    const a = makeItem({ id: 'uz-b', freqRank: 1 });
+    const b = makeItem({ id: 'uz-a', freqRank: 1 });
+    const c = makeItem({ id: 'uz-c', freqRank: 0 });
+    expect([a, b, c].sort(compareByFrequency).map((i) => i.id)).toEqual(['uz-c', 'uz-a', 'uz-b']);
   });
 });

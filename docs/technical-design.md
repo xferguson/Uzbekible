@@ -135,6 +135,8 @@ credentials, so `push` to `main` triggers CI and deploy normally.
   (index files are barrels/entry points that are not counted).
 - Content and sim scripts (`content/scripts/`, `scripts/sim.ts`) run `src/core` directly under Node
   `--experimental-strip-types`, which needs explicit `.ts` extensions on relative imports; keep that style in `src/core`.
+- **Import policy:** `src/core` uses relative imports with explicit `.ts` extensions. `src/games`, `src/ui` and `src/shell` use the
+  `@core/*`, `@ui/*`, `@design/*`, `@games/*` aliases for cross-module imports (relative only within the same module folder).
 - fast-check property tests required for: text and transliteration, random and shuffle, scoring, difficulty,
   storage migrations, motif geometry, and (later) grid placement.
 - ESLint boundaries (see `architecture.md`), plus jsx-a11y.

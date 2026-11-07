@@ -1,7 +1,7 @@
 import fc from 'fast-check';
 import { describe, it } from 'vitest';
 import { makeItem } from '../content/fixtures.ts';
-import type { Lang } from '../content/schema.ts';
+import type { SourceLang } from '../text/index.ts';
 import type { Aggregate } from '../learning-log/index.ts';
 import { createRng } from '../random/index.ts';
 import { nextItems } from './index.ts';
@@ -45,7 +45,7 @@ const historyArb = fc.array(
   { maxLength: 20 },
 );
 
-const enabledArb = fc.constantFrom<readonly Lang[] | undefined>(
+const enabledArb = fc.constantFrom<readonly SourceLang[] | undefined>(
   undefined,
   ['tr'],
   ['ru'],

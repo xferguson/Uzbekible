@@ -3,6 +3,7 @@
 import type { SimGame } from '../src/core/sim/index.ts';
 import { runCli, type SimGameSource } from './sim-cli.ts';
 import { juftSimGame } from '../src/games/juft/balance.ts';
+import { IMLO_PROFILES, imloSimGame } from '../src/games/imlo/balance.ts';
 
 type DemoState = { done: number };
 type DemoAction = { correct: boolean };
@@ -42,10 +43,19 @@ const demo: SimGame<DemoState, DemoAction> = {
 const GAMES: Record<string, SimGameSource> = {
   demo: demo as SimGame<unknown, unknown>,
   juft: juftSimGame as SimGameSource,
+  imlo: ((level) => imloSimGame(level, 'oson')) as SimGameSource,
+  'imlo-orta': ((level) => imloSimGame(level, 'orta')) as SimGameSource,
+  'imlo-qiyin': ((level) => imloSimGame(level, 'qiyin')) as SimGameSource,
 };
 
 try {
-  process.stdout.write(runCli(process.argv.slice(2), GAMES));
+  process.stdout.write(
+    runCli(process.argv.slice(2), GAMES, {
+      imlo: IMLO_PROFILES,
+      'imlo-orta': IMLO_PROFILES,
+      'imlo-qiyin': IMLO_PROFILES,
+    }),
+  );
 } catch (e) {
   console.error(e instanceof Error ? e.message : e);
   process.exit(1);

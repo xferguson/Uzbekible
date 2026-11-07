@@ -2,7 +2,13 @@
  * CLI plumbing for the balance simulator: flag parsing, game lookup and the markdown table.
  * Kept out of `core/sim` (no CLI concerns in core). Run via `npm run sim`.
  */
-import { PROFILES, simulate, type LevelRow, type SimGame } from '../src/core/sim/index.ts';
+import {
+  PROFILES,
+  simulate,
+  type LevelRow,
+  type SimGame,
+  type SimProfile,
+} from '../src/core/sim/index.ts';
 
 export function formatTable(rows: readonly LevelRow[]): string {
   const head =
@@ -64,7 +70,15 @@ export function parseArgs(argv: readonly string[]): CliArgs {
 export type SimGameSource =
   SimGame<unknown, unknown> | ((level: number) => SimGame<unknown, unknown>);
 
-export function runCli(argv: readonly string[], games: Record<string, SimGameSource>): string {
+/**
+ * `gameProfiles[game][name]` replaces the shared profile of that name for that game (a game whose step is not
+ * Juft's "one decision" needs its own response times).
+ */
+export function runCli(
+  argv: readonly string[],
+  games: Record<string, SimGameSource>,
+  gameProfiles: Record<string, Record<string, SimProfile>> = {},
+): string {
   const args = parseArgs(argv);
   const game = games[args.game];
   if (!game)
@@ -74,7 +88,7 @@ export function runCli(argv: readonly string[], games: Record<string, SimGameSou
   const rows = args.levels.flatMap((level) =>
     simulate({
       game: typeof game === 'function' ? game(level) : game,
-      profiles: args.profiles,
+      profiles: args.profiles.map((name) => gameProfiles[args.game]?.[name] ?? name),
       levels: [level],
       runs: args.runs,
       seed: args.seed,

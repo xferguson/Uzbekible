@@ -13,7 +13,7 @@
 Turn content + settings + level number into a deterministic LevelSpec.
 
 ## Acceptance criteria
-- [ ] `src/games/juft/levels.ts`: `levelSpec(level, settings, history)` using `core/difficulty` params, `core/scheduler`, `core/random` seed `juft:<level>:<settingsHash>`
+- [ ] `src/games/juft/levels.ts`: `levels(ctx: LevelContext): LevelSpec<JuftParams>` (the `GameDefinition` signature from `src/games/types.ts`; `ctx` carries level, settings, history, seed, rng) using `core/difficulty` params, `core/scheduler`, `ctx.rng` (seed `juft:<level>:<settingsHash>`)
 - [ ] Per pair, chooses one source form among enabled languages (prefer `tr`)
 - [ ] Excludes false friends; respects suffixed-form share param; inserts declared hard-pair levels
 - [ ] `difficulty.config.ts` initial curve per `docs/games/01-juft.md`: 120 levels in 8 chapters of 15, pair count ramping from 1 to a maximum of **12 pairs** (levels 106–120), hard-pair breathers every ~5th level

@@ -25,6 +25,20 @@ const agg = (
   meanRtMs: 1000,
 });
 
+describe('false friends', () => {
+  it('never returns an item with a false-friend source', () => {
+    const ff = makeItem({
+      id: 'uz-ff',
+      freqRank: 1,
+      sources: [{ lang: 'tr', text: 'x', relation: 'false-friend', confidence: 'high', ref: 'x' }],
+    });
+    const pool = [ff, item('uz-a', 2), item('uz-b', 3)];
+    const out = nextItems(pool, [], 3, createRng(1));
+    expect(out.map((i) => i.id)).not.toContain('uz-ff');
+    expect(out).toHaveLength(2);
+  });
+});
+
 const ids = (xs: { id: string }[]) => xs.map((x) => x.id);
 
 describe('masteryOf', () => {

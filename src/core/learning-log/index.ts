@@ -1,6 +1,7 @@
 /** The research instrument: every attempt logged locally, capped, aggregated and exportable. */
 import type { Clock } from '../clock/index.ts';
-import type { Lang, Relation } from '../content/schema.ts';
+import type { Relation } from '../content/schema.ts';
+import type { SourceLang } from '../text/index.ts';
 import { createStore, type Store, type StoreOptions } from '../storage/index.ts';
 
 interface Base {
@@ -12,12 +13,18 @@ interface Base {
 export type LogEvent = Base &
   (
     | { type: 'level_start'; level?: number }
-    | { type: 'match_correct'; itemId: string; sourceLang: Lang; relation: Relation; rtMs: number }
+    | {
+        type: 'match_correct';
+        itemId: string;
+        sourceLang: SourceLang;
+        relation: Relation;
+        rtMs: number;
+      }
     | {
         type: 'match_wrong';
         leftItemId: string;
         rightItemId: string;
-        sourceLang: Lang;
+        sourceLang: SourceLang;
         relation: Relation;
         rtMs: number;
       }
@@ -32,7 +39,7 @@ export type LogEventInput = DistributiveOmit<LogEvent, 'ts' | 'sessionId'>;
 
 export interface Aggregate {
   itemId: string;
-  sourceLang: Lang;
+  sourceLang: SourceLang;
   relation: Relation;
   attempts: number;
   correct: number;
@@ -42,7 +49,7 @@ export interface Aggregate {
 /** Internal running totals; sums (not means) so rollover is exact. */
 interface Totals {
   itemId: string;
-  sourceLang: Lang;
+  sourceLang: SourceLang;
   relation: Relation;
   attempts: number;
   correct: number;

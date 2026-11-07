@@ -26,7 +26,6 @@ _(no exports yet)_
 - `Item` = `z.infer<typeof ItemSchema>`
 - `ItemSchema`: `z.ZodObject<{ id: z.ZodString; uz: z.ZodObject<{ latn: z.ZodString; cyrl: z.ZodString; }, z.core.$strict>; freqRank: z.ZodNumber; form: z.ZodEnum<{ lemma: "lemma"; inflected: "inflected"; }>; lemma: z.Z…
 - `LANGS`: `readonly ["tr", "ru", "fa", "ar"]`
-- `Lang` = `z.infer<typeof LangSchema>`
 - `LangSchema`: `z.ZodEnum<{ tr: "tr"; ru: "ru"; fa: "fa"; ar: "ar"; }>`
 - `Pack` = `z.infer<typeof PackSchema>`
 - `PackSchema`: `z.ZodObject<{ version: z.ZodLiteral<1>; items: z.ZodArray<z.ZodObject<{ id: z.ZodString; uz: z.ZodObject<{ latn: z.ZodString; cyrl: z.ZodString; }, z.core.$strict>; freqRank: z.ZodNumber; form: z.ZodEnu…
@@ -35,10 +34,11 @@ _(no exports yet)_
 - `RelationSchema`: `z.ZodEnum<{ "turkic-cognate": "turkic-cognate"; "shared-arabic": "shared-arabic"; "shared-persian": "shared-persian"; "russian-loan": "russian-loan"; "persian-loan": "persian-loan"; "arabic-loan": "…
 - `SourceForm` = `z.infer<typeof SourceFormSchema>`
 - `SourceFormSchema`: `z.ZodObject<{ lang: z.ZodEnum<{ tr: "tr"; ru: "ru"; fa: "fa"; ar: "ar"; }>; text: z.ZodString; relation: z.ZodEnum<{ "turkic-cognate": "turkic-cognate"; "shared-arabic": "shared-arabic"; "shared-p…
-- `TransparencyFn` = `(item: Item) => Partial<Record<Lang, number>>`
+- `TransparencyFn` = `(item: Item) => Partial<Record<SourceLang, number>>`
 - `Validation` { issues: Issue[]; items: Item[] }
 - `boardPool(items: readonly Item[]): Item[]` - Items a match board may draw: not deprecated and with no false-friend source.
 - `buildPack(items: readonly Item[], opts?: { transparency?: TransparencyFn; }): Pack` - Deterministic pack: sorted by frequency rank then id, schema key order, optional computed transparency.
+- `compareByFrequency(a: Item, b: Item): number` - Frequency rank, then id: the one deterministic item order.
 - `isFalseFriend(item: Item): boolean`
 - `isPooled(item: Item): boolean` - Items tagged `pool:<game>` are drawn onto boards; those must not contain false friends.
 - `itemConfidence(item: Item): Confidence` - An item is as trustworthy as its weakest source; no sources at all counts as low.
@@ -58,12 +58,12 @@ _(no exports yet)_
 
 ## `core/learning-log`
 
-- `Aggregate` { itemId: string; sourceLang: Lang; relation: Relation; attempts: number; correct: number; meanRtMs: number }
+- `Aggregate` { itemId: string; sourceLang: SourceLang; relation: Relation; attempts: number; correct: number; meanRtMs: number }
 - `CSV_COLUMNS`: `readonly ["ts", "sessionId", "gameId", "type", "level", "itemId", "leftItemId", "rightItemId", "sourceLang", "relation", "rtMs", "score", "timeMs", "mistakes", "hints"]`
 - `DEFAULT_CAP`: `5000`
 - `LearningLog` { log(event: LogEventInput): void; events(): readonly LogEvent[]; aggregates(): Aggregate[]; exportJson(): string; exportCsv(): string; clear(): void }
 - `LearningLogOptions` { clock: Clock; sessionId: string; cap?: number; storage?: StoreOptions; store?: Store<LogState> }
-- `LogEvent` = `Base & ( | { type: 'level_start'; level?: number } | { type: 'match_correct'; itemId: string; sourceLang: Lang; relation: Relation; rtMs: number } | { type: 'match_wrong'; leftItemId: string; rightItemId…
+- `LogEvent` = `Base & ( | { type: 'level_start'; level?: number } | { type: 'match_correct'; itemId: string; sourceLang: SourceLang; relation: Relation; rtMs: number; } | { type: 'match_wrong'; leftItemId: string; righ…
 - `LogEventInput` = `DistributiveOmit<LogEvent, 'ts' | 'sessionId'>` - What a game passes to `log`: `ts` and `sessionId` are filled in by the log.
 - `aggregateEvents(events: readonly LogEvent[]): Aggregate[]` - Aggregates of a full event history: the reference the rolled-over log must match.
 - `createLearningLog(options: LearningLogOptions): LearningLog`
@@ -97,7 +97,7 @@ _(no exports yet)_
 ## `core/scheduler`
 
 - `DEFAULT_REVIEW_RATIO`: `0.3`
-- `SchedulerOptions` { reviewRatio?: number; enabledLangs?: readonly Lang[] }
+- `SchedulerOptions` { reviewRatio?: number; enabledLangs?: readonly SourceLang[] }
 - `masteryOf(rows: readonly Pick<Aggregate, "attempts" | "correct">[]): number` - Laplace-smoothed accuracy over the given aggregates (0.5 when there are none).
 - `nextItems(pool: readonly Item[], history: readonly Aggregate[], n: number, rng: Rng, opts?: SchedulerOptions): Item[]`
 
@@ -166,15 +166,16 @@ _(no exports yet)_
 
 ## `core/text`
 
-- `Lang` = `UzScript | 'tr' | 'ru' | 'fa' | 'ar'`
 - `ScriptMeta` { dir: 'ltr' | 'rtl'; bcp47: string; fontStack: string }
+- `SourceLang` = `'tr' | 'ru' | 'fa' | 'ar'` - The source languages a player can have (the non-Uzbek ones). Defined once; core/content etc. reuse it.
+- `TextLang` = `UzScript | SourceLang` - Any language/script text handles: Uzbek in either script, or a source language.
 - `UzScript` = `'uz-Latn' | 'uz-Cyrl'` - core/text: the single home for Unicode normalization, apostrophe handling, Turkish casing,
 - `canonicalizeUz(s: string): string` - NFC plus canonical Uzbek apostrophes: oʻ/gʻ use U+02BB, every other apostrophe (tutuq) uses U+02BC.
 - `cyrlToLatn(text: string): string` - Uzbek Cyrillic → Latin (canonical apostrophes). е is `ye` at word start and after a vowel, else `e`.
 - `foldApostrophes(s: string): string` - Maps every apostrophe variant (' ‘ ’ ` ʻ ʼ) to a plain `'` so spellings compare equal.
 - `latnToCyrl(text: string): string` - Uzbek Latin → Cyrillic. Word-initial `ts` becomes ц; medial ц in loans needs the stored Cyrillic.
 - `normalize(s: string): string` - Unicode NFC.
-- `scriptMeta(lang: Lang): ScriptMeta` - Direction, BCP-47 tag and font-stack token for a language (use instead of hardcoding `dir`).
+- `scriptMeta(lang: TextLang): ScriptMeta` - Direction, BCP-47 tag and font-stack token for a language (use instead of hardcoding `dir`).
 - `toLetters(word: string, script: UzScript): string[]` - Splits a word into game letters. In Latin, sh, ch, ng, oʻ and gʻ are single letters (any apostrophe
 - `toLowerTr(s: string): string` - Turkish-aware lower-casing (I → ı, İ → i).
 - `toUpperTr(s: string): string` - Turkish-aware upper-casing (ı → I, i → İ).

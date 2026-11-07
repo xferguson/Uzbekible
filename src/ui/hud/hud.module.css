@@ -1,0 +1,38 @@
+.stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+.value {
+  font-weight: 700;
+}
+.combo {
+  background: var(--color-gold);
+  color: var(--color-on-deep);
+}
+.lives {
+  display: inline-flex;
+  gap: var(--space-1);
+}
+.life {
+  width: var(--space-6);
+  height: var(--space-6);
+  border-radius: var(--radius-tile);
+  background: var(--color-turquoise);
+  border: 2px solid var(--color-cobalt);
+}
+.cracked {
+  background: var(--color-turquoise-pale);
+  border-color: var(--color-crack);
+}
+.crack {
+  stroke: var(--color-crack);
+  stroke-width: 2;
+  fill: none;
+}

@@ -60,23 +60,25 @@ export function parseArgs(argv: readonly string[]): CliArgs {
   return out;
 }
 
-export function runCli(
-  argv: readonly string[],
-  games: Record<string, SimGame<unknown, unknown>>,
-): string {
+/** A game, or a factory for games whose scoring depends on the level (par scales with pair count). */
+export type SimGameSource =
+  SimGame<unknown, unknown> | ((level: number) => SimGame<unknown, unknown>);
+
+export function runCli(argv: readonly string[], games: Record<string, SimGameSource>): string {
   const args = parseArgs(argv);
   const game = games[args.game];
   if (!game)
     throw new RangeError(
       `Unknown game "${args.game}". Known: ${Object.keys(games).join(', ') || '(none)'}`,
     );
-  return formatTable(
+  const rows = args.levels.flatMap((level) =>
     simulate({
-      game,
+      game: typeof game === 'function' ? game(level) : game,
       profiles: args.profiles,
-      levels: args.levels,
+      levels: [level],
       runs: args.runs,
       seed: args.seed,
     }),
   );
+  return formatTable(rows);
 }

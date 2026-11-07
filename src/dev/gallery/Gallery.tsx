@@ -3,6 +3,7 @@ import { scriptMeta, type TextLang } from '@core/text';
 import { colors, type ThemeName } from '@design/tokens';
 import { PatternBg, RosetteBand, Star8 } from '@ui/motif';
 import { Tile, type TileState } from '@ui/Tile';
+import { Combo, Countdown, LevelBadge, Lives, ResultsScreen, Score, Timer } from '@ui/index';
 import styles from './Gallery.module.css';
 
 export { isGalleryPath } from './route';
@@ -108,6 +109,57 @@ export function Gallery() {
         {() => (
           <div className={styles.bg}>
             <PatternBg />
+          </div>
+        )}
+      </Entry>
+
+      <Entry title="HUD">
+        {() => (
+          <div className={styles.row}>
+            <LevelBadge level={12} />
+            <Timer ms={83_000} />
+            <Lives lives={2} max={3} />
+            <Score value={640} />
+            <Combo count={4} />
+          </div>
+        )}
+      </Entry>
+
+      <Entry title="Countdown">
+        {() => (
+          <div className={styles.row}>
+            <Countdown remainingMs={2_000} />
+            <Countdown remainingMs={0} />
+          </div>
+        )}
+      </Entry>
+
+      <Entry title="ResultsScreen">
+        {() => (
+          <div className={styles.row}>
+            <ResultsScreen
+              won
+              stars={2}
+              score={420}
+              timeMs={75_000}
+              mistakes={1}
+              hints={0}
+              newBest
+              onNext={() => {}}
+              onReplay={() => {}}
+              onMap={() => {}}
+            />
+            <ResultsScreen
+              won={false}
+              stars={0}
+              score={0}
+              timeMs={30_000}
+              mistakes={3}
+              hints={0}
+              newBest={false}
+              onReplay={() => {}}
+              onMap={() => {}}
+            />
           </div>
         )}
       </Entry>

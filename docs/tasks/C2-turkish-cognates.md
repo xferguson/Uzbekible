@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | in review |
 | Lane | C Content |
 | Read first | `docs/technical-design.md` §3–4 (other docs only if needed) |
 | Depends on | [C1](C1-uzbek-frequency-list.md) |

@@ -39,7 +39,7 @@ Every code change in this repo is test-first. A task is not done until its tests
 
 ## 5. Before opening the PR — run the full fast gate
 ```bash
-npm run lint && npm run typecheck && npm test -- --coverage && npm run build
+npm run gate   # quiet lint → typecheck → test+coverage → build; ends in GATE OK
 ```
 Coverage thresholds: `src/core` ≥ 95% lines/branches, `src/ui` ≥ 80%. If e2e is relevant, see the
 `e2e-visual-check` skill.

@@ -30,5 +30,5 @@ PWA of arcade-style games that use Uzbek as the medium of play: **a game, not a 
    state in localStorage. Visual identity = Uzbek tilework, and the motif serves the mechanics.
 7. **Text** goes only through `src/core/text` (`uzbek-text-rules`).
 
-Fast gate: `npm run lint && npm run typecheck && npm test -- --coverage && npm run build` (e2e: `npm run e2e -- --trace off`).
+Fast gate: `npm run gate` (quiet: lint → typecheck → test+coverage → build; stops at first failure; `gate:changed` is inner-loop only; CI runs the individual steps) (e2e: `npm run e2e -- --trace off`).
 Commits: Conventional Commits with the task ID, e.g. `feat(core/random): seeded shuffle [K2]`.

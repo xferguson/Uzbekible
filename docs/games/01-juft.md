@@ -2,7 +2,7 @@
 
 > *juft* (Uzbek) = pair, a cognate of Turkish *çift*. Working title.
 
-**Status:** approved for build (behind design gates D1 and D2) · **Tasks:** see `../tasks/README.md`
+**Status:** approved for build (design gates D1 and D2 passed) · **Tasks:** see `../tasks/README.md`
 
 ## Pitch
 Two columns of glazed tiles: Turkish (or Russian, Persian, Arabic) on the left, Uzbek on the right. Tap a pair
@@ -35,15 +35,26 @@ crack your tiles, clear the level, and watch your mosaic grow. No lessons, just 
 | Pause | Pausing freezes the timer and **hides the tiles** (so pausing can't be used to cheat) |
 
 ## Level progression (initial curve, validated by simulation)
-| Levels | Pairs on board | Content |
-|---|---|---|
-| 1 | 1 | Very transparent cognates (men ↔ ben) |
-| 2–3 | 2 | Pronouns, numbers |
-| 4–10 | 3 → 5 | Top-frequency cognates and shared loans |
-| every ~5th | 1 | A **hard pair**: an irregular or opaque cognate (ev ↔ uy), as a breather that teaches |
-| 11–30 | 5 → 8 | More frequency bands. Lower-"transparency" pairs come in gradually |
-| 31+ | 6 → 8 | **Suffixed forms** (evde ↔ uyda, geldim ↔ keldim) mixed with lemmas |
+120 levels in eight chapters of 15. Each chapter is one building on the level map. The board grows to a maximum of
+**12 pairs** (12 source tiles × 12 Uzbek tiles); after that, difficulty comes from content and par time, not size.
+Revised in D2 at the user's request (was 8 pairs maximum).
 
+| Chapter | Levels | Pairs on board | Content |
+|---|---|---|---|
+| 1 Gumbaz (dome) | 1–15 | 1 → 4 | Very transparent cognates (men ↔ ben), pronouns, numbers |
+| 2 Minora (minaret) | 16–30 | 4 → 6 | Top-frequency cognates and shared loans |
+| 3 Ayvon (iwan) | 31–45 | 6 → 7 | Next frequency bands; lower-"transparency" pairs come in gradually |
+| 4 Darvoza (gate) | 46–60 | 7 → 8 | Russian, Persian and Arabic loans in the mix |
+| 5 Madrasa | 61–75 | 8 → 9 | **Suffixed forms** begin (evde ↔ uyda, geldim ↔ keldim), mixed with lemmas |
+| 6 Maqbara (mausoleum) | 76–90 | 9 → 10 | More suffixed forms; opaque cognates |
+| 7 Masjid (mosque) | 91–105 | 10 → 11 | Lower transparency, shorter par time |
+| 8 Registon | 106–120 | 12 | Full board: hardest transparency mix, highest suffixed share, tightest par |
+| every ~5th | | 1 | A **hard pair**: an irregular or opaque cognate (ev ↔ uy), as a breather that teaches |
+
+- **Board fit:** all pairs are always on screen; the board never scrolls. On a 390 × 844 phone, 12 pairs give
+  46 px tiles (gaps 6 px, tile type 17 px from 10 pairs up). Tiles never go below 44 px. See the D2 mockup.
+- **Content volume:** 120 levels average about 8 pairs, roughly 950 board slots. The top-1000 lemmas plus the
+  suffixed-forms set cover this, with `core/scheduler` re-showing missed items.
 - **Item order:** Uzbek frequency rank (top 1000), filtered to items with at least one source in the **enabled**
   source languages. Items the player missed are re-shown by `core/scheduler` in later levels.
 - **Difficulty knobs** (`core/difficulty`): pair count, the "transparency" mix (from `core/similarity`), par
@@ -83,3 +94,38 @@ Audio, mixed mosaic-grid mode, stats screen, leaderboards.
 - Should a hard pair show both options as a 1-pair board (instant), or a 1-pair board plus distractors?
   (Proposal: 1 pair, no distractors, and a "new pattern" glow.)
 - Should the combo multiplier be visible? (Proposal: yes, as a small gold counter.)
+
+## Approved decisions (D2)
+Approved by the user on 2026-11-07 (task D2, PR #12). Reference mockup: `../design/mockups/D2-juft-screens.html`
+(screens in `../design/mockups/screens/D2-*.png`). These settle the open questions above.
+
+1. **Screens and flow:** home, level map, ready, countdown, board, pause, results, fail, settings, as in the mockup.
+   On desktop the map and the ready card share one view.
+2. **HUD** is numbers and icons only (pause, level octagon, three life tiles, timer, combo, score), so nothing on the
+   board screen is English. Screen-reader labels are the exception.
+3. **Board size** tops out at **12 pairs** (Registon, levels 106–120). Tile height comes from the available height:
+   96 px for 1 pair, 66 px at 8, 46 px at 12 on a 390 × 844 phone (49 px on 1280 × 800), never below 44 px. From 10
+   pairs, gaps are 6 px and tile type 17 px. The board never scrolls.
+4. **Columns:** source on the left, Uzbek on the right, for every language, RTL included. Each column is shuffled on
+   its own.
+5. **Matched tiles** leave a dashed socket; nothing reflows.
+6. **Input is never locked:** other tiles stay tappable while a match or crack animation plays.
+7. **Hidden tiles** are face-down glazed tiles (cobalt-deep with a star) during the countdown and pause. Pause hides
+   them instantly in every motion setting.
+8. **Long-press hint:** a 450 ms hold fills a gold ring, then the English gloss shows for 1500 ms and costs points. A
+   hold never selects. Keyboard: H.
+9. **Mixed languages:** a badge in the language's own script (TR, РУ, فا, عر) at the source tile's inline-start corner.
+10. **Hard pair** (open question 1): a one-pair board, no distractors, with a turquoise "Yangi naqsh" glow.
+11. **Combo counter** (open question 2): visible, as a gold ×N pill from the second correct match in a row; it resets
+    on a mistake.
+12. **Level map:** a city of eight buildings, 15 levels each (see Level progression). A skyline of all eight sits above
+    the current building's facade on phone; on desktop it is a chapter list. Levels climb upward; a cleared cell's
+    glaze shows its stars (white 1, turquoise 2, gold 3) with star pips as the shape cue.
+13. **Results:** Next / Replay / Map, with a gold "Yangi rekord!" ribbon for a new best; heading by stars (Barakalla,
+    Yaxshi, Oʻtdingiz). **Fail:** "Yana!", Try again (same words, new shuffle) or Map; no score saved.
+14. **Settings:** source languages named in their own script; the last one on cannot be turned off. Uzbek script as
+    Lotin / Кирилл, with Cyrillic tagged hard mode. Motion and theme follow the system unless set.
+15. **New token** `--on-gold` (#0A1838, both themes): dark text on gold and turquoise fills. Checked in
+    `../design/mockups/contrast.mjs`.
+16. **Motion timings** as in the mockup's timing table, held as shared constants in `src/ui` (U1), never hard-coded
+    in a game. Every animation has the reduced-motion replacement listed there.

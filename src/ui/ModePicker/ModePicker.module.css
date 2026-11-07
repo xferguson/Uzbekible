@@ -1,0 +1,33 @@
+.group {
+  display: flex;
+  gap: var(--space-2);
+  font-family: var(--font-ui);
+}
+.option {
+  position: relative;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+}
+.input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.name {
+  padding: 0 var(--space-4);
+}
+.option:has(.input:checked) {
+  outline: 3px solid var(--color-text);
+  font-weight: 700;
+}
+.option:has(.input:focus-visible) {
+  outline-offset: 2px;
+}

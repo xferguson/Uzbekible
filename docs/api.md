@@ -197,6 +197,8 @@ _(no exports yet)_
 - `LongPressHandlers` { onPointerDown: (e: PointerEvent) => void; onPointerMove: (e: PointerEvent) => void; onPointerUp: () => void; onPointerLeave: () => void; onPointerCancel: () => void; onContextMenu: (e: MouseEvent…
 - `LongPressOptions` { ms?: number; tolerance?: number; clock?: FrameClock }
 - `MapProgress` { unlocked: number; best: Record<number, { score: number; stars: 0 | 1 | 2 | 3 }> } - The slice of a game's stored progress the map needs.
+- `ModePicker({ modes, value, script, onChange }: ModePickerProps): import("react").JSX.Element` - A plain segmented control for a game's difficulty modes.
+- `ModePickerProps` { modes: readonly { id: string; name: { uzLatn: string; uzCyrl: string } }[]; value: string; script: Script; onChange: (id: string) => void }
 - `PatternBg({ strength, cell, className }: PatternBgProps): import("react").JSX.Element` - Star-and-cross line lattice that fills its container. Decorative, low contrast.
 - `PatternBgProps` { strength?: number; cell?: number; className?: string }
 - `PauseOverlay({ onResume, onMap, script, }: Common & { onResume: () => void; onMap: () => void; }): import("react").JSX.Element` - Covers the screen and replaces the board, so a pause cannot be used to study the tiles.

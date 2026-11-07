@@ -1,5 +1,5 @@
 import { createMemoryBackend } from '@core/storage';
-import { createProgressStore, recordWin } from './progress';
+import { createModeStore, createProgressStore, recordWin } from './progress';
 
 const result = (score: number, stars: 0 | 1 | 2 | 3 = 1, timeMs = 1000) => ({
   score,
@@ -41,5 +41,28 @@ describe('progress', () => {
     const backend = createMemoryBackend();
     recordWin(createProgressStore('a', { backend }), 1, result(10));
     expect(createProgressStore('b', { backend }).get().unlocked).toBe(1);
+  });
+
+  it('keeps progress per mode: clearing level 3 in qiyin does not unlock level 4 in oson', () => {
+    const backend = createMemoryBackend();
+    const qiyin = createProgressStore('imlo', { backend }, 'qiyin');
+    const oson = createProgressStore('imlo', { backend }, 'oson');
+    recordWin(qiyin, 3, result(100));
+    expect(qiyin.get().unlocked).toBe(4);
+    expect(oson.get()).toEqual({ unlocked: 1, best: {} });
+  });
+
+  it('leaves a no-mode game on its existing storage key', () => {
+    const backend = createMemoryBackend();
+    recordWin(createProgressStore('juft', { backend }), 2, result(10));
+    expect(createProgressStore('juft', { backend }, undefined).get().unlocked).toBe(3);
+  });
+
+  it('remembers the chosen mode per game', () => {
+    const backend = createMemoryBackend();
+    const modes = createModeStore({ backend });
+    expect(modes.get()).toEqual({});
+    modes.update((m) => ({ ...m, imlo: 'qiyin' }));
+    expect(createModeStore({ backend }).get()).toEqual({ imlo: 'qiyin' });
   });
 });

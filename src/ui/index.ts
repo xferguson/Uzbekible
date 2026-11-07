@@ -9,3 +9,4 @@ export { Countdown, PauseOverlay, ResultsScreen, type ResultsScreenProps } from 
 export type { Script } from './labels';
 export * from './LevelMap';
 export * from './ScreenBar';
+export * from './ModePicker';

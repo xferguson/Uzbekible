@@ -77,6 +77,14 @@ describe('GameDefinition contract', () => {
     expect(levelSeed('fake', 3, { ...settings, script: 'cyrl' })).not.toBe(a);
   });
 
+  it('puts the mode in the seed only when there is one', () => {
+    const plain = levelSeed('fake', 3, settings);
+    expect(levelSeed('fake', 3, settings, undefined)).toBe(plain);
+    const hard = levelSeed('fake', 3, settings, 'qiyin');
+    expect(hard).toMatch(/^fake:qiyin:3:[0-9a-f]{8}$/);
+    expect(levelSeed('fake', 3, settings, 'oson')).not.toBe(hard);
+  });
+
   it('drives the sim from a definition, with a fresh attempt rng each createRules call', () => {
     const sim = toSimGame<FakeParams, FakeState, FakeAction, never>(fake, {
       settings,

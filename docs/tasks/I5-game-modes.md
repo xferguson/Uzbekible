@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | I Imlo |
 | Depends on | [U7](U7-juft-wiring.md) |
 | Read first | `docs/games/06-imlo.md` ("Difficulty modes"), `src/games/types.ts`, `docs/architecture.md` (shell and games rows) |

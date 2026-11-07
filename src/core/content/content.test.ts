@@ -4,7 +4,7 @@ import { ItemSchema, type Item } from './schema';
 import { boardPool, validateItems, type IssueCode } from './validate';
 import { buildPack, serializePack } from './build';
 import { loadItems } from './load';
-import { renderReview } from './review';
+import { itemConfidence, renderReview } from './review';
 
 const codes = (items: unknown[]): IssueCode[] => validateItems(items).issues.map((i) => i.code);
 const src = (over: Partial<Item['sources'][number]>): Item['sources'] => [
@@ -40,7 +40,9 @@ describe('validateItems: each fault gives its own error', () => {
   });
   it('flags (as a warning) Cyrillic that differs from the transliteration', () => {
     const r = validateItems([makeItem({ uz: { latn: 'koʻz', cyrl: 'коз' } })]);
-    expect(r.issues).toEqual([expect.objectContaining({ code: 'cyrl-mismatch', severity: 'warning' })]);
+    expect(r.issues).toEqual([
+      expect.objectContaining({ code: 'cyrl-mismatch', severity: 'warning' }),
+    ]);
     expect(r.items).toHaveLength(1);
   });
   it('reports duplicate ids', () => {
@@ -51,18 +53,31 @@ describe('validateItems: each fault gives its own error', () => {
   });
   it('requires Latin script for Turkish and Cyrillic for Russian', () => {
     expect(codes([makeItem({ sources: src({ text: 'гөз' }) })])).toContain('source-script');
-    expect(codes([makeItem({ sources: src({ lang: 'ru', text: 'glaz' }) })])).toContain('source-script');
-    expect(codes([makeItem({ sources: src({ lang: 'ru', text: 'глаз', relation: 'russian-loan' }) })])).toEqual([]);
+    expect(codes([makeItem({ sources: src({ lang: 'ru', text: 'glaz' }) })])).toContain(
+      'source-script',
+    );
+    expect(
+      codes([makeItem({ sources: src({ lang: 'ru', text: 'глаз', relation: 'russian-loan' }) })]),
+    ).toEqual([]);
   });
   it('requires Arabic script for Persian and Arabic', () => {
-    expect(codes([makeItem({ sources: src({ lang: 'fa', text: 'chashm' }) })])).toContain('source-script');
-    expect(codes([makeItem({ sources: src({ lang: 'ar', text: 'عين', relation: 'arabic-loan' }) })])).toEqual([]);
-    expect(codes([makeItem({ sources: src({ lang: 'fa', text: 'چشم', relation: 'persian-loan' }) })])).toEqual([]);
+    expect(codes([makeItem({ sources: src({ lang: 'fa', text: 'chashm' }) })])).toContain(
+      'source-script',
+    );
+    expect(
+      codes([makeItem({ sources: src({ lang: 'ar', text: 'عين', relation: 'arabic-loan' }) })]),
+    ).toEqual([]);
+    expect(
+      codes([makeItem({ sources: src({ lang: 'fa', text: 'چشم', relation: 'persian-loan' }) })]),
+    ).toEqual([]);
   });
   it('requires a lemma for inflected items, pointing at a known id', () => {
     expect(codes([makeItem({ form: 'inflected' })])).toContain('lemma-missing');
     expect(codes([makeItem({ form: 'inflected', lemma: 'uz-yoq' })])).toContain('lemma-unknown');
-    const ok = [makeItem(), makeItem({ id: 'uz-kozda', form: 'inflected', lemma: 'uz-koz', suffixes: ['-da'] })];
+    const ok = [
+      makeItem(),
+      makeItem({ id: 'uz-kozda', form: 'inflected', lemma: 'uz-koz', suffixes: ['-da'] }),
+    ];
     expect(codes(ok)).toEqual([]);
   });
   it('rejects ids that are not kebab-case uz- ids', () => {
@@ -76,9 +91,11 @@ describe('validateItems: each fault gives its own error', () => {
     const ff = makeItem({ sources: src({ relation: 'false-friend' }), tags: ['pool:juft'] });
     expect(codes([ff])).toEqual(['false-friend-in-pool']);
     expect(codes([{ ...ff, tags: [] }])).toEqual([]);
-    expect(boardPool([ff, makeItem({ id: 'uz-b' }), makeItem({ id: 'uz-c', deprecated: true })]).map((i) => i.id)).toEqual([
-      'uz-b',
-    ]);
+    expect(
+      boardPool([ff, makeItem({ id: 'uz-b' }), makeItem({ id: 'uz-c', deprecated: true })]).map(
+        (i) => i.id,
+      ),
+    ).toEqual(['uz-b']);
   });
 });
 
@@ -121,7 +138,10 @@ describe('loadItems', () => {
 describe('renderReview', () => {
   const hi = makeItem({ id: 'uz-hi' });
   const lo = makeItem({ id: 'uz-lo', sources: src({ confidence: 'low', ref: 'curator:C2' }) });
-  const md = renderReview([hi, lo], [{ code: 'cyrl-mismatch', severity: 'warning', id: 'uz-lo', message: 'm' }]);
+  const md = renderReview(
+    [hi, lo],
+    [{ code: 'cyrl-mismatch', severity: 'warning', id: 'uz-lo', message: 'm' }],
+  );
   it('groups by confidence, lowest first', () => {
     expect(md.indexOf('## Low')).toBeGreaterThan(-1);
     expect(md.indexOf('## Low')).toBeLessThan(md.indexOf('## High'));
@@ -133,5 +153,45 @@ describe('renderReview', () => {
   });
   it('is deterministic', () => {
     expect(renderReview([lo, hi], [])).toBe(renderReview([hi, lo], []));
+  });
+});
+
+describe('edge cases', () => {
+  it('names schema failures for non-objects and items without a string id', () => {
+    const r = validateItems([null, { id: 7 }]);
+    expect(r.issues.map((i) => i.id)).toEqual(['(item #0)', '(item #1)']);
+  });
+  it('sorts equal ranks by id in both directions', () => {
+    const ids = (xs: Item[]) => buildPack(xs).items.map((i) => i.id);
+    const lo = makeItem({ id: 'uz-a' });
+    const hi = makeItem({ id: 'uz-b' });
+    expect(ids([lo, hi])).toEqual(['uz-a', 'uz-b']);
+    expect(ids([hi, lo])).toEqual(['uz-a', 'uz-b']);
+    expect(ids([lo, makeItem({ id: 'uz-a' })])).toEqual(['uz-a', 'uz-a']);
+  });
+  it('rates an item by its weakest source; no sources is low', () => {
+    const mixed = makeItem({ sources: [...src({}), ...src({ confidence: 'medium' })] });
+    expect(itemConfidence(mixed)).toBe('medium');
+    expect(itemConfidence(makeItem({ sources: [] }))).toBe('low');
+    expect(itemConfidence(makeItem())).toBe('high');
+  });
+  it('escapes pipes, shows dashes for no sources, and handles empty groups', () => {
+    const md = renderReview(
+      [
+        makeItem({ id: 'uz-p', glossEn: 'a|b', sources: [] }),
+        makeItem({ id: 'uz-q', sources: src({ confidence: 'medium' }) }),
+      ],
+      [
+        { code: 'weak-ref', severity: 'warning', id: 'uz-z', message: 'x' },
+        { code: 'cyrl-mismatch', severity: 'warning', id: 'uz-y', message: 'y' },
+        { code: 'cyrl-mismatch', severity: 'warning', id: 'uz-x', message: 'z' },
+        { code: 'apostrophe', severity: 'error', id: 'uz-e', message: 'e' },
+      ],
+    );
+    expect(md).toContain('a\\|b');
+    expect(md).toContain('| — | — |');
+    expect(md).toContain('## High confidence (0)');
+    expect(md.indexOf('uz-x')).toBeLessThan(md.indexOf('uz-y'));
+    expect(md).not.toContain('uz-e:');
   });
 });

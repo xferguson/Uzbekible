@@ -13,10 +13,18 @@ const itemArb = fc
 describe('build output (property)', () => {
   it('is byte-identical for any permutation of the same items', () => {
     fc.assert(
-      fc.property(fc.uniqueArray(itemArb, { selector: (i) => i.id }), fc.integer(), (items, seed) => {
-        const shuffled = [...items].sort((a, b) => ((a.id.length * seed) % 7) - ((b.id.length * seed) % 7) || a.id.localeCompare(b.id) * (seed % 2 ? 1 : -1));
-        expect(serializePack(buildPack(shuffled))).toBe(serializePack(buildPack(items)));
-      }),
+      fc.property(
+        fc.uniqueArray(itemArb, { selector: (i) => i.id }),
+        fc.integer(),
+        (items, seed) => {
+          const shuffled = [...items].sort(
+            (a, b) =>
+              ((a.id.length * seed) % 7) - ((b.id.length * seed) % 7) ||
+              a.id.localeCompare(b.id) * (seed % 2 ? 1 : -1),
+          );
+          expect(serializePack(buildPack(shuffled))).toBe(serializePack(buildPack(items)));
+        },
+      ),
     );
   });
   it('is idempotent through JSON', () => {

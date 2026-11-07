@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | in review |
 | Lane | D Core |
 | Read first | `docs/architecture.md` (your module's row) (other docs only if needed) |
 | Depends on | [K3](K3-core-session.md), [K4](K4-core-scoring-difficulty.md), [K2](K2-core-random-clock.md) |

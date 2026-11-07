@@ -22,7 +22,10 @@ const fake: SimGame<S, A> = {
     reduce: (s, a) => {
       if (!a.correct) return { state: s, events: [{ type: 'mistake' }, { type: 'lifeLost' }] };
       const done = s.done + 1;
-      return { state: { done }, events: [{ type: 'combo' }, ...(done >= level ? [{ type: 'complete' }] : [])] };
+      return {
+        state: { done },
+        events: [{ type: 'combo' }, ...(done >= level ? [{ type: 'complete' }] : [])],
+      };
     },
   }),
   nextStep: (_s, level) => ({
@@ -43,24 +46,39 @@ describe('simulate', () => {
   });
 
   it('gives a perfect bot a 100% completion rate and consistent stats on a trivial game', () => {
-    const perfect = { ...PROFILES.expert!, accuracy: { low: 1, high: 1 }, responseMs: { median: 1000, spread: 0 } };
+    const perfect = {
+      ...PROFILES.expert!,
+      accuracy: { low: 1, high: 1 },
+      responseMs: { median: 1000, spread: 0 },
+    };
     const rows = simulate({ ...base, profiles: [perfect] });
     expect(rows).toHaveLength(2);
     const r2 = rows[1]!;
-    expect(r2).toMatchObject({ level: 2, profile: 'expert', runs: 20, completionRate: 1, medianTimeMs: 2000 });
+    expect(r2).toMatchObject({
+      level: 2,
+      profile: 'expert',
+      runs: 20,
+      completionRate: 1,
+      medianTimeMs: 2000,
+    });
     expect(r2.medianScore).toBe(1000 + 20); // base + 2 combos
     expect(r2.stars).toEqual([0, 0, 0, 20]);
   });
 
   it('never completes when accuracy is 0 and counts the runs as lost', () => {
-    const hopeless = { name: 'hopeless', accuracy: { low: 0, high: 0 }, responseMs: { median: 500, spread: 0 } };
+    const hopeless = {
+      name: 'hopeless',
+      accuracy: { low: 0, high: 0 },
+      responseMs: { median: 500, spread: 0 },
+    };
     const [row] = simulate({ ...base, profiles: [hopeless], levels: [1] });
     expect(row).toMatchObject({ completionRate: 0, medianScore: 0, stars: [20, 0, 0, 0] });
   });
 
   it('lowers completion for harder (low-transparency) levels with weaker profiles', () => {
     const rows = simulate({ ...base, profiles: ['novice', 'expert'], levels: [2, 6], runs: 100 });
-    const rate = (p: string, l: number) => rows.find((r) => r.profile === p && r.level === l)!.completionRate;
+    const rate = (p: string, l: number) =>
+      rows.find((r) => r.profile === p && r.level === l)!.completionRate;
     expect(rate('expert', 6)).toBeGreaterThanOrEqual(rate('novice', 6));
     expect(rate('novice', 2)).toBeGreaterThan(rate('novice', 6));
   });
@@ -95,7 +113,20 @@ describe('formatTable', () => {
 
 describe('cli', () => {
   it('parses flags with ranges and lists', () => {
-    expect(parseArgs(['--game', 'demo', '--levels', '2-4', '--profiles', 'novice,expert', '--runs', '10', '--seed', '3'])).toEqual({
+    expect(
+      parseArgs([
+        '--game',
+        'demo',
+        '--levels',
+        '2-4',
+        '--profiles',
+        'novice,expert',
+        '--runs',
+        '10',
+        '--seed',
+        '3',
+      ]),
+    ).toEqual({
       game: 'demo',
       levels: [2, 3, 4],
       profiles: ['novice', 'expert'],
@@ -119,8 +150,59 @@ describe('cli', () => {
     expect(() => parseArgs(['--game', 'x', '--bogus', '1'])).toThrow(/--bogus/);
   });
   it('runs a registered game and errors for unknown ones', () => {
-    const out = runCli(['--game', 'fake', '--levels', '1-2', '--runs', '5'], { fake: fake as SimGame<unknown, unknown> });
+    const out = runCli(['--game', 'fake', '--levels', '1-2', '--runs', '5'], {
+      fake: fake as SimGame<unknown, unknown>,
+    });
     expect(out).toContain('| Level |');
-    expect(() => runCli(['--game', 'zzz'], { fake: fake as SimGame<unknown, unknown> })).toThrow(/Unknown game "zzz".*fake/);
+    expect(() => runCli(['--game', 'zzz'], { fake: fake as SimGame<unknown, unknown> })).toThrow(
+      /Unknown game "zzz".*fake/,
+    );
+  });
+});
+
+describe('edge cases', () => {
+  it('tallies hint events as score penalties', () => {
+    const hinting: SimGame<S, A> = {
+      ...fake,
+      createRules: (level) => {
+        const r = fake.createRules(level);
+        return {
+          ...r,
+          reduce: (s, a) => {
+            const out = r.reduce(s, a);
+            return { ...out, events: [{ type: 'hint' }, ...out.events] };
+          },
+        };
+      },
+    };
+    const perfect = {
+      name: 'p',
+      accuracy: { low: 1, high: 1 },
+      responseMs: { median: 1000, spread: 0 },
+    };
+    const [plain] = simulate({ ...base, profiles: [perfect], levels: [1] });
+    const [hinted] = simulate({ ...base, game: hinting, profiles: [perfect], levels: [1] });
+    expect(hinted!.medianScore).toBe(plain!.medianScore - 50);
+  });
+
+  it('averages the two middle values for an even number of runs and shows "–" when nothing completed', () => {
+    const hopeless = {
+      name: 'h',
+      accuracy: { low: 0, high: 0 },
+      responseMs: { median: 500, spread: 0 },
+    };
+    const rows = simulate({ ...base, profiles: [hopeless], levels: [1], runs: 2 });
+    expect(rows[0]!.medianTimeMs).toBeNull();
+    expect(formatTable(rows)).toContain('| – |');
+  });
+
+  it('parses a single level and rejects a flag without a value or a non-numeric level', () => {
+    expect(parseArgs(['--game', 'x', '--levels', '3']).levels).toEqual([3]);
+    expect(() => parseArgs(['--game'])).toThrow(/missing value/);
+    expect(() => parseArgs(['--game', 'x', '--levels', 'abc'])).toThrow(/levels/);
+  });
+
+  it('names (none) when no games are registered', () => {
+    expect(() => runCli(['--game', 'x'], {})).toThrow(/\(none\)/);
   });
 });

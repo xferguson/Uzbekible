@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | in review |
 | Lane | I Imlo |
 | Depends on | [D1](D1-design-system-mockups.md) |
 | Read first | `docs/games/06-imlo.md` (all), `docs/design/brief.md`, `docs/design/mockups/D2-juft-screens.html` (board, HUD, map) |

@@ -35,7 +35,7 @@ describe('paramsFor', () => {
 
   it('evaluates logistic curves between min and max, half-way at the midpoint', () => {
     expect(paramsFor(10, config).parMs).toBeCloseTo(60_000);
-    expect(paramsFor(1, config).parMs).toBeLessThan(paramsFor(30, config).parMs);
+    expect(paramsFor(1, config).parMs).toBeLessThan(paramsFor(30, config).parMs!);
     expect(paramsFor(200, config).parMs).toBeLessThanOrEqual(90_000);
     expect(paramsFor(-200, config).parMs).toBeGreaterThanOrEqual(30_000);
   });
@@ -48,7 +48,7 @@ describe('paramsFor', () => {
     const p = paramsFor(7, config);
     expect(p.pairs).toBe(5);
     expect(p.transparency).toBe(0.9);
-    expect(p.parMs).toBeCloseTo(paramsFor(6, config).parMs, -5);
+    expect(p.parMs).toBeCloseTo(paramsFor(6, config).parMs!, -5);
     expect(paramsFor(8, config).pairs).toBe(6);
   });
 

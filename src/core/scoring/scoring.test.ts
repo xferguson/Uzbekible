@@ -42,7 +42,7 @@ describe('score', () => {
 
   it('floors at 0 and rounds to an integer', () => {
     expect(score({ ...clean, mistakes: 50 }, config)).toBe(0);
-    expect(score({ ...clean, timeMs: 61_001 }, config)).toBe(Number.isInteger(score({ ...clean, timeMs: 61_001 }, config)) ? 983 : -1);
+    expect(score({ ...clean, timeMs: 61_001 }, config)).toBe(992);
     expect(score({ ...clean, multipliers: [-3] }, config)).toBe(0);
   });
 

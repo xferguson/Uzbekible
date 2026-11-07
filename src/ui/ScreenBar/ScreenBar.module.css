@@ -1,0 +1,49 @@
+/* Sits above the pause overlay (position: fixed, no z-index) so the way out never disappears. */
+.bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-block-size: var(--space-12);
+  font-family: var(--font-ui);
+  color: var(--color-text);
+}
+.title {
+  flex: 1;
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: var(--space-12);
+  min-inline-size: var(--space-12);
+  padding-inline: var(--space-4);
+  border: 2px solid var(--color-cobalt);
+  border-radius: var(--radius-tile);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.close {
+  justify-content: center;
+  margin-inline-start: auto;
+  padding-inline: 0;
+}
+.icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.button:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}

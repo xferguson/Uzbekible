@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | on hold: awaiting approval of the Imlo plan (`docs/games/06-imlo.md`) |
+| Status | todo |
 | Lane | I Imlo |
 | Depends on | [I4](I4-imlo-mockups.md), [I3](I3-imlo-rules.md) |
 | Read first | `docs/design/mockups/I4-imlo-screens.html` (approved), `docs/games/06-imlo.md` ("Core loop", "Rules": Keyboard) |

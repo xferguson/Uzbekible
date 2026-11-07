@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | on hold: awaiting approval of the Imlo plan (`docs/games/06-imlo.md`) |
+| Status | todo |
 | Lane | I Imlo |
 | Depends on | [K1](K1-core-text.md) |
 | Read first | `docs/games/06-imlo.md` ("Level progression": Letters), `.claude/skills/uzbek-text-rules/SKILL.md` |

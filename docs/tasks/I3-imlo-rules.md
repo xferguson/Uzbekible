@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | on hold: awaiting approval of the Imlo plan (`docs/games/06-imlo.md`) |
+| Status | todo |
 | Lane | I Imlo |
 | Depends on | [I2](I2-imlo-levels.md) |
 | Read first | `docs/games/06-imlo.md` ("Core loop", "Rules"), `src/games/juft/rules.ts` (shape to mirror) |

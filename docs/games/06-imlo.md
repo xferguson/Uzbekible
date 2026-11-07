@@ -1,8 +1,8 @@
 # Game 6: Imlo (Cognate Spelling)
 
 > *imlo* (Uzbek) = spelling, orthography. It is itself a cognate: Turkish *imla*, Persian *emlâ* (املا), Arabic
-> *imlāʼ* (إملاء, dictation). Working title. **Status: draft plan, awaiting approval.** Tasks I1–I8 are on hold
-> until it is approved.
+> *imlāʼ* (إملاء, dictation). Working title. **Status: approved plan** (2026-11-07). Build before Soxta.
+> Tasks: I1–I8 in `../tasks/README.md`.
 
 ## Pitch
 Juft's production twin. One cognate pair at a time: an English meaning in the middle, two rows of empty letter
@@ -86,11 +86,10 @@ distractors. With Uzbek Cyrillic against Russian the two words share a script ag
 Source languages and Uzbek script, shared with Juft. With several languages on, each pair shows one source word,
 with the same script badge as Juft. Persian and Arabic slot rows are RTL.
 
-## Product-rule exception (needs approval)
+## Product-rule exception (decided)
 `CLAUDE.md` says no English on game boards. Like Soxta, **Imlo's clue is the English meaning**: there is no other
 neutral way to name the word without giving away one of the two spellings. The exemption covers only the clue; the
-letters, slots and button are Uzbek. To be recorded in `CLAUDE.md`, the PRD and the design brief when the plan is
-approved.
+letters, slots and button are Uzbek. Recorded in `CLAUDE.md`, the PRD and the design brief.
 
 ## Dependencies on shared modules
 `core/text` (letters, scripts, RTL meta), `core/content` (`boardPool`), `core/random` (shuffle, distractors),
@@ -104,15 +103,13 @@ in `core/text` (I1), and per-game difficulty modes in the game contract and shel
 `level_failed`. `spell_wrong` with `given` and `expected` is the research payoff: it shows *which* letters
 Turkish knowledge gets wrong in Uzbek (e.g. writing *isim* for *ism*).
 
-## Open questions
-1. **Persian/Arabic slots.** Letters in separate slots show isolated forms and lose joining. Proposal: tiles in the
-   bank and slots show isolated forms, and a joined preview of the word as spelled so far sits under the RTL slot
-   row. Settle in the mockups (I4).
-2. **Slot count gives the length away.** Proposal: keep it (the user's design; it is a word game, not a quiz). A
-   later "no length" variant could add one spare slot per side.
-3. **Is checking one side at a time useful?** Proposal: no; one check for both keeps the contrast in view.
-4. **Priority vs Soxta**, which was on hold until Juft v1 and can now resume. Proposal: build Imlo first; it reuses
-   Juft's content and pool unchanged, while Soxta needs a new gesture hook and its own pool.
+## Decisions (approved by the user, 2026-11-07)
+1. **English clue:** allowed, as the exception above.
+2. **Persian and Arabic:** separate letter tiles in isolated forms, in the bank and in the RTL slot row, exactly as
+   for the other languages. **No joined preview** of the word: showing it would give the spelling away.
+3. **Priority:** Imlo is built before Soxta.
+4. **Identical spellings** (e.g. *bu* ↔ *bu*) are excluded from the pool.
+5. **Slot count** shows the word length (kept as designed); one check covers both sides.
 
 ## Out of scope (v1)
 Audio, free typing on the device keyboard (a hardware keyboard works through the bank), stats screen.

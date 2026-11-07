@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | on hold: awaiting approval of the Imlo plan (`docs/games/06-imlo.md`) |
+| Status | todo |
 | Lane | I Imlo |
 | Depends on | [U7](U7-juft-wiring.md) |
 | Read first | `docs/games/06-imlo.md` ("Difficulty modes"), `src/games/types.ts`, `docs/architecture.md` (shell and games rows) |

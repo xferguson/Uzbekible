@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | on hold: awaiting approval of the Imlo plan (`docs/games/06-imlo.md`) |
+| Status | todo |
 | Lane | I Imlo |
 | Depends on | [I6](I6-imlo-board.md), [I5](I5-game-modes.md), [I8](I8-imlo-scoring-balance.md) |
 | Read first | `src/games/juft/definition.ts`, `src/games/juft/juft.e2e.ts`, `docs/games/06-imlo.md` ("Learning-log events") |

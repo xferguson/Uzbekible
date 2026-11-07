@@ -8,8 +8,7 @@ import type { Rules, RulesEvent } from '../../core/session';
 export type Side = 'left' | 'right';
 
 export type JuftAction =
-  | { type: 'select'; side: Side; tileId: string }
-  | { type: 'hint'; tileId: string };
+  { type: 'select'; side: Side; tileId: string } | { type: 'hint'; tileId: string };
 
 export interface JuftState {
   /** Tile ids top to bottom, shuffled on level start. Matched tiles stay in place (their sockets remain). */
@@ -22,14 +21,28 @@ export interface JuftState {
   combo: number;
 }
 
+/** Juft's own events, for the board UI. The standard events (`mistake`, `lifeLost`, `combo`, `hint`) ride alongside. */
+export type JuftEvent =
+  | { type: 'selected'; side: Side; tileId: string }
+  | { type: 'deselected'; side: Side; tileId: string }
+  | { type: 'matched'; tileId: string; combo: number }
+  | { type: 'mismatched'; leftId: string; rightId: string }
+  | { type: 'hintShown'; tileId: string };
+
+type Ev = RulesEvent<JuftEvent>;
+
 export interface JuftOptions {
   pairIds: readonly string[];
   rng: Rng;
 }
 
-export function createJuftRules({ pairIds, rng }: JuftOptions): Rules<JuftState, JuftAction> {
+export function createJuftRules({
+  pairIds,
+  rng,
+}: JuftOptions): Rules<JuftState, JuftAction, JuftEvent> {
   if (pairIds.length === 0) throw new RangeError('createJuftRules: need at least one pair');
-  if (new Set(pairIds).size !== pairIds.length) throw new RangeError('createJuftRules: duplicate pair ids');
+  if (new Set(pairIds).size !== pairIds.length)
+    throw new RangeError('createJuftRules: duplicate pair ids');
 
   const init: JuftState = {
     left: shuffle(rng, pairIds),
@@ -38,24 +51,28 @@ export function createJuftRules({ pairIds, rng }: JuftOptions): Rules<JuftState,
     matched: [],
     combo: 0,
   };
-  const none = (state: JuftState) => ({ state, events: [] as RulesEvent[] });
+  const none = (state: JuftState) => ({ state, events: [] as Ev[] });
 
   return {
     init,
     reduce(state, action) {
-      if (!pairIds.includes(action.tileId) || state.matched.includes(action.tileId)) return none(state);
+      if (!pairIds.includes(action.tileId) || state.matched.includes(action.tileId))
+        return none(state);
 
       if (action.type === 'hint') {
-        return { state, events: [{ type: 'hintShown', tileId: action.tileId }] };
+        return { state, events: [{ type: 'hintShown', tileId: action.tileId }, { type: 'hint' }] };
       }
 
       const { side, tileId } = action;
       const sel = state.selected;
       if (!sel) {
-        return { state: { ...state, selected: { side, tileId } }, events: [{ type: 'selected', side, tileId }] };
+        return {
+          state: { ...state, selected: { side, tileId } },
+          events: [{ type: 'selected', side, tileId }],
+        };
       }
       if (sel.side === side) {
-        const events: RulesEvent[] = [{ type: 'deselected', side, tileId: sel.tileId }];
+        const events: Ev[] = [{ type: 'deselected', side, tileId: sel.tileId }];
         if (sel.tileId === tileId) return { state: { ...state, selected: null }, events };
         events.push({ type: 'selected', side, tileId });
         return { state: { ...state, selected: { side, tileId } }, events };
@@ -65,7 +82,7 @@ export function createJuftRules({ pairIds, rng }: JuftOptions): Rules<JuftState,
       if (sel.tileId === tileId) {
         const matched = [...state.matched, tileId];
         const combo = state.combo + 1;
-        const events: RulesEvent[] = [{ type: 'matched', tileId, combo }];
+        const events: Ev[] = [{ type: 'matched', tileId, combo }, { type: 'combo' }];
         if (matched.length === pairIds.length) events.push({ type: 'complete' });
         return { state: { ...state, selected: null, matched, combo }, events };
       }
@@ -73,7 +90,11 @@ export function createJuftRules({ pairIds, rng }: JuftOptions): Rules<JuftState,
       const rightId = side === 'right' ? tileId : sel.tileId;
       return {
         state: { ...state, selected: null, combo: 0 },
-        events: [{ type: 'mismatched', leftId, rightId }, { type: 'lifeLost' }],
+        events: [
+          { type: 'mismatched', leftId, rightId },
+          { type: 'mistake' },
+          { type: 'lifeLost' },
+        ],
       };
     },
   };

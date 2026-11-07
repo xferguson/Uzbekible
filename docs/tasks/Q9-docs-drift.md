@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | Q Quality |
 | Read first | `docs/technical-design.md`, `docs/architecture.md` (other docs only if needed) |
 | Depends on | none |

@@ -26,12 +26,12 @@ shell  ──►  games/*  ──►  ui  ──►  design
 | `difficulty` | level → parameters via curves (linear, step, logistic) + explicit special levels | `paramsFor(level, config)` | **property** (non-decreasing except declared) | all games |
 | `scheduler` | next items: frequency order + re-showing missed items + mastery estimate | `nextItems(pool, history, n, rng)` | unit + property | all games |
 | `similarity` | edit distance, Turkish→Uzbek correspondence rules, transparency score, fuzzy match | `distance`, `applyRules`, `transparency`, `bestMatch` | unit + property (symmetry, bounds) | content build, Juft difficulty, Wordfall |
-| `morphology` | suffix allomorphs and attachment, form validation | `attach(root, suffixes)`, `isValid` | unit | Juft suffix levels, Qoʻsh |
+| `morphology` *(deferred to Game 2; Juft uses curated inflected content)* | suffix allomorphs and attachment, form validation | `attach(root, suffixes)`, `isValid` | unit | Game 2 suffix levels, Qoʻsh |
 | `storage` | namespaced, versioned localStorage, migrations, memory fallback | `createStore(ns, schema, migrations)` | unit + **property** (migrate → validates) | shell, all games |
 | `content` | zod schema, types, loader, validator | `ItemSchema`, `loadItems`, `validateItems` | unit | app, content scripts |
 | `learning-log` | append attempt events, aggregates, CSV/JSON export | `log(event)`, `exportCsv`, `aggregates` | unit | all games, settings |
 | `motif` | girih and rosette geometry (star polygons {n/k}, tilings) as pure point data | `starPolygon`, `rosette`, `tilePattern` | **property** (symmetry, closed paths) | ui/motif, icon |
-| `audio`, `speech` | provider interfaces + fakes | `AudioProvider`, `SpeechRecognizer`, `createFake*` | unit | Eshit, Wordfall, (Juft later) |
+| `audio`, `speech` *(deferred with S1; not built yet)* | provider interfaces + fakes | `AudioProvider`, `SpeechRecognizer`, `createFake*` | unit | Eshit, Wordfall, (Juft later) |
 | `sim` | headless bot runner for balance | `simulate(def, profiles, levels, seed)` | unit | balance tuning |
 | `grid` (later) | word-search placement | `placeWords` | property | Eshit |
 

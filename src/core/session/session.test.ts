@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { createFakeClock } from '../clock';
-import { createSession, type Rules, type SessionEvent } from './index';
+import { createSession, tallyScoreInput, type Rules, type SessionEvent } from './index';
 
 type Act = { type: 'add'; n: number } | { type: 'miss' } | { type: 'finish' };
-const rules: Rules<number, Act> = {
+type Scored = { type: 'scored'; n: number };
+const rules: Rules<number, Act, Scored> = {
   init: 0,
   reduce: (state, action) => {
     switch (action.type) {
@@ -20,7 +21,7 @@ const rules: Rules<number, Act> = {
 function setup(lives = 3, countdownMs = 3000) {
   const clock = createFakeClock(1000);
   const session = createSession({ rules, lives, countdownMs, clock });
-  const events: SessionEvent[] = [];
+  const events: SessionEvent<Scored>[] = [];
   session.subscribe((e) => events.push(e));
   return { clock, session, events };
 }
@@ -184,7 +185,7 @@ describe('events', () => {
 
   it('stops notifying after unsubscribe', () => {
     const { session, events } = setup();
-    const extra: SessionEvent[] = [];
+    const extra: SessionEvent<Scored>[] = [];
     const off = session.subscribe((e) => extra.push(e));
     off();
     session.start();
@@ -196,5 +197,20 @@ describe('events', () => {
     const clock = createFakeClock();
     expect(() => createSession({ rules, lives: 0, countdownMs: 0, clock })).toThrow(RangeError);
     expect(() => createSession({ rules, lives: 1, countdownMs: -1, clock })).toThrow(RangeError);
+  });
+});
+
+describe('tallyScoreInput', () => {
+  it('counts standard mistake, hint and combo events and ignores the rest', () => {
+    const events = [
+      { type: 'mistake' },
+      { type: 'hint' },
+      { type: 'combo' },
+      { type: 'combo' },
+      { type: 'lifeLost' },
+      { type: 'scored' },
+    ];
+    expect(tallyScoreInput(events)).toEqual({ mistakes: 1, hints: 1, combos: 2 });
+    expect(tallyScoreInput([])).toEqual({ mistakes: 0, hints: 0, combos: 0 });
   });
 });

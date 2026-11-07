@@ -1,15 +1,17 @@
 import { describe, expect, it } from 'vitest';
 import { createRng } from '../../core/random';
-import { createSession } from '../../core/session';
-import { createJuftRules, type JuftAction, type JuftState } from './rules';
+import { createSession, tallyScoreInput } from '../../core/session';
+import { createJuftRules, type JuftAction, type JuftEvent, type JuftState } from './rules';
 import type { RulesEvent } from '../../core/session';
+
+type Ev = RulesEvent<JuftEvent>;
 
 const ids = ['a', 'b', 'c', 'd'];
 const rules = createJuftRules({ pairIds: ids, rng: createRng(1) });
 
-function run(actions: JuftAction[]): { state: JuftState; events: RulesEvent[] } {
+function run(actions: JuftAction[]): { state: JuftState; events: Ev[] } {
   let state = rules.init;
-  const events: RulesEvent[] = [];
+  const events: Ev[] = [];
   for (const a of actions) {
     const r = rules.reduce(state, a);
     state = r.state;
@@ -17,7 +19,7 @@ function run(actions: JuftAction[]): { state: JuftState; events: RulesEvent[] } 
   }
   return { state, events };
 }
-const types = (e: RulesEvent[]): string[] => e.map((x) => x.type);
+const types = (e: Ev[]): string[] => e.map((x) => x.type);
 
 describe('juft rules', () => {
   it('shuffles each column independently but deterministically', () => {
@@ -54,8 +56,8 @@ describe('juft rules', () => {
       { type: 'select', side: 'right', tileId: 'b' },
       { type: 'select', side: 'left', tileId: 'b' },
     ]);
-    expect(types(events)).toEqual(['selected', 'matched', 'selected', 'matched']);
-    expect(events[3]).toMatchObject({ tileId: 'b', combo: 2 });
+    expect(types(events)).toEqual(['selected', 'matched', 'combo', 'selected', 'matched', 'combo']);
+    expect(events[4]).toMatchObject({ tileId: 'b', combo: 2 });
     expect(state.matched).toEqual(['a', 'b']);
     expect(state.selected).toBeNull();
   });
@@ -67,17 +69,19 @@ describe('juft rules', () => {
       { type: 'select', side: 'left', tileId: 'b' },
       { type: 'select', side: 'right', tileId: 'c' },
     ]);
-    expect(types(events).slice(-2)).toEqual(['mismatched', 'lifeLost']);
-    expect(events.at(-2)).toMatchObject({ leftId: 'b', rightId: 'c' });
+    expect(types(events).slice(-3)).toEqual(['mismatched', 'mistake', 'lifeLost']);
+    expect(events.at(-3)).toMatchObject({ leftId: 'b', rightId: 'c' });
     expect(state.selected).toBeNull();
     expect(state.combo).toBe(0);
   });
 
   it('completes when every pair is matched', () => {
-    const { events } = run(ids.flatMap((id): JuftAction[] => [
-      { type: 'select', side: 'left', tileId: id },
-      { type: 'select', side: 'right', tileId: id },
-    ]));
+    const { events } = run(
+      ids.flatMap((id): JuftAction[] => [
+        { type: 'select', side: 'left', tileId: id },
+        { type: 'select', side: 'right', tileId: id },
+      ]),
+    );
     expect(types(events).at(-1)).toBe('complete');
     expect(types(events).filter((t) => t === 'complete')).toHaveLength(1);
   });
@@ -90,7 +94,7 @@ describe('juft rules', () => {
       { type: 'select', side: 'right', tileId: 'zzz' },
       { type: 'hint', tileId: 'a' },
     ]);
-    expect(types(events)).toEqual(['selected', 'matched']);
+    expect(types(events)).toEqual(['selected', 'matched', 'combo']);
   });
 
   it('hint emits hintShown without touching selection or lives', () => {
@@ -98,9 +102,22 @@ describe('juft rules', () => {
       { type: 'select', side: 'left', tileId: 'a' },
       { type: 'hint', tileId: 'b' },
     ]);
-    expect(types(events)).toEqual(['selected', 'hintShown']);
+    expect(types(events)).toEqual(['selected', 'hintShown', 'hint']);
     expect(events[1]).toMatchObject({ tileId: 'b' });
     expect(state.selected).toEqual({ side: 'left', tileId: 'a' });
+  });
+
+  it('tallies one mismatch, one hint and two matches as score input', () => {
+    const { events } = run([
+      { type: 'select', side: 'left', tileId: 'a' },
+      { type: 'select', side: 'right', tileId: 'b' },
+      { type: 'hint', tileId: 'a' },
+      { type: 'select', side: 'left', tileId: 'a' },
+      { type: 'select', side: 'right', tileId: 'a' },
+      { type: 'select', side: 'left', tileId: 'b' },
+      { type: 'select', side: 'right', tileId: 'b' },
+    ]);
+    expect(tallyScoreInput(events)).toEqual({ mistakes: 1, hints: 1, combos: 2 });
   });
 
   it('three mismatches lose the session (K3 integration)', () => {

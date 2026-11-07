@@ -39,6 +39,10 @@ will use. Never re-implement another task's scope.
 ```bash
 npm run gate   # quiet lint → typecheck → test+coverage → build; ends in GATE OK
 ```
+Delegate the full gate to the `gate-runner` agent when you want only the verdict: it replies `GATE OK` or the
+failing step plus ≤ 20 lines of errors, keeping long logs out of your context. Run a single test file or step
+yourself; a few lines of output aren't worth a spawn.
+
 Coverage thresholds: `src/core` ≥ 95% lines/branches, `src/ui` ≥ 80%. If e2e is relevant, see the
 `e2e-visual-check` skill.
 

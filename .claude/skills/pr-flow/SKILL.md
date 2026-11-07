@@ -44,6 +44,9 @@ description: Use when committing, pushing, opening, labelling or merging a PR, o
 
 ## CI red?
 - Read the failing job log. Reproduce with the same npm script locally.
+- **Delegate when the log is long:** spawn the `ci-triage` agent with the PR number; it returns the failing step,
+  a ≤ 30-line root-cause excerpt and the local repro command. Don't spawn it when the failure is already visible
+  locally or the log is a few lines; reading it directly is cheaper.
 - Fix the cause. Never skip or disable tests, never lower thresholds, never push empty commits to re-trigger.
 
 ## After merge

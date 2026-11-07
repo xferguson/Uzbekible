@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | X Harness |
 | Read first | `.claude/skills/pr-flow/SKILL.md` (CI red?) (other docs only if needed) |
 | Depends on | [X1](X1-gate-script.md) |

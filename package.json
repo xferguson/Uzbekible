@@ -15,9 +15,9 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "e2e": "playwright test",
-    "content:validate": "node scripts/stub.mjs content:validate",
-    "content:review": "node scripts/stub.mjs content:review",
-    "content:build": "node scripts/stub.mjs content:build",
+    "content:validate": "node --experimental-strip-types --no-warnings content/scripts/cli.ts validate",
+    "content:review": "node --experimental-strip-types --no-warnings content/scripts/cli.ts review",
+    "content:build": "node --experimental-strip-types --no-warnings content/scripts/cli.ts build",
     "sim": "node scripts/stub.mjs sim",
     "icons:build": "node --experimental-strip-types --no-warnings scripts/icons/build.mjs"
   },
@@ -50,7 +50,8 @@
   },
   "dependencies": {
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "zod": "^4.6.7"
   },
   "overrides": {
     "eslint-plugin-jsx-a11y": {

@@ -9,6 +9,7 @@ import { score as scoreOf, starsForScore, type ScoringConfig } from '../scoring/
 import {
   createSession,
   tallyScoreInput,
+  type ScoreTally,
   type GameEvent,
   type Rules,
   type SessionEvent,
@@ -19,6 +20,8 @@ export interface SimStep<A> {
   transparency: number;
   correct: A;
   wrong: A;
+  /** Tiles on screen. Drives the profile's scan time; absent means no scan time is added. */
+  choices?: number;
 }
 
 /**
@@ -40,6 +43,8 @@ export interface SimProfile {
   accuracy: { low: number; high: number };
   /** Log-normal response time: `median` ms, `spread` = sigma of the log (0 = constant). */
   responseMs: { median: number; spread: number };
+  /** Extra ms of visual search per tile on screen, added to the sampled response when `choices` is set. */
+  scanMsPerChoice?: number;
 }
 
 export const PROFILES: Record<string, SimProfile> = {
@@ -47,16 +52,19 @@ export const PROFILES: Record<string, SimProfile> = {
     name: 'novice',
     accuracy: { low: 0.35, high: 0.85 },
     responseMs: { median: 3500, spread: 0.4 },
+    scanMsPerChoice: 250,
   },
   'b1-turkish': {
     name: 'b1-turkish',
     accuracy: { low: 0.55, high: 0.95 },
     responseMs: { median: 2500, spread: 0.35 },
+    scanMsPerChoice: 150,
   },
   expert: {
     name: 'expert',
     accuracy: { low: 0.8, high: 0.99 },
     responseMs: { median: 1200, spread: 0.25 },
+    scanMsPerChoice: 60,
   },
 };
 
@@ -79,6 +87,10 @@ export interface LevelRow {
   medianTimeMs: number | null;
   /** Median over all runs; runs that were not completed score 0. */
   medianScore: number;
+  /** Median mistakes, hints and combos over all runs (events tallied even when a run was lost). */
+  medianMistakes: number;
+  medianHints: number;
+  medianCombos: number;
   /** Run counts for 0, 1, 2 and 3 stars. */
   stars: [number, number, number, number];
 }
@@ -111,6 +123,7 @@ interface RunResult {
   timeMs: number;
   score: number;
   stars: 0 | 1 | 2 | 3;
+  tally: ScoreTally;
 }
 
 function playOnce<S, A>(
@@ -137,14 +150,18 @@ function playOnce<S, A>(
     const t = Math.min(1, Math.max(0, step.transparency));
     const accuracy = profile.accuracy.low + (profile.accuracy.high - profile.accuracy.low) * t;
     const { median: med, spread } = profile.responseMs;
-    clock.advance(Math.max(1, Math.round(med * Math.exp(spread * gaussian(rng)))));
+    const scanMs = (profile.scanMsPerChoice ?? 0) * (step.choices ?? 0);
+    clock.advance(Math.max(1, Math.round(med * Math.exp(spread * gaussian(rng)) + scanMs)));
     session.dispatch(rng.next() < accuracy ? step.correct : step.wrong);
   }
 
   const state = session.getState();
-  if (state.phase !== 'won') return { won: false, timeMs: state.elapsedMs, score: 0, stars: 0 };
-  const value = scoreOf({ timeMs: state.elapsedMs, ...tallyScoreInput(events) }, game.scoring);
+  const tally = tallyScoreInput(events);
+  if (state.phase !== 'won')
+    return { won: false, timeMs: state.elapsedMs, score: 0, stars: 0, tally };
+  const value = scoreOf({ timeMs: state.elapsedMs, ...tally }, game.scoring);
   return {
+    tally,
     won: true,
     timeMs: state.elapsedMs,
     score: value,
@@ -176,86 +193,12 @@ export function simulate<S, A>(opts: SimOptions<S, A>): LevelRow[] {
         completionRate: won.length / runs,
         medianTimeMs: won.length ? median(won.map((r) => r.timeMs)) : null,
         medianScore: median(results.map((r) => r.score)),
+        medianMistakes: median(results.map((r) => r.tally.mistakes)),
+        medianHints: median(results.map((r) => r.tally.hints)),
+        medianCombos: median(results.map((r) => r.tally.combos)),
         stars,
       });
     }
   }
   return rows;
-}
-
-export function formatTable(rows: readonly LevelRow[]): string {
-  const head =
-    '| Level | Profile | Runs | Completion | Median time (s) | Median score | Stars 0/1/2/3 |';
-  const rule = '| ---: | --- | ---: | ---: | ---: | ---: | --- |';
-  const body = rows.map((r) => {
-    const time = r.medianTimeMs === null ? '–' : (r.medianTimeMs / 1000).toFixed(1);
-    return `| ${r.level} | ${r.profile} | ${r.runs} | ${(r.completionRate * 100).toFixed(0)}% | ${time} | ${r.medianScore} | ${r.stars.join('/')} |`;
-  });
-  return [head, rule, ...body].join('\n') + '\n';
-}
-
-export interface CliArgs {
-  game: string;
-  levels: number[];
-  profiles: string[];
-  runs: number;
-  seed: number;
-}
-
-function parseInt10(flag: string, text: string): number {
-  if (!/^\d+$/.test(text)) throw new RangeError(`${flag}: expected a whole number, got "${text}"`);
-  return Number(text);
-}
-
-function parseLevels(text: string): number[] {
-  const m = /^(\d+)(?:-(\d+))?$/.exec(text);
-  const from = m ? Number(m[1]) : NaN;
-  const to = m ? Number(m[2] ?? m[1]) : NaN;
-  if (!m || from > to)
-    throw new RangeError(`levels: expected "n" or "a-b" with a <= b, got "${text}"`);
-  return Array.from({ length: to - from + 1 }, (_, i) => from + i);
-}
-
-export function parseArgs(argv: readonly string[]): CliArgs {
-  const out: CliArgs = {
-    game: '',
-    levels: parseLevels('1-5'),
-    profiles: Object.keys(PROFILES),
-    runs: 100,
-    seed: 1,
-  };
-  for (let i = 0; i < argv.length; i += 2) {
-    const flag = argv[i] as string;
-    const value = argv[i + 1];
-    if (value === undefined) throw new RangeError(`${flag}: missing value`);
-    if (flag === '--game') out.game = value;
-    else if (flag === '--levels') out.levels = parseLevels(value);
-    else if (flag === '--profiles') out.profiles = value.split(',').filter(Boolean);
-    else if (flag === '--runs') out.runs = parseInt10('runs', value);
-    else if (flag === '--seed') out.seed = parseInt10('seed', value);
-    else throw new RangeError(`Unknown flag ${flag}`);
-  }
-  if (!out.game) throw new RangeError('--game <id> is required');
-  return out;
-}
-
-export function runCli(
-  argv: readonly string[],
-  games: Record<string, SimGame<unknown, unknown>>,
-): string {
-  const args = parseArgs(argv);
-  const game = games[args.game];
-  if (!game)
-    throw new RangeError(
-      `Unknown game "${args.game}". Known: ${Object.keys(games).join(', ') || '(none)'}`,
-    );
-  return formatTable(
-    simulate({
-      game,
-      profiles: args.profiles,
-      levels: args.levels,
-      runs: args.runs,
-      seed: args.seed,
-    }),
-  );
 }

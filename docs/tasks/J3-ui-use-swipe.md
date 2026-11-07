@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | on hold: Game 5 is backlog like Games 2–4; resume after Juft v1 (R1) |
 | Lane | J Soxta |
 | Depends on | [U1](U1-design-tokens-motif-ui.md) |
 | Read first | `.claude/skills/ui-component/SKILL.md` (a11y, reduced motion), `docs/architecture.md` (`src/ui` row) |

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | in review |
+| Status | done |
 | Lane | A Foundation |
 | Read first | `docs/technical-design.md` §1–2, §8–9 (other docs only if needed) |
 | Depends on | [T00](T00-app-scaffold.md) |

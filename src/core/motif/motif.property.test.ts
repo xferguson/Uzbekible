@@ -22,7 +22,10 @@ describe('motif geometry properties', () => {
     fc.assert(
       fc.property(nk, fc.double({ min: 1, max: 100, noNaN: true }), ([n, k], r) => {
         const pts = starPolygon(n, k, r).points;
-        return sameSet(pts.map((p) => rotate(p, (2 * Math.PI) / n)), pts);
+        return sameSet(
+          pts.map((p) => rotate(p, (2 * Math.PI) / n)),
+          pts,
+        );
       }),
       opts,
     );
@@ -39,12 +42,18 @@ describe('motif geometry properties', () => {
 
   it('rosette is n-fold symmetric and its petals are closed', () => {
     fc.assert(
-      fc.property(fc.integer({ min: 5, max: 16 }), fc.double({ min: 1, max: 50, noNaN: true }), (n, r) => {
-        const ro = rosette(n, r);
-        const pts = ro.petals.flatMap((p) => p.points);
-        const rotated = pts.map((p) => rotate(p, (2 * Math.PI) / n));
-        return ro.petals.every((p) => p.closed) && rotated.every((p) => pts.some((q) => near(p, q)));
-      }),
+      fc.property(
+        fc.integer({ min: 5, max: 16 }),
+        fc.double({ min: 1, max: 50, noNaN: true }),
+        (n, r) => {
+          const ro = rosette(n, r);
+          const pts = ro.petals.flatMap((p) => p.points);
+          const rotated = pts.map((p) => rotate(p, (2 * Math.PI) / n));
+          return (
+            ro.petals.every((p) => p.closed) && rotated.every((p) => pts.some((q) => near(p, q)))
+          );
+        },
+      ),
       opts,
     );
   });
@@ -61,8 +70,10 @@ describe('motif geometry properties', () => {
         (kind, x, y, width, height, cell) =>
           tilePattern(kind, { x, y, width, height }, cell).every(
             (t) =>
-              t.center.x >= x - EPS && t.center.x <= x + width + EPS &&
-              t.center.y >= y - EPS && t.center.y <= y + height + EPS,
+              t.center.x >= x - EPS &&
+              t.center.x <= x + width + EPS &&
+              t.center.y >= y - EPS &&
+              t.center.y <= y + height + EPS,
           ),
       ),
       opts,

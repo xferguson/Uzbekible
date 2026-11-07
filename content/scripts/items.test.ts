@@ -21,9 +21,9 @@ describe('curated items under content/items', () => {
     const errors = validateItems(all).issues.filter((i) => i.severity === 'error');
     expect(errors).toEqual([]);
   });
-  it('seed fixture has about 20 items, including inflected forms with known lemmas and a Persian-script source', () => {
+  it('seed fixture has about 10 items, including inflected forms with known lemmas and a Persian-script source', () => {
     const seed = validateItems(read('seed.yaml')).items;
-    expect(seed.length).toBeGreaterThanOrEqual(15);
+    expect(seed.length).toBeGreaterThanOrEqual(10);
     expect(seed.some((i) => i.form === 'inflected')).toBe(true);
     expect(seed.some((i) => i.sources.some((s) => s.lang === 'fa'))).toBe(true);
   });

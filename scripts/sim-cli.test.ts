@@ -112,6 +112,20 @@ describe('cli edge cases', () => {
     expect(() => parseArgs(['--game', 'x', '--levels', 'abc'])).toThrow(/levels/);
   });
 
+  it('resolves profile names against a game-specific set before the shared ones', () => {
+    const mine = {
+      name: 'novice',
+      accuracy: { low: 1, high: 1 },
+      responseMs: { median: 1000, spread: 0 },
+    };
+    const game = fake as SimGame<unknown, unknown>;
+    const args = ['--game', 'fake', '--levels', '1', '--profiles', 'novice', '--runs', '3'];
+    const shared = runCli(args, { fake: game });
+    const own = runCli(args, { fake: game }, { fake: { novice: mine } });
+    expect(own).not.toEqual(shared);
+    expect(own).toContain('| 100% |');
+  });
+
   it('names (none) when no games are registered', () => {
     expect(() => runCli(['--game', 'x'], {})).toThrow(/\(none\)/);
   });

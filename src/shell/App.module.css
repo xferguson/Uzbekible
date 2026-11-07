@@ -1,0 +1,62 @@
+/* Page frame for the shell screens (home, settings, map, play). Tokens only. */
+.page {
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: 720px;
+  min-block-size: 100dvh;
+  margin-inline: auto;
+  padding-block: max(var(--space-4), env(safe-area-inset-top)) var(--space-8);
+  padding-inline: max(var(--space-4), env(safe-area-inset-left))
+    max(var(--space-4), env(safe-area-inset-right));
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  font-family: var(--font-ui);
+  color: var(--color-text);
+}
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+.tagline {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+.games {
+  display: grid;
+  gap: var(--space-3);
+}
+.game {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: 72px;
+  padding: var(--space-4) var(--space-6);
+  border: 2px solid var(--color-cobalt);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  text-align: start;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.secondary {
+  justify-self: start;
+  min-block-size: var(--space-12);
+  padding-inline: var(--space-6);
+  border: 2px solid var(--color-cobalt);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.game:focus-visible,
+.secondary:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}

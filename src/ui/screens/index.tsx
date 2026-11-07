@@ -72,15 +72,20 @@ export function ResultsScreen(p: ResultsScreenProps) {
             ))}
           </span>
           {p.newBest && <p className={styles.best}>{t('Yangi rekord!')}</p>}
-          <dl className={styles.stat}>
-            <dt>{t('Ball')}</dt>
-            <dd>{p.score}</dd>
-            <dt>{t('Vaqt')}</dt>
-            <dd>{formatTime(p.timeMs)}</dd>
-            <dt>{t('Xato')}</dt>
-            <dd>{p.mistakes}</dd>
-            <dt>{t('Maslahat')}</dt>
-            <dd>{p.hints}</dd>
+          <dl className={styles.stats}>
+            {(
+              [
+                ['Ball', p.score],
+                ['Vaqt', formatTime(p.timeMs)],
+                ['Xato', p.mistakes],
+                ['Maslahat', p.hints],
+              ] as const
+            ).map(([name, value]) => (
+              <div key={name} className={styles.stat}>
+                <dt>{t(name)}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
           </dl>
         </>
       )}

@@ -18,7 +18,7 @@
     "content:validate": "node --experimental-strip-types --no-warnings content/scripts/cli.ts validate",
     "content:review": "node --experimental-strip-types --no-warnings content/scripts/cli.ts review",
     "content:build": "node --experimental-strip-types --no-warnings content/scripts/cli.ts build",
-    "sim": "node scripts/stub.mjs sim",
+    "sim": "node --experimental-strip-types --no-warnings scripts/sim.ts",
     "icons:build": "node --experimental-strip-types --no-warnings scripts/icons/build.mjs"
   },
   "devDependencies": {

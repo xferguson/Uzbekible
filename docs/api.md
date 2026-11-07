@@ -206,6 +206,8 @@ _(no exports yet)_
 - `Score({ value, script }: Common & { value: number; }): import("react").JSX.Element`
 - `Script` = `'latn' | 'cyrl'` - Uzbek script a label is shown in.
 - `ScriptProvider({ script, children }: { script: UzScript; children: ReactNode; }): import("react").JSX.Element` - Supplies the player's Uzbek script setting to every `UzText` below.
+- `SettingsPanel(p: SettingsPanelProps): import("react").JSX.Element`
+- `SettingsPanelProps` { languages: readonly SourceLang[]; script: UzScript; theme: Theme; onToggleLanguage: (lang: SourceLang) => void; onScript: (script: UzScript) => void; onTheme: (theme: Theme) => void; onExport: (…
 - `SourceText({ lang, text, className }: SourceTextProps): import("react").JSX.Element` - Text in a source language's native script (RTL for Persian/Arabic).
 - `SourceTextProps` { lang: SourceLang; text: string; className?: string }
 - `Star8({ size, variant, className }: Star8Props): import("react").JSX.Element` - The signature star: {8/2} khatam, {8/3} turquoise interlace and a gold octagon centre. Decorative.

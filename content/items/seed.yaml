@@ -1,50 +1,6 @@
 # Seed fixture (C5): inflected forms and a few items outside the top-1000 so downstream tasks can work with the schema.
 # Every source here is unverified (confidence low, ref curator:C5); C4/C6 replace or confirm them.
-- id: uz-uyda
-  uz: { latn: uyda, cyrl: уйда }
-  freqRank: 58
-  form: inflected
-  lemma: uz-uy
-  suffixes: [ -da ]
-  pos: noun
-  glossEn: at home, in the house
-  sources:
-    - lang: tr
-      text: evde
-      relation: turkic-cognate
-      confidence: low
-      ref: curator:C5
-  tags: [ seed ]
-- id: uz-uyga
-  uz: { latn: uyga, cyrl: уйга }
-  freqRank: 58
-  form: inflected
-  lemma: uz-uy
-  suffixes: [ -ga ]
-  pos: noun
-  glossEn: to the house, home
-  sources:
-    - lang: tr
-      text: eve
-      relation: turkic-cognate
-      confidence: low
-      ref: curator:C5
-  tags: [ seed ]
-- id: uz-uyim
-  uz: { latn: uyim, cyrl: уйим }
-  freqRank: 58
-  form: inflected
-  lemma: uz-uy
-  suffixes: [ -im ]
-  pos: noun
-  glossEn: my house
-  sources:
-    - lang: tr
-      text: evim
-      relation: turkic-cognate
-      confidence: low
-      ref: curator:C5
-  tags: [ seed ]
+# Items that C4 also generates (uyda, uyga, uyim, kitobda, kitobim, maktabda, maktabga) were removed: C4's versions are the verified ones.
 - id: uz-uyimiz
   uz: { latn: uyimiz, cyrl: уйимиз }
   freqRank: 58
@@ -105,36 +61,6 @@
       confidence: low
       ref: curator:C5
   tags: [ seed ]
-- id: uz-kitobda
-  uz: { latn: kitobda, cyrl: китобда }
-  freqRank: 81
-  form: inflected
-  lemma: uz-kitob
-  suffixes: [ -da ]
-  pos: noun
-  glossEn: in the book
-  sources:
-    - lang: tr
-      text: kitapta
-      relation: shared-arabic
-      confidence: low
-      ref: curator:C5
-  tags: [ seed ]
-- id: uz-kitobim
-  uz: { latn: kitobim, cyrl: китобим }
-  freqRank: 81
-  form: inflected
-  lemma: uz-kitob
-  suffixes: [ -im ]
-  pos: noun
-  glossEn: my book
-  sources:
-    - lang: tr
-      text: kitabım
-      relation: shared-arabic
-      confidence: low
-      ref: curator:C5
-  tags: [ seed ]
 - id: uz-kitobni
   uz: { latn: kitobni, cyrl: китобни }
   freqRank: 81
@@ -146,36 +72,6 @@
   sources:
     - lang: tr
       text: kitabı
-      relation: shared-arabic
-      confidence: low
-      ref: curator:C5
-  tags: [ seed ]
-- id: uz-maktabda
-  uz: { latn: maktabda, cyrl: мактабда }
-  freqRank: 133
-  form: inflected
-  lemma: uz-maktab
-  suffixes: [ -da ]
-  pos: noun
-  glossEn: at school
-  sources:
-    - lang: tr
-      text: mektepte
-      relation: shared-arabic
-      confidence: low
-      ref: curator:C5
-  tags: [ seed ]
-- id: uz-maktabga
-  uz: { latn: maktabga, cyrl: мактабга }
-  freqRank: 133
-  form: inflected
-  lemma: uz-maktab
-  suffixes: [ -ga ]
-  pos: noun
-  glossEn: to school
-  sources:
-    - lang: tr
-      text: mektebe
       relation: shared-arabic
       confidence: low
       ref: curator:C5

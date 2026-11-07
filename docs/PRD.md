@@ -51,6 +51,7 @@ Secondary personas, later: Russian speakers learning Uzbek, and heritage learner
 | 2 | [**Qoʻsh** (Compose)](games/02-compose.md) | Combine roots and suffixes into real words and phrases, then state the meaning | Morphology, productive word building | Backlog |
 | 3 | [**Wordfall** (Say it!)](games/03-wordfall.md) | Words fall across a tilework sky; say them aloud to zap them | Reading speed, pronunciation | Backlog (speech-to-text risk) |
 | 4 | [**Eshit** (Listen & Search)](games/04-listen-search.md) | Hear a word, then find it in a letter grid | Listening, sound-to-spelling | Backlog (needs audio) |
+| 5 | [**Soxta** (False-Friend Swipe)](games/05-soxta.md) | Swipe toward the word (Uzbek or Turkish) that matches an English meaning | Unlearning false friends | **Draft, awaiting approval** |
 
 More game ideas will be added here as they come up.
 

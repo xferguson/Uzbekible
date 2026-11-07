@@ -84,15 +84,19 @@ export function checkFrames({ tasks }, states) {
   const known = new Set(states);
   for (const t of tasks.values()) {
     for (const f of t.screens ?? []) {
-      if (!known.has(f)) problems.push(`${t.file}: owns frame "${f}", which is not in docs/design/frames.json`);
+      if (!known.has(f))
+        problems.push(`${t.file}: owns frame "${f}", which is not in docs/design/frames.json`);
     }
   }
   for (const f of states) {
     const owners = [...tasks.values()].filter((t) => (t.screens ?? []).includes(f));
-    if (owners.length === 0) problems.push(`frame "${f}" is claimed by no task (add it to a "Screens owned" row)`);
+    if (owners.length === 0)
+      problems.push(`frame "${f}" is claimed by no task (add it to a "Screens owned" row)`);
     const open = owners.filter((t) => !isDone(t));
     if (open.length > 1)
-      problems.push(`frame "${f}" is claimed by several unfinished tasks: ${open.map((t) => t.id).join(', ')}`);
+      problems.push(
+        `frame "${f}" is claimed by several unfinished tasks: ${open.map((t) => t.id).join(', ')}`,
+      );
   }
   return problems;
 }
@@ -122,7 +126,13 @@ function main(argv) {
     return problems.length === 0 ? 0 : 1;
   }
   if (cmd === 'frames') {
-    const file = join(dirname(fileURLToPath(import.meta.url)), '..', 'docs', 'design', 'frames.json');
+    const file = join(
+      dirname(fileURLToPath(import.meta.url)),
+      '..',
+      'docs',
+      'design',
+      'frames.json',
+    );
     const problems = checkFrames(board, Object.keys(JSON.parse(readFileSync(file, 'utf8')).states));
     for (const p of problems) console.error(`error: ${p}`);
     if (problems.length === 0) console.log('tasks: every frame has one owner');

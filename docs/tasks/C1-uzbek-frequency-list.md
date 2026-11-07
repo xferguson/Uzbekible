@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | C Content |
 | Depends on | none |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
@@ -13,10 +13,10 @@
 Produce a cited, lemmatized top-1000 Uzbek frequency list.
 
 ## Acceptance criteria
-- [ ] `content/sources/SOURCES.md` lists every corpus/list used with URL, license, retrieval date, method
-- [ ] `content/sources/uz-freq-top1000.csv`: rank, lemma (canonical Latin with U+02BB), cyrl, pos, count, source
-- [ ] Method note: how surface forms were lemmatized, how lists were merged
-- [ ] Spot-check of 30 random rows documented in the PR
+- [x] `content/sources/SOURCES.md` lists every corpus/list used with URL, license, retrieval date, method
+- [x] `content/sources/uz-freq-top1000.csv`: rank, lemma (canonical Latin with U+02BB), cyrl, pos, count, source
+- [x] Method note: how surface forms were lemmatized, how lists were merged
+- [x] Spot-check of 30 random rows documented in the PR
 
 ## Test-first plan
 - If a script is written: unit tests for its normalization/merging (uses `core/text` if merged)

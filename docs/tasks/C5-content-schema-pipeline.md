@@ -4,6 +4,7 @@
 |---|---|
 | Status | todo |
 | Lane | C Content |
+| Read first | `docs/technical-design.md` §3–4 (other docs only if needed) |
 | Depends on | [T00](T00-app-scaffold.md), [K1](K1-core-text.md) |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `add-content-items`, `uzbek-text-rules`, `pr-flow` |

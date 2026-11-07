@@ -6,6 +6,7 @@
 | Lane | <lane> |
 | Depends on | <task links or none> |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
+| Read first | <only the docs/sections this task needs> |
 | Skills | `tdd-task`, `pr-flow`, ... |
 | Branch | `task/<ID>-<slug>` |
 

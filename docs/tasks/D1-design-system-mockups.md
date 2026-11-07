@@ -4,6 +4,7 @@
 |---|---|
 | Status | done |
 | Lane | B Design |
+| Read first | `docs/design/brief.md` (other docs only if needed) |
 | Depends on | none |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `design-mockup`, `pr-flow`, `uzbek-text-rules` |

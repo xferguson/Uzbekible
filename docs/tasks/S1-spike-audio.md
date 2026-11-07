@@ -4,6 +4,7 @@
 |---|---|
 | Status | on hold: audio deferred, see [docs/spikes/S1-audio.md](../spikes/S1-audio.md) |
 | Lane | H Spikes |
+| Read first | `docs/technical-design.md` §7 (other docs only if needed) |
 | Depends on | none |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `cognate-research`, `pr-flow` |

@@ -1,6 +1,6 @@
 ---
 name: game-balance-tuning
-description: Use when changing difficulty curves, level parameters, scoring formulas or weights, star thresholds, lives, timers, or speed ramps in any Uzbekible game, or when a level feels too easy/hard. Requires config-only changes validated by the seeded simulation bot.
+description: Use when changing difficulty, scoring, timing, lives or star thresholds in any game (config-only, validated by simulation).
 ---
 
 # Game balance tuning

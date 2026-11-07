@@ -1,6 +1,6 @@
 ---
 name: add-content-items
-description: Use when adding, editing, importing, or reviewing vocabulary/content items (Uzbek words, cognate pairs, borrowings, suffixed forms) in content/ for any Uzbekible game. Covers the schema, both scripts, source citations, and validation.
+description: Use when adding or editing vocabulary/pair items in content/ (schema, both Uzbek scripts, sources, validation).
 ---
 
 # Adding content items

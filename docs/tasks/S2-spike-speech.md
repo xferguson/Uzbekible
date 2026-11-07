@@ -4,6 +4,7 @@
 |---|---|
 | Status | todo |
 | Lane | H Spikes |
+| Read first | `docs/technical-design.md` §7 (other docs only if needed) |
 | Depends on | none |
 | Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `pr-flow`, `e2e-visual-check` |

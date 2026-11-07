@@ -1,6 +1,6 @@
 ---
 name: uzbek-text-rules
-description: Use whenever code or content touches Uzbek, Turkish, Russian, Persian, or Arabic text — comparison, normalization, transliteration, tokenizing letters, rendering, sorting, case changes, fonts, RTL. Checklist of the text pitfalls that cause bugs in Uzbekible.
+description: Use when code or content touches Uzbek, Turkish, Russian, Persian or Arabic text: normalization, letters, scripts, RTL.
 ---
 
 # Uzbek & multi-script text rules

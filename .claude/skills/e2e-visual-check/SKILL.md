@@ -1,6 +1,6 @@
 ---
 name: e2e-visual-check
-description: Use when writing or running Playwright end-to-end tests, checking a UI change in a real browser, taking screenshots, or verifying PWA/offline behaviour in Uzbekible.
+description: Use when writing or running Playwright e2e tests, taking screenshots, or checking PWA/offline behaviour.
 ---
 
 # E2E & visual checks

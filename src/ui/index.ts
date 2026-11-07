@@ -8,3 +8,4 @@ export { SettingsPanel, type SettingsPanelProps } from './SettingsPanel';
 export { Countdown, PauseOverlay, ResultsScreen, type ResultsScreenProps } from './screens';
 export type { Script } from './labels';
 export * from './LevelMap';
+export * from './ScreenBar';

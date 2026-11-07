@@ -50,5 +50,5 @@ description: Use when committing, pushing, opening, labelling or merging a PR, o
 - **Always update the task list once a task is merged.** The task file's `Status` row must read `done` on `main`.
   Set it to `done` in the PR itself, in the last commit before you merge (the task is merging, so it is true by
   the time it lands). If a merged task still reads `todo`/`in review`, fix it in a docs-only PR straight away.
-- Confirm with `git show origin/main:docs/tasks/<ID>-*.md | grep Status`.
-- Tell the user which tasks are now unblocked (check `docs/tasks/README.md`).
+- CI fails a ready (non-draft) `task/<ID>-*` PR whose task file is not `done`.
+- Confirm and tell the user which tasks are now unblocked: `git fetch origin main && git checkout origin/main -- docs/tasks && npm run tasks` (see **Ready next**).

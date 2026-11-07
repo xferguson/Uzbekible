@@ -39,7 +39,7 @@ property-test if the logic is pure. Docs-only tasks say how they are validated i
 - Branch: `task/<ID>-<slug>`; file: `docs/tasks/<ID>-<slug>.md`.
 
 ## README update steps (same PR as the task files)
-1. Add a row to the **Tasks** table: `| [ID](ID-slug.md) 🔒? | Title | Lane | Depends on |`.
+1. Add a row to the **Tasks** table, copying a neighbouring row: ID link (with 🔒 if gated), title, lane, depends on.
 2. Update the **Parallel lanes** diagram (a new lane gets its own line).
 3. Add the lane to the "Start right away" line if the first tasks have no dependencies.
 4. `npm run tasks -- check` must print no problems; `npm run tasks` should list the new tasks in **Ready next** when

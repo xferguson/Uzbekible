@@ -4,14 +4,27 @@
 |---|---|
 | Task | [S1](../tasks/S1-spike-audio.md) |
 | Date | 2026-11-07 |
-| Status | Recommendation, waiting for user approval |
-| Listen page | https://claude.ai/artifact/9WkMcLH3r8Fq4pjrUVvPt9 (source: [`S1-audio/listen.html`](S1-audio/listen.html), built from `S1-audio/generate-espeak.sh`) |
+| Status | **On hold.** Audio is deferred; this note records what was learned |
+
+## Decision (2026-11-07): audio is on hold
+The only audio this session could produce (offline espeak-ng) did not work for the user: it was unusable as
+player audio, and playback failed on the listening page. Better sources (Azure neural TTS, Commons
+recordings) need network access and a key that this environment doesn't have. So:
+- **No audio work is planned for v1.** Games 3/4 (Wordfall, Listen & Search) stay unscheduled until audio is
+  picked up again. Juft doesn't depend on audio.
+- `AudioProvider` stays an interface only (technical-design §7). Nothing implements it yet.
+- When audio is picked up again, start from the recommendation and the "could not verify" list below. Run the
+  20-word Azure sample with a native-speaker check *before* building anything. Use a session whose
+  environment can reach the TTS host, and listen on a real phone (Safari and Chrome) with plain files, not
+  data URIs.
+
+The espeak-ng prototype files were removed from the repository. The findings below are kept.
 
 ## Question
 How should Uzbekible source Uzbek word audio for Games 3 and 4 (and Juft later), given the options in
 [technical-design §7](../technical-design.md#7-audio-and-speech-plan-not-built-for-v1)?
 
-## Recommendation
+## Recommendation (for when audio resumes)
 1. **Primary: pre-generated Azure neural TTS** (`uz-UZ-MadinaNeural`, with `uz-UZ-SardorNeural` as a second
    voice). Generate at `content:build` time with a key held only locally or in CI, and commit
    **Ogg Opus, mono, 24 kbps** with an **MP3 32 kbps** fallback. The service worker precaches the files,
@@ -48,7 +61,7 @@ Legend: ✅ measured in this spike · 📄 from vendor documentation, not verifi
 ## Prototype: espeak-ng, 20 words ✅
 I generated 20 high-frequency words (18 lemmas plus 2 infinitives, covering oʻ, gʻ, ʼ, q, x, sh, ch) with
 `espeak-ng -v uz -s 140`, trimmed the silence and encoded them with ffmpeg as Opus 24 kbps and MP3 32 kbps.
-The listen page plays all 20.
+These files were removed when audio was put on hold.
 
 Results (IPA from `espeak-ng --ipa`):
 
@@ -77,7 +90,7 @@ was proposed and declined, and no Azure key was available, so:
 To close these gaps (one session, about an hour):
 1. Allow `<region>.tts.speech.microsoft.com` and save an Azure Speech key through the credential flow.
 2. Allow `commons.wikimedia.org` and `upload.wikimedia.org` (and `lingualibre.org`).
-3. Generate the same 20 words with Madina and Sardor, add them to the listen page next to espeak, and have a
+3. Generate the same 20 words with Madina and Sardor, put them on a listening page (plain files, not data URIs), and have a
    native speaker rate each word (correct / odd / wrong). Count Commons coverage against C1's top 1000.
 
 ## Implementation notes (for the follow-up audio task)

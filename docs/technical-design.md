@@ -91,6 +91,8 @@ CSS logical properties.
   as CSV/JSON from Settings.
 
 ## 7. Audio and speech plan (not built for v1)
+> **Audio is on hold** (2026-11-07). See [S1 spike note](spikes/S1-audio.md) for what was learned and where to restart.
+
 Interfaces exist from the start so games can depend on them:
 ```ts
 interface AudioProvider { preload(ids: string[]): Promise<void>; speak(id: string): Promise<void> }

@@ -1,5 +1,7 @@
 # Uzbekible
 
+**Play Juft v1: <https://xferguson.github.io/Uzbekible/>** (installable PWA, works offline).
+
 Games that make Uzbek happen. Uzbekible is a phone-first PWA of arcade-style games that use Uzbek as the
 medium of play, styled after the blue-and-white tilework of Samarkand, Bukhara and Khiva. It is built to explore one
 question: *with intermediate Turkish, what is the fastest path to Uzbek?*

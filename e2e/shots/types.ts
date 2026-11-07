@@ -35,7 +35,10 @@ export interface Driver {
   /** Moves the frozen clock forward, firing timers and intervals on the way. */
   advance(ms: number): Promise<void>;
   /** Advances in small steps until `done()` holds; throws after `maxMs` of app time. */
-  advanceUntil(done: () => Promise<boolean>, opts?: { stepMs?: number; maxMs?: number }): Promise<void>;
+  advanceUntil(
+    done: () => Promise<boolean>,
+    opts?: { stepMs?: number; maxMs?: number },
+  ): Promise<void>;
   /** Clicks the button with this accessible name (string = exact, RegExp = pattern). */
   tap(name: string | RegExp): Promise<void>;
   /** Home → the game's level map, via its picker button (the game's Uzbek title). */

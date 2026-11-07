@@ -8,7 +8,11 @@ import type { Driver, OpenOptions } from './types.ts';
 
 export const SETTINGS_KEY = 'uzbekible:v1:settings';
 export const progressKey = (gameId: string) => `uzbekible:v1:progress:${gameId}`;
-const DEFAULT_SETTINGS = { languages: ['tr', 'ru', 'fa', 'ar'], script: 'uz-Latn', theme: 'system' };
+const DEFAULT_SETTINGS = {
+  languages: ['tr', 'ru', 'fa', 'ar'],
+  script: 'uz-Latn',
+  theme: 'system',
+};
 /** Fixed start time, so dates and seeds derived from the clock repeat between runs. */
 const T0 = Date.UTC(2026, 0, 1);
 const COUNTDOWN_MS = 3_000;
@@ -56,7 +60,8 @@ export function createDriver(page: Page, appUrl: string): Driver {
     async advanceUntil(done, { stepMs = TICK_MS, maxMs = 10_000 } = {}) {
       // Small steps, so a timer the app registers after a step (React effects run after paint) still fires.
       for (let t = 0; !(await done()); t += stepMs) {
-        if (t >= maxMs) throw new StateCheckError(`condition not met within ${maxMs} ms of app time`);
+        if (t >= maxMs)
+          throw new StateCheckError(`condition not met within ${maxMs} ms of app time`);
         await page.clock.runFor(stepMs);
       }
     },

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | E Juft engine |
 | Read first | `docs/games/01-juft.md`, `docs/architecture.md` (rows you use) (other docs only if needed) |
 | Depends on | [C5](C5-content-schema-pipeline.md), [K7](K7-core-scheduler.md), [K8](K8-core-similarity.md), [K4](K4-core-scoring-difficulty.md), [Q2](Q2-content-transparency.md), [Q7](Q7-game-contract.md) |

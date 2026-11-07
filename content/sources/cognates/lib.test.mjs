@@ -111,9 +111,18 @@ test('confidenceFor: two sources high, one medium, none low; false friends never
   assert.equal(confidenceFor('shared-arabic', { meaning: false, origin: true }), 'medium');
   assert.equal(confidenceFor('shared-arabic', { meaning: false, origin: false }), 'low');
   // For a false friend the dictionary must NOT pair the two words (meanings differ).
-  assert.equal(confidenceFor('false-friend', { meaning: false, otherMeaning: true, origin: true }), 'medium');
-  assert.equal(confidenceFor('false-friend', { meaning: true, otherMeaning: true, origin: true }), 'low');
-  assert.equal(confidenceFor('false-friend', { meaning: false, otherMeaning: false, origin: true }), 'low');
+  assert.equal(
+    confidenceFor('false-friend', { meaning: false, otherMeaning: true, origin: true }),
+    'medium',
+  );
+  assert.equal(
+    confidenceFor('false-friend', { meaning: true, otherMeaning: true, origin: true }),
+    'low',
+  );
+  assert.equal(
+    confidenceFor('false-friend', { meaning: false, otherMeaning: false, origin: true }),
+    'low',
+  );
 });
 
 test('trInfinitive follows vowel harmony', () => {
@@ -185,7 +194,13 @@ test('validateItems reports duplicate ids, bad enums, missing ref, wrong scripts
 });
 
 test('RELATIONS lists the schema relations used by C2', () => {
-  for (const r of ['turkic-cognate', 'shared-arabic', 'shared-persian', 'other-loan', 'false-friend']) {
+  for (const r of [
+    'turkic-cognate',
+    'shared-arabic',
+    'shared-persian',
+    'other-loan',
+    'false-friend',
+  ]) {
     assert.ok(RELATIONS.includes(r), r);
   }
 });

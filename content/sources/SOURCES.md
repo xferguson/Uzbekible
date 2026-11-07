@@ -31,6 +31,18 @@ text. Two inputs are GPL-3.0 (`kaharjan` for one of three rank signals, Apertium
 are CC BY-SA 4.0 (they supply the POS label for 547 of the 1000 rows). Word-frequency facts are generally not
 protected expression, but attribution is kept here. Flagged for the user in the C1 PR.
 
+## Turkish partners (task C2)
+
+| key | source | URL | license | retrieved | pinned version | used for |
+|---|---|---|---|---|---|---|
+| `apertium-tur-uzb` | Apertium Turkish–Uzbek bilingual dictionary (`apertium-tur-uzb.tur-uzb.dix`, 13,100 entries) | https://github.com/apertium/apertium-tur-uzb | GPL-3.0 | 2026-11-07 | commit `a96a28b669730a36f74adfd424fc6d24203dcdc4`, file sha256 `92d71a82c20a65ee…` | meaning evidence: does the dictionary pair the Uzbek lemma with the Turkish word? |
+| `wiktionary` (via EtymDB) | EtymDB 2.1 (Fourrier & Sagot, LREC 2020): etymology links extracted from English Wiktionary | https://github.com/clefourrier/EtymDB | CC BY-SA 4.0 | 2026-11-07 | commit `878e5a55627048c6ed414a7b23739fe2385bd723` | origin evidence: Uzbek and Turkish ancestor chains (Proto-Turkic, Arabic, Persian, European) |
+
+Curator judgement (`curated.tsv`) picks each partner and its relation; the two sources above only set the
+confidence (see [`cognates/README.md`](cognates/README.md)). Not reachable from the build environment: Wiktionary
+itself, kaikki.org, Nişanyan Sözlük and the StarLing (Starostin) databases. Allowing them would let a later
+revision raise `low` items. Derived facts only (pairings, origin classes) are stored, not dictionary text.
+
 ---
 
 ## Method: `uz-freq-top1000.csv` (task C1)

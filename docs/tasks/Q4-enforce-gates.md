@@ -6,7 +6,6 @@
 | Lane | Q Quality |
 | Read first | `CLAUDE.md` (Non-negotiables), `docs/architecture.md` (Layers, Quality gates) (other docs only if needed) |
 | Depends on | none |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `pr-flow` |
 | Branch | `task/Q4-enforce-gates` |
 
@@ -32,8 +31,3 @@ Turn rules that are only written down into checks: the determinism ban (non-nego
 
 ## Note
 The Prettier pass touches many files: merge it while few branches are open; other branches pick it up with a plain `git merge origin/main`.
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task Q4 (Enforce the unwritten gates: determinism lint, core in node env, Prettier in CI). Read CLAUDE.md and docs/tasks/Q4-enforce-gates.md first, and follow the skills it lists (tdd-task, pr-flow). Confirm that its dependencies (none) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

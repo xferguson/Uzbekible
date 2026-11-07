@@ -5,7 +5,6 @@
 | Status | todo |
 | Lane | <lane> |
 | Depends on | <task links or none> |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Read first | <only the docs/sections this task needs> |
 | Skills | `tdd-task`, `pr-flow`, ... |
 | Branch | `task/<ID>-<slug>` |
@@ -23,7 +22,5 @@
 ## Files likely touched
 - `...`
 
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task <ID> (<Title>). Read CLAUDE.md and docs/tasks/<file> first, and follow the skills it lists. Confirm that its dependencies are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```
+## Notes for next tasks
+<optional: gotchas found while doing the task, e.g. Node import quirks>

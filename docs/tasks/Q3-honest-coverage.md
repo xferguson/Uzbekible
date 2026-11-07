@@ -6,7 +6,6 @@
 | Lane | Q Quality |
 | Read first | `docs/architecture.md` (Quality gates) (other docs only if needed) |
 | Depends on | none |
-| Precondition | [P0](README.md#p0-precondition) skills/docs PR merged to `main` |
 | Skills | `tdd-task`, `pr-flow` |
 | Branch | `task/Q3-honest-coverage` |
 
@@ -25,8 +24,3 @@ Make the coverage gate measure the code it claims to. `vite.config.ts` excludes 
 ## Files likely touched
 - `vite.config.ts`
 - `src/core/{clock,storage,text,motif,learning-log}/*.test.ts`
-
-## Session prompt (copy-paste)
-```
-Work on Uzbekible task Q3 (Honest coverage: measure index.ts files, per-file core thresholds). Read CLAUDE.md and docs/tasks/Q3-honest-coverage.md first, and follow the skills it lists (tdd-task, pr-flow). Confirm that its dependencies (none) are merged to main before you start; if one isn't, stop and tell me. Use red-green TDD, keep to this task's scope, open a draft PR using the template, mark it ready when the fast gate passes, and set the Status row in the task file.
-```

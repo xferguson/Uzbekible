@@ -12,7 +12,7 @@ shell  ──►  games/*  ──►  ui  ──►  design
 ```
 - `core` imports only `core` (no React, no DOM except adapters behind interfaces).
 - `design` imports nothing from the app. `ui` imports `core` and `design`, never `games` or `shell`.
-- `games/<a>` never imports `games/<b>`. Games import `core`, `ui`, `design`, and `games/types`.
+- `games/<a>` never imports `games/<b>`. Games import `core`, `ui`, `design`, `games/types` and `games/shared` (helpers several games use, e.g. `chooseSource`; it imports only `core` and `games/types`).
 - `content/scripts` imports `core` only (shared schema and text rules).
 
 ## Shared core modules

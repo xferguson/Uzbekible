@@ -3,17 +3,12 @@
  * Content is injected (`createJuftLevels(items)`) so the generator stays pure and testable; the game definition
  * wires in the loaded pack. All randomness comes from `ctx.rng`.
  */
-import {
-  boardPool,
-  compareByFrequency,
-  type Confidence,
-  type Item,
-  type SourceForm,
-} from '@core/content/index.ts';
+import { boardPool, compareByFrequency, type Item, type SourceForm } from '@core/content/index.ts';
 import { paramsFor, type DifficultyConfig } from '@core/difficulty/index.ts';
 import { sample } from '@core/random/index.ts';
 import { DEFAULT_REVIEW_RATIO, nextItems } from '@core/scheduler/index.ts';
 import type { SourceLang } from '@core/text/index.ts';
+import { chooseSource } from '../shared/source.ts';
 import type { LevelContext, LevelSpec } from '../types.ts';
 import { CHAPTER_SIZE, MAX_PAIRS, juftDifficulty, type JuftParamKey } from './difficulty.config.ts';
 
@@ -44,28 +39,6 @@ const HARD_WINDOW = 4;
 const LIVES = 3;
 /** Level at which the frequency window reaches the end of the pool. */
 const PROGRESS_LEVELS = 105;
-const LANG_ORDER: readonly SourceLang[] = ['tr', 'fa', 'ru', 'ar'];
-const CONFIDENCE_RANK: Record<Confidence, number> = { high: 0, medium: 1, low: 2 };
-
-function bestOf(forms: readonly SourceForm[]): SourceForm {
-  return [...forms].sort(
-    (a, b) => CONFIDENCE_RANK[a.confidence] - CONFIDENCE_RANK[b.confidence],
-  )[0]!;
-}
-
-/** One source form among the enabled languages: Turkish when there is one, else a random enabled language. */
-function chooseSource(
-  item: Item,
-  langs: ReadonlySet<SourceLang>,
-  rng: LevelContext['rng'],
-): SourceForm {
-  const usable = item.sources.filter((s) => langs.has(s.lang) && s.relation !== 'false-friend');
-  const tr = usable.filter((s) => s.lang === 'tr');
-  if (tr.length > 0) return bestOf(tr);
-  const present = LANG_ORDER.filter((l) => usable.some((s) => s.lang === l));
-  const lang = present.length === 1 ? present[0]! : present[rng.int(0, present.length - 1)]!;
-  return bestOf(usable.filter((s) => s.lang === lang));
-}
 
 function transparencyOf(item: Item, langs: ReadonlySet<SourceLang>): number {
   const scores = [...langs]

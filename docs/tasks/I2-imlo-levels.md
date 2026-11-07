@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | I Imlo |
 | Depends on | [I1](I1-core-text-source-letters.md), [I5](I5-game-modes.md) |
 | Read first | `docs/games/06-imlo.md` ("Difficulty modes", "Level progression"), `src/games/juft/levels.ts` (`chooseSource`, `band`) |

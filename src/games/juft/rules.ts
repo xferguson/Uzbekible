@@ -2,8 +2,8 @@
  * Juft match rules: a pure reducer for `core/session`. Both columns hold the same pair ids (a tile's id is its
  * pair's id), so two tiles match exactly when their ids are equal.
  */
-import { shuffle, type Rng } from '@core/random/index.ts';
-import type { Rules, RulesEvent } from '@core/session/index.ts';
+import { shuffle, type Rng } from '../../core/random/index.ts';
+import type { Rules, RulesEvent } from '../../core/session/index.ts';
 
 export type Side = 'left' | 'right';
 

@@ -14,7 +14,7 @@ import tseslint from 'typescript-eslint';
 // - core imports only core.
 // - design imports only design. ui imports core and design, never games or shell.
 // - games/<a> never imports games/<b>. Games import core, ui, design and games/types.
-// - scripts (repo tooling) and content/scripts (content pipeline) import core only.
+// - scripts (repo tooling; the sim also imports games) and content/scripts (content pipeline) import core only.
 const elements = [
   { type: 'core', pattern: 'src/core' },
   { type: 'design', pattern: 'src/design' },
@@ -105,7 +105,8 @@ export default tseslint.config(
             },
             {
               from: { element: { type: 'scripts' } },
-              allow: { to: { element: { types: ['scripts', 'core'] } } },
+              // The balance simulator (scripts/sim.ts) registers each game's sim harness.
+              allow: { to: { element: { types: ['scripts', 'core', 'game'] } } },
             },
             {
               from: { element: { type: 'content-scripts' } },

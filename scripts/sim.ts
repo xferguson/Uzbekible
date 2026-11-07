@@ -1,7 +1,8 @@
 // npm run sim -- --game <id> --levels a-b --profiles novice,b1-turkish,expert --runs n --seed s
 // Prints a markdown balance table. Games register their SimGame in GAMES below as they land.
 import type { SimGame } from '../src/core/sim/index.ts';
-import { runCli } from './sim-cli.ts';
+import { runCli, type SimGameSource } from './sim-cli.ts';
+import { juftSimGame } from '../src/games/juft/balance.ts';
 
 type DemoState = { done: number };
 type DemoAction = { correct: boolean };
@@ -38,8 +39,9 @@ const demo: SimGame<DemoState, DemoAction> = {
   }),
 };
 
-const GAMES: Record<string, SimGame<unknown, unknown>> = {
+const GAMES: Record<string, SimGameSource> = {
   demo: demo as SimGame<unknown, unknown>,
+  juft: juftSimGame as SimGameSource,
 };
 
 try {

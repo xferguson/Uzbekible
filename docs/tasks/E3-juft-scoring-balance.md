@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | E Juft engine |
 | Read first | `docs/games/01-juft.md`, `docs/architecture.md` (rows you use) (other docs only if needed) |
 | Depends on | [K4](K4-core-scoring-difficulty.md), [E2](E2-juft-rules.md), [K10](K10-core-sim.md), [Q5](Q5-game-event-vocabulary.md), [Q6](Q6-sim-scan-time.md) |

@@ -17,7 +17,7 @@ PWA of arcade-style games that use Uzbek as the medium of play: **a game, not a 
 
 ## Non-negotiables
 1. **Red-green TDD** (`tdd-task`). **One task per PR**, merged into `main` through a PR (`pr-flow`).
-2. **Merging:** the agent merges its own PR once CI is green. 🔒 tasks (D1, D2, C6, S1, S2, R1) wait for the user's
+2. **Merging:** the agent merges its own PR once CI is green. 🔒 tasks (D1, D2, J4, C6, S1, S2, R1) wait for the user's
    explicit approval in the session.
 3. **Before every push, merge the latest `main` into your branch** (`git fetch origin main && git merge origin/main`),
    resolve conflicts, re-run the fast gate. Merge, don't rebase or force-push.
@@ -25,7 +25,7 @@ PWA of arcade-style games that use Uzbek as the medium of play: **a game, not a 
    tiles, HUD, map, results in `src/ui/`. Games add only rules and layout (boundaries: `docs/architecture.md`).
 5. **Deterministic tests:** inject `Clock` and `Rng`; no `Date.now()`, `Math.random()` or real timers in tests.
    Coverage: `src/core` ≥ 95%, `src/ui` ≥ 80%; fast-check for invariants.
-6. **Product rules:** no English on game boards (only a points-costing long-press hint). Uzbek shows in Latin or
+6. **Product rules:** no English on game boards (only a points-costing long-press hint; exception: the Soxta clue, `docs/games/05-soxta.md`). Uzbek shows in Latin or
    Cyrillic (player setting); other languages always in their native script (RTL for Persian/Arabic). No accounts;
    state in localStorage. Visual identity = Uzbek tilework, and the motif serves the mechanics.
 7. **Text** goes only through `src/core/text` (`uzbek-text-rules`).

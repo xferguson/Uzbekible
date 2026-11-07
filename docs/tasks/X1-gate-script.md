@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | X Harness |
 | Read first | `CLAUDE.md` (Fast gate), `.claude/skills/tdd-task/SKILL.md` §5 (other docs only if needed) |
 | Depends on | none |

@@ -20,7 +20,9 @@
     "content:build": "node --experimental-strip-types --no-warnings content/scripts/cli.ts build",
     "tasks": "node scripts/tasks.mjs",
     "sim": "node --experimental-strip-types --no-warnings scripts/sim.ts",
-    "icons:build": "node --experimental-strip-types --no-warnings scripts/icons/build.mjs"
+    "icons:build": "node --experimental-strip-types --no-warnings scripts/icons/build.mjs",
+    "gate": "node scripts/gate.mjs",
+    "gate:changed": "vitest run --changed origin/main --reporter=dot"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -34,6 +36,7 @@
     "@vitejs/plugin-react": "^6.2.1",
     "@vitest/coverage-v8": "^5.1.0",
     "eslint": "^10.14.0",
+    "eslint-formatter-compact": "^9.0.1",
     "eslint-import-resolver-typescript": "^4.4.5",
     "eslint-plugin-boundaries": "^7.4.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",

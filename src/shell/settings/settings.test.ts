@@ -1,8 +1,11 @@
+import { createProgressStore } from '../progress';
 import { createMemoryBackend } from '@core/storage';
 import {
   applyTheme,
   createSettingsStore,
   downloadFile,
+  exportLog,
+  resetProgress,
   setScript,
   setTheme,
   toggleLanguage,
@@ -80,5 +83,27 @@ describe('downloadFile', () => {
     expect(a.download).toBe('log.csv');
     expect(a.href).toBe('blob:x');
     expect(click).toHaveBeenCalledOnce();
+  });
+});
+
+describe('exportLog / resetProgress', () => {
+  it('exports the log as CSV or JSON through downloadFile', () => {
+    const calls: [string, string, string][] = [];
+    const log = { exportCsv: () => 'csv', exportJson: () => '{}' };
+    exportLog(log, 'csv', (n, c, t) => calls.push([n, c, t]));
+    exportLog(log, 'json', (n, c, t) => calls.push([n, c, t]));
+    expect(calls).toEqual([
+      ['uzbekible-log.csv', 'csv', 'text/csv'],
+      ['uzbekible-log.json', '{}', 'application/json'],
+    ]);
+  });
+
+  it('resets every progress store to its default and clears the log', () => {
+    const a = createProgressStore('juft', { backend: createMemoryBackend() });
+    a.set({ unlocked: 5, best: {} });
+    const clear = vi.fn();
+    resetProgress([a], { clear });
+    expect(a.get()).toEqual({ unlocked: 1, best: {} });
+    expect(clear).toHaveBeenCalledOnce();
   });
 });

@@ -183,10 +183,14 @@ _(no exports yet)_
 
 ## `ui`
 
+- `Announcer({ message }: { message: string; }): import("react").JSX.Element` - Visually hidden polite live region.
+- `AnnouncerProvider({ children }: { children: ReactNode; }): import("react").JSX.Element` - Hosts the single shared live region and lets descendants announce via `useAnnounce`.
 - `Combo({ count, script }: Common & { count: number; }): import("react").JSX.Element | null` - Consecutive-correct streak; shown from 2 up.
 - `Countdown({ remainingMs, script }: Common & { remainingMs: number; }): import("react").JSX.Element`
 - `LevelBadge({ level, script }: Common & { level: number; }): import("react").JSX.Element`
 - `Lives({ lives, max, script }: Common & { lives: number; max: number; }): import("react").JSX.Element` - One glazed tile per life; a lost life shows crack lines as well as a paler glaze.
+- `LongPressHandlers` { onPointerDown: (e: PointerEvent) => void; onPointerMove: (e: PointerEvent) => void; onPointerUp: () => void; onPointerLeave: () => void; onPointerCancel: () => void; onContextMenu: (e: MouseEvent…
+- `LongPressOptions` { ms?: number; tolerance?: number; clock?: FrameClock }
 - `PatternBg({ strength, cell, className }: PatternBgProps): import("react").JSX.Element` - Star-and-cross line lattice that fills its container. Decorative, low contrast.
 - `PatternBgProps` { strength?: number; cell?: number; className?: string }
 - `PauseOverlay({ onResume, onMap, script, }: Common & { onResume: () => void; onMap: () => void; }): import("react").JSX.Element` - Covers the screen and replaces the board, so a pause cannot be used to study the tiles.
@@ -196,7 +200,19 @@ _(no exports yet)_
 - `RosetteBandProps` { width?: number; height?: number; className?: string }
 - `Score({ value, script }: Common & { value: number; }): import("react").JSX.Element`
 - `Script` = `'latn' | 'cyrl'` - Uzbek script a label is shown in.
+- `ScriptProvider({ script, children }: { script: UzScript; children: ReactNode; }): import("react").JSX.Element` - Supplies the player's Uzbek script setting to every `UzText` below.
+- `SourceText({ lang, text, className }: SourceTextProps): import("react").JSX.Element` - Text in a source language's native script (RTL for Persian/Arabic).
+- `SourceTextProps` { lang: SourceLang; text: string; className?: string }
 - `Star8({ size, variant, className }: Star8Props): import("react").JSX.Element` - The signature star: {8/2} khatam, {8/3} turquoise interlace and a gold octagon centre. Decorative.
 - `Star8Props` { size?: number; variant?: 'full' | 'outline'; className?: string }
+- `Tile({ label, state, shape, onSelect, pressHandlers, children, }: TileProps): import("react").JSX.Element` - The shared game tile: states, rect or hex shape, keyboard (Enter/Space), never colour-only.
+- `TileProps` { label: string; state?: TileState; shape?: TileShape; onSelect?: () => void; pressHandlers?: Partial<LongPressHandlers>; children?: ReactNode }
+- `TileShape` = `'rect' | 'hex'`
+- `TileState` = `'idle' | 'selected' | 'matched' | 'wrong' | 'cracked' | 'disabled'`
 - `Timer({ ms, script }: Common & { ms: number; }): import("react").JSX.Element`
+- `UzText({ latn, cyrl, script, className }: UzTextProps): import("react").JSX.Element` - Uzbek text in the player's chosen script, with correct lang/dir/font.
+- `UzTextProps` { latn: string; cyrl?: string | undefined; script?: UzScript; className?: string }
 - `formatTime(ms: number): string` - m:ss, rounded down.
+- `useAnnounce(): (message: string) => void`
+- `useLongPress(onLongPress: () => void, options?: LongPressOptions): LongPressHandlers` - Touch/mouse/pen long press; fires `onLongPress` once per hold, cancels on move, release or leave.
+- `useUzScript(): UzScript`

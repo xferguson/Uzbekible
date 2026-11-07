@@ -2,11 +2,13 @@ import { type ReactNode } from 'react';
 import { scriptMeta, type TextLang } from '@core/text';
 import { colors, type ThemeName } from '@design/tokens';
 import { PatternBg, RosetteBand, Star8 } from '@ui/motif';
+import { Tile, type TileState } from '@ui/Tile';
 import { Combo, Countdown, LevelBadge, Lives, ResultsScreen, Score, Timer } from '@ui/index';
 import styles from './Gallery.module.css';
 
 export { isGalleryPath } from './route';
 const THEMES: ThemeName[] = ['light', 'dark'];
+const TILE_STATES: TileState[] = ['idle', 'selected', 'matched', 'wrong', 'cracked', 'disabled'];
 
 const SPECIMENS: [TextLang, string][] = [
   ['uz-Latn', 'Oʻzbekiston: gʻisht, qalʼa, shahar'],
@@ -69,6 +71,18 @@ export function Gallery() {
               );
             })}
           </ul>
+        )}
+      </Entry>
+
+      <Entry title="Tile">
+        {() => (
+          <div className={styles.row}>
+            {(['rect', 'hex'] as const).flatMap((shape) =>
+              TILE_STATES.map((state) => (
+                <Tile key={`${shape}-${state}`} shape={shape} state={state} label="gʻisht" />
+              )),
+            )}
+          </div>
         )}
       </Entry>
 

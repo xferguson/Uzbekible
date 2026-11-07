@@ -18,6 +18,12 @@ describe('dev gallery', () => {
     expect(document.querySelectorAll('[data-theme="dark"] svg').length).toBeGreaterThan(0);
   });
 
+  it('shows every tile state in both shapes', () => {
+    render(<Gallery />);
+    expect(document.querySelectorAll('button[data-shape="hex"]')).toHaveLength(12);
+    expect(document.querySelectorAll('button[data-shape="rect"]')).toHaveLength(12);
+  });
+
   it('defines every font stack that scriptMeta refers to', () => {
     const langs: TextLang[] = ['uz-Latn', 'uz-Cyrl', 'tr', 'ru', 'fa', 'ar'];
     for (const lang of langs) {

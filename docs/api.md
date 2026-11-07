@@ -112,21 +112,25 @@ _(no exports yet)_
 
 ## `core/session`
 
+- `GameEvent` { type: string } - A game's own typed events (e.g. tile ids for the UI); they pass through the session untouched.
 - `Phase` = `'ready' | 'countdown' | 'playing' | 'paused' | 'won' | 'lost'`
-- `Rules<S, A>` { init: S; reduce(state: S, action: A): { state: S; events: readonly RulesEvent[] } }
-- `RulesEvent` { type: string; [key: string]: unknown } - Events a rules reducer may emit. `lifeLost` and `complete` drive the session; others pass through.
-- `Session<S, A>` { getState(): SessionState<S>; start(): void; pause(): void; resume(): void; dispatch(action: A): void; tick(): void; subscribe(listener: (event: SessionEvent) => void): () => void }
-- `SessionEvent` = `| { type: 'phase'; phase: Phase; at: number } | (RulesEvent & { at: number })`
-- `SessionOptions<S, A>` { rules: Rules<S, A>; lives: number; countdownMs: number; clock: Clock }
+- `Rules<S, A, E extends GameEvent = never>` { init: S; reduce(state: S, action: A): { state: S; events: readonly RulesEvent<E>[] } }
+- `RulesEvent<E extends GameEvent = never>` = `StandardEvent | E` - Events a rules reducer may emit: the standard ones plus the game's own `E`.
+- `ScoreTally` = `{ mistakes: number; hints: number; combos: number }` - The score-input counts an event stream implies. Time and multipliers come from elsewhere.
+- `Session<S, A, E extends GameEvent = never>` { getState(): SessionState<S>; start(): void; pause(): void; resume(): void; dispatch(action: A): void; tick(): void; subscribe(listener: (event: SessionEvent<E>) => void):…
+- `SessionEvent<E extends GameEvent = never>` = `{ type: 'phase'; phase: Phase; at: number } | (RulesEvent<E> & { at: number })`
+- `SessionOptions<S, A, E extends GameEvent = never>` { rules: Rules<S, A, E>; lives: number; countdownMs: number; clock: Clock }
 - `SessionState<S>` { phase: Phase; lives: number; elapsedMs: number; game: S }
-- `createSession<S, A>(opts: SessionOptions<S, A>): Session<S, A>`
+- `StandardEvent` = `| { type: 'lifeLost' } | { type: 'complete' } | { type: 'mistake' } | { type: 'hint' } | { type: 'combo' }` - Events every game shares. `lifeLost` and `complete` drive the session; all five feed `ta…
+- `createSession<S, A, E extends GameEvent = never>(opts: SessionOptions<S, A, E>): Session<S, A, E>`
+- `tallyScoreInput(events: readonly GameEvent[]): ScoreTally`
 
 ## `core/sim`
 
 - `CliArgs` { game: string; levels: number[]; profiles: string[]; runs: number; seed: number }
 - `LevelRow` { level: number; profile: string; runs: number; completionRate: number; medianTimeMs: number | null; medianScore: number; stars: [number, number, number, number] }
 - `PROFILES`: `Record<string, SimProfile>`
-- `SimGame<S, A>` { id: string; scoring: ScoringConfig; lives(level: number): number; countdownMs: number; createRules(level: number): Rules<S, A>; nextStep(state: S, level: number, rng: Rng): SimStep<A> } - The slice o…
+- `SimGame<S, A>` { id: string; scoring: ScoringConfig; lives(level: number): number; countdownMs: number; createRules(level: number): Rules<S, A, GameEvent>; nextStep(state: S, level: number, rng: Rng): SimStep<A> } - …
 - `SimOptions<S, A>` { game: SimGame<S, A>; profiles: readonly (string | SimProfile)[]; levels: readonly number[]; runs: number; seed: number; maxActions?: number }
 - `SimProfile` { name: string; accuracy: { low: number; high: number }; responseMs: { median: number; spread: number } }
 - `SimStep<A>` { transparency: number; correct: A; wrong: A } - What the bot faces next: how transparent the item is (0..1) and the two actions it can take.

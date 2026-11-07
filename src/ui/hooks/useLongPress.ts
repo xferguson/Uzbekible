@@ -20,7 +20,10 @@ export interface LongPressHandlers {
 }
 
 /** Touch/mouse/pen long press; fires `onLongPress` once per hold, cancels on move, release or leave. */
-export function useLongPress(onLongPress: () => void, options: LongPressOptions = {}): LongPressHandlers {
+export function useLongPress(
+  onLongPress: () => void,
+  options: LongPressOptions = {},
+): LongPressHandlers {
   const { ms = 500, tolerance = 10, clock = systemClock } = options;
   const stop = useRef<(() => void) | undefined>(undefined);
   const origin = useRef<{ x: number; y: number } | undefined>(undefined);

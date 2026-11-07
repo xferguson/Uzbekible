@@ -26,7 +26,14 @@ const CUES: Record<Exclude<TileState, 'idle'>, [string, string]> = {
 };
 
 /** The shared game tile: states, rect or hex shape, keyboard (Enter/Space), never colour-only. */
-export function Tile({ label, state = 'idle', shape = 'rect', onSelect, pressHandlers, children }: TileProps) {
+export function Tile({
+  label,
+  state = 'idle',
+  shape = 'rect',
+  onSelect,
+  pressHandlers,
+  children,
+}: TileProps) {
   const descId = useId();
   const inert = state === 'disabled' || state === 'matched';
   const cue = state === 'idle' ? undefined : CUES[state];

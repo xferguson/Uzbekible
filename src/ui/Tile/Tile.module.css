@@ -14,7 +14,9 @@
   cursor: pointer;
   touch-action: manipulation;
   user-select: none;
-  transition: background-color 120ms, transform 120ms;
+  transition:
+    background-color 120ms,
+    transform 120ms;
 }
 .tile[data-shape='hex'] {
   border-radius: 0;

@@ -10,7 +10,12 @@ export interface SourceTextProps {
 export function SourceText({ lang, text, className }: SourceTextProps) {
   const meta = scriptMeta(lang);
   return (
-    <span lang={meta.bcp47} dir={meta.dir} style={{ fontFamily: meta.fontStack }} className={className}>
+    <span
+      lang={meta.bcp47}
+      dir={meta.dir}
+      style={{ fontFamily: meta.fontStack }}
+      className={className}
+    >
       {text}
     </span>
   );

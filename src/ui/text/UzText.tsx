@@ -17,7 +17,12 @@ export function UzText({ latn, cyrl, script, className }: UzTextProps) {
   const meta = scriptMeta(active);
   const text = active === 'uz-Cyrl' ? (cyrl ?? latnToCyrl(latn)) : latn;
   return (
-    <span lang={meta.bcp47} dir={meta.dir} style={{ fontFamily: meta.fontStack }} className={className}>
+    <span
+      lang={meta.bcp47}
+      dir={meta.dir}
+      style={{ fontFamily: meta.fontStack }}
+      className={className}
+    >
       {text}
     </span>
   );

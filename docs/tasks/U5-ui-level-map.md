@@ -5,7 +5,7 @@
 | Status | done |
 | Lane | F UI |
 | Read first | `docs/design/brief.md`, `docs/architecture.md` (Shared UI), `docs/games/01-juft.md` (other docs only if needed) |
-| Screens owned | `map-early`, `map-late` |
+| Screens owned | `juft-map-early`, `juft-map-late` |
 | Depends on | [D2](D2-juft-mockups.md), [U1](U1-design-tokens-motif-ui.md), [K5](K5-core-storage.md) |
 | Skills | `ui-component`, `tdd-task`, `pr-flow` |
 | Branch | `task/U5-ui-level-map` |

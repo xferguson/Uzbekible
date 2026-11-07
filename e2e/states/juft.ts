@@ -55,7 +55,7 @@ function playMsFor(stars: 1 | 2 | 3): number {
 function results(stars: 1 | 2 | 3): ScreenState {
   const waitMs = playMsFor(stars);
   return {
-    id: `results-${stars}`,
+    id: `juft-results-${stars}`,
     game: 'juft',
     title: `Results: ${stars} star${stars > 1 ? 's' : ''}, new best`,
     async reach(d) {
@@ -77,7 +77,7 @@ function results(stars: 1 | 2 | 3): ScreenState {
 
 export const juftStates: ScreenState[] = [
   {
-    id: 'map-early',
+    id: 'juft-map-early',
     game: 'juft',
     title: 'Level map, early: Minora (levels 16–30), some stars',
     async reach(d) {
@@ -92,7 +92,7 @@ export const juftStates: ScreenState[] = [
     },
   },
   {
-    id: 'map-late',
+    id: 'juft-map-late',
     game: 'juft',
     title: 'Level map, late: Registon (levels 106–120)',
     async reach(d) {
@@ -104,7 +104,7 @@ export const juftStates: ScreenState[] = [
     },
   },
   {
-    id: 'ready',
+    id: 'juft-ready',
     game: 'juft',
     title: 'Ready: the level has opened, countdown at 3',
     async reach(d) {
@@ -114,7 +114,7 @@ export const juftStates: ScreenState[] = [
     },
   },
   {
-    id: 'countdown',
+    id: 'juft-countdown',
     game: 'juft',
     title: 'Countdown: mid 3-2-1',
     async reach(d) {
@@ -124,37 +124,37 @@ export const juftStates: ScreenState[] = [
     },
   },
   {
-    id: 'board-1',
+    id: 'juft-board-1',
     game: 'juft',
     title: 'Board, 1 pair (hard-pair level 5)',
     reach: (d) => board(d, 5, 1),
   },
   {
-    id: 'board-3',
+    id: 'juft-board-3',
     game: 'juft',
     title: 'Board, 3 pairs (level 9)',
     reach: (d) => board(d, 9, 3),
   },
   {
-    id: 'board-6',
+    id: 'juft-board-6',
     game: 'juft',
     title: 'Board, 6 pairs (level 29)',
     reach: (d) => board(d, 29, 6),
   },
   {
-    id: 'board-8',
+    id: 'juft-board-8',
     game: 'juft',
     title: 'Board, 8 pairs, mixed source languages (level 59)',
     reach: (d) => board(d, 59, 8),
   },
   {
-    id: 'board-12',
+    id: 'juft-board-12',
     game: 'juft',
     title: 'Board, 12 pairs (Registon, level 106)',
     reach: (d) => board(d, 106, 12),
   },
   {
-    id: 'wrong',
+    id: 'juft-wrong',
     game: 'juft',
     title: 'Wrong pair: crack flash and a life lost',
     async reach(d) {
@@ -163,7 +163,7 @@ export const juftStates: ScreenState[] = [
     },
   },
   {
-    id: 'hint',
+    id: 'juft-hint',
     game: 'juft',
     title: 'Long-press hint: the English gloss (the only English on a board)',
     async reach(d) {
@@ -176,7 +176,7 @@ export const juftStates: ScreenState[] = [
     },
   },
   {
-    id: 'pause',
+    id: 'juft-pause',
     game: 'juft',
     title: 'Pause: board hidden, resume or leave',
     async reach(d) {
@@ -188,7 +188,7 @@ export const juftStates: ScreenState[] = [
   results(2),
   results(1),
   {
-    id: 'fail',
+    id: 'juft-fail',
     game: 'juft',
     title: 'Fail: the third strike',
     async reach(d) {

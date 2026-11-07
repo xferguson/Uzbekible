@@ -31,7 +31,7 @@ description: Use when writing or running Playwright e2e tests, taking screenshot
 1. `npm run shots` (≈1 min, cloud session only, never CI) builds the e2e bundle, drives the app into every state in
    `e2e/states.ts` at 360×780, 390×844 and 1280×800, light and dark, reduced motion, fonts loaded, and writes
    `shots/<state>-<width>-<scheme>.png` plus `shots/compare.html` (app left, approved mockup right, missing frames
-   and failed states flagged). Limit it: `-- --states map,results` (ids or prefixes), `-- --games juft`,
+   and failed states flagged). Limit it: `-- --states juft-map,juft-results` (ids or prefixes), `-- --games juft`,
    `-- --url <running server>`.
 2. Look at the shots yourself before claiming the change works. Publish `shots/compare.html` with the `shots/`
    images it references (`*.png`, `frames/*.png`) as an Artifact and link it in the PR (Screenshots section).

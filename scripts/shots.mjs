@@ -4,7 +4,7 @@
  * mockup frame right, from `docs/design/frames.json`). Cloud-session tool: never run in CI.
  *
  *   npm run shots                          all states
- *   npm run shots -- --states map,results  ids or id prefixes (map → map-early, map-late)
+ *   npm run shots -- --states juft-map,juft-results  ids or id prefixes (juft-map → juft-map-early, juft-map-late)
  *   npm run shots -- --games juft          one game's states
  *   npm run shots -- --url http://localhost:5173/Uzbekible/   use a running e2e/dev server instead of building
  */
@@ -40,7 +40,7 @@ export function parseArgs(argv) {
   return out;
 }
 
-/** States kept by the filters: `--states` matches an id or an id prefix (`map` → `map-early`). */
+/** States kept by the filters: `--states` matches an id or an id prefix (`juft-map` → `juft-map-early`). */
 export function selectStates(states, { states: ids, games }) {
   return states.filter(
     (s) =>

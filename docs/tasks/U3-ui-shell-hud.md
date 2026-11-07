@@ -5,7 +5,7 @@
 | Status | done |
 | Lane | F UI |
 | Read first | `docs/design/brief.md`, `docs/architecture.md` (Shared UI), `docs/games/01-juft.md` (other docs only if needed) |
-| Screens owned | `ready`, `countdown`, `pause`, `results-3`, `results-2`, `results-1`, `fail` |
+| Screens owned | `juft-ready`, `juft-countdown`, `juft-pause`, `juft-results-3`, `juft-results-2`, `juft-results-1`, `juft-fail` |
 | Depends on | [U1](U1-design-tokens-motif-ui.md), [K3](K3-core-session.md), [K5](K5-core-storage.md), [K6](K6-core-learning-log.md), [Q7](Q7-game-contract.md) |
 | Skills | `ui-component`, `new-game-scaffold`, `tdd-task`, `pr-flow` |
 | Branch | `task/U3-ui-shell-hud` |

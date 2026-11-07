@@ -10,7 +10,7 @@ Agents must not grade their own visual work. The implementing agent produces the
 a mismatch table. This skill is the checklist and the procedure.
 
 ## Procedure
-1. **Shoot.** `npm run shots` (or `npm run shots -- --states map,results` for the screens you touched). Output:
+1. **Shoot.** `npm run shots` (or `npm run shots -- --states juft-map,juft-results` for the screens you touched). Output:
    `shots/<state>-<width>-<scheme>.png`, approved frames copied to `shots/frames/`, side-by-side page
    `shots/compare.html`. Pairs come from `docs/design/frames.json` (the frame map). Widths 360, 390 (phone frames) and
    1280 (desktop frames); light and dark.
@@ -49,7 +49,7 @@ A state with no mockup frame (flagged on `compare.html`) cannot be graded for fi
 ```
 | Frame | What differs | Severity |
 |---|---|---|
-| map-early · 390 · light | App bar has no rosette band; mockup has one under the bar | major |
+| juft-map-early · 390 · light | App bar has no rosette band; mockup has one under the bar | major |
 ```
 Frame = `<state> · <width> · <scheme>`. One row per distinct difference; merge the same difference across widths or
 schemes into one row ("390/360 · light/dark"). "What differs" says what the app shows and what the mockup shows,

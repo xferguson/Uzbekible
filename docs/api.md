@@ -177,6 +177,7 @@ _(no exports yet)_
 - `latnToCyrl(text: string): string` - Uzbek Latin → Cyrillic. Word-initial `ts` becomes ц; medial ц in loans needs the stored Cyrillic.
 - `normalize(s: string): string` - Unicode NFC.
 - `scriptMeta(lang: TextLang): ScriptMeta` - Direction, BCP-47 tag and font-stack token for a language (use instead of hardcoding `dir`).
+- `sourceLetters(word: string, lang: SourceLang): string[]` - Splits a Turkish, Russian, Persian or Arabic word into game letters (the counterpart of `toLetters`).
 - `toLetters(word: string, script: UzScript): string[]` - Splits a word into game letters. In Latin, sh, ch, ng, oʻ and gʻ are single letters (any apostrophe
 - `toLowerTr(s: string): string` - Turkish-aware lower-casing (I → ı, İ → i).
 - `toUpperTr(s: string): string` - Turkish-aware upper-casing (ı → I, i → İ).

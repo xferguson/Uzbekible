@@ -88,6 +88,27 @@ export function toLetters(word: string, script: UzScript): string[] {
   return out;
 }
 
+const ARABIC_MARKS = /[\u064B-\u065F\u0670\u0640]/gu;
+
+/**
+ * Splits a Turkish, Russian, Persian or Arabic word into game letters (the counterpart of `toLetters`).
+ * NFC first. Turkish is lower-cased with `toLowerTr`, Russian with `toLowerCase` (ё stays distinct from е);
+ * both split per code point, with any stray combining mark kept on the letter before it. Persian and Arabic
+ * drop harakat, superscript alef and tatweel, keep logical order and keep hamza forms (أ إ ؤ ئ آ) as written.
+ */
+export function sourceLetters(word: string, lang: SourceLang): string[] {
+  const nfc = normalize(word);
+  if (lang === 'fa' || lang === 'ar')
+    return Array.from(nfc.replace(ARABIC_MARKS, '').replace(/[\u0654\u0655]/gu, ''));
+  const lowered = normalize(lang === 'tr' ? toLowerTr(nfc) : nfc.toLowerCase());
+  const out: string[] = [];
+  for (const ch of lowered) {
+    if (out.length > 0 && /^\p{M}$/u.test(ch)) out[out.length - 1] += ch;
+    else out.push(ch);
+  }
+  return out;
+}
+
 const VOWELS_LATN = new Set(['a', 'e', 'i', 'o', 'u']);
 const VOWELS_CYRL = new Set([...'аеёэиоуўюя']);
 

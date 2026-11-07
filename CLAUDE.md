@@ -51,5 +51,7 @@ npm run sim -- --game juft --levels 1-30
 ```
 
 ## Branches and commits
+- **Before every push, merge the latest `main` into your branch** (`git fetch origin main && git merge origin/main`),
+  resolve conflicts, and re-run the fast gate. Merge, don't rebase or force-push. See the `pr-flow` skill.
 - Branch: `task/<ID>-<slug>`, or the branch a session is assigned.
 - Commits: Conventional Commits with the task ID, e.g. `feat(core/random): seeded shuffle [K2]`.

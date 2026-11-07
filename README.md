@@ -15,4 +15,7 @@ Open a session and say **"Do <task ID>"** (e.g. "Do D1"). See [docs/tasks/README
 Agents merge their own PRs once CI is green; approval-gated (🔒) tasks wait for your OK.
 
 ## Repository settings required
-- **Pages → Source:** GitHub Actions (once task T01 lands)
+- **Settings → Pages → Source:** GitHub Actions. `.github/workflows/deploy.yml` builds and deploys `main` on every push
+  (and on manual `workflow_dispatch`) to <https://xferguson.github.io/Uzbekible/>.
+- The app is built with `base: '/Uzbekible/'`; if the repository is renamed, update `base`, `start_url` and `scope`
+  in `vite.config.ts`.

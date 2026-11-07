@@ -28,6 +28,12 @@ Not for doing a task (that is `tdd-task`).
 Bad: `docs/architecture.md`. Good: `docs/architecture.md` (the `core/session` row), `docs/games/<game>.md` ("Rules").
 Add only what the task cannot do without. For code the task *calls*, add the `API used` row.
 
+## Frames: assign every one
+When breaking down a game, give every state in `docs/design/frames.json` to exactly one task via its `Screens owned`
+row (state ids in backticks, or `none`), and list those frame PNGs in the UI task's `Read first`. UI acceptance
+criteria include "matches the owned frames at 360/390/1280, light and dark, comparison in the PR".
+`npm run tasks -- frames` (CI) fails on an unowned frame, or one claimed by two unfinished tasks.
+
 ## First red test
 Every task's "Test-first plan" names the **first failing test** (file and what it asserts), plus the invariant to
 property-test if the logic is pure. Docs-only tasks say how they are validated instead.

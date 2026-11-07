@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 // @ts-expect-error plain JS module without types
-import { check, isDone, loadBoard, readyNext, render } from './tasks.mjs';
+import { check, checkFrames, isDone, loadBoard, readyNext, render } from './tasks.mjs';
 
 function fixture(files: Record<string, string>) {
   const dir = mkdtempSync(join(tmpdir(), 'tasks-'));
@@ -70,5 +70,39 @@ describe('task board', () => {
 
   it('the real board is consistent', () => {
     expect(check(loadBoard(join(process.cwd(), 'docs', 'tasks')))).toEqual([]);
+  });
+});
+
+describe('frame ownership', () => {
+  const owned = (status: string, screens: string) =>
+    `# T\n\n| | |\n|---|---|\n| Status | ${status} |\n| Depends on | none |\n| Screens owned | ${screens} |\n`;
+  const states = ['home', 'board-1'];
+  const run = (files: Record<string, string>) =>
+    checkFrames(loadBoard(fixture({ ...files, 'README.md': readme([]) })), states).join('\n');
+
+  it('fails when a frame is claimed by no task', () => {
+    const out = run({ 'A1-a.md': owned('done', '`home`') });
+    expect(out).toMatch(/board-1.*no task/);
+  });
+
+  it('fails when two tasks that are not done claim the same frame', () => {
+    const out = run({
+      'A1-a.md': owned('todo', '`home`, `board-1`'),
+      'B1-b.md': owned('in progress', '`home`'),
+    });
+    expect(out).toMatch(/home.*A1, B1/);
+  });
+
+  it('allows a done task and a later task to claim the same frame; rejects unknown frames', () => {
+    const ok = run({
+      'A1-a.md': owned('done', '`home`, `board-1`'),
+      'B1-b.md': owned('todo', '`home`'),
+    });
+    expect(ok).toBe('');
+    expect(run({ 'A1-a.md': owned('done', '`home`, `board-1`, `nope`') })).toMatch(/nope/);
+  });
+
+  it('treats "none" as no claim', () => {
+    expect(run({ 'A1-a.md': owned('done', 'none') })).toMatch(/home.*no task/);
   });
 });

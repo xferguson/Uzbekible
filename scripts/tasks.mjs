@@ -1,6 +1,7 @@
 // Task board: parses docs/tasks/<ID>-*.md and the README table (plain Node, no dependencies).
 //   node scripts/tasks.mjs              compact table + "Ready next"
 //   node scripts/tasks.mjs check        validate the task files and README (CI)
+//   node scripts/tasks.mjs frames      exit 1 unless every docs/design/frames.json state is owned by one task (CI)
 //   node scripts/tasks.mjs done <ID>    exit 1 unless task <ID> has Status "done" (CI, ready PRs)
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -28,6 +29,7 @@ export function loadBoard(dir) {
       file,
       status: row(text, 'Status') ?? '',
       deps: parseIds(row(text, 'Depends on')),
+      screens: [...(row(text, 'Screens owned') ?? '').matchAll(/`([^`]+)`/g)].map((m) => m[1]),
     });
   }
   let readme = [];
@@ -76,6 +78,29 @@ export function check({ tasks, readmeIds }) {
   return problems;
 }
 
+/** Frame problems: every state in frames.json is claimed, and only once unless the earlier claimants are done. */
+export function checkFrames({ tasks }, states) {
+  const problems = [];
+  const known = new Set(states);
+  for (const t of tasks.values()) {
+    for (const f of t.screens ?? []) {
+      if (!known.has(f))
+        problems.push(`${t.file}: owns frame "${f}", which is not in docs/design/frames.json`);
+    }
+  }
+  for (const f of states) {
+    const owners = [...tasks.values()].filter((t) => (t.screens ?? []).includes(f));
+    if (owners.length === 0)
+      problems.push(`frame "${f}" is claimed by no task (add it to a "Screens owned" row)`);
+    const open = owners.filter((t) => !isDone(t));
+    if (open.length > 1)
+      problems.push(
+        `frame "${f}" is claimed by several unfinished tasks: ${open.map((t) => t.id).join(', ')}`,
+      );
+  }
+  return problems;
+}
+
 export function render(board) {
   const lines = ['ID   Status       Depends on'];
   for (const t of board.tasks.values()) {
@@ -98,6 +123,19 @@ function main(argv) {
     const problems = check(board);
     for (const p of problems) console.error(`error: ${p}`);
     if (problems.length === 0) console.log(`tasks: ${board.tasks.size} task files OK`);
+    return problems.length === 0 ? 0 : 1;
+  }
+  if (cmd === 'frames') {
+    const file = join(
+      dirname(fileURLToPath(import.meta.url)),
+      '..',
+      'docs',
+      'design',
+      'frames.json',
+    );
+    const problems = checkFrames(board, Object.keys(JSON.parse(readFileSync(file, 'utf8')).states));
+    for (const p of problems) console.error(`error: ${p}`);
+    if (problems.length === 0) console.log('tasks: every frame has one owner');
     return problems.length === 0 ? 0 : 1;
   }
   if (cmd === 'done') {

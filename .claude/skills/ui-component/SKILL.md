@@ -45,3 +45,5 @@ Register a demo in the dev gallery route (`src/dev/gallery/`) showing every vari
 - [ ] Tokens only · [ ] logic in core · [ ] lang/dir via shared text components
 - [ ] keyboard + focus-visible · [ ] not colour-only · [ ] reduced motion
 - [ ] gallery entry · [ ] tests green
+
+- [ ] `npm run shots` pairs match the owned frames at 360/390/1280, light and dark; design-fidelity review (V5) has no open blocker or major

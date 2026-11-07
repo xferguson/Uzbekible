@@ -26,7 +26,14 @@ description: Use whenever committing, pushing, opening, updating, labelling, or 
 1. Branch: `task/<ID>-<slug>` (or the branch the session was assigned). If that branch's earlier PR was
    already merged, restart the branch from the latest `main`.
 2. Commits: Conventional Commits with the task ID, e.g. `feat(core/text): fold apostrophe variants [K1]`.
-3. Push: `git push -u origin <branch>` (retry on network errors with 2s/4s/8s/16s backoff).
+3. **Sync with `main` before every push** (including the first), so conflicts get resolved on your branch, not in the PR:
+   ```bash
+   git fetch origin main && git merge origin/main   # merge, don't rebase or force-push
+   ```
+   Resolve any conflicts (regenerate lockfiles with `npm install`, never hand-edit `package-lock.json`),
+   then re-run the fast gate (`npm run lint && npm run typecheck && npm test -- --coverage && npm run build`)
+   before pushing. If `main` moved while CI was running, repeat this before you merge.
+   Then push: `git push -u origin <branch>` (retry on network errors with 2s/4s/8s/16s backoff).
 4. Open the PR **as a draft**, filling the `.github/pull_request_template.md` sections:
    Summary · Task · Red → Green evidence · Docs-only? · Screenshots · Checklist.
 5. Optional labels (signals for the user; the merge rule above is what counts): `needs-approval` on gated work,

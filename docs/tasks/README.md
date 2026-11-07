@@ -8,7 +8,7 @@ unmerged dependencies can run **in parallel**. Each task's **Status** row lives 
 ## Gates 🔒
 - **D1** general design system → user approval (`needs-approval` label) → unlocks **D2**, **D3** and **U1**
 - **D2** Juft mockups → user approval → unlocks **U4** and **U5**
-- **J4** Soxta mockups → user approval → unlocks **J5**
+- **J4** Soxta mockups → user approval → unlocks **J5** (J lane on hold until after R1)
 - **C6** content review, **S1**/**S2** spikes and **R1** release also need explicit approval.
 
 Engine (K, E) and content (C) lanes don't wait for the design gates.
@@ -27,7 +27,7 @@ C Content:    C1 ─┬─ C2 ── C4
 B Design:     **D1 🔒 ── D2 🔒** ── (U4, U5)      D1 ── D3
 E Juft:       E1 (C5,K7,K8,K4,Q2,Q7) · E2 (K3) · E3 (K4,E2,K10,Q5,Q6)
 F UI:         U1 (D1,T00,K9) ── U2 / U3 / U5 / U6 ── U4 ── **U7 ── U8 ── R1**  (U3 also needs Q7)
-J Soxta:      J1 (C5) ── J2 (K3,K4,J1) ─┐   J3 (U1) ─┤   J4 🔒 (D1) ── J5 ── J6
+J Soxta:      J1 (C5) ── J2 (K3,K4,J1) ─┐   J3 (U1) ─┤   J4 🔒 (D1) ── J5 ── J6   ON HOLD until after R1
 Q Quality:    Q1 ─┬─ Q2      Q5 ─┬─ Q6        Q3 · Q4 · Q9 (independent)
                   └─ Q8         └─ Q7
 X Harness:    X1 ─┬─ X5 ──┐      X2 ── X4 (also Q4)
@@ -101,12 +101,12 @@ so merge it while few branches are open.
 | [X6](X6-api-digest.md) | Generated API digest: `docs/api.md` | X Harness | none |
 | [X7](X7-helper-subagents.md) | Cheap helper subagents: gate-runner and ci-triage | X Harness | X1 |
 | [X8](X8-task-breakdown-skill.md) | `task-breakdown` skill for writing new task files | X Harness | X5, X6 |
-| [J1](J1-soxta-card-pool.md) | Soxta card pool from false-friend data | J Soxta | C5 |
-| [J2](J2-soxta-rules.md) | Soxta rules on core/session | J Soxta | K3, K4, J1 |
-| [J3](J3-ui-use-swipe.md) | ui/useSwipe gesture hook | J Soxta | U1 |
-| [J4](J4-soxta-mockups.md) 🔒 | Soxta screen mockups (GATE) | J Soxta | D1 |
-| [J5](J5-soxta-board.md) | Soxta board UI | J Soxta | J4, J2, J3, U2, U3 |
-| [J6](J6-soxta-wiring-e2e.md) | Soxta wiring, registry entry and e2e | J Soxta | J5, U6, T01 |
+| [J1](J1-soxta-card-pool.md) | Soxta card pool from false-friend data (on hold) | J Soxta | C5 |
+| [J2](J2-soxta-rules.md) | Soxta rules on core/session (on hold) | J Soxta | K3, K4, J1 |
+| [J3](J3-ui-use-swipe.md) | ui/useSwipe gesture hook (on hold) | J Soxta | U1 |
+| [J4](J4-soxta-mockups.md) 🔒 | Soxta screen mockups (GATE) (on hold) | J Soxta | D1 |
+| [J5](J5-soxta-board.md) | Soxta board UI (on hold) | J Soxta | J4, J2, J3, U2, U3 |
+| [J6](J6-soxta-wiring-e2e.md) | Soxta wiring, registry entry and e2e (on hold) | J Soxta | J5, U6, T01 |
 
 ## Writing new tasks
 Copy [`_TEMPLATE.md`](_TEMPLATE.md). Keep a task small enough for one PR (about ≤ 400 lines of non-generated

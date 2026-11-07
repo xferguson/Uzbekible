@@ -24,17 +24,21 @@ docs/games/<NN>-<id>.md  # product spec (must exist first)
 
 ## GameDefinition contract (see `src/games/types.ts`)
 ```ts
-interface GameDefinition<Rules, Params> {
-  id: string;                    // 'juft'
+interface GameDefinition<Params, State, Action, E extends GameEvent = never> {
+  id: string;                                   // 'juft'
   title: { uzLatn: string; uzCyrl: string };
-  levels: LevelSource<Params>;   // (levelNumber, settings, rng) => LevelSpec
-  createRules: (spec: LevelSpec<Params>) => Rules;   // built on core/session
+  levels(ctx: LevelContext): LevelSpec<Params>; // deterministic: ctx = { level, settings, history, seed, rng }
+  createRules(spec: LevelSpec<Params>, attemptRng: Rng): Rules<State, Action, E | GameEvent>; // core/session
   scoring: ScoringConfig;
-  difficulty: DifficultyConfig<Params>;
-  Board: React.ComponentType<BoardProps<Rules>>;
+  difficulty: DifficultyConfig;
+  Board: React.ComponentType<BoardProps<Params, State, Action, E>>;
   requires?: { audio?: boolean; microphone?: boolean };
 }
 ```
+- `LevelContext.seed` is `<gameId>:<level>:<settingsHash>` (`levelSeed` in `src/games/sim-adapter.ts`); `rng` is seeded
+  from it, so a level's content is reproducible. `history` is the learning-log aggregates, for the scheduler.
+- `attemptRng` is fresh for every attempt (retry included): per-attempt layout (Juft's shuffle) uses it, level content never does.
+- The simulator runs a definition through `toSimGame(def, { settings, history, countdownMs, nextStep })`; only the bot's `nextStep` is extra. No second contract.
 The `GameShell` provides: countdown, HUD (timer/lives/score), pause, results, level map, persistence of
 progress/best scores, learning-log writes, and settings. A game never imports another game.
 
@@ -42,7 +46,7 @@ progress/best scores, learning-log writes, and settings. A game never imports an
 | Need | Module |
 |---|---|
 | lifecycle, lives, timer | `core/session` + `core/clock` |
-| shuffle, sampling, seeds | `core/random` (seed = `${gameId}:${level}`) |
+| shuffle, sampling, seeds | `core/random` (level seed = `<gameId>:<level>:<settingsHash>`) |
 | points, stars | `core/scoring` |
 | level → params | `core/difficulty` |
 | which items next | `core/scheduler` |

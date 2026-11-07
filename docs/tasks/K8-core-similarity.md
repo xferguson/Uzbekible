@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | in review |
 | Lane | D Core |
 | Read first | `docs/architecture.md` (your module's row) (other docs only if needed) |
 | Depends on | [K1](K1-core-text.md) |

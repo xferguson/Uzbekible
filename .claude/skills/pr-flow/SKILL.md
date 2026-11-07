@@ -36,6 +36,9 @@ description: Use when committing, pushing, opening, labelling or merging a PR, o
    Then push: `git push -u origin <branch>` (retry on network errors with 2s/4s/8s/16s backoff).
 4. Open the PR **as a draft**, filling the `.github/pull_request_template.md` sections:
    Summary · Task · Red → Green evidence · Docs-only? · Screenshots · Checklist.
+   **UI PRs** (anything under `src/ui/**`, `src/shell/**`, `src/games/*/**/*.tsx` or `*.css`): run `npm run shots`,
+   publish `compare.html` as an Artifact and link it under Screenshots. The `pr-evidence` CI job fails "n/a" or an
+   empty section. For a non-visual change write `Visual change: none (<reason>)`; the reviewer sees the reason.
 5. Optional labels (signals for the user; the merge rule above is what counts): `needs-approval` on gated work,
    `content` on content data changes, `do-not-merge` on anything you want the user to look at first.
 6. When the work is complete and the local fast gate passes, **mark the PR ready for review** and subscribe to

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | V Visual quality |
 | Depends on | none |
 | Read first | `.github/workflows/ci.yml`, `.github/pull_request_template.md`, `.claude/skills/pr-flow/SKILL.md` (other docs only if needed) |

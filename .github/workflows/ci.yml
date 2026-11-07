@@ -22,6 +22,7 @@ jobs:
     outputs:
       docs_only: ${{ steps.diff.outputs.docs_only }}
       has_app: ${{ steps.diff.outputs.has_app }}
+      files: ${{ steps.diff.outputs.files }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -50,6 +51,11 @@ jobs:
           non_docs=$(echo "$files" | grep -vE '^(docs/|\.claude/)|\.md$' | grep -v '^$' || true)
           if [ -z "$non_docs" ]; then docs_only=true; else docs_only=false; fi
           if [ -f package.json ]; then has_app=true; else has_app=false; fi
+          {
+            echo "files<<CHANGED_FILES_EOF"
+            echo "$files"
+            echo "CHANGED_FILES_EOF"
+          } >> "$GITHUB_OUTPUT"
           echo "docs_only=$docs_only" >> "$GITHUB_OUTPUT"
           echo "has_app=$has_app" >> "$GITHUB_OUTPUT"
           echo "docs_only=$docs_only has_app=$has_app"
@@ -86,6 +92,25 @@ jobs:
           done
           exit $status
 
+  pr-evidence:
+    name: PR evidence (UI changes need a mockup comparison)
+    runs-on: ubuntu-latest
+    needs: changes
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - name: Check Screenshots section
+        env:
+          FILES: ${{ needs.changes.outputs.files }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          printf '%s\n' "$FILES" > "$RUNNER_TEMP/files.txt"
+          printf '%s\n' "$PR_BODY" > "$RUNNER_TEMP/body.md"
+          node scripts/pr-evidence.mjs "$RUNNER_TEMP/files.txt" "$RUNNER_TEMP/body.md"
+
   app:
     name: Lint · Typecheck · Test · Build · E2E
     runs-on: ubuntu-latest
@@ -117,7 +142,7 @@ jobs:
   ci-ok:
     name: CI OK
     runs-on: ubuntu-latest
-    needs: [changes, docs, app]
+    needs: [changes, docs, pr-evidence, app]
     # Run even when jobs were skipped, but not in a run cancelled by a newer push
     # (otherwise a superseded run reports a false failure).
     if: ${{ always() && !cancelled() }}

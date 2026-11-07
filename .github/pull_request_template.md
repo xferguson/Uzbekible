@@ -11,7 +11,10 @@
 - [ ] Yes. Only `docs/**`, `.claude/**` or `*.md` changed (fast CI path)
 
 ## Screenshots / Artifact link
-<!-- UI and design changes: phone + desktop, light + dark. -->
+<!-- CI (pr-evidence) fails a PR that touches src/ui/**, src/shell/**, src/games/*/**/*.tsx or any *.css unless this
+section links a mockup comparison: run `npm run shots`, publish compare.html as an Artifact and paste the link
+(or name `shots/compare`). Phone + desktop, light + dark.
+Non-visual UI change (e.g. a hook refactor)? Write `Visual change: none (<one-line reason>)` instead. "n/a" fails. -->
 
 ## Checklist
 - [ ] Tests written first; `npm run gate` passes locally

@@ -140,3 +140,44 @@ describe('CSV export', () => {
     expect(log.exportCsv()).toContain('"کتاب, ""kitob"""');
   });
 });
+
+describe('learning log with a pre-rolled history', () => {
+  const row = (attempts: number, correct: number, rtSumMs: number) => ({
+    itemId: 'a',
+    sourceLang: 'tr',
+    relation: 'turkic-cognate',
+    attempts,
+    correct,
+    rtSumMs,
+  });
+
+  it('merges duplicate rolled rows and reports a zero mean for zero attempts', () => {
+    const backend = createMemoryBackend();
+    backend.setItem(
+      'uzbekible:v1:learning-log',
+      JSON.stringify({
+        events: [],
+        rolled: [row(2, 1, 20), row(2, 2, 40), { ...row(0, 0, 0), itemId: 'z' }],
+      }),
+    );
+    const { log } = make(5, backend);
+    expect(log.aggregates()).toEqual([
+      {
+        itemId: 'a',
+        sourceLang: 'tr',
+        relation: 'turkic-cognate',
+        attempts: 4,
+        correct: 3,
+        meanRtMs: 15,
+      },
+      {
+        itemId: 'z',
+        sourceLang: 'tr',
+        relation: 'turkic-cognate',
+        attempts: 0,
+        correct: 0,
+        meanRtMs: 0,
+      },
+    ]);
+  });
+});

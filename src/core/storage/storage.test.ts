@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   createMemoryBackend,
   createStore,
@@ -142,5 +142,58 @@ describe('createStore', () => {
     const s = createStore('p', schema, migrations);
     s.set({ coins: 3, name: '' });
     expect(s.get().coins).toBe(3);
+  });
+});
+
+describe('createStore backend edge cases', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  it('falls back to memory when localStorage access throws', () => {
+    vi.stubGlobal('localStorage', undefined);
+    const s = createStore('p', schema, migrations);
+    s.set({ coins: 4, name: '' });
+    expect(s.get().coins).toBe(4);
+  });
+
+  it('falls back to memory when reading localStorage itself throws', () => {
+    vi.spyOn(window, 'localStorage', 'get').mockImplementation(() => {
+      throw new Error('blocked');
+    });
+    const s = createStore('p', schema, migrations);
+    s.set({ coins: 6, name: '' });
+    expect(s.get().coins).toBe(6);
+  });
+
+  it('warns about an unavailable backend only once', () => {
+    const onWarning = vi.fn();
+    const s = createStore('p', schema, migrations, { backend: throwing, onWarning });
+    s.set({ coins: 1, name: '' });
+    s.set({ coins: 2, name: '' });
+    s.get();
+    expect(onWarning.mock.calls.filter(([w]) => w.reason === 'unavailable')).toHaveLength(1);
+  });
+
+  it('survives a warning listener that throws', () => {
+    const s = createStore('p', schema, migrations, {
+      backend: throwing,
+      onWarning: () => {
+        throw new Error('listener');
+      },
+    });
+    expect(() => s.set({ coins: 1, name: '' })).not.toThrow();
+  });
+});
+
+describe('createStore with a missing migration step', () => {
+  it('resets to the default with a migration warning', () => {
+    const backend = createMemoryBackend();
+    backend.setItem('uzbekible:v1:p', '1');
+    const onWarning = vi.fn();
+    const s = createStore('p', { ...schema, version: 3 }, migrations, { backend, onWarning });
+    expect(s.get()).toEqual(schema.default);
+    expect(onWarning).toHaveBeenCalledWith(expect.objectContaining({ reason: 'migration' }));
   });
 });

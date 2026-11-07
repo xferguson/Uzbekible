@@ -3,6 +3,19 @@ import { rosette, starPolygon, tilePattern } from './index.ts';
 
 const dist = (p: { x: number; y: number }) => Math.hypot(p.x, p.y);
 
+describe('starPolygon edge cases', () => {
+  it('uses the {n/1} inner radius for k = 1', () => {
+    const s = starPolygon(6, 1, 10);
+    expect(Math.hypot(s.points[1]!.x, s.points[1]!.y)).toBeCloseTo(10 * Math.cos(Math.PI / 6));
+  });
+  it('rejects a non-positive explicit inner radius', () => {
+    expect(() => starPolygon(8, 2, 10, 0)).toThrow(RangeError);
+  });
+  it('builds rosettes below five petals from a {n/1} star', () => {
+    expect(rosette(4, 10).petals).toHaveLength(4);
+  });
+});
+
 describe('starPolygon', () => {
   it('returns 2n alternating outer/inner vertices in a closed path', () => {
     const s = starPolygon(8, 2, 10);

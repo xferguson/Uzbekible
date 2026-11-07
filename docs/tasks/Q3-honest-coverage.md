@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | Q Quality |
 | Read first | `docs/architecture.md` (Quality gates) (other docs only if needed) |
 | Depends on | none |

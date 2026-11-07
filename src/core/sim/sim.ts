@@ -6,7 +6,13 @@
 import { createFakeClock } from '../clock/index.ts';
 import { createRng, seedFrom, type Rng } from '../random/index.ts';
 import { score as scoreOf, starsForScore, type ScoringConfig } from '../scoring/index.ts';
-import { createSession, type Rules, type SessionEvent } from '../session/index.ts';
+import {
+  createSession,
+  tallyScoreInput,
+  type GameEvent,
+  type Rules,
+  type SessionEvent,
+} from '../session/index.ts';
 
 /** What the bot faces next: how transparent the item is (0..1) and the two actions it can take. */
 export interface SimStep<A> {
@@ -16,15 +22,15 @@ export interface SimStep<A> {
 }
 
 /**
- * The slice of a game the simulator needs. Rules events of type `mistake`, `hint` and `combo`
- * are tallied into the score input; `lifeLost` and `complete` drive the session as usual.
+ * The slice of a game the simulator needs. The standard session events (`mistake`, `hint`, `combo`)
+ * are tallied into the score input by `tallyScoreInput`; `lifeLost` and `complete` drive the session.
  */
 export interface SimGame<S, A> {
   id: string;
   scoring: ScoringConfig;
   lives(level: number): number;
   countdownMs: number;
-  createRules(level: number): Rules<S, A>;
+  createRules(level: number): Rules<S, A, GameEvent>;
   nextStep(state: S, level: number, rng: Rng): SimStep<A>;
 }
 
@@ -121,12 +127,8 @@ function playOnce<S, A>(
     countdownMs: game.countdownMs,
     clock,
   });
-  const tally = { mistakes: 0, hints: 0, combos: 0 };
-  session.subscribe((e: SessionEvent) => {
-    if (e.type === 'mistake') tally.mistakes++;
-    else if (e.type === 'hint') tally.hints++;
-    else if (e.type === 'combo') tally.combos++;
-  });
+  const events: SessionEvent<GameEvent>[] = [];
+  session.subscribe((e) => void events.push(e));
   session.start();
   clock.advance(game.countdownMs);
 
@@ -141,7 +143,7 @@ function playOnce<S, A>(
 
   const state = session.getState();
   if (state.phase !== 'won') return { won: false, timeMs: state.elapsedMs, score: 0, stars: 0 };
-  const value = scoreOf({ timeMs: state.elapsedMs, ...tally }, game.scoring);
+  const value = scoreOf({ timeMs: state.elapsedMs, ...tallyScoreInput(events) }, game.scoring);
   return {
     won: true,
     timeMs: state.elapsedMs,

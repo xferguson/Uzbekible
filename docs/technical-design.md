@@ -6,7 +6,7 @@
 | Concern | Choice | Why |
 |---|---|---|
 | Build | **Vite** | Fast dev server, simple static output for GitHub Pages |
-| UI | **React 18 + TypeScript (strict)** | Widely known by agents and humans; good testing ecosystem |
+| UI | **React 19 + TypeScript (strict)** | Widely known by agents and humans; good testing ecosystem |
 | Styling | CSS Modules + CSS custom properties (tokens) | No runtime cost; themeable; tokens shared with mockups |
 | Unit tests | **Vitest** + Testing Library + `@testing-library/user-event` | Fast, Vite-native |
 | Property tests | **fast-check** | Invariants for core maths and text |
@@ -87,13 +87,13 @@ CSS logical properties.
 - Keys are namespaced: `uzbekible:v<schema>:<namespace>`, where the namespace is `settings`, `progress:<gameId>` or `log`.
 - Every namespace has a zod schema and a **migration chain** (`v1 → v2 → …`), covered by property tests
   (a migrated value always validates).
-- Learning log: append-only, capped (e.g. 50k events, oldest first rolled into per-item aggregates), exportable
+- Learning log: append-only, capped at 5,000 events (`DEFAULT_CAP`; oldest first rolled into per-item aggregates), exportable
   as CSV/JSON from Settings.
 
 ## 7. Audio and speech plan (not built for v1)
 > **Audio is on hold** (2026-11-07). See [S1 spike note](spikes/S1-audio.md) for what was learned and where to restart.
 
-Interfaces exist from the start so games can depend on them:
+Interfaces are deferred with S1 (not built yet); planned shape, so games can depend on them once audio is unblocked:
 ```ts
 interface AudioProvider { preload(ids: string[]): Promise<void>; speak(id: string): Promise<void> }
 interface SpeechRecognizer { start(vocab: string[]): AsyncIterable<{ text: string; confidence: number }>; stop(): void }
@@ -130,7 +130,11 @@ credentials, so `push` to `main` triggers CI and deploy normally.
 **Repo settings needed:** Pages → Source: GitHub Actions (for T01). The labels `needs-approval`, `do-not-merge`, `content` are optional signals.
 
 ## 10. Quality gates
-- Coverage thresholds (Vitest): `src/core/**` ≥ 95% lines and branches; `src/ui/**` ≥ 80%.
+- Coverage thresholds (Vitest): `src/core/**` ≥ 95% lines and branches; `src/ui/**` ≥ 80%. Coverage excludes test
+  files, `src/test-setup.ts`, `src/main.tsx` and `src/**/index.ts`; so core modules keep their logic in non-index files
+  (index files are barrels/entry points that are not counted).
+- Content and sim scripts (`content/scripts/`, `scripts/sim.ts`) run `src/core` directly under Node
+  `--experimental-strip-types`, which needs explicit `.ts` extensions on relative imports; keep that style in `src/core`.
 - fast-check property tests required for: text and transliteration, random and shuffle, scoring, difficulty,
   storage migrations, motif geometry, and (later) grid placement.
 - ESLint boundaries (see `architecture.md`), plus jsx-a11y.

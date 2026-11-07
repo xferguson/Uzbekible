@@ -52,11 +52,11 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['src/**/*.{ts,tsx}'],
-      exclude: ['src/**/*.test.{ts,tsx}', 'src/test-setup.ts', 'src/main.tsx', 'src/**/index.ts'],
+      exclude: ['src/**/*.test.{ts,tsx}', 'src/test-setup.ts', 'src/main.tsx'],
       reporter: ['text-summary', 'lcov'],
       // CI fails below these (docs/architecture.md quality bar). Never lower them.
       thresholds: {
-        'src/core/**': { lines: 95, branches: 95 },
+        'src/core/**': { lines: 95, branches: 95, perFile: true },
         'src/ui/**': { lines: 80, branches: 80 },
       },
     },

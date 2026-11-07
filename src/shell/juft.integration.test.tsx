@@ -4,11 +4,12 @@ import { createFakeClock } from '@core/clock';
 import { loadItems } from '@core/content/index.ts';
 import { createLearningLog } from '@core/learning-log';
 import { createMemoryBackend } from '@core/storage';
-import { GameShell } from '../../shell/GameShell.tsx';
-import { createProgressStore } from '../../shell/progress.ts';
-import { levelContext } from '../sim-adapter.ts';
-import type { GameSettings } from '../types.ts';
-import { createJuftDefinition } from './definition.ts';
+import { GameShell } from './GameShell.tsx';
+import { createProgressStore } from './progress.ts';
+import { levelContext } from '@games/sim-adapter';
+import type { GameSettings } from '@games/types';
+import type { AnyGameDefinition } from '@games/registry';
+import { createJuftDefinition } from '@games/juft/definition';
 
 const items = loadItems(JSON.parse(readFileSync('public/content/items.v1.json', 'utf8')));
 const juft = createJuftDefinition(items);
@@ -22,7 +23,7 @@ function setup(level: number, settings: GameSettings = tr) {
   const onNext = vi.fn();
   const view = render(
     <GameShell
-      definition={juft}
+      definition={juft as unknown as AnyGameDefinition}
       level={level}
       settings={settings}
       history={[]}
@@ -44,7 +45,8 @@ function setup(level: number, settings: GameSettings = tr) {
     view.container.querySelector<HTMLElement>(
       `[data-testid="col-${side}"] [data-tile-id="${id}"] button`,
     )!;
-  const click = (side: 'left' | 'right', id: string) => act(() => void fireEvent.click(tile(side, id)));
+  const click = (side: 'left' | 'right', id: string) =>
+    act(() => void fireEvent.click(tile(side, id)));
   const playAll = (msPerPair = 2_000) => {
     for (const p of spec.params.pairs) {
       advance(msPerPair);

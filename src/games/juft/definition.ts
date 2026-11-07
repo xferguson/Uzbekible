@@ -8,21 +8,29 @@ import type { GameEvent } from '@core/session/index.ts';
 import { registerGame } from '../registry.ts';
 import type { GameDefinition, GameSettings, LevelSpec } from '../types.ts';
 import { Board } from './Board.tsx';
-import { juftDifficulty } from './difficulty.config.ts';
+import { CHAPTER_SIZE, juftDifficulty } from './difficulty.config.ts';
 import { createJuftLevels, type JuftParams } from './levels.ts';
 import { createJuftRules, type JuftAction, type JuftEvent, type JuftState } from './rules.ts';
 import { CYRILLIC_MULTIPLIER, juftScoring, scoringFor } from './scoring.config.ts';
+
+/** The eight buildings of the level map, in order (docs/games/01-juft.md). */
+const CHAPTERS = [
+  'Gumbaz',
+  'Minora',
+  'Ayvon',
+  'Darvoza',
+  'Madrasa',
+  'Maqbara',
+  'Masjid',
+  'Registon',
+];
 
 export type JuftDefinition = GameDefinition<JuftParams, JuftState, JuftAction, JuftEvent>;
 
 export function createJuftDefinition(items: readonly Item[]): JuftDefinition {
   const levels = createJuftLevels(items);
 
-  function logEvents(
-    spec: LevelSpec<JuftParams>,
-    event: GameEvent,
-    rtMs: number,
-  ): LogEventInput[] {
+  function logEvents(spec: LevelSpec<JuftParams>, event: GameEvent, rtMs: number): LogEventInput[] {
     const pair = (id: string) => spec.params.pairs.find((p) => p.id === id);
     const e = event as JuftEvent;
     if (e.type === 'matched') {
@@ -66,9 +74,11 @@ export function createJuftDefinition(items: readonly Item[]): JuftDefinition {
       createJuftRules({ pairIds: spec.params.pairs.map((p) => p.id), rng: attemptRng }),
     scoring: juftScoring,
     scoringFor: (spec) => scoringFor(spec.level, spec.params.pairs.length),
-    multipliers: (settings: GameSettings) => (settings.script === 'cyrl' ? [CYRILLIC_MULTIPLIER] : []),
+    multipliers: (settings: GameSettings) =>
+      settings.script === 'cyrl' ? [CYRILLIC_MULTIPLIER] : [],
     logEvents,
     difficulty: juftDifficulty,
+    chapters: CHAPTERS.map((name) => ({ id: name.toLowerCase(), name, levels: CHAPTER_SIZE })),
     Board,
   };
 }

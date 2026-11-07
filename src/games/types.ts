@@ -67,6 +67,8 @@ export interface GameDefinition<Params, State, Action, E extends GameEvent = nev
    */
   logEvents?(spec: LevelSpec<Params>, event: GameEvent, rtMs: number): LogEventInput[];
   difficulty: DifficultyConfig;
+  /** The level map's buildings (name in Latin spelling, number of levels each). */
+  chapters?: readonly { id: string; name: string; levels: number }[];
   Board: ComponentType<BoardProps<Params, State, Action, E>>;
   requires?: { audio?: boolean; microphone?: boolean };
 }

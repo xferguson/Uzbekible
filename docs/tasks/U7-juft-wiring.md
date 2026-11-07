@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | F UI |
 | Read first | `docs/design/brief.md`, `docs/architecture.md` (Shared UI), `docs/games/01-juft.md` (other docs only if needed) |
 | Depends on | [U4](U4-juft-board.md), [U5](U5-ui-level-map.md), [U6](U6-settings.md), [E1](E1-juft-levels.md), [E3](E3-juft-scoring-balance.md) |
@@ -13,9 +13,9 @@
 Assemble generator → board → scoring → log → progress into a playable game.
 
 ## Acceptance criteria
-- [ ] `src/games/juft/definition.ts` registered; Juft playable from home
-- [ ] Level spec respects settings; results save best score and unlock next
-- [ ] Learning-log events emitted per spec
+- [x] `src/games/juft/definition.ts` registered; Juft playable from home
+- [x] Level spec respects settings; results save best score and unlock next
+- [x] Learning-log events emitted per spec
 
 ## Test-first plan
 - Integration test (Testing Library) with seed and fake clock plays level 1 and level 2

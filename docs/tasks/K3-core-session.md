@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | in review |
+| Status | done |
 | Lane | D Core |
 | Read first | `docs/architecture.md` (your module's row) (other docs only if needed) |
 | Depends on | [K2](K2-core-random-clock.md) |

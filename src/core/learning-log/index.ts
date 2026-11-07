@@ -13,7 +13,13 @@ interface Base {
 export type LogEvent = Base &
   (
     | { type: 'level_start'; level?: number }
-    | { type: 'match_correct'; itemId: string; sourceLang: SourceLang; relation: Relation; rtMs: number }
+    | {
+        type: 'match_correct';
+        itemId: string;
+        sourceLang: SourceLang;
+        relation: Relation;
+        rtMs: number;
+      }
     | {
         type: 'match_wrong';
         leftItemId: string;

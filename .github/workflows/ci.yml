@@ -1,0 +1,110 @@
+name: CI
+
+on:
+  pull_request:
+    # ready_for_review / unlabeled re-run CI so automerge can act when a draft is
+    # marked ready or a `needs-approval` label is removed.
+    types: [opened, synchronize, reopened, ready_for_review, labeled, unlabeled]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    outputs:
+      docs_only: ${{ steps.diff.outputs.docs_only }}
+      has_app: ${{ steps.diff.outputs.has_app }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: diff
+        name: Classify changed files
+        env:
+          EVENT: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [ "$EVENT" = "pull_request" ]; then
+            base="$BASE_SHA"
+          elif [ -n "$BEFORE_SHA" ] && [ "$BEFORE_SHA" != "0000000000000000000000000000000000000000" ]; then
+            base="$BEFORE_SHA"
+          else
+            base=""
+          fi
+          if [ -n "$base" ]; then
+            files=$(git diff --name-only "$base"...HEAD)
+          else
+            files=$(git ls-files)
+          fi
+          echo "Changed files:"; echo "$files"
+          # Docs-only = every changed file is under docs/ or .claude/, or is a Markdown file.
+          non_docs=$(echo "$files" | grep -vE '^(docs/|\.claude/)|\.md$' | grep -v '^$' || true)
+          if [ -z "$non_docs" ]; then docs_only=true; else docs_only=false; fi
+          if [ -f package.json ]; then has_app=true; else has_app=false; fi
+          echo "docs_only=$docs_only" >> "$GITHUB_OUTPUT"
+          echo "has_app=$has_app" >> "$GITHUB_OUTPUT"
+          echo "docs_only=$docs_only has_app=$has_app"
+
+  docs:
+    name: Docs checks
+    runs-on: ubuntu-latest
+    needs: changes
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check relative Markdown links
+        run: python3 .github/scripts/check_md_links.py
+      - name: Check skills have frontmatter
+        run: |
+          status=0
+          for f in .claude/skills/*/SKILL.md; do
+            [ -e "$f" ] || continue
+            head -1 "$f" | grep -q '^---$' || { echo "::error file=$f::missing frontmatter"; status=1; }
+            grep -q '^name: ' "$f" || { echo "::error file=$f::missing name"; status=1; }
+            grep -q '^description: ' "$f" || { echo "::error file=$f::missing description"; status=1; }
+          done
+          exit $status
+
+  app:
+    name: Lint · Typecheck · Test · Build · E2E
+    runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.docs_only != 'true' && needs.changes.outputs.has_app == 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test -- --coverage
+      - run: npm run build
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - run: npm run e2e -- --trace off
+
+  ci-ok:
+    name: CI OK
+    runs-on: ubuntu-latest
+    needs: [changes, docs, app]
+    if: always()
+    steps:
+      - name: Require all jobs succeeded or were skipped
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "Job results: $RESULTS"
+          for r in $RESULTS; do
+            case "$r" in success|skipped) ;; *) echo "::error::a required job ended with '$r'"; exit 1;; esac
+          done

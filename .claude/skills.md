@@ -17,5 +17,15 @@ description. This file is the human-readable index. **To add a skill:** create t
 | 9 | [`e2e-visual-check`](skills/e2e-visual-check/SKILL.md) | Playwright tests, screenshots, offline/PWA checks | Deterministic e2e flows, screenshots |
 | 10 | [`game-balance-tuning`](skills/game-balance-tuning/SKILL.md) | difficulty, scoring, timing, star thresholds | Config-only change + simulation table |
 
+## Agents
+
+Cheap helper subagents in `.claude/agents/` (model `haiku`) that keep large logs out of the main context.
+Spawn them for long output only; a few lines are cheaper to read directly.
+
+| Agent | Use it when… | Replies with |
+|---|---|---|
+| [`gate-runner`](agents/gate-runner.md) | you want the verdict of `npm run gate` (or one step) | `GATE OK`, or the failing step + ≤ 20 lines of `file:line` errors |
+| [`ci-triage`](agents/ci-triage.md) | CI is red on a PR and the log is long | failing job/step, ≤ 30-line root-cause excerpt, local repro command |
+
 Candidates for later: `task-breakdown` (writing task files for Games 2–4), `audio-pipeline` (once spike S1
 lands), `research-analysis` (analyzing exported learning logs).

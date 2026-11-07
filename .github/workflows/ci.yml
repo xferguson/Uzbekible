@@ -97,7 +97,9 @@ jobs:
     name: CI OK
     runs-on: ubuntu-latest
     needs: [changes, docs, app]
-    if: always()
+    # Run even when jobs were skipped, but not in a run cancelled by a newer push
+    # (otherwise a superseded run reports a false failure).
+    if: ${{ always() && !cancelled() }}
     steps:
       - name: Require all jobs succeeded or were skipped
         env:

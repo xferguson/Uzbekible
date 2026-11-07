@@ -4,6 +4,8 @@ import { createFakeClock } from '@core/clock';
 import { createMemoryBackend } from '@core/storage';
 import { GAMES } from '@games/registry';
 import { getGame } from '@games/registry';
+import { registerJuft } from '@games/juft/definition';
+import { loadItems } from '@core/content';
 import { createProgressStore } from './progress';
 import { App } from './App';
 
@@ -109,7 +111,8 @@ describe('<App /> difficulty modes', () => {
       unlocked: 4,
       best: {},
     });
-    const juft = getGame('juft') ?? GAMES[0];
+    if (!getGame('juft')) registerJuft(loadItems(pack));
+    const juft = getGame('juft');
     const withModes = {
       ...juft!,
       modes: [

@@ -56,4 +56,39 @@ describe('<App />', () => {
     fireEvent.click(screen.getByRole('button', { name: /Орқага|Ortga/i }));
     expect(await screen.findByRole('button', { name: 'Жуфт' })).toBeInTheDocument();
   });
+
+  it('offers a way out of every screen: back one step, or straight home from a level', async () => {
+    const { clock } = setup();
+    fireEvent.click(await screen.findByRole('button', { name: 'Juft' }));
+    // Map: back goes home.
+    fireEvent.click(screen.getByRole('button', { name: 'Orqaga' }));
+    expect(screen.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeInTheDocument();
+
+    // Mid-level: back goes to the map, close goes home.
+    fireEvent.click(screen.getByRole('button', { name: 'Juft' }));
+    fireEvent.click(screen.getByRole('button', { name: /^1-daraja, joriy/ }));
+    await act(async () => {
+      clock.advance(10);
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Orqaga' }));
+    expect(screen.getByRole('button', { name: /^1-daraja, joriy/ })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /^1-daraja, joriy/ }));
+    await act(async () => {
+      clock.advance(10);
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Bosh sahifa' }));
+    expect(screen.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeInTheDocument();
+
+    // Results: the close button is still there.
+    fireEvent.click(screen.getByRole('button', { name: 'Juft' }));
+    fireEvent.click(screen.getByRole('button', { name: /^1-daraja, joriy/ }));
+    await act(async () => {
+      clock.advance(10);
+    });
+    fireEvent.click(document.querySelector<HTMLElement>('[data-testid="col-left"] button')!);
+    fireEvent.click(document.querySelector<HTMLElement>('[data-testid="col-right"] button')!);
+    expect(screen.getByRole('img', { name: /\/3/ })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Bosh sahifa' }));
+    expect(screen.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeInTheDocument();
+  });
 });

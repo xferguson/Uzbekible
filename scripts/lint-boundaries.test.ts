@@ -36,8 +36,10 @@ describe('import boundaries (docs/architecture.md)', () => {
     expect(await violates('src/design/x.ts', "import '@ui/index';\n")).toBe(true);
   });
   it('a game must not import another game', async () => {
-    expect(await violates('src/games/juft/x.ts', "import '../qosh/index';\n")).toBe(true);
-    expect(await violates('src/games/juft/x.ts', "import '@games/qosh/index';\n")).toBe(true);
+    // juft is the existing game; qosh is a hypothetical sibling importing it.
+    expect(await violates('src/games/qosh/x.ts', "import '../juft/index';\n")).toBe(true);
+    expect(await violates('src/games/qosh/x.ts', "import '@games/juft/index';\n")).toBe(true);
+    expect(await violates('src/games/juft/x.ts', "import './index';\n")).toBe(false);
   });
   it('a game may import core, ui, design, its own files and games/types', async () => {
     const f = 'src/games/juft/x.ts';

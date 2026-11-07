@@ -74,8 +74,9 @@ export function createStore<T>(
     }
   };
   const fail = (err: unknown): void => {
-    if (!useMemory) warn('unavailable', String(err));
+    // Only the real backend can throw: once we are on memory, `fail` is never reached again.
     useMemory = true;
+    warn('unavailable', String(err));
   };
   const active = (): StorageBackend => (useMemory ? memory : backend);
 

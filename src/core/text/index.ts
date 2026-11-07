@@ -68,16 +68,16 @@ export function toLetters(word: string, script: UzScript): string[] {
   if (script === 'uz-Cyrl') return chars.filter((ch) => ch !== ZWNJ);
   const out: string[] = [];
   for (let i = 0; i < chars.length; i++) {
-    const ch = chars[i] ?? '';
+    const ch = chars[i]!;
     const next = chars[i + 1];
     if (ch === ZWNJ) continue;
     const c = lower(ch);
     const pair = c + lower(next);
     if ((c === 'o' || c === 'g') && isApostrophe(next)) {
-      out.push(ch + (next ?? ''));
+      out.push(ch + next!);
       i += 1;
     } else if (pair === 'sh' || pair === 'ch' || (pair === 'ng' && !isApostrophe(chars[i + 2]))) {
-      out.push(ch + (next ?? ''));
+      out.push(ch + next!);
       i += 1;
     } else {
       out.push(ch);
@@ -121,7 +121,7 @@ export function latnToCyrl(text: string): string {
   let out = '';
   let afterVowel = false;
   for (let i = 0; i < chars.length; i++) {
-    const ch = chars[i] ?? '';
+    const ch = chars[i]!;
     if (ch === ZWNJ) continue;
     const c = lower(ch);
     const next = lower(chars[i + 1]);
@@ -132,19 +132,19 @@ export function latnToCyrl(text: string): string {
       src = ch + MODIFIER_TURNED_COMMA;
       cyrl = c === 'o' ? 'ў' : 'ғ';
     } else if (c === 'y' && next === 'e') {
-      src = ch + (chars[i + 1] ?? '');
+      src = ch + chars[i + 1]!;
       cyrl = 'е';
     } else if (c === 'y' && chars[i + 2] !== MODIFIER_TURNED_COMMA && (next === 'o' || next === 'u' || next === 'a')) {
-      src = ch + (chars[i + 1] ?? '');
+      src = ch + chars[i + 1]!;
       cyrl = { o: 'ё', u: 'ю', a: 'я' }[next];
     } else if (c + next === 'sh' || c + next === 'ch') {
-      src = ch + (chars[i + 1] ?? '');
+      src = ch + chars[i + 1]!;
       cyrl = c === 's' ? 'ш' : 'ч';
     } else if (c + next === 'ng' && chars[i + 2] !== MODIFIER_TURNED_COMMA) {
-      src = ch + (chars[i + 1] ?? '');
+      src = ch + chars[i + 1]!;
       cyrl = 'нг';
     } else if (c + next === 'ts' && wordStart) {
-      src = ch + (chars[i + 1] ?? '');
+      src = ch + chars[i + 1]!;
       cyrl = 'ц';
     } else if (c === 'e') {
       cyrl = wordStart || afterVowel ? 'э' : 'е';
@@ -169,7 +169,7 @@ export function cyrlToLatn(text: string): string {
   const chars = Array.from(normalize(text));
   let out = '';
   for (let i = 0; i < chars.length; i++) {
-    const ch = chars[i] ?? '';
+    const ch = chars[i]!;
     const c = lower(ch);
     const prev = chars[i - 1];
     let latn: string | undefined;

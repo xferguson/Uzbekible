@@ -94,3 +94,16 @@ describe('nextItems', () => {
     expect(() => nextItems(pool, [], 1, createRng(1), { reviewRatio: 2 })).toThrow(RangeError);
   });
 });
+
+describe('nextItems tie-breaking', () => {
+  it('orders equal-frequency items by id regardless of pool order', () => {
+    const pool = [item('b', 1), item('c', 1), item('a', 1)];
+    const rng = createRng(1);
+    expect(ids(nextItems(pool, [], 3, rng, { reviewRatio: 0 }))).toEqual(['a', 'b', 'c']);
+    expect(ids(nextItems([...pool].reverse(), [], 3, createRng(1), { reviewRatio: 0 }))).toEqual([
+      'a',
+      'b',
+      'c',
+    ]);
+  });
+});

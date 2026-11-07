@@ -3,7 +3,16 @@ import { scriptMeta, type TextLang } from '@core/text';
 import { colors, type ThemeName } from '@design/tokens';
 import { PatternBg, RosetteBand, Star8 } from '@ui/motif';
 import { Tile, type TileState } from '@ui/Tile';
-import { Combo, Countdown, LevelBadge, Lives, ResultsScreen, Score, Timer } from '@ui/index';
+import {
+  Combo,
+  Countdown,
+  LevelBadge,
+  Lives,
+  ResultsScreen,
+  Score,
+  SettingsPanel,
+  Timer,
+} from '@ui/index';
 import styles from './Gallery.module.css';
 
 export { isGalleryPath } from './route';
@@ -51,6 +60,21 @@ export function Gallery() {
               </li>
             ))}
           </ul>
+        )}
+      </Entry>
+
+      <Entry title="Settings panel">
+        {() => (
+          <SettingsPanel
+            languages={['tr', 'fa']}
+            script="uz-Latn"
+            theme="system"
+            onToggleLanguage={() => {}}
+            onScript={() => {}}
+            onTheme={() => {}}
+            onExport={() => {}}
+            onReset={() => {}}
+          />
         )}
       </Entry>
 

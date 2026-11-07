@@ -185,12 +185,17 @@ _(no exports yet)_
 
 - `Announcer({ message }: { message: string; }): import("react").JSX.Element` - Visually hidden polite live region.
 - `AnnouncerProvider({ children }: { children: ReactNode; }): import("react").JSX.Element` - Hosts the single shared live region and lets descendants announce via `useAnnounce`.
+- `ChapterInfo` { id: string; name: string; levels: number }
 - `Combo({ count, script }: Common & { count: number; }): import("react").JSX.Element | null` - Consecutive-correct streak; shown from 2 up.
 - `Countdown({ remainingMs, script }: Common & { remainingMs: number; }): import("react").JSX.Element`
 - `LevelBadge({ level, script }: Common & { level: number; }): import("react").JSX.Element`
+- `LevelCellState` = `'cleared' | 'current' | 'locked'`
+- `LevelMap({ chapters, progress, onSelect, script }: LevelMapProps): import("react").JSX.Element` - Mosaic facade progress map: one building per chapter, levels climb upward, any unlocked level can be replayed.
+- `LevelMapProps` { chapters: readonly ChapterInfo[]; progress: MapProgress; onSelect: (level: number) => void; script?: Script }
 - `Lives({ lives, max, script }: Common & { lives: number; max: number; }): import("react").JSX.Element` - One glazed tile per life; a lost life shows crack lines as well as a paler glaze.
 - `LongPressHandlers` { onPointerDown: (e: PointerEvent) => void; onPointerMove: (e: PointerEvent) => void; onPointerUp: () => void; onPointerLeave: () => void; onPointerCancel: () => void; onContextMenu: (e: MouseEvent…
 - `LongPressOptions` { ms?: number; tolerance?: number; clock?: FrameClock }
+- `MapProgress` { unlocked: number; best: Record<number, { score: number; stars: 0 | 1 | 2 | 3 }> } - The slice of a game's stored progress the map needs.
 - `PatternBg({ strength, cell, className }: PatternBgProps): import("react").JSX.Element` - Star-and-cross line lattice that fills its container. Decorative, low contrast.
 - `PatternBgProps` { strength?: number; cell?: number; className?: string }
 - `PauseOverlay({ onResume, onMap, script, }: Common & { onResume: () => void; onMap: () => void; }): import("react").JSX.Element` - Covers the screen and replaces the board, so a pause cannot be used to study the tiles.
@@ -201,18 +206,22 @@ _(no exports yet)_
 - `Score({ value, script }: Common & { value: number; }): import("react").JSX.Element`
 - `Script` = `'latn' | 'cyrl'` - Uzbek script a label is shown in.
 - `ScriptProvider({ script, children }: { script: UzScript; children: ReactNode; }): import("react").JSX.Element` - Supplies the player's Uzbek script setting to every `UzText` below.
+- `SettingsPanel(p: SettingsPanelProps): import("react").JSX.Element`
+- `SettingsPanelProps` { languages: readonly SourceLang[]; script: UzScript; theme: Theme; onToggleLanguage: (lang: SourceLang) => void; onScript: (script: UzScript) => void; onTheme: (theme: Theme) => void; onExport: (…
 - `SourceText({ lang, text, className }: SourceTextProps): import("react").JSX.Element` - Text in a source language's native script (RTL for Persian/Arabic).
 - `SourceTextProps` { lang: SourceLang; text: string; className?: string }
 - `Star8({ size, variant, className }: Star8Props): import("react").JSX.Element` - The signature star: {8/2} khatam, {8/3} turquoise interlace and a gold octagon centre. Decorative.
 - `Star8Props` { size?: number; variant?: 'full' | 'outline'; className?: string }
-- `Tile({ label, state, shape, onSelect, pressHandlers, children, }: TileProps): import("react").JSX.Element` - The shared game tile: states, rect or hex shape, keyboard (Enter/Space), never colour-only.
-- `TileProps` { label: string; state?: TileState; shape?: TileShape; onSelect?: () => void; pressHandlers?: Partial<LongPressHandlers>; children?: ReactNode }
+- `Tile({ label, state, shape, onSelect, onKeyDown, pressHandlers, children, }: TileProps): import("react").JSX.Element` - The shared game tile: states, rect or hex shape, keyboard (Enter/Space), never colour-only.
+- `TileProps` { label: string; state?: TileState; shape?: TileShape; onSelect?: () => void; onKeyDown?: (e: KeyboardEvent) => void; pressHandlers?: Partial<LongPressHandlers>; children?: ReactNode }
 - `TileShape` = `'rect' | 'hex'`
 - `TileState` = `'idle' | 'selected' | 'matched' | 'wrong' | 'cracked' | 'disabled'`
 - `Timer({ ms, script }: Common & { ms: number; }): import("react").JSX.Element`
 - `UzText({ latn, cyrl, script, className }: UzTextProps): import("react").JSX.Element` - Uzbek text in the player's chosen script, with correct lang/dir/font.
 - `UzTextProps` { latn: string; cyrl?: string | undefined; script?: UzScript; className?: string }
+- `chapterOf(level: number, chapters: readonly ChapterInfo[]): number` - Index of the chapter holding `level`; levels past the end belong to the last chapter.
 - `formatTime(ms: number): string` - m:ss, rounded down.
+- `levelState(level: number, progress: MapProgress): LevelCellState`
 - `useAnnounce(): (message: string) => void`
 - `useLongPress(onLongPress: () => void, options?: LongPressOptions): LongPressHandlers` - Touch/mouse/pen long press; fires `onLongPress` once per hold, cancels on move, release or leave.
 - `useUzScript(): UzScript`

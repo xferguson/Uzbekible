@@ -13,7 +13,7 @@ PWA of arcade-style games that use Uzbek as the medium of play: **a game, not a 
 1. Read `docs/tasks/<ID>-*.md` in full; read only the docs in its `Read first` row.
 2. Check its dependencies are merged to `main` (their task files' `Status`, `git log origin/main`). If not, say which and stop.
 3. Follow the skills it lists (always `tdd-task` and `pr-flow`) on branch `task/<ID>-<slug>`, unless a branch was assigned.
-4. Finish: PR, CI green, merge it, or wait for approval if the task is 🔒.
+4. Finish: PR, CI green, set the task file's `Status` to `done` in that PR, merge it (or wait for approval if the task is 🔒). A merged task must never be left `in review`.
 
 ## Non-negotiables
 1. **Red-green TDD** (`tdd-task`). **One task per PR**, merged into `main` through a PR (`pr-flow`).

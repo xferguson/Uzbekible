@@ -46,7 +46,7 @@ Coverage thresholds: `src/core` ≥ 95% lines/branches, `src/ui` ≥ 80%. If e2e
 
 ## 6. Ship
 Follow the `pr-flow` skill. Put Red/Green evidence in the PR template. Set the `Status` row in the task file to
-`in review` in the same PR (status lives in each task file, never in the README index, to avoid merge conflicts).
+`in review` while the PR is open, and to `done` in the same PR before you merge it (status lives in each task file, never in the README index, to avoid merge conflicts).
 
 ## Rules
 - One task per PR. If you discover extra scope, add a new task file (follow `docs/tasks/_TEMPLATE.md`)

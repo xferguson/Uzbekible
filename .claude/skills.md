@@ -16,6 +16,7 @@ description. This file is the human-readable index. **To add a skill:** create t
 | 8 | [`new-game-scaffold`](skills/new-game-scaffold/SKILL.md) | adding or restructuring a game | `GameDefinition` that reuses shared modules |
 | 9 | [`e2e-visual-check`](skills/e2e-visual-check/SKILL.md) | Playwright tests, screenshots, offline/PWA checks | Deterministic e2e flows, screenshots |
 | 10 | [`game-balance-tuning`](skills/game-balance-tuning/SKILL.md) | difficulty, scoring, timing, star thresholds | Config-only change + simulation table |
+| 11 | [`task-breakdown`](skills/task-breakdown/SKILL.md) | writing or splitting `docs/tasks/` task files | Small, dependency-ordered tasks with a named red test, README rows |
 
 ## Agents
 
@@ -27,5 +28,5 @@ Spawn them for long output only; a few lines are cheaper to read directly.
 | [`gate-runner`](agents/gate-runner.md) | you want the verdict of `npm run gate` (or one step) | `GATE OK`, or the failing step + ≤ 20 lines of `file:line` errors |
 | [`ci-triage`](agents/ci-triage.md) | CI is red on a PR and the log is long | failing job/step, ≤ 30-line root-cause excerpt, local repro command |
 
-Candidates for later: `task-breakdown` (writing task files for Games 2–4), `audio-pipeline` (once spike S1
+Candidates for later: `audio-pipeline` (once spike S1
 lands), `research-analysis` (analyzing exported learning logs).

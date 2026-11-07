@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | Q Quality |
 | Read first | `docs/architecture.md` (`text`, `content`, `scheduler` rows) (other docs only if needed) |
 | Depends on | [Q1](Q1-node-runnable-core.md) |

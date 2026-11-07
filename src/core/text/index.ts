@@ -5,7 +5,10 @@
  */
 
 export type UzScript = 'uz-Latn' | 'uz-Cyrl';
-export type Lang = UzScript | 'tr' | 'ru' | 'fa' | 'ar';
+/** The source languages a player can have (the non-Uzbek ones). Defined once; core/content etc. reuse it. */
+export type SourceLang = 'tr' | 'ru' | 'fa' | 'ar';
+/** Any language/script text handles: Uzbek in either script, or a source language. */
+export type TextLang = UzScript | SourceLang;
 
 export interface ScriptMeta {
   dir: 'ltr' | 'rtl';
@@ -245,7 +248,7 @@ export function cyrlToLatn(text: string): string {
   return out;
 }
 
-const META: Record<Lang, ScriptMeta> = {
+const META: Record<TextLang, ScriptMeta> = {
   'uz-Latn': { dir: 'ltr', bcp47: 'uz-Latn', fontStack: 'var(--font-ui)' },
   'uz-Cyrl': { dir: 'ltr', bcp47: 'uz-Cyrl', fontStack: 'var(--font-ui)' },
   tr: { dir: 'ltr', bcp47: 'tr', fontStack: 'var(--font-ui)' },
@@ -255,6 +258,6 @@ const META: Record<Lang, ScriptMeta> = {
 };
 
 /** Direction, BCP-47 tag and font-stack token for a language (use instead of hardcoding `dir`). */
-export function scriptMeta(lang: Lang): ScriptMeta {
+export function scriptMeta(lang: TextLang): ScriptMeta {
   return { ...META[lang] };
 }

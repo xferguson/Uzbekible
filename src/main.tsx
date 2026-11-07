@@ -1,6 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
+import './design/fonts.css';
+import './design/tokens.css';
 import { App } from './shell/App';
 import { installTestHooks } from './shell/testHooks';
 

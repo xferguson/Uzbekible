@@ -1,6 +1,7 @@
 import { z } from 'zod';
+import type { SourceLang } from '../text/index.ts';
 
-export const LANGS = ['tr', 'ru', 'fa', 'ar'] as const;
+export const LANGS = ['tr', 'ru', 'fa', 'ar'] as const satisfies readonly SourceLang[];
 export const RELATIONS = [
   'turkic-cognate',
   'shared-arabic',
@@ -49,7 +50,6 @@ export const PackSchema = z.strictObject({
   items: z.array(ItemSchema),
 });
 
-export type Lang = z.infer<typeof LangSchema>;
 export type Relation = z.infer<typeof RelationSchema>;
 export type Confidence = z.infer<typeof ConfidenceSchema>;
 export type SourceForm = z.infer<typeof SourceFormSchema>;

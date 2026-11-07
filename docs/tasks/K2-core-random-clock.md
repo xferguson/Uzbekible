@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | in review |
 | Lane | D Core |
 | Read first | `docs/architecture.md` (your module's row) (other docs only if needed) |
 | Depends on | [T00](T00-app-scaffold.md) |
@@ -14,9 +14,9 @@
 Deterministic randomness and time for every game, test, and simulation.
 
 ## Acceptance criteria
-- [ ] `createRng(seed)` (sfc32 or mulberry32), `seedFrom(string)`, `shuffle`, `sample`, `weightedPick`, `int(min,max)`
-- [ ] `Clock` interface (`now()`), `systemClock`, `createFakeClock()` with `advance(ms)`
-- [ ] `frameLoop(clock, cb)` abstraction usable with fake clock
+- [x] `createRng(seed)` (sfc32 or mulberry32), `seedFrom(string)`, `shuffle`, `sample`, `weightedPick`, `int(min,max)`
+- [x] `Clock` interface (`now()`), `systemClock`, `createFakeClock()` with `advance(ms)`
+- [x] `frameLoop(clock, cb)` abstraction usable with fake clock
 
 ## Test-first plan
 - Property: shuffle is a permutation; same seed → same sequence; `int` within bounds; weightedPick never returns zero-weight items

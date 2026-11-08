@@ -6,7 +6,7 @@
 import { boardPool, compareByFrequency, type Item, type SourceForm } from '@core/content/index.ts';
 import { paramsFor, type DifficultyConfig } from '@core/difficulty/index.ts';
 import { sample, shuffle, type Rng } from '@core/random/index.ts';
-import { distance } from '@core/similarity/index.ts';
+import { letterDistance, lettersOf } from '@core/similarity/index.ts';
 import { DEFAULT_REVIEW_RATIO, nextItems } from '@core/scheduler/index.ts';
 import type { SourceLang } from '@core/text/index.ts';
 import { chooseSource } from '../shared/source.ts';
@@ -48,7 +48,7 @@ const HARD_MAX_TRANSPARENCY = 0.5;
 const HARD_WINDOW = 4;
 const LIVES = 3;
 /** Seeds tried when looking for a tight look-alike cluster. */
-const LOOKALIKE_SEEDS = 12;
+const LOOKALIKE_SEEDS = 6;
 /** Fewest forms a stem needs to anchor a family board (smaller boards need fewer). */
 const FAMILY_MIN_FORMS = 4;
 
@@ -56,9 +56,19 @@ function sourceText(item: Item, langs: ReadonlySet<SourceLang>): string {
   return (item.sources.find((s) => langs.has(s.lang)) ?? item.sources[0])?.text ?? item.uz.latn;
 }
 
+const letterCache = new Map<string, string[]>();
+function letters(text: string): string[] {
+  let l = letterCache.get(text);
+  if (!l) letterCache.set(text, (l = lettersOf(text)));
+  return l;
+}
+
 /** How alike two items look: Uzbek spelling plus the source word's spelling (lower is more alike). */
 function likeness(a: Item, b: Item, langs: ReadonlySet<SourceLang>): number {
-  return distance(a.uz.latn, b.uz.latn) + distance(sourceText(a, langs), sourceText(b, langs));
+  return (
+    letterDistance(letters(a.uz.latn), letters(b.uz.latn)) +
+    letterDistance(letters(sourceText(a, langs)), letters(sourceText(b, langs)))
+  );
 }
 
 /** The best of a few random seeds: the seed plus its `n - 1` nearest neighbours, with the smallest total distance. */

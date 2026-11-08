@@ -45,11 +45,9 @@ describe('motif components', () => {
     expect(svg.style.opacity).toBe('0.08');
   });
 
-  it('PatternBg clamps strength to the 7–10% brief range ceiling of 0.1 by default', () => {
+  it('PatternBg follows the theme strength token (7% light, 10% dark) by default', () => {
     const { container } = render(<PatternBg />);
-    const o = Number(container.querySelector('svg')!.style.opacity);
-    expect(o).toBeGreaterThanOrEqual(0.07);
-    expect(o).toBeLessThanOrEqual(0.1);
+    expect(container.querySelector('svg')!.style.opacity).toBe('var(--pattern-strength, 0.08)');
   });
 
   it('PatternBg uses unique pattern ids per instance', () => {

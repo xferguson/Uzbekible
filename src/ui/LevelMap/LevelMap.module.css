@@ -67,6 +67,9 @@
   padding: var(--space-4);
   list-style: none;
   background: var(--color-cobalt-deep);
+  /* cobalt-deep is close to the dark ground: the edge keeps the facade distinct from the lattice. */
+  border: 2px solid var(--color-cobalt);
+  border-block-end: 0;
   border-radius: var(--radius-card) var(--radius-card) 0 0;
 }
 .row {

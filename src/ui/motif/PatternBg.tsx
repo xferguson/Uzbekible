@@ -2,7 +2,7 @@ import { useId } from 'react';
 import { khatam, pathData } from './geometry';
 
 export interface PatternBgProps {
-  /** Line strength, 0.07–0.10 per the brief (default 0.08). Never place behind running text. */
+  /** Line strength, 0.07–0.10 per the brief. Defaults to the theme's `--pattern-strength` token. Never place behind running text. */
   strength?: number;
   /** Lattice pitch in px. */
   cell?: number;
@@ -10,7 +10,7 @@ export interface PatternBgProps {
 }
 
 /** Star-and-cross line lattice that fills its container. Decorative, low contrast. */
-export function PatternBg({ strength = 0.08, cell = 64, className }: PatternBgProps) {
+export function PatternBg({ strength, cell = 64, className }: PatternBgProps) {
   const id = `pattern-${useId().replace(/:/g, '')}`;
   const h = cell / 2;
   const d = [
@@ -27,7 +27,7 @@ export function PatternBg({ strength = 0.08, cell = 64, className }: PatternBgPr
       className={className}
       width="100%"
       height="100%"
-      style={{ opacity: strength }}
+      style={{ opacity: strength ?? 'var(--pattern-strength, 0.08)' }}
       aria-hidden="true"
       focusable="false"
     >

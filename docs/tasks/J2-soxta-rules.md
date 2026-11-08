@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | on hold: Game 5 is backlog like Games 2–4; resume after Juft v1 (R1) |
+| Status | todo |
 | Lane | J Soxta |
 | Depends on | [K3](K3-core-session.md), [K4](K4-core-scoring-difficulty.md), [J1](J1-soxta-card-pool.md) |
 | Read first | `docs/games/05-soxta.md` ("Core loop", "Decisions"), `docs/architecture.md` (rows you use) |

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | on hold: Game 5 is backlog like Games 2–4; resume after Juft v1 (R1) |
+| Status | todo |
 | Lane | J Soxta |
 | Depends on | [J4](J4-soxta-mockups.md), [J2](J2-soxta-rules.md), [J3](J3-ui-use-swipe.md), [U2](U2-ui-tile-text.md), [U3](U3-ui-shell-hud.md) |
 | Read first | `docs/design/mockups/soxta/` (approved), `docs/games/05-soxta.md` ("Core loop") |

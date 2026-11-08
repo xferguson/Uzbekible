@@ -9,6 +9,8 @@
 | `screenshot-d2.mjs` | D2 | Regenerates `screens/D2-*.png` (each device frame at native size): `node docs/design/mockups/screenshot-d2.mjs` |
 | `I4-imlo-screens.html` | I4 | Every Imlo screen (phone and desktop, light and dark): level map, ready card with modes, board states, the 20-tile largest board, Oson colouring, six scripts, parts, motion with reduced-motion twins, sizing and contrast tables |
 | `screenshot-i4.mjs` | I4 | Regenerates `screens/I4-*.png`: `node docs/design/mockups/screenshot-i4.mjs` |
+| `J4-soxta-screens.html` | J4 | Every Soxta screen (phone and desktop, light and dark): ready, card, drag, correct, wrong, timeout, pause, results; six scripts, parts, motion with reduced-motion twins, timer curve, 360 px fit, contrast, a playable card |
+| `screenshot-j4.mjs` | J4 | Regenerates `screens/J4-*.png`: `node docs/design/mockups/screenshot-j4.mjs` |
 
 Published for review: D1 https://claude.ai/artifact/5znuW6aHUn9NkYXe9MfLzP · D2 https://claude.ai/artifact/GneG7ZrPFZ1nCyaBfBhb2G · I4 https://claude.ai/artifact/2AN25RgzmLzxFuQwA5tdfe
 

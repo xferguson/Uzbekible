@@ -44,6 +44,8 @@ export const pairs = [
   ['text', 'glaze-tint', 4.5, 'letter on an active row'],
   ['gold', 'glaze-tint', 3, 'active / correct row border'],
   ['crack', 'ground', 3, 'wrong-row edge and cracks'],
+  // J4 additions
+  ['ochre', 'ground', 3, 'urgent timer segments (Soxta)'],
 ];
 const lum = (hex) => {
   const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)

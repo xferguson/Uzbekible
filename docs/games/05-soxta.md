@@ -57,3 +57,18 @@ to Uzbek-meaning clues only.
 - **Partial false friends** (one shared sense, one not) muddy the "exactly one" rule; exclude them from v1.
 - **Reverse mode:** show the two words and ask for the meaning among English choices. A later variant.
 - Add **Persian/Arabic/Russian** false-friend pairs later, reusing the same card.
+
+## Approved decisions
+Approved by the user on 2026-11-08 (task J4, PR #85). Reference mockup: `docs/design/mockups/J4-soxta-screens.html`; frames `docs/design/mockups/screens/J4-*`.
+- **Flow:** ready → cards → results. Endless, so no level map; countdown, pause and settings are Juft's.
+- **Card:** two word tiles on opposite sides, the English clue in a gold octagon between them (captioned *maʼnosi* / *маъноси*), per-card timer under the HUD, two arrow buttons as the tap fallback (desktop shows `←` `→`). A **UZ** / **TR** tag sits in each tile's corner; sides are random per card.
+- **English** only in the clue and the reveal; tiles are never glossed.
+- **Swipe:** the tile follows the finger, lifts and tilts, 3 px gold border and corner star; past halfway, a tap, an arrow button or a key all choose the side.
+- **Correct:** gold glaze, star bloom, check badge. **Wrong:** cracks, shake, cross badge, one life tile cracks, the right tile gets a dashed gold edge and a check. **Timeout:** same cost; all timer segments dashed, clock banner, right tile outlined.
+- **Reveal** holds 1.4 s (tap or `Space` skips) and shows both words with both meanings, the clue's owner first.
+- **Timer:** 12 glazed segments dropping one by one; the last three turn ochre with a "!" before the seconds. Proposed numbers (J2 tunes them): 8 s at streak 0–2, then 7, 6, 5, 4, 3 s at streak 3, 6, 9, 12, 15+; points 10 × (1, 2, 3, 3, 4, 4); pair tiers rise with the streak.
+- **HUD:** lives as three tiles, streak as an octagon with a count, gold ×N pill from streak 3. A mistake resets the streak.
+- **Results:** score, new-best ribbon, four stats, and the pairs missed with both meanings; Again is primary.
+- **Scripts:** Uzbek in Latin or Cyrillic (ready-card toggle); Turkish always Turkish; Russian, Persian and Arabic tiles are drawn for the later variant (RTL in their own fonts).
+- **Reduced motion:** instant replacements that keep each shape cue; dragging stays (it is the player's own movement).
+- **Colour:** no new tokens; `contrast.mjs` gains the ochre timer pair.

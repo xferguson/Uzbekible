@@ -41,6 +41,7 @@ V Visual:     V1 ─┬─ V2 ──────────┐
                   ├─ V4         ├─ V8 🔒 / V9 🔒 / V10 🔒 ── V11
                   └─ V5 ── V7 ──┘
               V7 ── V12 (standing rule for every game)
+              V5 + I7 + J6 ── V13 (Imlo and Soxta audit → follow-up tasks)
               V3 · V6 (independent)
 ```
 **Start right away, in parallel:** T00, D1, C1, S1, S2. After T00: T01, T02, K1, K2, K4, K5, K9.
@@ -144,6 +145,7 @@ seconds-long PR-body check with no GitHub API calls. **Queued for later:** nothi
 | [V10](V10-juft-results-overlays-board.md) 🔒 | Results, countdown, pause, fail and board polish to D2 (GATE) | V Visual quality | V2, V7 |
 | [V11](V11-visual-regression.md) | Visual-regression baselines, run in the cloud session | V Visual quality | V8, V9, V10 |
 | [V12](V12-fidelity-for-every-game.md) | Mock fidelity as a standing rule for every design and game | V Visual quality | V7 |
+| [V13](V13-imlo-soxta-fidelity-audit.md) | Imlo and Soxta fidelity audit, with owned follow-up tasks | V Visual quality | V5, I7, J6 |
 
 ## Writing new tasks
 Copy [`_TEMPLATE.md`](_TEMPLATE.md). Keep a task small enough for one PR (about ≤ 400 lines of non-generated

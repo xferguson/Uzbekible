@@ -69,6 +69,7 @@ _(no exports yet)_
 - `aggregateEvents(events: readonly LogEvent[]): Aggregate[]` - Aggregates of a full event history: the reference the rolled-over log must match.
 - `createLearningLog(options: LearningLogOptions): LearningLog`
 - `csvEscape(value: unknown): string`
+- `isAttemptEvent(e: { type: string; }): boolean` - Events that are one answer to one item: a game's response time runs from the previous one.
 
 ## `core/morphology`
 

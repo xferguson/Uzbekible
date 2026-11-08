@@ -14,6 +14,7 @@
 <!-- CI (pr-evidence) fails a PR that touches src/ui/**, src/shell/**, src/games/*/**/*.tsx or any *.css unless this
 section links a mockup comparison: run `npm run shots`, publish compare.html as an Artifact and paste the link
 (or name `shots/compare`). Phone + desktop, light + dark.
+Release (R) PR: always link the published compare page; "n/a" is not allowed (docs/tasks/_RELEASE_TEMPLATE.md).
 Non-visual UI change (e.g. a hook refactor)? Write `Visual change: none (<one-line reason>)` instead. "n/a" fails. -->
 
 ## Checklist

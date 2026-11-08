@@ -26,6 +26,16 @@ describe('<App />', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeInTheDocument();
   });
 
+  it('draws the girih lattice behind every screen as a decorative, non-interactive layer', async () => {
+    const { container } = render(<App loadPack={() => new Promise(() => {})} />);
+    const layer = container.querySelector('[data-testid="app-bg"]')!;
+    expect(layer).not.toBeNull();
+    expect(layer).toHaveAttribute('aria-hidden', 'true');
+    expect(layer.querySelector('pattern')).not.toBeNull();
+    // It sits before the page content so the content paints over it.
+    expect(layer.nextElementSibling?.tagName).toBe('MAIN');
+  });
+
   it('survives a pack that fails to load', async () => {
     render(<App loadPack={() => Promise.reject(new Error('offline'))} />);
     expect(await screen.findByRole('alert')).toBeInTheDocument();

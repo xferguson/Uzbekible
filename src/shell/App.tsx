@@ -7,7 +7,7 @@ import type { StorageBackend } from '@core/storage';
 import { registerAllGames } from '@games/all';
 import type { AnyGameDefinition } from '@games/registry';
 import type { GameSettings } from '@games/types';
-import { LevelMap, ModePicker, ScreenBar, SettingsPanel, type Script } from '@ui/index';
+import { LevelMap, ModePicker, PatternBg, ScreenBar, SettingsPanel, type Script } from '@ui/index';
 import { label } from '../ui/labels';
 import { isGalleryPath } from '../dev/gallery/route';
 import { GameShell } from './GameShell';
@@ -218,6 +218,9 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
 
   return (
     <>
+      <div className={styles.bg} data-testid="app-bg" aria-hidden="true">
+        <PatternBg />
+      </div>
       {body}
       <UpdateToast sw={'serviceWorker' in navigator ? navigator.serviceWorker : undefined} />
     </>

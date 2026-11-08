@@ -1,3 +1,14 @@
+/* Girih lattice behind every screen: full-bleed, fixed, never interactive. */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.bg > svg {
+  display: block;
+}
+
 /* Page frame for the shell screens (home, settings, map, play). Tokens only. */
 .page {
   box-sizing: border-box;
@@ -8,6 +19,8 @@
   padding-block: max(var(--space-4), env(safe-area-inset-top)) var(--space-8);
   padding-inline: max(var(--space-4), env(safe-area-inset-left))
     max(var(--space-4), env(safe-area-inset-right));
+  position: relative;
+  z-index: 1;
   display: grid;
   align-content: start;
   gap: var(--space-4);

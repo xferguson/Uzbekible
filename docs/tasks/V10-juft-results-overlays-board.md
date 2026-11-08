@@ -18,6 +18,8 @@ Bring the results card (star medallions, stat grid, actions), the countdown, pau
 ## Acceptance criteria
 - [ ] Results as in D2 for 1, 2 and 3 stars and new best; fits 320 px
 - [ ] Countdown, pause (board hidden) and fail overlays as in D2
+- [ ] Add phone/desktop frames to `docs/design/frames.json` for results 1/2/3, board-8, wrong and hint where D2 PNGs exist
+- [ ] Wrong state shows tile crack and life-glyph crack and the -5 delta; hint tooltip anchored with arrow
 - [ ] Board gaps from `fidelity-juft.md` fixed (HUD, tile states, hint)
 - [ ] Matches the owned frames at 360/390/1280, light and dark; design-reviewer reports no blocker or major; comparison in the PR
 

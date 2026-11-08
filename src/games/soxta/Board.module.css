@@ -129,10 +129,7 @@
   color: var(--color-text);
   background: var(--color-gold);
 }
-.cell[data-answer] > button {
-  background: color-mix(in srgb, var(--color-gold) 22%, var(--color-surface));
-  color: var(--color-text);
-}
+
 .cell[data-answer] {
   outline: 3px dashed var(--color-gold);
   outline-offset: 3px;
@@ -309,4 +306,72 @@
   .card {
     transition: none;
   }
+}
+
+/* Feedback looks (mockup J4). */
+.card {
+  position: relative;
+}
+.cell > button {
+  background: linear-gradient(
+    var(--color-surface),
+    color-mix(in srgb, var(--color-turquoise-pale) 55%, var(--color-surface))
+  );
+}
+.chev {
+  margin-block-start: auto;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--color-cobalt);
+  opacity: 0.55;
+}
+.cell[data-kind='correct'][data-answer] {
+  outline: none;
+}
+.cell[data-kind='correct'][data-answer] > button {
+  background: var(--color-gold);
+  color: var(--color-text);
+  border: 3px solid var(--color-cobalt);
+}
+.cell[data-kind='correct'][data-answer] .chev {
+  color: var(--color-text);
+}
+.cell[data-kind='timeout'][data-answer] > button {
+  border: 4px dashed var(--color-gold);
+}
+.cell[data-ghost] > button {
+  background: transparent;
+  border: 2px dashed var(--color-text-muted);
+  opacity: 0.6;
+}
+.cell[data-wrong] > button {
+  background: var(--color-surface);
+  border: 3px solid var(--color-crack);
+}
+.cracks {
+  stroke-width: 4;
+}
+.reveal[data-kind='correct'],
+.reveal[data-kind='timeout'] {
+  border-color: var(--color-gold);
+}
+.pill.good,
+.cross.tick {
+  color: var(--color-text);
+  background: var(--color-gold);
+}
+.timeoutPill {
+  position: absolute;
+  inset-block-start: -14px;
+  inset-inline: 0;
+  margin-inline: auto;
+  inline-size: max-content;
+  z-index: 4;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  color: var(--color-text);
+  background: var(--color-gold);
+  border: 2px solid var(--color-surface);
 }

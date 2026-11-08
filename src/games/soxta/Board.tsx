@@ -186,6 +186,9 @@ export function Board({
         className={styles.cell}
         data-side={side}
         data-answer={feedback && side === answerSide ? '' : undefined}
+        data-kind={feedback?.kind}
+        data-wrong={feedback?.kind === 'wrong' && feedback.picked === side ? '' : undefined}
+        data-ghost={feedback && feedback.kind !== 'wrong' && side !== answerSide ? '' : undefined}
       >
         {feedback && side === answerSide && (
           <span aria-hidden="true" className={`${styles.badge} ${styles.check}`}>
@@ -211,6 +214,9 @@ export function Board({
         <Tile label={text} state={tileState(side)} onSelect={() => answer(side)}>
           <span data-testid={`tile-${side}`} className={styles.tileFace}>
             <span className={styles.tag}>{isUz ? 'UZ' : 'TR'}</span>
+            <span aria-hidden="true" className={styles.chev}>
+              {side === 'left' ? '«' : '»'}
+            </span>
             {isUz ? (
               <UzText
                 latn={view.card.uz.uz.latn}
@@ -290,6 +296,11 @@ export function Board({
         aria-label={label(script, 'Qaysi soʻz?')}
         role="group"
       >
+        {feedback?.kind === 'timeout' && (
+          <span data-testid="timeout-pill" className={styles.timeoutPill}>
+            ◷ {label(script, 'Vaqt tugadi')}
+          </span>
+        )}
         {word('left')}
         <div className={styles.clueWrap}>
           <span data-testid="clue" className={styles.clue} lang="en">
@@ -325,6 +336,7 @@ export function Board({
         <button
           type="button"
           data-testid="reveal"
+          data-kind={reveal.kind}
           aria-live="polite"
           className={styles.reveal}
           onClick={skip}
@@ -332,9 +344,9 @@ export function Board({
           <span className={styles.revealHead}>
             <span
               aria-hidden="true"
-              className={`${styles.cross} ${reveal.kind === 'correct' ? styles.tick : ''}`}
+              className={`${styles.cross} ${reveal.kind === 'wrong' ? '' : styles.tick}`}
             >
-              {reveal.kind === 'correct' ? '✓' : '✕'}
+              {reveal.kind === 'correct' ? '✓' : reveal.kind === 'timeout' ? '◷' : '✕'}
             </span>
             <span className={styles.revealTitle}>
               {label(

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | in review |
 | Lane | J Soxta |
 | Depends on | [D1](D1-design-system-mockups.md) |
 | Read first | `docs/games/05-soxta.md`, `docs/design/brief.md`, `.claude/skills/design-mockup/SKILL.md` |

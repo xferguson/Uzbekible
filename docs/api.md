@@ -202,7 +202,7 @@ _(no exports yet)_
 - `ModePickerProps` { modes: readonly { id: string; name: { uzLatn: string; uzCyrl: string } }[]; value: string; script: Script; onChange: (id: string) => void }
 - `PatternBg({ strength, cell, className }: PatternBgProps): import("react").JSX.Element` - Star-and-cross line lattice that fills its container. Decorative, low contrast.
 - `PatternBgProps` { strength?: number; cell?: number; className?: string }
-- `PauseOverlay({ onResume, onMap, script, }: Common & { onResume: () => void; onMap: () => void; }): import("react").JSX.Element` - Covers the screen and replaces the board, so a pause cannot be used to study the tiles.
+- `PauseOverlay({ onResume, onMap, mapLabel, script, }: Common & { onResume: () => void; onMap: () => void; mapLabel?: string; }): import("react").JSX.Element` - Covers the screen and replaces the board, so a pause cann…
 - `ResultsScreen(p: ResultsScreenProps): import("react").JSX.Element`
 - `ResultsScreenProps` { won: boolean; stars: 0 | 1 | 2 | 3; score: number; timeMs: number; mistakes: number; hints: number; newBest: boolean; onNext?: () => void; onReplay?: () => void; onMap: () => void }
 - `RosetteBand({ width, height, className }: RosetteBandProps): import("react").JSX.Element` - Horizontal band: alternating stars in octagon frames with gold diamonds between, on cobalt-deep.

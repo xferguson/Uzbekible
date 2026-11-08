@@ -266,6 +266,7 @@
   sources:
     - lang: tr
       text: hat
+      glossEn: line; handwriting
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:xat=not; wiktionary:hat
@@ -357,6 +358,7 @@
   sources:
     - lang: tr
       text: üzmek
+      glossEn: to upset, to sadden
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:uz=özbekçe,kırmak; wiktionary:üzmek
@@ -456,6 +458,7 @@
   sources:
     - lang: tr
       text: vuruş
+      glossEn: hit, blow
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:urush=savaş
@@ -491,6 +494,7 @@
   sources:
     - lang: tr
       text: derya
+      glossEn: sea
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:daryo=ırmak; wiktionary:daryo; wiktionary:derya
@@ -545,6 +549,7 @@
   sources:
     - lang: tr
       text: el
+      glossEn: hand; stranger
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -599,6 +604,7 @@
   sources:
     - lang: tr
       text: duman
+      glossEn: smoke
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:tuman=ilçe; wiktionary:duman
@@ -1104,6 +1110,7 @@
   sources:
     - lang: tr
       text: son
+      glossEn: end; last
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:son=sayı; wiktionary:son
@@ -1213,6 +1220,7 @@
   sources:
     - lang: tr
       text: boy
+      glossEn: height, stature
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:boy=varlıklı,zengin
@@ -1357,6 +1365,7 @@
   sources:
     - lang: tr
       text: yapmak
+      glossEn: to do, to make
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:yop=kapatmak; wiktionary:yapmak

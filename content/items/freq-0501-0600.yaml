@@ -77,6 +77,7 @@
   sources:
     - lang: tr
       text: fukara
+      glossEn: the poor
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:fuqaro=vatandaş; wiktionary:fukara
@@ -342,6 +343,7 @@
   sources:
     - lang: tr
       text: maslahat
+      glossEn: affair, matter
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -999,6 +1001,7 @@
   sources:
     - lang: tr
       text: layiha
+      glossEn: written memorandum
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -1026,6 +1029,7 @@
   sources:
     - lang: tr
       text: baba
+      glossEn: father
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -1157,6 +1161,7 @@
   sources:
     - lang: tr
       text: şaşmak
+      glossEn: to be surprised
       relation: false-friend
       confidence: low
       ref: wiktionary:şaşmak
@@ -1274,6 +1279,7 @@
   sources:
     - lang: tr
       text: hâkim
+      glossEn: judge
       relation: false-friend
       confidence: low
       ref: wiktionary:hokim; wiktionary:hâkim
@@ -1338,6 +1344,7 @@
   sources:
     - lang: tr
       text: kumpanya
+      glossEn: theatrical troupe
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:kompaniya=firma
@@ -1462,6 +1469,7 @@
   sources:
     - lang: tr
       text: güruh
+      glossEn: crowd, throng
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:guruh=grup

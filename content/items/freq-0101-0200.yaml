@@ -248,6 +248,7 @@
   sources:
     - lang: tr
       text: gütmek
+      glossEn: to herd, to tend
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:kut=beklemek; wiktionary:gütmek
@@ -455,6 +456,7 @@
   sources:
     - lang: tr
       text: hazır
+      glossEn: ready
       relation: false-friend
       confidence: low
       ref: wiktionary:hozir; wiktionary:hazır
@@ -585,6 +587,7 @@
   sources:
     - lang: tr
       text: taşlamak
+      glossEn: to pelt with stones
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -694,6 +697,7 @@
   sources:
     - lang: tr
       text: yaman
+      glossEn: formidable, terrific
       relation: false-friend
       confidence: low
       ref: wiktionary:yomon
@@ -767,6 +771,7 @@
   sources:
     - lang: tr
       text: düşünmek
+      glossEn: to think
       relation: false-friend
       confidence: low
       ref: wiktionary:düşünmek
@@ -780,6 +785,7 @@
   sources:
     - lang: tr
       text: iltimas
+      glossEn: favouritism
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -820,6 +826,7 @@
   sources:
     - lang: tr
       text: muamma
+      glossEn: riddle, mystery
       relation: false-friend
       confidence: low
       ref: curator:C2

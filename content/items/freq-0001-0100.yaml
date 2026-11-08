@@ -922,6 +922,7 @@
   sources:
     - lang: tr
       text: kol
+      glossEn: arm; sleeve
       relation: false-friend
       confidence: low
       ref: wiktionary:kol
@@ -1003,6 +1004,7 @@
   sources:
     - lang: tr
       text: tapmak
+      glossEn: to worship
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:top=bulmak,türemek
@@ -1062,6 +1064,7 @@
   sources:
     - lang: tr
       text: oylamak
+      glossEn: to vote
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:oʻyla=düşünmek,sanmak
@@ -1256,6 +1259,7 @@
   sources:
     - lang: tr
       text: pul
+      glossEn: stamp; scale
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:pul=para

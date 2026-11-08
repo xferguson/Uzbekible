@@ -17,7 +17,12 @@ export default defineConfig({
     launchOptions: { executablePath },
   },
   projects: [
-    { name: 'phone', use: { ...devices['iPhone 13'], defaultBrowserType: 'chromium' } },
+    {
+      name: 'phone',
+      use: { ...devices['iPhone 13'], defaultBrowserType: 'chromium' },
+      // The layout matrix sets its own viewports (V2); run it once, in the desktop project.
+      testIgnore: /layout\.e2e\.ts/,
+    },
     {
       name: 'desktop',
       use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 } },

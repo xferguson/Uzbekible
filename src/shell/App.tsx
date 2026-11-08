@@ -10,6 +10,7 @@ import type { GameSettings } from '@games/types';
 import { LevelMap, ModePicker, PatternBg, ScreenBar, SettingsPanel, type Script } from '@ui/index';
 import { label } from '../ui/labels';
 import { isGalleryPath } from '../dev/gallery/route';
+import { isSoxtaPreviewPath } from '../dev/soxta/route';
 import { GameShell } from './GameShell';
 import { createModeStore, createProgressStore, type Progress } from './progress';
 import {
@@ -27,6 +28,10 @@ import { UpdateToast } from './UpdateToast';
 // Dev-only: the gallery chunk is dropped from production builds (import.meta.env.DEV is false there).
 const Gallery = import.meta.env.DEV
   ? lazy(() => import('../dev/gallery').then((m) => ({ default: m.Gallery })))
+  : null;
+// TEMPORARY (J5): removed by J6 with src/dev/soxta.
+const SoxtaPreview = import.meta.env.DEV
+  ? lazy(() => import('../dev/soxta/SoxtaPreview').then((m) => ({ default: m.SoxtaPreview })))
   : null;
 
 export interface AppProps {
@@ -55,6 +60,13 @@ export function App(props: AppProps) {
     return (
       <Suspense fallback={null}>
         <Gallery />
+      </Suspense>
+    );
+  }
+  if (SoxtaPreview && isSoxtaPreviewPath(window.location.pathname)) {
+    return (
+      <Suspense fallback={null}>
+        <SoxtaPreview />
       </Suspense>
     );
   }

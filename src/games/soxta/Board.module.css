@@ -1,0 +1,377 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  block-size: 100%;
+  min-block-size: 0;
+  max-inline-size: 760px;
+  margin-inline: auto;
+  padding: var(--space-4) var(--space-4) var(--space-6);
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden; /* the board never scrolls */
+}
+.pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.board > :not(.pattern) {
+  position: relative;
+  z-index: 1;
+}
+
+.hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+/* Per-card timer: 12 glazed segments dropping one by one. */
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.segment {
+  flex: 1;
+  block-size: 10px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  border: 2px dashed var(--color-text-muted);
+  box-sizing: border-box;
+}
+.segment[data-on] {
+  background: var(--color-turquoise);
+  border: 2px solid var(--color-cobalt);
+}
+.timer[data-warn] .segment[data-on] {
+  background: var(--color-gold);
+  border-color: var(--color-text);
+}
+.timer[data-timeout] .segment {
+  border-style: dashed;
+}
+.seconds {
+  min-inline-size: 3ch;
+  text-align: end;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  color: var(--color-text);
+}
+.timer[data-warn] .seconds {
+  color: var(--color-crack);
+}
+
+/* The card: two words on opposite sides, the clue between. */
+.card {
+  flex: none;
+  margin-block: var(--space-6) 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  align-content: center;
+  gap: var(--space-2);
+  touch-action: pan-y;
+  cursor: grab;
+  outline-offset: 4px;
+  transition: transform 120ms;
+}
+.card:focus-visible {
+  outline: 3px solid var(--color-gold);
+}
+.cell {
+  position: relative;
+  display: grid;
+  min-inline-size: 0;
+  border-radius: var(--radius-tile);
+}
+.cell > button {
+  inline-size: 100%;
+  min-block-size: clamp(180px, 34dvh, 300px);
+  padding-inline: var(--space-2);
+  font-size: 1.25rem;
+}
+.badge {
+  position: absolute;
+  inset-block-start: -10px;
+  inset-inline-end: -6px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  inline-size: 1.7rem;
+  block-size: 1.7rem;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 2px solid var(--color-surface);
+}
+.check {
+  color: var(--color-text);
+  background: var(--color-gold);
+}
+.miss {
+  color: var(--color-on-deep);
+  background: var(--color-crack);
+}
+.clock {
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+}
+.tick {
+  color: var(--color-text);
+  background: var(--color-gold);
+}
+.good {
+  color: var(--color-text);
+  background: var(--color-gold);
+}
+
+.cell[data-answer] {
+  outline: 3px dashed var(--color-gold);
+  outline-offset: 3px;
+}
+.tileFace {
+  display: grid;
+  grid-template-columns: 100%;
+  justify-items: center;
+  align-content: center;
+  gap: var(--space-2);
+  inline-size: 100%;
+}
+.tag {
+  justify-self: start;
+  padding: 0 var(--space-1);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-cobalt);
+  border: 1px solid currentColor;
+  border-radius: var(--radius-tile);
+}
+.word {
+  font-size: clamp(1rem, 4.8vw, 1.4rem);
+  overflow-wrap: break-word;
+  text-align: center;
+}
+.clueWrap {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+  max-inline-size: 7rem;
+}
+.caption {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+.clue {
+  display: grid;
+  place-items: center;
+  padding: var(--space-3);
+  position: relative;
+  background: var(--color-gold);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  text-align: center;
+  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  inline-size: clamp(5.25rem, 22vw, 7rem);
+  aspect-ratio: 1;
+  box-sizing: border-box;
+}
+.clue::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background: var(--color-surface);
+  clip-path: inherit;
+}
+.clue > span {
+  position: relative;
+  padding: 0 var(--space-1);
+  overflow-wrap: normal;
+  hyphens: none;
+  font-size: 0.9rem;
+}
+.cracks {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  z-index: 2;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--color-crack);
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+}
+.cracks path {
+  vector-effect: non-scaling-stroke;
+}
+
+.arrows {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.arrow {
+  flex: 1;
+  min-block-size: 56px;
+  font-size: 1.5rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 2px solid var(--color-cobalt);
+  border-radius: var(--radius-tile);
+  cursor: pointer;
+}
+.arrow:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Reveal: both words with both meanings, the clue's owner first. */
+.reveal {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  text-align: start;
+  font-family: var(--font-ui);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 3px solid var(--color-crack);
+  border-radius: var(--radius-tile);
+  cursor: pointer;
+}
+.revealHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-block-end: var(--space-2);
+  border-block-end: 1px solid var(--color-text-muted);
+}
+.cross {
+  display: grid;
+  place-items: center;
+  inline-size: 1.6rem;
+  block-size: 1.6rem;
+  border-radius: 50%;
+  color: var(--color-on-deep);
+  background: var(--color-crack);
+  font-size: 0.8rem;
+}
+.revealTitle {
+  flex: 1;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.pill {
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  color: var(--color-on-deep);
+  background: var(--color-crack);
+  font-weight: 700;
+}
+.revealRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-block: var(--space-1);
+  border-block-end: 1px solid var(--color-text-muted);
+}
+.rowTag {
+  min-inline-size: 2ch;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+.revealRow[data-owner] .revealWord {
+  font-weight: 700;
+}
+.revealWord {
+  font-size: 1.2rem;
+}
+.meaning {
+  margin-inline-start: auto;
+  color: var(--color-text-muted);
+}
+.hint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
+
+/* Feedback looks (mockup J4). */
+.card {
+  position: relative;
+}
+.cell > button {
+  background: linear-gradient(
+    var(--color-surface),
+    color-mix(in srgb, var(--color-turquoise-pale) 55%, var(--color-surface))
+  );
+}
+.chev {
+  margin-block-start: auto;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--color-cobalt);
+  opacity: 0.55;
+}
+.cell[data-kind='correct'][data-answer] {
+  outline: none;
+}
+.cell[data-kind='correct'][data-answer] > button {
+  background: var(--color-gold);
+  color: var(--color-text);
+  border: 3px solid var(--color-cobalt);
+}
+.cell[data-kind='correct'][data-answer] .chev {
+  color: var(--color-text);
+}
+.cell[data-kind='timeout'][data-answer] > button {
+  border: 4px dashed var(--color-gold);
+}
+.cell[data-ghost] > button {
+  background: transparent;
+  border: 2px dashed var(--color-text-muted);
+  opacity: 0.6;
+}
+.cell[data-wrong] > button {
+  background: var(--color-surface);
+  border: 3px solid var(--color-crack);
+}
+.cracks {
+  stroke-width: 4;
+}
+.reveal[data-kind='correct'],
+.reveal[data-kind='timeout'] {
+  border-color: var(--color-gold);
+}
+.pill.good,
+.cross.tick {
+  color: var(--color-text);
+  background: var(--color-gold);
+}
+.timeoutPill {
+  position: absolute;
+  inset-block-start: -14px;
+  inset-inline: 0;
+  margin-inline: auto;
+  inline-size: max-content;
+  z-index: 4;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  color: var(--color-text);
+  background: var(--color-gold);
+  border: 2px solid var(--color-surface);
+}

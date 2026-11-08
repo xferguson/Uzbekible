@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | J Soxta |
 | Depends on | [J4](J4-soxta-mockups.md), [J2](J2-soxta-rules.md), [J3](J3-ui-use-swipe.md), [U2](U2-ui-tile-text.md), [U3](U3-ui-shell-hud.md) |
 | Read first | `docs/design/mockups/soxta/` (approved), `docs/games/05-soxta.md` ("Core loop") |
@@ -26,3 +26,6 @@ The card screen built from shared tiles and HUD, driven by `useSwipe` and the J2
 
 ## Files likely touched
 - `src/games/soxta/Board.tsx`, `src/games/soxta/Board.test.tsx`
+
+## Notes
+- Visual proof came from a temporary dev route, `/dev/soxta` (`src/dev/soxta/`), because the game is not registered until J6. **J6 must delete it first** (see J6 acceptance criteria).

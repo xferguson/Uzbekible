@@ -14,6 +14,7 @@
 Register Soxta as a `GameDefinition`, log every attempt, persist best score, and cover one full run end to end.
 
 ## Acceptance criteria
+- [ ] **First step: delete J5's temporary preview** (`src/dev/soxta/`, the `SoxtaPreview` lazy import and `/dev/soxta` branch in `src/shell/App.tsx`), then mount the board through the registry and add `soxta-*` states to `e2e/states/` and `docs/design/frames.json` so `npm run shots` covers it
 - [ ] Registered in the game registry and reachable from the home screen
 - [ ] Every answer is written to the learning log with the item id and outcome
 - [ ] Best streak and score persist in localStorage

@@ -18,6 +18,7 @@
 :root,
 [data-theme='light'] {
   color-scheme: light;
+  --pattern-strength: 0.07;
   --color-ground: #f7f4ec;
   --color-surface: #ffffff;
   --color-cobalt: #1b3f8f;
@@ -36,6 +37,7 @@
 
 [data-theme='dark'] {
   color-scheme: dark;
+  --pattern-strength: 0.1;
   --color-ground: #0b1a3a;
   --color-surface: #12254d;
   --color-cobalt: #5b86e8;
@@ -56,6 +58,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
+    --pattern-strength: 0.1;
     --color-ground: #0b1a3a;
     --color-surface: #12254d;
     --color-cobalt: #5b86e8;

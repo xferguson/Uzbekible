@@ -27,6 +27,12 @@ describe('design tokens', () => {
     }
   });
 
+  it('sets the girih lattice strength per theme: 7% light, 10% dark (brief, 7-10%)', () => {
+    const strengths = [...css.matchAll(/--pattern-strength:\s*([\d.]+);/g)].map((m) => m[1]);
+    // light (:root), explicit dark, and the OS-dark fallback
+    expect(strengths).toEqual(['0.07', '0.1', '0.1']);
+  });
+
   it('serialises a theme to CSS variables', () => {
     const vars = cssVariables('light');
     expect(vars['--color-cobalt']).toBe('#1B3F8F');

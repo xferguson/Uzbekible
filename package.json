@@ -16,6 +16,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "e2e": "playwright test",
+    "e2e:layout": "LAYOUT_FULL=1 playwright test e2e/layout.e2e.ts --project=desktop --trace off",
     "content:validate": "node --experimental-strip-types --no-warnings content/scripts/cli.ts validate",
     "content:review": "node --experimental-strip-types --no-warnings content/scripts/cli.ts review",
     "content:build": "node --experimental-strip-types --no-warnings content/scripts/cli.ts build",
@@ -28,6 +29,7 @@
     "shots": "node --experimental-strip-types --no-warnings scripts/shots.mjs"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.63.0",
     "@testing-library/jest-dom": "^7.0.1",

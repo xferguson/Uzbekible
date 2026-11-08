@@ -36,6 +36,14 @@ describe('<App />', () => {
     expect(layer.nextElementSibling?.tagName).toBe('MAIN');
   });
 
+  it('keeps shell buttons opaque so the lattice never shows through them', () => {
+    const css = readFileSync('src/shell/App.module.css', 'utf8');
+    for (const cls of ['game', 'secondary']) {
+      const rule = new RegExp(`\\.${cls}\\s*\\{([^}]*)\\}`).exec(css)![1]!;
+      expect(rule).toMatch(/background:\s*var\(--color-surface\)/);
+    }
+  });
+
   it('survives a pack that fails to load', async () => {
     render(<App loadPack={() => Promise.reject(new Error('offline'))} />);
     expect(await screen.findByRole('alert')).toBeInTheDocument();

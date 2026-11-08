@@ -65,7 +65,7 @@
   padding-inline: var(--space-6);
   border: 2px solid var(--color-cobalt);
   border-radius: var(--radius-pill);
-  background: transparent;
+  background: var(--color-surface);
   color: var(--color-text);
   font: inherit;
   cursor: pointer;

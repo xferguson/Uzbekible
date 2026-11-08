@@ -26,3 +26,6 @@ The card screen built from shared tiles and HUD, driven by `useSwipe` and the J2
 
 ## Files likely touched
 - `src/games/soxta/Board.tsx`, `src/games/soxta/Board.test.tsx`
+
+## Notes
+- Visual proof came from a temporary dev route, `/dev/soxta` (`src/dev/soxta/`), because the game is not registered until J6. **J6 must delete it first** (see J6 acceptance criteria).

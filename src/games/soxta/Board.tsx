@@ -7,7 +7,17 @@
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { frameLoop, systemClock, type FrameClock } from '@core/clock';
 import type { GameEvent } from '@core/session';
-import { Combo, Lives, Score, SourceText, Tile, UzText, useSwipe, type TileState } from '@ui/index';
+import {
+  Combo,
+  Lives,
+  PatternBg,
+  Score,
+  SourceText,
+  Tile,
+  UzText,
+  useSwipe,
+  type TileState,
+} from '@ui/index';
 import { label } from '../../ui/labels.ts';
 import type { BoardProps } from '../types.ts';
 import {
@@ -146,8 +156,9 @@ export function Board({
   // While feedback is held the answered card stays on screen.
   const view = feedback ? feedback.card : game.current;
   const total = cardMsFor(game.streak);
-  const left = feedback ? 0 : segmentsLeft(game.current.remainingMs, total);
-  const warn = !feedback && left > 0 && left <= WARN_SEGMENTS;
+  const timed = feedback ? feedback.card.remainingMs : game.current.remainingMs;
+  const left = feedback?.kind === 'timeout' ? 0 : segmentsLeft(timed, total);
+  const warn = left > 0 && left <= WARN_SEGMENTS;
   const answerSide = correctSide(view);
 
   const tileState = (side: Side): TileState => {
@@ -172,6 +183,17 @@ export function Board({
           feedback && feedback.kind !== 'correct' && side === answerSide ? '' : undefined
         }
       >
+        {feedback?.kind === 'wrong' && feedback.picked === side && (
+          <svg
+            data-testid="cracks"
+            className={styles.cracks}
+            viewBox="0 0 100 160"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path d="M52 0 L46 40 L60 62 L48 100 L56 160 M46 40 L30 55 M60 62 L80 48 M48 100 L34 120" />
+          </svg>
+        )}
         <Tile label={text} state={tileState(side)} onSelect={() => answer(side)}>
           <span data-testid={`tile-${side}`} className={styles.tileFace}>
             <span className={styles.tag}>{isUz ? 'UZ' : 'TR'}</span>
@@ -211,6 +233,7 @@ export function Board({
       data-feedback={feedback?.kind}
       data-reduced={reducedMotion ? '' : undefined}
     >
+      <PatternBg className={styles.pattern} />
       <div className={styles.hud}>
         <Lives lives={state.lives} max={spec.lives} script={script} />
         <Combo count={game.streak} script={script} />
@@ -231,7 +254,7 @@ export function Board({
         ))}
         <span className={styles.seconds}>
           {warn && '! '}
-          {feedback ? '' : Math.ceil(game.current.remainingMs / 1000)}
+          {feedback?.kind === 'timeout' ? '0' : Math.ceil(timed / 1000)}
         </span>
       </div>
 
@@ -252,10 +275,10 @@ export function Board({
       >
         {word('left')}
         <div className={styles.clueWrap}>
-          <span className={styles.caption}>{label(script, 'Maʼnosi')}</span>
           <span data-testid="clue" className={styles.clue} lang="en">
-            {view.clue.text}
+            <span>{view.clue.text}</span>
           </span>
+          <span className={styles.caption}>{label(script, 'Maʼnosi')}</span>
         </div>
         {word('right')}
       </div>
@@ -287,15 +310,22 @@ export function Board({
           className={styles.reveal}
           onClick={skip}
         >
-          {reveal.kind === 'timeout' && (
-            <span className={styles.banner}>{label(script, 'Vaqt tugadi')}</span>
-          )}
+          <span className={styles.revealHead}>
+            <span aria-hidden="true" className={styles.cross}>
+              ✕
+            </span>
+            <span className={styles.revealTitle}>
+              {label(script, reveal.kind === 'timeout' ? 'Vaqt tugadi' : 'Xato')}
+            </span>
+            <span className={styles.pill}>{label(script, '−1 jon')}</span>
+          </span>
           {ordered.map((r) => (
             <span
               key={r.key}
               className={styles.revealRow}
               data-owner={r.key === ordered[0]!.key ? '' : undefined}
             >
+              <span className={styles.rowTag}>{r.key === 'uz' ? 'UZ' : 'TR'}</span>
               {r.key === 'uz' ? (
                 <UzText
                   latn={view.card.uz.uz.latn}
@@ -317,6 +347,9 @@ export function Board({
               )}
             </span>
           ))}
+          <span className={styles.hint}>
+            {label(script, 'Davom etish uchun bosing yoki')} Space
+          </span>
         </button>
       )}
     </div>

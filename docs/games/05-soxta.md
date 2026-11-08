@@ -1,6 +1,6 @@
 # Game 5: Soxta (False-Friend Swipe)
 
-> *soxta* (Uzbek) = fake, false (Turkish *sahte*). Working title. **Status: approved plan, backlog. On hold until Juft v1 ships (tasks J1–J6 are on hold).**
+> *soxta* (Uzbek) = fake, false (Turkish *sahte*). Working title. **Status: approved plan, in progress (tasks J1–J6; J1 and J3 done).**
 
 ## Pitch
 Two words sit on opposite sides of the screen: an **Uzbek** word on one side, a **Turkish** word on the other.

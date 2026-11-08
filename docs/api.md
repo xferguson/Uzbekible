@@ -218,6 +218,10 @@ _(no exports yet)_
 - `SourceTextProps` { lang: SourceLang; text: string; className?: string }
 - `Star8({ size, variant, className }: Star8Props): import("react").JSX.Element` - The signature star: {8/2} khatam, {8/3} turquoise interlace and a gold octagon centre. Decorative.
 - `Star8Props` { size?: number; variant?: 'full' | 'outline'; className?: string }
+- `SwipeBindings` { tabIndex: 0; onPointerDown: (e: PointerEvent<HTMLElement>) => void; onPointerMove: (e: PointerEvent<HTMLElement>) => void; onPointerUp: (e: PointerEvent<HTMLElement>) => void; onPointerCancel: () => …
+- `SwipeDirection` = `'left' | 'right'`
+- `SwipeOptions` { distance?: number; velocity?: number; tapTolerance?: number; clock?: Pick<FrameClock, 'now'>; reducedMotion?: boolean }
+- `SwipeResult` { bind: SwipeBindings; offsetX: number; direction: SwipeDirection | null }
 - `Tile({ label, state, shape, onSelect, onKeyDown, pressHandlers, children, }: TileProps): import("react").JSX.Element` - The shared game tile: states, rect or hex shape, keyboard (Enter/Space), never colour-only.
 - `TileProps` { label: string; state?: TileState; shape?: TileShape; onSelect?: () => void; onKeyDown?: (e: KeyboardEvent) => void; pressHandlers?: Partial<LongPressHandlers>; children?: ReactNode }
 - `TileShape` = `'rect' | 'hex'`
@@ -228,6 +232,9 @@ _(no exports yet)_
 - `chapterOf(level: number, chapters: readonly ChapterInfo[]): number` - Index of the chapter holding `level`; levels past the end belong to the last chapter.
 - `formatTime(ms: number): string` - m:ss, rounded down.
 - `levelState(level: number, progress: MapProgress): LevelCellState`
+- `prefersReducedMotion(): boolean` - True when the user asks for reduced motion.
+- `swipeOutcome(dx: number, dy: number, elapsedMs: number, distance: number, velocity: number): SwipeDirection | null` - Decides whether a finished horizontal drag commits a swipe.
 - `useAnnounce(): (message: string) => void`
 - `useLongPress(onLongPress: () => void, options?: LongPressOptions): LongPressHandlers` - Touch/mouse/pen long press; fires `onLongPress` once per hold, cancels on move, release or leave.
+- `useSwipe(onSwipe: (direction: SwipeDirection) => void, options?: SwipeOptions): SwipeResult` - Horizontal swipe with a distance/velocity threshold, tap-on-side and arrow-key fallbacks.
 - `useUzScript(): UzScript`

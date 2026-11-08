@@ -34,6 +34,7 @@ const read = <T>(page: Page, key: string) =>
 
 async function start(page: Page) {
   await page.getByRole('button', { name: /^(Soxta|Сохта)$/ }).click();
+  await page.getByRole('button', { name: /Boshlash|Бошлаш/ }).click();
   // Real 3-2-1 countdown, then the card.
   await expect(page.getByTestId('soxta-board')).toBeVisible({ timeout: 10_000 });
   await expect(page.getByTestId('clue')).toBeVisible();
@@ -90,10 +91,11 @@ test('a run: one right answer, three mistakes, results, best saved, replay', asy
 
   await loseThree(page);
 
-  await expect(page.getByRole('heading', { name: 'Yugurish tugadi' })).toBeVisible({
-    timeout: 5_000,
-  });
+  await expect(page.getByRole('heading', { name: 'Barakalla!' })).toBeVisible({ timeout: 5_000 });
   await expect(page.getByText('Yangi rekord!')).toBeVisible();
+  await expect(page.getByText('points · was 0')).toBeVisible();
+  // The missed pairs are listed with both meanings.
+  await expect(page.getByRole('listitem').first()).toContainText(' = ');
   expect(await read(page, BEST_KEY)).toEqual({ score: 100, streak: 1 });
 
   // Every answer is in the learning log with the item and the outcome.
@@ -102,17 +104,29 @@ test('a run: one right answer, three mistakes, results, best saved, replay', asy
   expect(log.filter((e) => e.type === 'swipe_wrong')).toHaveLength(3);
   expect(log.filter((e) => e.type.startsWith('swipe_')).every((e) => e.itemId)).toBe(true);
 
-  // The best survives a reload; Again starts a fresh run.
+  // The best survives a reload and shows on the ready card; Again starts a fresh run.
   await page.reload();
   expect(await read(page, BEST_KEY)).toEqual({ score: 100, streak: 1 });
+  await page.getByRole('button', { name: 'Soxta' }).click();
+  await expect(page.getByText('Best score').locator('..')).toContainText('100');
+  await page.getByRole('button', { name: 'Orqaga' }).click();
   await start(page);
   await loseThree(page);
-  await expect(page.getByRole('heading', { name: 'Yugurish tugadi' })).toBeVisible({
-    timeout: 5_000,
-  });
+  await expect(page.getByRole('heading', { name: 'Yaxshi!' })).toBeVisible({ timeout: 5_000 });
   await expect(page.getByText('Yangi rekord!')).toHaveCount(0);
-  await page.getByRole('button', { name: 'Qayta' }).click();
+  await expect(page.getByText('points · best 100')).toBeVisible();
+  await page.getByRole('button', { name: /Yana/ }).click();
   await expect(page.getByTestId('soxta-board')).toBeVisible();
+});
+
+test('script toggle on the ready card shows the Uzbek word in Cyrillic', async ({ page }) => {
+  await page.getByRole('button', { name: 'Soxta' }).click();
+  await page.getByRole('radio', { name: /Cyrillic/ }).click();
+  await expect(page.getByTestId('ready-sample')).toContainText('тун');
+  await page.getByRole('button', { name: /Бошлаш/ }).click();
+  await expect(page.getByTestId('soxta-board')).toBeVisible({ timeout: 10_000 });
+  const uz = (await page.getByTestId('tile-left').innerText()).startsWith('UZ') ? 'left' : 'right';
+  await expect(page.getByTestId(`tile-${uz}`)).toContainText(/[\u0400-\u04FF]/);
 });
 
 test('offline: after the first load a reload still plays a card', async ({ page, context }) => {

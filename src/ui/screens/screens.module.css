@@ -90,3 +90,229 @@
   outline: 3px solid var(--color-gold);
   outline-offset: 2px;
 }
+.note {
+  margin: 0;
+  color: var(--color-on-deep);
+}
+
+/* Endless run results and ready card (mockup J4): one centred column on the ground, no card behind it. */
+.run,
+.ready {
+  box-sizing: border-box;
+  inline-size: min(100%, 560px);
+  margin-inline: auto;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) 0 var(--space-6);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  text-align: center;
+}
+.run p,
+.ready p,
+.run h2,
+.ready h2,
+.run h3 {
+  margin: 0;
+}
+.kicker {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.verdict,
+.readyTitle {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+.gloss {
+  color: var(--color-text-muted);
+}
+.ribbon {
+  margin-block: var(--space-2);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-tile);
+  background: var(--color-gold);
+  color: var(--color-text);
+  font-weight: 700;
+}
+.ribbon small {
+  font-weight: 400;
+}
+.score {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 1.1;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+.runStats,
+.readyStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+  inline-size: 100%;
+  margin: var(--space-2) 0 var(--space-4);
+}
+.readyStats {
+  grid-template-columns: repeat(3, 1fr);
+}
+.runStat,
+.readyStat {
+  display: grid;
+  justify-items: center;
+  padding: var(--space-3) var(--space-1);
+  border-radius: var(--radius-tile);
+  background: var(--color-surface);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+  font-variant-numeric: tabular-nums;
+}
+.runStat dt,
+.readyStat dt {
+  order: 1;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+.readyStat dt {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+.runStat dd,
+.readyStat dd {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.missed {
+  display: grid;
+  gap: var(--space-2);
+  inline-size: 100%;
+  justify-items: start;
+}
+.missed ul {
+  display: grid;
+  gap: var(--space-2);
+  inline-size: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.miss {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-tile);
+  background: var(--color-surface);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+  text-align: start;
+}
+/* A cracked tile: cobalt tile with crack lines, as on the board. */
+.missIcon {
+  flex: none;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+}
+.missIcon rect {
+  fill: var(--color-cobalt-deep);
+  stroke: var(--color-cobalt);
+  stroke-width: 2;
+}
+.missIcon path {
+  fill: none;
+  stroke: var(--color-crack);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+.missText {
+  display: grid;
+}
+.missHead {
+  font-weight: 700;
+}
+.missSub {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+.stack {
+  display: grid;
+  gap: var(--space-3);
+  inline-size: 100%;
+  margin-block-start: var(--space-2);
+}
+.wide {
+  inline-size: 100%;
+  min-block-size: var(--space-12);
+  border-radius: var(--radius-tile);
+  border: 2px solid var(--color-cobalt);
+  background: var(--color-surface);
+  color: var(--color-cobalt);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.wide.primary {
+  background: var(--color-cobalt);
+  color: var(--color-on-cobalt);
+  box-shadow: 0 0 0 2px var(--color-surface) inset;
+}
+.wide small {
+  font-weight: 400;
+}
+.wide:focus-visible,
+.scriptOption:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.readyStar {
+  margin-block-end: var(--space-2);
+}
+.blurb {
+  max-inline-size: 26rem;
+  color: var(--color-text-muted);
+}
+.sample {
+  display: grid;
+  justify-items: center;
+  inline-size: 100%;
+  margin-block: var(--space-4) var(--space-2);
+}
+.scripts {
+  display: flex;
+  gap: var(--space-2);
+  margin-block-end: var(--space-4);
+}
+.scriptOption {
+  display: grid;
+  justify-items: center;
+  min-inline-size: 4rem;
+  min-block-size: var(--space-12);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-tile);
+  border: 1px solid var(--color-cobalt-pale);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+.scriptOption[aria-checked='true'] {
+  background: var(--color-cobalt);
+  border-color: var(--color-cobalt);
+  color: var(--color-on-cobalt);
+}
+.scriptOption small {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+.tick {
+  font-size: 0.7rem;
+  line-height: 1;
+}

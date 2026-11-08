@@ -7,7 +7,16 @@ import type { StorageBackend } from '@core/storage';
 import { registerAllGames } from '@games/all';
 import type { AnyGameDefinition } from '@games/registry';
 import type { GameSettings } from '@games/types';
-import { LevelMap, ModePicker, PatternBg, ScreenBar, SettingsPanel, type Script } from '@ui/index';
+import {
+  LevelMap,
+  ModePicker,
+  PatternBg,
+  ReadyCard,
+  ScreenBar,
+  SettingsPanel,
+  type Script,
+} from '@ui/index';
+import { levelContext } from '@games/sim-adapter';
 import { label } from '../ui/labels';
 import { isGalleryPath } from '../dev/gallery/route';
 import { GameShell } from './GameShell';
@@ -163,8 +172,8 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
     } else if (screen.name === 'play') {
       const { level } = screen;
       const progress = progressOf(def);
-      // An endless game has no map: back goes home.
-      const toMap = () => (def.endless ? home() : setScreen({ name: 'map', gameId: def.id }));
+      // For an endless game the "map" is its ready card.
+      const toMap = () => setScreen({ name: 'map', gameId: def.id });
       body = (
         <main className={`${styles.page} ${styles.wide}`}>
           <ScreenBar
@@ -186,6 +195,33 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
             countdownMs={countdownMs}
             onNext={() => setScreen({ name: 'play', gameId: def.id, level: level + 1 })}
             onMap={toMap}
+          />
+        </main>
+      );
+    } else if (def.endless) {
+      const { intro } = def.endless;
+      const best = runBests.get(def.id)!.get();
+      const lives = def.levels(levelContext(def.id, 1, gameSettings, [])).lives;
+      body = (
+        <main className={styles.page}>
+          <ScreenBar
+            title={script === 'cyrl' ? def.title.uzCyrl : def.title.uzLatn}
+            onBack={home}
+            script={script}
+          />
+          <ReadyCard
+            kicker={intro.kicker}
+            title={script === 'cyrl' ? def.title.uzCyrl : def.title.uzLatn}
+            blurb={intro.blurb}
+            sample={<intro.Sample script={script} />}
+            stats={[
+              { label: 'Lives', value: lives },
+              { label: 'Best streak', value: best.streak },
+              { label: 'Best score', value: best.score },
+            ]}
+            script={script}
+            onScript={(sc) => setScript(settingsStore, sc === 'cyrl' ? 'uz-Cyrl' : 'uz-Latn')}
+            onStart={() => setScreen({ name: 'play', gameId: def.id, level: 1 })}
           />
         </main>
       );
@@ -215,13 +251,7 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
               key={g.id}
               type="button"
               className={styles.game}
-              onClick={() =>
-                setScreen(
-                  g.endless
-                    ? { name: 'play', gameId: g.id, level: 1 }
-                    : { name: 'map', gameId: g.id },
-                )
-              }
+              onClick={() => setScreen({ name: 'map', gameId: g.id })}
             >
               {script === 'cyrl' ? g.title.uzCyrl : g.title.uzLatn}
             </button>

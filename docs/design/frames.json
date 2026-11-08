@@ -233,11 +233,23 @@
       "phone": [
         "docs/design/mockups/screens/J4-phone-pause-pause-{scheme}.png"
       ],
-      "desktop": []
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-pause-pause-{scheme}.png"
+      ]
     },
     "soxta-results": {
       "phone": [
         "docs/design/mockups/screens/J4-phone-results-results-no-record-{scheme}.png"
+      ],
+      "desktop": []
+    },
+    "soxta-countdown": {
+      "phone": [],
+      "desktop": []
+    },
+    "soxta-results-best": {
+      "phone": [
+        "docs/design/mockups/screens/J4-phone-results-results-new-best-{scheme}.png"
       ],
       "desktop": [
         "docs/design/mockups/screens/J4-desk-6-results-{scheme}.png"

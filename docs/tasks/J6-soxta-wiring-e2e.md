@@ -8,7 +8,7 @@
 | Read first | `docs/games/05-soxta.md`, `.claude/skills/e2e-visual-check/SKILL.md` |
 | API used | `docs/api.md` § `core/learning-log`, `core/storage`, game registry |
 | Skills | `tdd-task`, `e2e-visual-check`, `pr-flow` |
-| Screens owned | `soxta-ready`, `soxta-card`, `soxta-correct`, `soxta-wrong`, `soxta-timeout`, `soxta-pause`, `soxta-results` |
+| Screens owned | `soxta-ready`, `soxta-countdown`, `soxta-card`, `soxta-correct`, `soxta-wrong`, `soxta-timeout`, `soxta-pause`, `soxta-results-best`, `soxta-results` |
 | Branch | `task/J6-soxta-wiring-e2e` |
 
 ## Goal

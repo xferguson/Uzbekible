@@ -72,6 +72,7 @@ export function Board({
   subscribe,
   clock = systemClock,
   reducedMotion,
+  onPause,
 }: SoxtaBoardProps) {
   const game = state.game;
   const script = settings.script;
@@ -255,6 +256,16 @@ export function Board({
     >
       <PatternBg className={styles.pattern} />
       <div className={styles.hud}>
+        {onPause && (
+          <button
+            type="button"
+            className={styles.pause}
+            aria-label={label(script, 'Pauza')}
+            onClick={onPause}
+          >
+            <span aria-hidden="true" className={styles.pauseBars} />
+          </button>
+        )}
         <Lives lives={state.lives} max={spec.lives} script={script} />
         <Combo count={game.streak} script={script} />
         <Score value={game.score} script={script} />

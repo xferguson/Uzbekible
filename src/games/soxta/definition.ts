@@ -9,6 +9,7 @@ import { registerGame } from '../registry.ts';
 import type { GameDefinition, LevelSpec } from '../types.ts';
 import { Board, REVEAL_MS } from './Board.tsx';
 import { soxtaPool, type Card } from './cards.ts';
+import { Sample } from './Sample.tsx';
 import { cardScoring, LIVES, soxtaDifficulty } from './config.ts';
 import { createSoxtaRules, type SoxtaAction, type SoxtaEvent, type SoxtaState } from './rules.ts';
 
@@ -59,11 +60,30 @@ export function createSoxtaDefinition(items: readonly Item[]): SoxtaDefinition {
     logEvents,
     difficulty: soxtaDifficulty,
     endless: {
+      intro: {
+        kicker: 'Game 5 · False friends',
+        blurb:
+          'Two words look alike. One clue gives a meaning. Swipe toward the word that really has it. Three cracks end the run.',
+        Sample,
+      },
       summary: (g) => ({
         score: g.score,
         streak: g.bestStreak,
         correct: g.correct,
         mistakes: g.mistakes,
+        missed: g.missed.flatMap((id) => {
+          const c = byId.get(id);
+          if (!c) return [];
+          return [
+            {
+              id,
+              uz: c.uz.uz,
+              uzMeaning: c.clues.uz,
+              source: { lang: c.other.lang, text: c.other.text },
+              ...(c.clues.other !== undefined && { sourceMeaning: c.clues.other }),
+            },
+          ];
+        }),
       }),
       holdMs: REVEAL_MS,
     },

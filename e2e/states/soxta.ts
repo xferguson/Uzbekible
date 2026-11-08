@@ -19,12 +19,21 @@ const PACK = JSON.parse(readFileSync('public/content/items.v1.json', 'utf8')) as
   items: PackItem[];
 };
 
-/** Home → Soxta → the 3-2-1, run for `countdownMs` of it (omitted: all of it, so the first card shows). */
+/** Home → Soxta's ready card. */
+async function ready(d: Driver) {
+  await d.open({ settings: { languages: ['tr'] } });
+  await d.tap(TITLE);
+  await d.page.getByTestId('ready-sample').waitFor();
+}
+
+/**
+ * Home → ready card (Cyrillic picked there when asked) → Start → the 3-2-1, run for `countdownMs` of it
+ * (omitted: all of it, so the first card shows).
+ */
 async function open(d: Driver, opts: { cyrl?: boolean; countdownMs?: number } = {}) {
-  await d.open({
-    settings: { languages: ['tr'], ...(opts.cyrl && { script: 'uz-Cyrl' as const }) },
-  });
-  await d.tap(new RegExp(`^(${TITLE}|Сохта)$`));
+  await ready(d);
+  if (opts.cyrl) await d.page.getByRole('radio', { name: /Cyrillic/ }).click();
+  await d.page.getByRole('button', { name: /^(▶ )?(Boshlash|Бошлаш)/ }).click();
   await d.page.getByRole('status').first().waitFor();
   const run = opts.countdownMs ?? COUNTDOWN_MS + TICK_MS * 2;
   for (let t = 0; t < run; t += TICK_MS) await d.advance(TICK_MS);
@@ -60,11 +69,28 @@ async function wrong(d: Driver) {
   await d.page.getByTestId('reveal').waitFor();
 }
 
+/** Three wrong answers, then the hold on the last one: the run results. */
+async function endRun(d: Driver) {
+  for (let i = 0; i < 3; i++) {
+    await wrong(d);
+    if (i < 2) await d.page.getByTestId('reveal').click();
+  }
+  await d.advance(REVEAL_MS + TICK_MS * 2);
+}
+
 export const soxtaStates: ScreenState[] = [
   {
     id: 'soxta-ready',
     game: 'soxta',
-    title: 'Ready: Soxta opens straight from home, countdown at 3',
+    title: 'Ready card: what the game is, a sample pair, lives and bests, the script toggle, Start',
+    async reach(d) {
+      await ready(d);
+    },
+  },
+  {
+    id: 'soxta-countdown',
+    game: 'soxta',
+    title: 'Start pressed: the 3-2-1 at 3',
     async reach(d) {
       await open(d, { countdownMs: 0 });
     },
@@ -120,18 +146,27 @@ export const soxtaStates: ScreenState[] = [
     },
   },
   {
-    id: 'soxta-results',
+    id: 'soxta-results-best',
     game: 'soxta',
-    title: 'Results: the third mistake ends the run',
+    title: 'Results, new best: one right then three cracks; ribbon, score, stats, the pairs missed',
     async reach(d) {
       await open(d);
-      for (let i = 0; i < 3; i++) {
-        await wrong(d);
-        if (i < 2) await d.page.getByTestId('reveal').click();
-      }
-      await d.advance(REVEAL_MS + TICK_MS * 2);
-      const heading = await d.page.getByRole('heading', { name: 'Yugurish tugadi' }).count();
-      d.check(heading === 1, 'expected the run results');
+      await arrow(d, await rightSide(d));
+      await d.page.getByTestId('reveal').click();
+      await endRun(d);
+      const ok = await d.page.getByRole('heading', { name: 'Barakalla!' }).count();
+      d.check(ok === 1, 'expected the new-best results');
+    },
+  },
+  {
+    id: 'soxta-results',
+    game: 'soxta',
+    title: 'Results, no record: three cracks straight away',
+    async reach(d) {
+      await open(d);
+      await endRun(d);
+      const ok = await d.page.getByRole('heading', { name: 'Yaxshi!' }).count();
+      d.check(ok === 1, 'expected the no-record results');
     },
   },
 ];

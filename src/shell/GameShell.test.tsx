@@ -11,9 +11,10 @@ import { createProgressStore, createRunBestStore } from './progress';
 type State = { left: number };
 type Action = { type: 'take' } | { type: 'miss' };
 
-function Board({ state, dispatch }: BoardProps<{ n: number }, State, Action>) {
+function Board({ state, dispatch, onPause }: BoardProps<{ n: number }, State, Action>) {
   return (
     <div data-testid="board">
+      {onPause && <button onClick={onPause}>board-pause</button>}
       <span>left {state.game.left}</span>
       <button onClick={() => dispatch({ type: 'take' })}>take</button>
       <button onClick={() => dispatch({ type: 'miss' })}>miss</button>
@@ -212,7 +213,21 @@ describe('GameShell: an endless game', () => {
     ...fake,
     id: 'endless',
     endless: {
-      summary: (g) => ({ score: 40 + g.left, streak: 7, correct: 5, mistakes: 2 }),
+      intro: { kicker: 'k', blurb: 'b', Sample: () => null },
+      summary: (g) => ({
+        score: 40 + g.left,
+        streak: 7,
+        correct: 5,
+        mistakes: 2,
+        missed: [
+          {
+            id: 'x',
+            uz: { latn: 'tun', cyrl: 'тун' },
+            uzMeaning: 'night',
+            source: { lang: 'tr', text: 'dün' },
+          },
+        ],
+      }),
       holdMs: 1_000,
     },
   };
@@ -249,12 +264,13 @@ describe('GameShell: an endless game', () => {
   beforeEach(() => vi.useFakeTimers());
   afterEach(() => vi.useRealTimers());
 
-  it('shows only a pause button over the board, not the level HUD', () => {
+  it('adds no level HUD: the board gets the pause button', () => {
     const { advance } = run();
     advance(200);
     expect(screen.getByTestId('board')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Pauza' })).toBeInTheDocument();
-    expect(screen.queryByText(/daraja/i)).toBeNull();
+    expect(screen.getByRole('button', { name: 'board-pause' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Pauza' })).toBeNull();
+    expect(screen.queryByRole('timer')).toBeNull();
   });
 
   it('holds the last answer, then shows run results and keeps the best', () => {
@@ -267,18 +283,23 @@ describe('GameShell: an endless game', () => {
     expect(screen.getByTestId('board')).toBeInTheDocument();
     advance(600);
     expect(screen.queryByTestId('board')).toBeNull();
-    expect(screen.getByRole('heading', { name: 'Yugurish tugadi' })).toBeInTheDocument();
-    expect(screen.getByText('Yangi rekord!')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Barakalla!' })).toBeInTheDocument();
+    expect(screen.getByText('points · was 0')).toBeInTheDocument();
+    expect(screen.getByText('cards').nextSibling).toHaveTextContent('7');
+    expect(screen.getByRole('listitem')).toHaveTextContent('tun = night');
     expect(runBest.get()).toEqual({ score: 43, streak: 7 });
-    act(() => screen.getByRole('button', { name: 'Bosh sahifa' }).click());
+    act(() => screen.getByRole('button', { name: /Bosh sahifa/ }).click());
     expect(onMap).toHaveBeenCalled();
   });
 
   it('pauses with a way home, not to a map', () => {
     const { advance, onMap } = run();
     advance(200);
-    act(() => screen.getByRole('button', { name: 'Pauza' }).click());
+    act(() => screen.getByRole('button', { name: 'board-pause' }).click());
     expect(screen.queryByRole('button', { name: 'Xarita' })).toBeNull();
+    act(() => screen.getByRole('button', { name: 'Qayta boshlash' }).click());
+    expect(screen.getByTestId('board')).toBeInTheDocument();
+    act(() => screen.getByRole('button', { name: 'board-pause' }).click());
     act(() => screen.getByRole('button', { name: 'Bosh sahifa' }).click());
     expect(onMap).toHaveBeenCalled();
   });
@@ -289,7 +310,7 @@ describe('GameShell: an endless game', () => {
     act(() => screen.getByRole('button', { name: 'miss' }).click());
     act(() => screen.getByRole('button', { name: 'miss' }).click());
     advance(1_100);
-    act(() => screen.getByRole('button', { name: 'Qayta' }).click());
+    act(() => screen.getByRole('button', { name: /Yana/ }).click());
     advance(200);
     expect(screen.getByTestId('board')).toBeInTheDocument();
   });

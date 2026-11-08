@@ -28,6 +28,71 @@
   justify-content: space-between;
   gap: var(--space-3);
 }
+/* Pause: a square tile button with two cobalt bars (mockup J4 HUD). */
+.pause {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: var(--space-12);
+  block-size: var(--space-12);
+  border: 2px solid var(--color-cobalt);
+  border-radius: var(--radius-tile);
+  background: var(--color-surface);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.pause:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+.pauseBars {
+  inline-size: 14px;
+  block-size: 16px;
+  background: linear-gradient(
+    to right,
+    var(--color-cobalt) 0 35%,
+    transparent 35% 65%,
+    var(--color-cobalt) 65%
+  );
+}
+/* Ready card miniature: UZ tile, clue octagon, TR tile with a dashed gold edge. */
+.sample {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-3);
+  inline-size: min(100%, 340px);
+}
+.sampleTile {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-block-size: 64px;
+  padding: var(--space-3) var(--space-2) var(--space-2);
+  border: 2px solid var(--color-cobalt);
+  border-radius: var(--radius-tile);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1.1rem;
+}
+.sampleTile[data-false] {
+  border: 2px dashed var(--color-gold);
+  background: color-mix(in srgb, var(--color-turquoise-pale) 45%, var(--color-surface));
+}
+.sampleTile .tag {
+  position: absolute;
+  inset-block-start: 4px;
+  inset-inline-start: 6px;
+}
+/* Doubled class: wins over `.clue`, which comes later in this file. */
+.clue.sampleClue {
+  inline-size: 4.25rem;
+  padding: var(--space-2);
+}
+.clue.sampleClue > span {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+}
 
 /* Per-card timer: 12 glazed segments dropping one by one. */
 .timer {

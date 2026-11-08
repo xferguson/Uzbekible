@@ -71,14 +71,24 @@ describe('<App />', () => {
     expect(screen.getByRole('button', { name: /^2-daraja, joriy/ })).toBeInTheDocument();
   });
 
-  it('opens Soxta straight onto its cards (no level map) and goes home from back', async () => {
+  it('opens Soxta on its ready card (no level map), switches script there and starts a run', async () => {
     const { clock } = setup();
     fireEvent.click(await screen.findByRole('button', { name: 'Soxta' }));
+    expect(screen.queryByRole('button', { name: /daraja/ })).toBeNull();
+    expect(screen.getByTestId('ready-sample')).toBeInTheDocument();
+    expect(screen.getByText('Lives').nextSibling).toHaveTextContent('3');
+    expect(screen.getByText('Best score').nextSibling).toHaveTextContent('0');
+    fireEvent.click(screen.getByRole('radio', { name: /Cyrillic/ }));
+    expect(screen.getAllByRole('heading', { name: 'Сохта', level: 2 })).toHaveLength(2);
+    fireEvent.click(screen.getByRole('radio', { name: /Latin/ }));
+    fireEvent.click(screen.getByRole('button', { name: /Boshlash/ }));
     await act(async () => {
       clock.advance(10);
     });
-    expect(screen.queryByRole('button', { name: /daraja/ })).toBeNull();
     expect(await screen.findByTestId('soxta-board')).toBeInTheDocument();
+    // Back from a run goes to the ready card, back again goes home.
+    fireEvent.click(screen.getByRole('button', { name: 'Orqaga' }));
+    expect(screen.getByTestId('ready-sample')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Orqaga' }));
     expect(screen.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeInTheDocument();
   });

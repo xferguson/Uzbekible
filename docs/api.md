@@ -202,13 +202,16 @@ _(no exports yet)_
 - `ModePickerProps` { modes: readonly { id: string; name: { uzLatn: string; uzCyrl: string } }[]; value: string; script: Script; onChange: (id: string) => void }
 - `PatternBg({ strength, cell, className }: PatternBgProps): import("react").JSX.Element` - Star-and-cross line lattice that fills its container. Decorative, low contrast.
 - `PatternBgProps` { strength?: number; cell?: number; className?: string }
-- `PauseOverlay({ onResume, onMap, mapLabel, script, }: Common & { onResume: () => void; onMap: () => void; mapLabel?: string; }): import("react").JSX.Element` - Covers the screen and replaces the board, so a pause cann…
+- `PauseOverlay({ onResume, onMap, onRestart, note, mapLabel, script, }: Common & { onResume: () => void; onMap: () => void; onRestart?: () => void; note?: string; mapLabel?: string; }): import("react").JSX.Element` - C…
+- `ReadyCard(p: ReadyCardProps): import("react").JSX.Element` - Before an endless run (mockup J4 "ready"): what the game is, the best so far, the script, Start.
+- `ReadyCardProps` { kicker: string; title: string; blurb: string; sample: ReactNode; stats: readonly { label: string; value: number }[]; onScript: (script: Script) => void; onStart: () => void }
 - `ResultsScreen(p: ResultsScreenProps): import("react").JSX.Element`
 - `ResultsScreenProps` { won: boolean; stars: 0 | 1 | 2 | 3; score: number; timeMs: number; mistakes: number; hints: number; newBest: boolean; onNext?: () => void; onReplay?: () => void; onMap: () => void }
 - `RosetteBand({ width, height, className }: RosetteBandProps): import("react").JSX.Element` - Horizontal band: alternating stars in octagon frames with gold diamonds between, on cobalt-deep.
 - `RosetteBandProps` { width?: number; height?: number; className?: string }
-- `RunResultsScreen(p: RunResultsScreenProps): import("react").JSX.Element` - End of an endless run (Soxta): score, streak and the best so far; Again is the primary action.
-- `RunResultsScreenProps` { score: number; streak: number; correct: number; mistakes: number; best: { score: number; streak: number }; newBest: boolean; onReplay?: () => void; onHome: () => void }
+- `RunMissed` { id: string; uz: { latn: string; cyrl: string }; uzMeaning: string; source: { lang: SourceLang; text: string }; sourceMeaning?: string } - A pair missed in an endless run: the Uzbek word, the look-alike a…
+- `RunResultsScreen(p: RunResultsScreenProps): import("react").JSX.Element` - End of an endless run (Soxta, mockup J4): verdict, score, four stats, the pairs missed; Again is primary.
+- `RunResultsScreenProps` { score: number; previousBest: number; newBest: boolean; cards: number; streak: number; correct: number; timeMs: number; missed: readonly RunMissed[]; onReplay?: () => void; onHome: () => void }
 - `Score({ value, script }: Common & { value: number; }): import("react").JSX.Element`
 - `ScreenBar({ title, onBack, onHome, script }: ScreenBarProps): import("react").JSX.Element` - Top bar on every screen but home, so there is always a visible way out.
 - `ScreenBarProps` { title?: string; onBack: () => void; onHome?: () => void; script?: Script }
@@ -233,6 +236,7 @@ _(no exports yet)_
 - `UzTextProps` { latn: string; cyrl?: string | undefined; script?: UzScript; className?: string }
 - `chapterOf(level: number, chapters: readonly ChapterInfo[]): number` - Index of the chapter holding `level`; levels past the end belong to the last chapter.
 - `formatTime(ms: number): string` - m:ss, rounded down.
+- `groupDigits(n: number): string` - "1 240": thin no-break spaces between thousands (mockup J4).
 - `levelState(level: number, progress: MapProgress): LevelCellState`
 - `prefersReducedMotion(): boolean` - True when the user asks for reduced motion.
 - `swipeOutcome(dx: number, dy: number, elapsedMs: number, distance: number, velocity: number): SwipeDirection | null` - Decides whether a finished horizontal drag commits a swipe.

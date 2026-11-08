@@ -55,7 +55,7 @@ interface Outcome {
   hints: number;
   newBest: boolean;
   /** Set for an endless game: the run's own numbers replace the level score and stars. */
-  run?: RunSummary;
+  run?: RunSummary & { previousBest: number };
 }
 
 /** Re-render interval while time is moving (display only; the session reads the injected clock). */
@@ -135,10 +135,12 @@ function Attempt({
       const tally = tallyScoreInput(events);
       state.endedAt = clock.now();
       if (def.endless) {
-        const run = def.endless.summary(session.getState().game);
+        const summary = def.endless.summary(session.getState().game);
+        const previousBest = runBest?.get().score ?? 0;
         const { newBest } = runBest
-          ? recordRun(runBest, { score: run.score, streak: run.streak })
+          ? recordRun(runBest, { score: summary.score, streak: summary.streak })
           : { newBest: false };
+        const run = { ...summary, previousBest };
         state.outcome = { won, score: run.score, stars: 0, timeMs, ...tally, newBest, run };
         log.log({
           type: 'level_complete',
@@ -203,11 +205,16 @@ function Attempt({
 
   if (ended && !holding) {
     const o = state.outcome!;
-    if (o.run && runBest)
+    if (o.run)
       return (
         <RunResultsScreen
-          {...o.run}
-          best={runBest.get()}
+          score={o.run.score}
+          previousBest={o.run.previousBest}
+          cards={o.run.correct + o.run.mistakes}
+          streak={o.run.streak}
+          correct={o.run.correct}
+          timeMs={o.timeMs}
+          missed={o.run.missed}
           newBest={o.newBest}
           script={script}
           onReplay={onRetry}
@@ -239,27 +246,25 @@ function Attempt({
     />
   );
   if (def.endless)
-    // The board draws its own HUD (lives, streak, score), so the shell adds only the pause button.
-    return (
-      <div>
-        {!holding && (
-          <header>
-            <button type="button" onClick={() => session.pause()}>
-              {t('Pauza')}
-            </button>
-          </header>
-        )}
-        {s.phase === 'paused' ? (
-          <PauseOverlay
-            script={script}
-            onResume={() => session.resume()}
-            onMap={onMap}
-            mapLabel="Bosh sahifa"
-          />
-        ) : (
-          board
-        )}
-      </div>
+    // The board draws its own HUD (lives, streak, score) and the pause button.
+    return s.phase === 'paused' ? (
+      <PauseOverlay
+        script={script}
+        note="The card is hidden and its timer stopped."
+        onResume={() => session.resume()}
+        onRestart={onRetry}
+        onMap={onMap}
+        mapLabel="Bosh sahifa"
+      />
+    ) : (
+      <Board
+        spec={state.spec}
+        settings={settings}
+        state={s}
+        dispatch={(a: unknown) => session.dispatch(a)}
+        subscribe={session.subscribe as BoardProps<unknown, unknown, unknown>['subscribe']}
+        {...(!holding && { onPause: () => session.pause() })}
+      />
     );
   return (
     <div>

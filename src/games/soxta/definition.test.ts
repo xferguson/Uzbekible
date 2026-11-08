@@ -44,12 +44,26 @@ describe('Soxta definition', () => {
     }
     const s = session.getState();
     expect(s.phase).toBe('lost');
-    expect(def.endless!.summary(s.game as never)).toEqual({
-      score: 200,
-      streak: 2,
-      correct: 2,
-      mistakes: 3,
-    });
+    const summary = def.endless!.summary(s.game as never);
+    expect(summary).toMatchObject({ score: 200, streak: 2, correct: 2, mistakes: 3 });
+    // Each missed card is listed once, with the Uzbek word and both meanings.
+    expect(summary.missed.length).toBeGreaterThan(0);
+    expect(summary.missed.length).toBeLessThanOrEqual(3);
+    for (const m of summary.missed) {
+      const card = spec.params.cards.find((c) => c.id === m.id)!;
+      expect(m).toMatchObject({
+        uz: card.uz.uz,
+        uzMeaning: card.clues.uz,
+        source: { lang: 'tr', text: card.other.text },
+      });
+      expect(m.sourceMeaning).toBe(card.clues.other);
+    }
+  });
+
+  it('drops a missed id it does not know, and has a ready-card intro', () => {
+    const s = { score: 0, bestStreak: 0, correct: 0, mistakes: 1, missed: ['nope'] };
+    expect(def.endless!.summary(s as never).missed).toEqual([]);
+    expect(def.endless!.intro.kicker).toMatch(/False friends/);
   });
 
   describe('logEvents', () => {

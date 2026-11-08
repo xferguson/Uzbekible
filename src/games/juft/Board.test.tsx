@@ -58,7 +58,7 @@ function setup(
     level: 1,
     seed: 's',
     lives: 3,
-    params: { pairs, parMs: 60_000, hard: opts.hard ?? false, chapter: 1 },
+    params: { pairs, parMs: 60_000, hard: opts.hard ?? false, focus: 'mixed', chapter: 1 },
   };
   const dispatch = vi.fn((a: JuftAction) => session.dispatch(a));
   const settings = { sourceLangs: opts.langs ?? ['tr'], script: opts.script ?? 'latn' } as const;

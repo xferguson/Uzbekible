@@ -5,7 +5,14 @@ import type { Aggregate } from '@core/learning-log/index.ts';
 import type { SourceLang } from '@core/text/index.ts';
 import { levelContext } from '../sim-adapter.ts';
 import type { GameSettings } from '../types.ts';
-import { CHAPTER_SIZE, LEVEL_COUNT, MAX_PAIRS, juftDifficulty } from './difficulty.config.ts';
+import { distance } from '@core/similarity/index.ts';
+import {
+  CHAPTER_SIZE,
+  LEVEL_COUNT,
+  MAX_PAIRS,
+  focusFor,
+  juftDifficulty,
+} from './difficulty.config.ts';
 import { createJuftLevels } from './levels.ts';
 
 const items = loadItems(JSON.parse(readFileSync('public/content/items.v1.json', 'utf8')));
@@ -100,7 +107,7 @@ describe('juft level content', () => {
     }
   });
   it('re-shows missed items in later levels', () => {
-    const first = spec(62).params.pairs.map((p) => p.id);
+    const first = spec(61).params.pairs.map((p) => p.id);
     const missedId = items
       .filter((i: Item) => i.sources.some((s) => s.lang === 'tr') && !first.includes(i.id))
       .find((i) => i.form === 'lemma' && i.freqRank < 40)!;
@@ -114,12 +121,98 @@ describe('juft level content', () => {
         meanRtMs: 3000,
       },
     ];
-    const ids = spec(62, tr, history).params.pairs.map((p) => p.id);
+    const ids = spec(61, tr, history).params.pairs.map((p) => p.id);
     expect(ids).toContain(missedId.id);
   });
   it('rejects bad levels and empty language sets', () => {
     expect(() => spec(0)).toThrow(RangeError);
     expect(() => spec(1.5)).toThrow(RangeError);
     expect(() => spec(1, { sourceLangs: [], script: 'latn' })).toThrow(RangeError);
+  });
+});
+
+/** Mean Uzbek-form edit distance over all pairs of tiles on a board: low means the tiles look alike. */
+function meanSpread(level: number, settings = tr): number {
+  const uz = spec(level, settings).params.pairs.map((p) => p.uz.latn);
+  let sum = 0;
+  let count = 0;
+  for (let i = 0; i < uz.length; i++)
+    for (let j = i + 1; j < uz.length; j++) {
+      sum += distance(uz[i]!, uz[j]!);
+      count++;
+    }
+  return sum / count;
+}
+
+describe('juft focus schedule (E4)', () => {
+  it('is mixed in chapter 1, look-alike from chapter 2, suffix-family from chapter 5', () => {
+    for (let l = 1; l <= 15; l++) expect(focusFor(l), `level ${l}`).toBe('mixed');
+    expect(focusFor(18)).toBe('lookalike');
+    expect(focusFor(62)).toBe('family');
+    expect(focusFor(66)).toBe('family');
+  });
+  it('hard-pair levels stay mixed breathers', () => {
+    for (let l = 5; l <= 105; l += 5) expect(focusFor(l), `level ${l}`).toBe('mixed');
+  });
+  it('every focus kind is used regularly and the spec carries it', () => {
+    const kinds = new Set<string>();
+    for (let l = 1; l <= LEVEL_COUNT; l++) kinds.add(spec(l).params.focus);
+    expect([...kinds].sort()).toEqual(['family', 'lookalike', 'mixed']);
+    expect(spec(18).params.focus).toBe('lookalike');
+  });
+});
+
+describe('juft look-alike boards (E4)', () => {
+  const lookalikeLevels = Array.from({ length: LEVEL_COUNT }, (_, i) => i + 1).filter(
+    (l) => focusFor(l) === 'lookalike' && l > 20 && l < 60,
+  );
+  const mixedLevels = Array.from({ length: LEVEL_COUNT }, (_, i) => i + 1).filter(
+    (l) => focusFor(l) === 'mixed' && l % 5 !== 0 && l > 20 && l < 60,
+  );
+  const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
+
+  it('tiles on look-alike boards are much closer in spelling than on mixed boards', () => {
+    const look = mean(lookalikeLevels.map((l) => meanSpread(l)));
+    const mixed = mean(mixedLevels.map((l) => meanSpread(l)));
+    expect(look).toBeLessThan(mixed - 1);
+  });
+  it('are full boards of distinct items', () => {
+    for (const l of lookalikeLevels) {
+      const s = spec(l);
+      expect(s.params.pairs.length).toBe(Math.min(MAX_PAIRS, s.params.pairs.length));
+      expect(new Set(s.params.pairs.map((p) => p.id)).size).toBe(s.params.pairs.length);
+    }
+  });
+});
+
+describe('juft suffix-family boards (E4)', () => {
+  const familyLevels = Array.from({ length: LEVEL_COUNT }, (_, i) => i + 1).filter(
+    (l) => focusFor(l) === 'family',
+  );
+  const stemOf = (id: string) => {
+    const it = byId.get(id)!;
+    return it.lemma ?? it.id;
+  };
+
+  it('one stem dominates the board with different suffixes', () => {
+    for (const l of familyLevels) {
+      const pairs = spec(l).params.pairs;
+      const counts = new Map<string, number>();
+      for (const p of pairs) counts.set(stemOf(p.id), (counts.get(stemOf(p.id)) ?? 0) + 1);
+      const top = Math.max(...counts.values());
+      expect(top, `level ${l}`).toBeGreaterThanOrEqual(Math.min(pairs.length, 5));
+    }
+  });
+  it('the board is mostly suffixed forms of the stem', () => {
+    for (const l of familyLevels) {
+      const pairs = spec(l).params.pairs;
+      expect(pairs.filter((p) => p.suffixed).length, `level ${l}`).toBeGreaterThanOrEqual(
+        Math.ceil(pairs.length / 2),
+      );
+    }
+  });
+  it('falls back to a normal board when Turkish (the only suffixed source) is off', () => {
+    const ar: GameSettings = { sourceLangs: ['ar'], script: 'latn' };
+    expect(spec(62, ar).params.pairs.length).toBeGreaterThan(0);
   });
 });

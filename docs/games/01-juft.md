@@ -51,6 +51,10 @@ Revised in D2 at the user's request (was 8 pairs maximum).
 | 8 Registon | 106–120 | 12 | Full board: hardest transparency mix, highest suffixed share, tightest par |
 | every ~5th | | 1 | A **hard pair**: an irregular or opaque cognate (ev ↔ uy), as a breather that teaches |
 
+- **Board focus (E4).** Most levels are the usual frequency-ordered mix. Two kinds make the player read closely:
+  **look-alike** boards (every 3rd level from 16) deal words spelled alike (giymek ↔ kiymoq, girmek ↔ kirmoq, gitmek ↔
+  ketmoq), and **suffix-family** boards (every 4th level from 61) deal one stem with different suffixes (göz ↔ koʻz,
+  gözden ↔ koʻzdan, gözüm ↔ koʻzim). Hard-pair breathers stay as they are. Schedule: `focusFor` in `difficulty.config.ts`.
 - **Board fit:** all pairs are always on screen; the board never scrolls. On a 390 × 844 phone, 12 pairs give
   46 px tiles (gaps 6 px, tile type 17 px from 10 pairs up). Tiles never go below 44 px. See the D2 mockup.
 - **Content volume:** 120 levels average about 8 pairs, roughly 950 board slots. The top-1000 lemmas plus the
@@ -86,6 +90,9 @@ Revised in D2 at the user's request (was 8 pairs maximum).
 ## Learning-log events
 `level_start`, `match_correct {itemId, sourceLang, rtMs}`, `match_wrong {leftItemId, rightItemId, rtMs}`,
 `hint_used {itemId}`, `level_complete {score, timeMs, mistakes, hints}`, `level_failed`.
+
+## Later
+- Results screen lists the words just played with their meanings (task U9, parked).
 
 ## Out of scope (v1)
 Audio, mixed mosaic-grid mode, stats screen, leaderboards.

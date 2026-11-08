@@ -7,6 +7,7 @@
 | Depends on | [I6](I6-imlo-board.md), [I5](I5-game-modes.md), [I8](I8-imlo-scoring-balance.md) |
 | Read first | `src/games/juft/definition.ts`, `src/games/juft/juft.e2e.ts`, `docs/games/06-imlo.md` ("Learning-log events") |
 | API used | `docs/api.md` § `core/learning-log`, `ui` (`LevelMap`, Results) |
+| Screens owned | `imlo-map-early`, `imlo-map-late`, `imlo-countdown`, `imlo-board-empty`, `imlo-board-full`, `imlo-wrong`, `imlo-pause`, `imlo-fail` |
 | Skills | `tdd-task`, `new-game-scaffold`, `e2e-visual-check`, `pr-flow` |
 | Branch | `task/I7-imlo-wiring-e2e` |
 

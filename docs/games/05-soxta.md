@@ -33,8 +33,8 @@ after an answer); the two words themselves are never glossed. Recorded in `CLAUD
 ## Decisions (approved)
 - **Timer:** a per-card countdown that tightens with the streak, plus **3 lives**. A timeout costs a life.
 - **Content:** reuse the existing false-friend data (`relation: false-friend` sources, the same entries the user
-  reviews in C6). No new research task. The one gap is the Turkish word's own English meaning, for the reveal and
-  for clues about the Turkish word; see J1.
+  reviews in C6). No new research task. The Turkish word's own English meaning (`glossEn` on the Turkish source)
+  feeds the reveal and the Turkish-meaning clues; every pool card has one, and a test keeps it that way.
 - **Control cards (later idea, worth trying):** mix in true cognates where *both* words fit, answered with a third
   gesture (swipe up). It stops "always distrust" becoming a winning strategy. Not in v1.
 
@@ -47,9 +47,10 @@ keyboard fallbacks, reduced-motion safe) and a false-friend field on content pai
 ## Content needs
 Source: items in `content/items/` whose `sources` include `relation: false-friend` (about 70 today, mostly
 Turkish). Each yields a card: the Uzbek item (`uz`, `glossEn`) and the Turkish word (`sources[].text`). Juft keeps
-excluding these from its boards (`boardPool`), so Soxta has its own pool function. Needed addition: an optional
-English gloss on the Turkish source, so the clue can be the Turkish word's meaning too. Without it, cards fall back
-to Uzbek-meaning clues only.
+excluding these from its boards (`boardPool`), so Soxta has its own pool function. The Turkish source carries an
+optional English gloss (`glossEn`), so the clue can be the Turkish word's meaning too and the reveal can show it.
+A card without one falls back to Uzbek-meaning clues only and an empty reveal meaning, so the content test requires
+it for every pool card.
 
 ## Open questions and risks
 - **Supply:** about 70 pairs is enough for a first version but a short run before repeats. Spaced repetition of

@@ -301,6 +301,7 @@
   sources:
     - lang: tr
       text: ayrım
+      glossEn: distinction
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:ayrim=ayrılmış
@@ -445,6 +446,7 @@
   sources:
     - lang: tr
       text: muhabbet
+      glossEn: chat, conversation
       relation: false-friend
       confidence: low
       ref: wiktionary:muhabbat
@@ -463,6 +465,7 @@
   sources:
     - lang: tr
       text: sevda
+      glossEn: infatuation, passion
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:savdo=müzayede,pazarlık; wiktionary:sevda
@@ -713,6 +716,7 @@
   sources:
     - lang: tr
       text: dil
+      glossEn: tongue, language
       relation: false-friend
       confidence: low
       ref: wiktionary:dil
@@ -930,6 +934,7 @@
   sources:
     - lang: tr
       text: yazıcı
+      glossEn: printer; scribe
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:yozuvchi=yazar
@@ -1102,6 +1107,7 @@
   sources:
     - lang: tr
       text: kıymet
+      glossEn: value, worth
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -1321,6 +1327,7 @@
   sources:
     - lang: tr
       text: içki
+      glossEn: alcoholic drink
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:ichki=iç

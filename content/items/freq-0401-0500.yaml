@@ -317,6 +317,7 @@
   sources:
     - lang: tr
       text: dolamak
+      glossEn: to wrap around, to circle
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:toʻla=dolu,ödemek; wiktionary:dolamak
@@ -330,6 +331,7 @@
   sources:
     - lang: tr
       text: süzmek
+      glossEn: to filter; to glide
       relation: false-friend
       confidence: low
       ref: wiktionary:süzmek
@@ -453,6 +455,7 @@
   sources:
     - lang: tr
       text: dün
+      glossEn: yesterday
       relation: false-friend
       confidence: low
       ref: wiktionary:dün
@@ -1069,6 +1072,7 @@
   sources:
     - lang: tr
       text: dede
+      glossEn: grandfather
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -1336,6 +1340,7 @@
   sources:
     - lang: tr
       text: rahmet
+      glossEn: mercy
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:rahmat=teşekkürler

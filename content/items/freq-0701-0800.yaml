@@ -251,6 +251,7 @@
   sources:
     - lang: tr
       text: izlemek
+      glossEn: to watch, to follow
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -408,6 +409,7 @@
   sources:
     - lang: tr
       text: bekâr
+      glossEn: unmarried, single
       relation: false-friend
       confidence: low
       ref: wiktionary:bekâr
@@ -458,6 +460,7 @@
   sources:
     - lang: tr
       text: çukur
+      glossEn: pit, hole
       relation: false-friend
       confidence: low
       ref: wiktionary:çukur
@@ -471,6 +474,7 @@
   sources:
     - lang: tr
       text: sakin
+      glossEn: calm; resident
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -662,6 +666,7 @@
   sources:
     - lang: tr
       text: muhakeme
+      glossEn: reasoning, judgement
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -711,6 +716,7 @@
   sources:
     - lang: tr
       text: galat
+      glossEn: mistake, error
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:gʻalati=küsur
@@ -732,6 +738,7 @@
   sources:
     - lang: tr
       text: cinayet
+      glossEn: murder
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:jinoyat=suç
@@ -818,6 +825,7 @@
   sources:
     - lang: tr
       text: evlat
+      glossEn: child, offspring
       relation: false-friend
       confidence: low
       ref: wiktionary:evlat
@@ -877,6 +885,7 @@
   sources:
     - lang: tr
       text: şirin
+      glossEn: cute, charming
       relation: false-friend
       confidence: low
       ref: wiktionary:şirin
@@ -941,6 +950,7 @@
   sources:
     - lang: tr
       text: kilit
+      glossEn: lock
       relation: false-friend
       confidence: low
       ref: curator:C2

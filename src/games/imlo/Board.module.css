@@ -199,7 +199,7 @@
 }
 .row[data-result='right'] {
   border-color: var(--color-gold);
-  background: color-mix(in srgb, var(--color-gold) 22%, transparent);
+  background: color-mix(in srgb, var(--color-gold) 22%, var(--color-surface));
 }
 .row[data-result='right'] .slot > button {
   /* I4 frames: a solved row is solid gold tiles with dark letters. */

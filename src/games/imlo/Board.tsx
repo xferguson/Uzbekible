@@ -341,7 +341,11 @@ function SlotRow({
   const rtl = side === 'source' && (pair.source.lang === 'fa' || pair.source.lang === 'ar');
   const size = slotSize(word.length);
   const nextEmpty = state.slots[side].indexOf(null);
-  const active = state.active === side;
+  // Once both rows are full nothing is left to fill: the I4 frame shows no active row, only the ready star.
+  const bothFull = (['source', 'uz'] as Side[]).every((x) =>
+    state.slots[x].every((id) => id !== null),
+  );
+  const active = state.active === side && !bothFull;
   return (
     // Tapping the row's padding picks the side; the slots inside are the real, focusable controls.
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions

@@ -207,6 +207,8 @@ _(no exports yet)_
 - `ResultsScreenProps` { won: boolean; stars: 0 | 1 | 2 | 3; score: number; timeMs: number; mistakes: number; hints: number; newBest: boolean; onNext?: () => void; onReplay?: () => void; onMap: () => void }
 - `RosetteBand({ width, height, className }: RosetteBandProps): import("react").JSX.Element` - Horizontal band: alternating stars in octagon frames with gold diamonds between, on cobalt-deep.
 - `RosetteBandProps` { width?: number; height?: number; className?: string }
+- `RunResultsScreen(p: RunResultsScreenProps): import("react").JSX.Element` - End of an endless run (Soxta): score, streak and the best so far; Again is the primary action.
+- `RunResultsScreenProps` { score: number; streak: number; correct: number; mistakes: number; best: { score: number; streak: number }; newBest: boolean; onReplay?: () => void; onHome: () => void }
 - `Score({ value, script }: Common & { value: number; }): import("react").JSX.Element`
 - `ScreenBar({ title, onBack, onHome, script }: ScreenBarProps): import("react").JSX.Element` - Top bar on every screen but home, so there is always a visible way out.
 - `ScreenBarProps` { title?: string; onBack: () => void; onHome?: () => void; script?: Script }

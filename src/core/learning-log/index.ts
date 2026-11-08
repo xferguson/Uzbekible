@@ -46,6 +46,22 @@ export type LogEvent = Base &
         expected: string;
         rtMs: number;
       }
+    | {
+        type: 'swipe_correct';
+        itemId: string;
+        sourceLang: SourceLang;
+        /** The word the player swiped to: `source` is the non-Uzbek one. */
+        side: 'source' | 'uz';
+        rtMs: number;
+      }
+    | {
+        type: 'swipe_wrong';
+        itemId: string;
+        sourceLang: SourceLang;
+        side: 'source' | 'uz';
+        rtMs: number;
+      }
+    | { type: 'swipe_timeout'; itemId: string; sourceLang: SourceLang; rtMs: number }
     | { type: 'level_complete'; score: number; timeMs: number; mistakes: number; hints: number }
     | { type: 'level_failed'; level?: number }
   );
@@ -95,7 +111,10 @@ export const isAttemptEvent = (e: { type: string }): boolean =>
   e.type === 'match_correct' ||
   e.type === 'match_wrong' ||
   e.type === 'spell_correct' ||
-  e.type === 'spell_wrong';
+  e.type === 'spell_wrong' ||
+  e.type === 'swipe_correct' ||
+  e.type === 'swipe_wrong' ||
+  e.type === 'swipe_timeout';
 
 /** Folds an event into totals; events that are not item attempts are ignored. */
 function fold(into: Map<string, Totals>, e: LogEvent): void {

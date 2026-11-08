@@ -83,3 +83,31 @@ export function recordWin(
   });
   return { newBest };
 }
+
+/** The best finished run of an endless game: top score and longest streak, each kept on its own. */
+export interface RunBest {
+  score: number;
+  streak: number;
+}
+
+const runBestSchema = {
+  version: 1,
+  default: { score: 0, streak: 0 } as RunBest,
+  validate: (v: unknown): v is RunBest =>
+    isObject(v) &&
+    typeof v.score === 'number' &&
+    v.score >= 0 &&
+    typeof v.streak === 'number' &&
+    v.streak >= 0,
+};
+
+export function createRunBestStore(gameId: string, options?: StoreOptions): Store<RunBest> {
+  return createStore(`best:${gameId}`, runBestSchema, {}, options);
+}
+
+/** Keeps the best score and streak; `newBest` is true only when the score strictly beats the old best. */
+export function recordRun(store: Store<RunBest>, run: RunBest): { newBest: boolean } {
+  const prev = store.get();
+  store.set({ score: Math.max(prev.score, run.score), streak: Math.max(prev.streak, run.streak) });
+  return { newBest: run.score > prev.score };
+}

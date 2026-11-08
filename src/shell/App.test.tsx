@@ -71,6 +71,18 @@ describe('<App />', () => {
     expect(screen.getByRole('button', { name: /^2-daraja, joriy/ })).toBeInTheDocument();
   });
 
+  it('opens Soxta straight onto its cards (no level map) and goes home from back', async () => {
+    const { clock } = setup();
+    fireEvent.click(await screen.findByRole('button', { name: 'Soxta' }));
+    await act(async () => {
+      clock.advance(10);
+    });
+    expect(screen.queryByRole('button', { name: /daraja/ })).toBeNull();
+    expect(await screen.findByTestId('soxta-board')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Orqaga' }));
+    expect(screen.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeInTheDocument();
+  });
+
   it('opens settings and switches the Uzbek script', async () => {
     setup();
     await screen.findByRole('button', { name: 'Juft' });

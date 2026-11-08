@@ -6,8 +6,14 @@
 import { imloStates } from './states/imlo.ts';
 import { juftStates } from './states/juft.ts';
 import { shellStates } from './states/shell.ts';
+import { soxtaStates } from './states/soxta.ts';
 import type { ScreenState } from './shots/types.ts';
 
 export type { Driver, ScreenState } from './shots/types.ts';
 
-export const STATES: readonly ScreenState[] = [...shellStates, ...juftStates, ...imloStates];
+export const STATES: readonly ScreenState[] = [
+  ...shellStates,
+  ...juftStates,
+  ...imloStates,
+  ...soxtaStates,
+];

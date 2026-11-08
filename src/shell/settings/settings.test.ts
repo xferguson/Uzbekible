@@ -1,4 +1,4 @@
-import { createProgressStore } from '../progress';
+import { createProgressStore, createRunBestStore } from '../progress';
 import { createMemoryBackend } from '@core/storage';
 import {
   applyTheme,
@@ -105,5 +105,12 @@ describe('exportLog / resetProgress', () => {
     resetProgress([a], { clear });
     expect(a.get()).toEqual({ unlocked: 1, best: {} });
     expect(clear).toHaveBeenCalledOnce();
+  });
+
+  it('also zeroes the best run of an endless game', () => {
+    const best = createRunBestStore('soxta', { backend: createMemoryBackend() });
+    best.set({ score: 900, streak: 12 });
+    resetProgress([], { clear: vi.fn() }, [best]);
+    expect(best.get()).toEqual({ score: 0, streak: 0 });
   });
 });

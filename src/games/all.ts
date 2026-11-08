@@ -3,10 +3,12 @@ import type { Item } from '@core/content/index.ts';
 import { getGame, GAMES, type AnyGameDefinition } from './registry.ts';
 import { registerImlo } from './imlo/definition.ts';
 import { registerJuft } from './juft/definition.ts';
+import { registerSoxta } from './soxta/definition.ts';
 
 const SHIPPED: readonly { id: string; register: (items: readonly Item[]) => unknown }[] = [
   { id: 'juft', register: registerJuft },
   { id: 'imlo', register: registerImlo },
+  { id: 'soxta', register: registerSoxta },
 ];
 
 /** Registers each shipped game that is not yet registered (safe to call again) and returns them in order. */

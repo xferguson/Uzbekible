@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Countdown, PauseOverlay, ResultsScreen } from './index';
+import { Countdown, PauseOverlay, ResultsScreen, RunResultsScreen } from './index';
 
 describe('Countdown', () => {
   it('shows whole seconds remaining, rounding up, then Go', () => {
@@ -73,5 +73,37 @@ describe('ResultsScreen', () => {
     expect(screen.queryByRole('button', { name: /keyingi/i })).toBeNull();
     expect(screen.queryByRole('img', { name: /\/3/ })).toBeNull();
     expect(screen.queryByText('420')).toBeNull();
+  });
+});
+
+describe('RunResultsScreen', () => {
+  const base = {
+    score: 640,
+    streak: 8,
+    correct: 11,
+    mistakes: 3,
+    best: { score: 800, streak: 9 },
+    newBest: false,
+    onReplay: vi.fn(),
+    onHome: vi.fn(),
+  };
+
+  it('shows the run, the best so far and the actions', async () => {
+    render(<RunResultsScreen {...base} />);
+    expect(screen.getByRole('heading', { name: 'Yugurish tugadi' })).toBeInTheDocument();
+    expect(screen.getByText('Ball').nextSibling).toHaveTextContent('640');
+    expect(screen.getByText('Eng uzun seriya').nextSibling).toHaveTextContent('8');
+    expect(screen.getByText('Rekord').nextSibling).toHaveTextContent('800');
+    expect(screen.queryByText('Yangi rekord!')).toBeNull();
+    await userEvent.click(screen.getByRole('button', { name: 'Qayta' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Bosh sahifa' }));
+    expect(base.onReplay).toHaveBeenCalledOnce();
+    expect(base.onHome).toHaveBeenCalledOnce();
+  });
+
+  it('flags a new best, and reads in Cyrillic', () => {
+    render(<RunResultsScreen {...base} newBest script="cyrl" />);
+    expect(screen.getByText('Янги рекорд!')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Қайта' })).toBeInTheDocument();
   });
 });

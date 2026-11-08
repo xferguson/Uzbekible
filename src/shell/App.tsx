@@ -10,9 +10,13 @@ import type { GameSettings } from '@games/types';
 import { LevelMap, ModePicker, PatternBg, ScreenBar, SettingsPanel, type Script } from '@ui/index';
 import { label } from '../ui/labels';
 import { isGalleryPath } from '../dev/gallery/route';
-import { isSoxtaPreviewPath } from '../dev/soxta/route';
 import { GameShell } from './GameShell';
-import { createModeStore, createProgressStore, type Progress } from './progress';
+import {
+  createModeStore,
+  createProgressStore,
+  createRunBestStore,
+  type Progress,
+} from './progress';
 import {
   applyTheme,
   createSettingsStore,
@@ -28,10 +32,6 @@ import { UpdateToast } from './UpdateToast';
 // Dev-only: the gallery chunk is dropped from production builds (import.meta.env.DEV is false there).
 const Gallery = import.meta.env.DEV
   ? lazy(() => import('../dev/gallery').then((m) => ({ default: m.Gallery })))
-  : null;
-// TEMPORARY (J5): removed by J6 with src/dev/soxta.
-const SoxtaPreview = import.meta.env.DEV
-  ? lazy(() => import('../dev/soxta/SoxtaPreview').then((m) => ({ default: m.SoxtaPreview })))
   : null;
 
 export interface AppProps {
@@ -60,13 +60,6 @@ export function App(props: AppProps) {
     return (
       <Suspense fallback={null}>
         <Gallery />
-      </Suspense>
-    );
-  }
-  if (SoxtaPreview && isSoxtaPreviewPath(window.location.pathname)) {
-    return (
-      <Suspense fallback={null}>
-        <SoxtaPreview />
       </Suspense>
     );
   }
@@ -119,6 +112,15 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
       ),
     [games, storage],
   );
+  const runBests = useMemo(
+    () =>
+      new Map(
+        games
+          .filter((g) => g.endless)
+          .map((g) => [g.id, createRunBestStore(g.id, storage)] as const),
+      ),
+    [games, storage],
+  );
   const modeStore = useMemo(() => createModeStore(storage), [storage]);
   const [chosen, setChosen] = useState(() => modeStore.get());
   useEffect(() => modeStore.subscribe(setChosen), [modeStore]);
@@ -150,7 +152,7 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
           onScript={(s) => setScript(settingsStore, s)}
           onTheme={(th) => setTheme(settingsStore, th)}
           onExport={(f) => exportLog(log, f)}
-          onReset={() => resetProgress([...progressStores.values()], log)}
+          onReset={() => resetProgress([...progressStores.values()], log, [...runBests.values()])}
         />
       </main>
     );
@@ -161,7 +163,8 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
     } else if (screen.name === 'play') {
       const { level } = screen;
       const progress = progressOf(def);
-      const toMap = () => setScreen({ name: 'map', gameId: def.id });
+      // An endless game has no map: back goes home.
+      const toMap = () => (def.endless ? home() : setScreen({ name: 'map', gameId: def.id }));
       body = (
         <main className={`${styles.page} ${styles.wide}`}>
           <ScreenBar
@@ -178,6 +181,7 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
             history={log.aggregates()}
             clock={clock}
             progress={progress}
+            runBest={runBests.get(def.id)}
             log={log}
             countdownMs={countdownMs}
             onNext={() => setScreen({ name: 'play', gameId: def.id, level: level + 1 })}
@@ -211,7 +215,13 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
               key={g.id}
               type="button"
               className={styles.game}
-              onClick={() => setScreen({ name: 'map', gameId: g.id })}
+              onClick={() =>
+                setScreen(
+                  g.endless
+                    ? { name: 'play', gameId: g.id, level: 1 }
+                    : { name: 'map', gameId: g.id },
+                )
+              }
             >
               {script === 'cyrl' ? g.title.uzCyrl : g.title.uzLatn}
             </button>

@@ -48,6 +48,15 @@ export interface BoardProps<Params, State, Action, E extends GameEvent = never> 
   subscribe: Session<State, Action, E>['subscribe'];
 }
 
+/** What an endless run reports when it ends. */
+export interface RunSummary {
+  score: number;
+  /** Longest streak of correct answers in the run. */
+  streak: number;
+  correct: number;
+  mistakes: number;
+}
+
 export interface GameDefinition<Params, State, Action, E extends GameEvent = never> {
   id: string;
   title: { uzLatn: string; uzCyrl: string };
@@ -73,6 +82,15 @@ export interface GameDefinition<Params, State, Action, E extends GameEvent = nev
   difficulty: DifficultyConfig;
   /** The level map's buildings (name in Latin spelling, number of levels each). */
   chapters?: readonly { id: string; name: string; levels: number }[];
+  /**
+   * Present for a game with no levels and no map (Soxta): the shell opens it as level 1 straight from the home
+   * screen, shows run results from `summary` when the lives run out, and keeps the best run.
+   */
+  endless?: {
+    summary(game: State): RunSummary;
+    /** How long the final answer stays on the board before the results replace it. */
+    holdMs: number;
+  };
   Board: ComponentType<BoardProps<Params, State, Action, E>>;
   requires?: { audio?: boolean; microphone?: boolean };
 }

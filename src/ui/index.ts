@@ -5,7 +5,14 @@ export * from './hooks';
 export * from './Announcer';
 export { Timer, Lives, Score, LevelBadge, Combo, formatTime } from './hud';
 export { SettingsPanel, type SettingsPanelProps } from './SettingsPanel';
-export { Countdown, PauseOverlay, ResultsScreen, type ResultsScreenProps } from './screens';
+export {
+  Countdown,
+  PauseOverlay,
+  ResultsScreen,
+  type ResultsScreenProps,
+  RunResultsScreen,
+  type RunResultsScreenProps,
+} from './screens';
 export type { Script } from './labels';
 export * from './LevelMap';
 export * from './ScreenBar';

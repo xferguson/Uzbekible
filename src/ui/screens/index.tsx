@@ -97,3 +97,49 @@ export function ResultsScreen(p: ResultsScreenProps) {
     </section>
   );
 }
+
+export interface RunResultsScreenProps extends Common {
+  score: number;
+  /** Longest streak of this run. */
+  streak: number;
+  correct: number;
+  mistakes: number;
+  /** The best run so far, this one included. */
+  best: { score: number; streak: number };
+  newBest: boolean;
+  onReplay?: () => void;
+  onHome: () => void;
+}
+
+/** End of an endless run (Soxta): score, streak and the best so far; Again is the primary action. */
+export function RunResultsScreen(p: RunResultsScreenProps) {
+  const script = p.script ?? 'latn';
+  const t = (latn: string) => label(script, latn);
+  return (
+    <section className={styles.results} aria-label={t('Natija')} {...langProps(script)}>
+      <h2>{t('Yugurish tugadi')}</h2>
+      {p.newBest && <p className={styles.best}>{t('Yangi rekord!')}</p>}
+      <dl className={styles.stats}>
+        {(
+          [
+            ['Ball', p.score],
+            ['Eng uzun seriya', p.streak],
+            ['Toʻgʻri', p.correct],
+            ['Xato', p.mistakes],
+            ['Rekord', p.best.score],
+            ['Rekord seriya', p.best.streak],
+          ] as const
+        ).map(([name, value]) => (
+          <div key={name} className={styles.stat}>
+            <dt>{t(name)}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+      <div className={styles.actions}>
+        <Button onClick={p.onReplay}>{t('Qayta')}</Button>
+        <Button onClick={p.onHome}>{t('Bosh sahifa')}</Button>
+      </div>
+    </section>
+  );
+}

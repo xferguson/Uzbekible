@@ -2,12 +2,13 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | in review |
 | Lane | J Soxta |
 | Depends on | [J5](J5-soxta-board.md), [U6](U6-settings.md), [T01](T01-pwa-deploy.md) |
 | Read first | `docs/games/05-soxta.md`, `.claude/skills/e2e-visual-check/SKILL.md` |
 | API used | `docs/api.md` § `core/learning-log`, `core/storage`, game registry |
 | Skills | `tdd-task`, `e2e-visual-check`, `pr-flow` |
+| Screens owned | `soxta-ready`, `soxta-card`, `soxta-correct`, `soxta-wrong`, `soxta-timeout`, `soxta-pause`, `soxta-results` |
 | Branch | `task/J6-soxta-wiring-e2e` |
 
 ## Goal

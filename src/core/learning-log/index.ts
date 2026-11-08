@@ -28,7 +28,24 @@ export type LogEvent = Base &
         relation: Relation;
         rtMs: number;
       }
-    | { type: 'hint_used'; itemId: string }
+    | { type: 'hint_used'; itemId: string; side?: 'source' | 'uz'; slot?: number }
+    | {
+        type: 'spell_correct';
+        itemId: string;
+        sourceLang: SourceLang;
+        rtMs: number;
+        checks: number;
+        hints: number;
+      }
+    | {
+        type: 'spell_wrong';
+        itemId: string;
+        sourceLang: SourceLang;
+        side: 'source' | 'uz';
+        given: string;
+        expected: string;
+        rtMs: number;
+      }
     | { type: 'level_complete'; score: number; timeMs: number; mistakes: number; hints: number }
     | { type: 'level_failed'; level?: number }
   );
@@ -72,6 +89,13 @@ const isState = (v: unknown): v is LogState =>
 
 const keyOf = (t: Pick<Totals, 'itemId' | 'sourceLang' | 'relation'>): string =>
   JSON.stringify([t.itemId, t.sourceLang, t.relation]);
+
+/** Events that are one answer to one item: a game's response time runs from the previous one. */
+export const isAttemptEvent = (e: { type: string }): boolean =>
+  e.type === 'match_correct' ||
+  e.type === 'match_wrong' ||
+  e.type === 'spell_correct' ||
+  e.type === 'spell_wrong';
 
 /** Folds an event into totals; events that are not item attempts are ignored. */
 function fold(into: Map<string, Totals>, e: LogEvent): void {
@@ -137,6 +161,11 @@ export const CSV_COLUMNS = [
   'timeMs',
   'mistakes',
   'hints',
+  'side',
+  'slot',
+  'given',
+  'expected',
+  'checks',
 ] as const;
 
 export function csvEscape(value: unknown): string {

@@ -1,4 +1,4 @@
-// One quiet fast-gate command: lint → typecheck → test+coverage → build.
+// One quiet fast-gate command: task files → frame owners → api digest → lint → typecheck → test+coverage → build.
 // Stops at the first failing step; passing runs print a handful of lines ending in `GATE OK`.
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -17,6 +17,26 @@ const tail = (output) =>
 
 /** @type {import('./gate').GateStep[]} */
 export const STEPS = [
+  // The docs checks CI runs (docs/tasks consistency, every screen frame owned by one task): cheap, so first.
+  {
+    name: 'tasks',
+    cmd: 'node',
+    args: ['scripts/tasks.mjs', 'check'],
+    errors: (o) => pick(o, /^error|^tasks:/),
+  },
+  {
+    name: 'frames',
+    cmd: 'node',
+    args: ['scripts/tasks.mjs', 'frames'],
+    errors: (o) => pick(o, /^error|^tasks:/),
+  },
+  // CI's `npm run api -- --check`: docs/api.md is generated from the exports, so a new export needs a regenerate.
+  {
+    name: 'api',
+    cmd: 'node',
+    args: ['scripts/api-digest.mjs', '--check'],
+    errors: (o) => pick(o, /stale|error/i),
+  },
   {
     name: 'lint',
     cmd: 'eslint',

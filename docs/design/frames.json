@@ -2,70 +2,192 @@
   "$comment": "Screen state (e2e/states.ts) -> approved mockup frames. 'phone' frames pair with the 360 and 390 shots, 'desktop' with 1280. {scheme} is light or dark. An empty list means no frame exists yet: npm run shots flags it on shots/compare.html. A new game adds its states here when its design task (D-lane) is approved.",
   "states": {
     "home": {
-      "phone": ["docs/design/mockups/screens/D2-phone-home-home-and-game-picker-{scheme}.png"],
-      "desktop": ["docs/design/mockups/screens/D2-desk-home-home-{scheme}.png"]
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-home-home-and-game-picker-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-home-home-{scheme}.png"
+      ]
     },
     "settings": {
       "phone": [],
-      "desktop": ["docs/design/mockups/screens/D2-desk-settings-settings-{scheme}.png"]
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-settings-settings-{scheme}.png"
+      ]
     },
     "juft-map-early": {
-      "phone": ["docs/design/mockups/screens/D2-phone-map-minora-levels-16-30-{scheme}.png"],
-      "desktop": ["docs/design/mockups/screens/D2-desk-map-level-map-with-ready-card-{scheme}.png"]
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-map-minora-levels-16-30-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-map-level-map-with-ready-card-{scheme}.png"
+      ]
     },
     "juft-map-late": {
-      "phone": ["docs/design/mockups/screens/D2-phone-map-registon-levels-106-120-{scheme}.png"],
-      "desktop": ["docs/design/mockups/screens/D2-desk-map-late-late-game-map-registon-{scheme}.png"]
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-map-registon-levels-106-120-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-map-late-late-game-map-registon-{scheme}.png"
+      ]
     },
     "juft-ready": {
-      "phone": ["docs/design/mockups/screens/D2-phone-ready-ready-{scheme}.png"],
-      "desktop": ["docs/design/mockups/screens/D2-desk-map-level-map-with-ready-card-{scheme}.png"]
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-ready-ready-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-map-level-map-with-ready-card-{scheme}.png"
+      ]
     },
     "juft-countdown": {
-      "phone": ["docs/design/mockups/screens/D2-phone-count-3-{scheme}.png", "docs/design/mockups/screens/D2-phone-count-boshla-{scheme}.png"],
-      "desktop": ["docs/design/mockups/screens/D2-desk-count-countdown-{scheme}.png"]
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-count-3-{scheme}.png",
+        "docs/design/mockups/screens/D2-phone-count-boshla-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-count-countdown-{scheme}.png"
+      ]
     },
     "juft-board-1": {
-      "phone": ["docs/design/mockups/screens/D2-phone-board-1-pair-hard-pair-{scheme}.png"],
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-board-1-pair-hard-pair-{scheme}.png"
+      ],
       "desktop": []
     },
     "juft-board-3": {
-      "phone": ["docs/design/mockups/screens/D2-phone-board-3-pairs-one-selected-{scheme}.png"],
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-board-3-pairs-one-selected-{scheme}.png"
+      ],
       "desktop": []
     },
     "juft-board-6": {
-      "phone": ["docs/design/mockups/screens/D2-phone-board-6-pairs-combo-3-focus-ring-{scheme}.png"],
-      "desktop": ["docs/design/mockups/screens/D2-desk-board-board-6-pairs-{scheme}.png"]
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-board-6-pairs-combo-3-focus-ring-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-board-board-6-pairs-{scheme}.png"
+      ]
     },
     "juft-board-8": {
       "phone": [],
-      "desktop": ["docs/design/mockups/screens/D2-desk-board-8-board-8-pairs-mixed-languages-{scheme}.png"]
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-board-8-board-8-pairs-mixed-languages-{scheme}.png"
+      ]
     },
     "juft-board-12": {
-      "phone": ["docs/design/mockups/screens/D2-phone-board-12-pairs-registon-start-{scheme}.png", "docs/design/mockups/screens/D2-phone-board-12-pairs-mid-play-{scheme}.png"],
-      "desktop": ["docs/design/mockups/screens/D2-desk-board-12-board-12-pairs-{scheme}.png"]
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-board-12-pairs-registon-start-{scheme}.png",
+        "docs/design/mockups/screens/D2-phone-board-12-pairs-mid-play-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-board-12-board-12-pairs-{scheme}.png"
+      ]
     },
     "juft-wrong": {
-      "phone": ["docs/design/mockups/screens/D2-phone-board-8-pairs-wrong-life-cracks-{scheme}.png"],
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-board-8-pairs-wrong-life-cracks-{scheme}.png"
+      ],
       "desktop": []
     },
     "juft-hint": {
-      "phone": ["docs/design/mockups/screens/D2-phone-board-long-press-hint-the-only-english-{scheme}.png"],
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-board-long-press-hint-the-only-english-{scheme}.png"
+      ],
       "desktop": []
     },
     "juft-pause": {
-      "phone": ["docs/design/mockups/screens/D2-phone-pause-pause-{scheme}.png"],
-      "desktop": ["docs/design/mockups/screens/D2-desk-pause-pause-{scheme}.png"]
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-pause-pause-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-pause-pause-{scheme}.png"
+      ]
     },
     "juft-results-3": {
       "phone": [],
-      "desktop": ["docs/design/mockups/screens/D2-desk-results-results-3-new-best-{scheme}.png"]
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-results-results-3-new-best-{scheme}.png"
+      ]
     },
-    "juft-results-2": { "phone": [], "desktop": [] },
-    "juft-results-1": { "phone": [], "desktop": [] },
+    "juft-results-2": {
+      "phone": [],
+      "desktop": []
+    },
+    "juft-results-1": {
+      "phone": [],
+      "desktop": []
+    },
     "juft-fail": {
-      "phone": ["docs/design/mockups/screens/D2-phone-fail-fail-third-strike-{scheme}.png"],
-      "desktop": ["docs/design/mockups/screens/D2-desk-fail-fail-{scheme}.png"]
+      "phone": [
+        "docs/design/mockups/screens/D2-phone-fail-fail-third-strike-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/D2-desk-fail-fail-{scheme}.png"
+      ]
+    },
+    "imlo-map-early": {
+      "phone": [
+        "docs/design/mockups/screens/I4-phone-map-masjid-levels-16-30-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/I4-desk-0-level-map-with-ready-card-{scheme}.png"
+      ]
+    },
+    "imlo-map-late": {
+      "phone": [
+        "docs/design/mockups/screens/I4-phone-map-registon-levels-46-60-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/I4-desk-6-late-game-map-registon-{scheme}.png"
+      ]
+    },
+    "imlo-countdown": {
+      "phone": [
+        "docs/design/mockups/screens/I4-phone-ready-oson-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/I4-desk-0-level-map-with-ready-card-{scheme}.png"
+      ]
+    },
+    "imlo-board-empty": {
+      "phone": [
+        "docs/design/mockups/screens/I4-phone-board-empty-source-side-active-oson-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/I4-desk-1-board-empty-source-active-{scheme}.png"
+      ]
+    },
+    "imlo-board-full": {
+      "phone": [
+        "docs/design/mockups/screens/I4-phone-board-both-full-the-star-is-ready-o-rta-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/I4-desk-2-board-both-full-star-ready-{scheme}.png"
+      ]
+    },
+    "imlo-wrong": {
+      "phone": [
+        "docs/design/mockups/screens/I4-phone-board-wrong-on-the-uzbek-side-qiyin-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/I4-desk-4-board-wrong-on-the-uzbek-side-{scheme}.png"
+      ]
+    },
+    "imlo-pause": {
+      "phone": [
+        "docs/design/mockups/screens/I4-phone-pause-pause-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/I4-desk-7-pause-{scheme}.png"
+      ]
+    },
+    "imlo-fail": {
+      "phone": [
+        "docs/design/mockups/screens/I4-phone-fail-fail-third-strike-{scheme}.png"
+      ],
+      "desktop": [
+        "docs/design/mockups/screens/I4-desk-9-fail-{scheme}.png"
+      ]
     }
   }
 }

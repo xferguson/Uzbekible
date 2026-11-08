@@ -45,12 +45,26 @@ A state with no mockup frame (flagged on `compare.html`) cannot be graded for fi
 - **major**: clearly different from the mockup in a way a user would notice (missing band or illustration, wrong layout, wrong palette use).
 - **minor**: small deviation (a few px of spacing, a slightly different weight).
 
+## Shell chrome vs game content (who owns a mismatch)
+The app bar, rosette band, lattice ground, HUD, pause and fail cards, countdown, level-map chrome (chapter picker,
+building art, lock glyphs, star rows, ready card) are **shell** screens shared by every game. Their gaps are owned by the
+V lane (V7 audit, V8–V10 fixes), not by the game task being reviewed. Otherwise every new game would be unmergeable
+until the shell is fixed, and each game PR would re-report the same defects.
+- A mismatch is **shell-owned** when the same element shows the same gap in the game's reference implementation
+  (Juft's shot of the same state: `npm run shots -- --games juft`). Mark it `shell-owned` in the severity column
+  instead of blocker/major, and do not fix it in the game PR.
+- Everything the game itself draws (its board, its tiles, its states, its content, its wiring) is **game-owned**:
+  blocker/major rules apply in full.
+- Once `docs/design/fidelity-juft.md` (V7) exists, it is the list of shell-owned gaps; a gap not in it is game-owned.
+- Never relabel a gap `shell-owned` to get a merge: the reviewer decides, from the Juft shot, not the implementer.
+- The PR lists the shell-owned rows under "Design fidelity", so they stay visible until V8–V10 close them.
+
 ## Mismatch table (the only output format)
 ```
 | Frame | What differs | Severity |
 |---|---|---|
 | juft-map-early · 390 · light | App bar has no rosette band; mockup has one under the bar | major |
 ```
-Frame = `<state> · <width> · <scheme>`. One row per distinct difference; merge the same difference across widths or
+Severity is blocker, major, minor or `shell-owned`. Frame = `<state> · <width> · <scheme>`. One row per distinct difference; merge the same difference across widths or
 schemes into one row ("390/360 · light/dark"). "What differs" says what the app shows and what the mockup shows,
 with a measured value where there is one. Empty table → write `No mismatches`.

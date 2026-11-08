@@ -149,6 +149,16 @@ describe('Imlo Board', () => {
     expect(t.star()).not.toHaveAttribute('aria-disabled');
   });
 
+  it('shows no active row once both rows are full (only the ready star is left)', async () => {
+    const t = setup({ pairs: [TWO] });
+    const user = userEvent.setup();
+    for (const l of 'ikiikk') await t.tap(user, l);
+    expect(t.row('uz')).toHaveAttribute('data-active', '');
+    await t.tap(user, 'i');
+    expect(t.row('source')).not.toHaveAttribute('data-active');
+    expect(t.row('uz')).not.toHaveAttribute('data-active');
+  });
+
   it('a wrong check cracks only the wrong row, then recovers; letters stay', async () => {
     const t = setup({ pairs: [NAME] });
     const user = userEvent.setup();

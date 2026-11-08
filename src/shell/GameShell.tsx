@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from 'react';
 import type { Clock } from '@core/clock';
-import type { Aggregate, LearningLog } from '@core/learning-log';
+import { isAttemptEvent, type Aggregate, type LearningLog } from '@core/learning-log';
 import { createRng, seedFrom } from '@core/random';
 import { score as scoreOf, stars as starsOf, type Stars } from '@core/scoring';
 import {
@@ -117,8 +117,7 @@ function Attempt({
         const entries = def.logEvents?.(spec, e, e.at - state.lastAt) ?? [];
         for (const entry of entries) log.log(entry);
         // Response time runs from the start of play, or from the previous answer.
-        if (entries.some((x) => x.type === 'match_correct' || x.type === 'match_wrong'))
-          state.lastAt = e.at;
+        if (entries.some(isAttemptEvent)) state.lastAt = e.at;
         if (e.type === 'combo') state.streak++;
         if (e.type === 'mistake' || e.type === 'lifeLost') state.streak = 0;
       }

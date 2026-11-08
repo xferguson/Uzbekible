@@ -37,7 +37,7 @@ will use. Never re-implement another task's scope.
 
 ## 5. Before opening the PR — run the fast gate
 ```bash
-npm run gate   # quiet lint → typecheck → test+coverage → build; ends in GATE OK
+npm run gate   # quiet task/frame/api checks → lint → typecheck → test+coverage → build; ends in GATE OK
 ```
 Delegate the full gate to the `gate-runner` agent when you want only the verdict: it replies `GATE OK` or the
 failing step plus ≤ 20 lines of errors, keeping long logs out of your context. Run a single test file or step

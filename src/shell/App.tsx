@@ -172,9 +172,29 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
     } else if (screen.name === 'play') {
       const { level } = screen;
       const progress = progressOf(def);
-      // For an endless game the "map" is its ready card.
-      const toMap = () => setScreen({ name: 'map', gameId: def.id });
-      body = (
+      // For an endless game the "map" is its ready card, and leaving a run goes home.
+      const toMap = () => (def.endless ? home() : setScreen({ name: 'map', gameId: def.id }));
+      const shell = (
+        <GameShell
+          definition={def}
+          level={level}
+          mode={modeOf(def)}
+          settings={gameSettings}
+          history={log.aggregates()}
+          clock={clock}
+          progress={progress}
+          runBest={runBests.get(def.id)}
+          log={log}
+          countdownMs={countdownMs}
+          onNext={() => setScreen({ name: 'play', gameId: def.id, level: level + 1 })}
+          onMap={toMap}
+        />
+      );
+      // An endless run is full-bleed with no screen bar (mockup J4): its board draws the HUD band, and pause and
+      // the results both lead home.
+      body = def.endless ? (
+        <main className={styles.bleed}>{shell}</main>
+      ) : (
         <main className={`${styles.page} ${styles.wide}`}>
           <ScreenBar
             title={script === 'cyrl' ? def.title.uzCyrl : def.title.uzLatn}
@@ -182,20 +202,7 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
             onHome={home}
             script={script}
           />
-          <GameShell
-            definition={def}
-            level={level}
-            mode={modeOf(def)}
-            settings={gameSettings}
-            history={log.aggregates()}
-            clock={clock}
-            progress={progress}
-            runBest={runBests.get(def.id)}
-            log={log}
-            countdownMs={countdownMs}
-            onNext={() => setScreen({ name: 'play', gameId: def.id, level: level + 1 })}
-            onMap={toMap}
-          />
+          {shell}
         </main>
       );
     } else if (def.endless) {

@@ -86,9 +86,13 @@ describe('<App />', () => {
       clock.advance(10);
     });
     expect(await screen.findByTestId('soxta-board')).toBeInTheDocument();
-    // Back from a run goes to the ready card, back again goes home.
-    fireEvent.click(screen.getByRole('button', { name: 'Orqaga' }));
-    expect(screen.getByTestId('ready-sample')).toBeInTheDocument();
+    // A run is full-bleed: no screen bar; pause is the way out, and it goes home.
+    expect(screen.queryByRole('button', { name: 'Orqaga' })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Pauza' }));
+    fireEvent.click(screen.getByRole('button', { name: /Bosh sahifa/ }));
+    expect(screen.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeInTheDocument();
+    // Back from the ready card goes home too.
+    fireEvent.click(screen.getByRole('button', { name: 'Soxta' }));
     fireEvent.click(screen.getByRole('button', { name: 'Orqaga' }));
     expect(screen.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeInTheDocument();
   });

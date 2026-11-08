@@ -255,6 +255,7 @@ function Attempt({
         onRestart={onRetry}
         onMap={onMap}
         mapLabel="Bosh sahifa"
+        card
       />
     ) : (
       <Board

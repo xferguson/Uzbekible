@@ -33,6 +33,7 @@ export function PauseOverlay({
   onRestart,
   note,
   mapLabel = 'Xarita',
+  card = false,
   script = 'latn',
 }: Common & {
   onResume: () => void;
@@ -42,7 +43,41 @@ export function PauseOverlay({
   /** One line under the heading (shell microcopy). */
   note?: string;
   mapLabel?: string;
+  /** A white card on a veil (mockup J4) instead of the full navy sheet (D2). */
+  card?: boolean;
 }) {
+  if (card)
+    return (
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={label(script, 'Pauza')}
+        className={styles.veil}
+        {...langProps(script)}
+      >
+        <div className={styles.pauseCard}>
+          <h2 className={styles.pauseTitle}>{label(script, 'Pauza')}</h2>
+          {note && (
+            <p lang="en" className={styles.gloss}>
+              {note}
+            </p>
+          )}
+          <div className={styles.stack}>
+            <WideButton primary icon="▶" onClick={onResume}>
+              {label(script, 'Davom etish')}
+            </WideButton>
+            {onRestart && (
+              <WideButton icon="↻" onClick={onRestart}>
+                {label(script, 'Qayta boshlash')}
+              </WideButton>
+            )}
+            <WideButton icon="⌂" onClick={onMap}>
+              {label(script, mapLabel)}
+            </WideButton>
+          </div>
+        </div>
+      </div>
+    );
   return (
     <div
       role="dialog"

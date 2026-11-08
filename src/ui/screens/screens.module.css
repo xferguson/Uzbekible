@@ -109,6 +109,14 @@
   font-family: var(--font-ui);
   text-align: center;
 }
+/* Results stand alone on a full-bleed page (no screen bar), so they carry their own gutters. */
+.run {
+  inline-size: min(100%, 472px);
+  padding: 58px var(--space-4) var(--space-6);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  text-align: center;
+}
 .run p,
 .ready p,
 .run h2,
@@ -315,4 +323,47 @@
 .tick {
   font-size: 0.7rem;
   line-height: 1;
+}
+
+@media (min-width: 900px) {
+  .run {
+    inline-size: min(100%, 552px);
+    padding-block-start: 28px;
+  }
+}
+
+/* Pause as a card (mockup J4): the screen veiled, a white card centred on it. */
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--color-ground) 72%, transparent);
+  font-family: var(--font-ui);
+  color: var(--color-text);
+}
+.pauseCard {
+  box-sizing: border-box;
+  inline-size: min(100%, 328px);
+  display: grid;
+  gap: 10px;
+  padding: var(--space-6) var(--space-6) var(--space-4);
+  border-radius: var(--radius-card);
+  border: 1px solid color-mix(in srgb, var(--color-cobalt) 16%, transparent);
+  background: var(--color-surface);
+  box-shadow:
+    0 2px 0 color-mix(in srgb, var(--color-cobalt-deep) 18%, transparent),
+    0 6px 14px color-mix(in srgb, var(--color-cobalt-deep) 10%, transparent);
+  text-align: center;
+}
+.pauseCard p {
+  margin: 0;
+}
+.pauseTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  color: var(--color-text);
 }

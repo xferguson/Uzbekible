@@ -30,6 +30,12 @@
 .wide {
   max-inline-size: 800px;
 }
+/* Full-bleed: an endless run's board spans the screen (its HUD band runs edge to edge). */
+.bleed {
+  position: relative;
+  z-index: 1;
+  min-block-size: 100dvh;
+}
 .title {
   margin: 0;
   font-family: var(--font-display);

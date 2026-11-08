@@ -23,16 +23,21 @@
 .life {
   width: var(--space-6);
   height: var(--space-6);
-  border-radius: var(--radius-tile);
-  background: var(--color-turquoise);
-  border: 2px solid var(--color-cobalt);
 }
-.cracked {
-  background: var(--color-turquoise-pale);
-  border-color: var(--color-crack);
+.lifeTile {
+  fill: var(--color-surface);
+  stroke: var(--color-cobalt);
+  stroke-width: 2;
+}
+.lifeStar {
+  fill: var(--color-turquoise);
+}
+.cracked .lifeTile {
+  fill: var(--color-cobalt-deep);
+  stroke: var(--color-crack);
 }
 .crack {
   stroke: var(--color-crack);
-  stroke-width: 2;
+  stroke-width: 1.8;
   fill: none;
 }

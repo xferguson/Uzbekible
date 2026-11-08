@@ -1,6 +1,7 @@
 /** The ready card's miniature of a Soxta card (mockup J4 "ready"): the Uzbek word, its clue, the false friend. */
 import { SourceText, UzText } from '@ui/index';
 import styles from './Board.module.css';
+import { ClueOctagon } from './icons.tsx';
 
 /** tun (night) and Turkish dün (yesterday): the mockup's example pair. */
 const UZ = { latn: 'tun', cyrl: 'тун' };
@@ -15,7 +16,8 @@ export function Sample({ script }: { script: 'latn' | 'cyrl' }) {
         <UzText latn={UZ.latn} cyrl={UZ.cyrl} script={script === 'cyrl' ? 'uz-Cyrl' : 'uz-Latn'} />
       </span>
       <span className={`${styles.clue} ${styles.sampleClue}`} lang="en">
-        <span>{CLUE}</span>
+        <ClueOctagon className={styles.octagon} />
+        <span className={styles.clueText}>{CLUE}</span>
       </span>
       <span className={styles.sampleTile} data-false="">
         <span className={styles.tag}>TR</span>

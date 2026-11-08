@@ -40,6 +40,33 @@ describe('PauseOverlay', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Qayta boshlash' }));
     expect(onRestart).toHaveBeenCalledOnce();
   });
+
+  it('as a card it offers the same actions in a modal dialog', async () => {
+    const onResume = vi.fn();
+    const onRestart = vi.fn();
+    const onMap = vi.fn();
+    render(
+      <PauseOverlay
+        card
+        note="Hidden."
+        mapLabel="Bosh sahifa"
+        onResume={onResume}
+        onRestart={onRestart}
+        onMap={onMap}
+      />,
+    );
+    expect(screen.getByRole('dialog', { name: 'Pauza' })).toBeInTheDocument();
+    expect(screen.getByText('Hidden.')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: /Davom etish/ }));
+    await userEvent.click(screen.getByRole('button', { name: /Qayta boshlash/ }));
+    await userEvent.click(screen.getByRole('button', { name: /Bosh sahifa/ }));
+    expect([onResume, onRestart, onMap].map((f) => f.mock.calls.length)).toEqual([1, 1, 1]);
+  });
+
+  it('as a card it leaves out Restart when not offered', () => {
+    render(<PauseOverlay card onResume={vi.fn()} onMap={vi.fn()} />);
+    expect(screen.queryByRole('button', { name: /Qayta boshlash/ })).toBeNull();
+  });
 });
 
 describe('ResultsScreen', () => {

@@ -8,16 +8,27 @@ import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 're
 import { frameLoop, systemClock, type FrameClock } from '@core/clock';
 import type { GameEvent } from '@core/session';
 import {
-  Combo,
+  groupDigits,
   Lives,
   PatternBg,
-  Score,
+  RosetteBand,
   SourceText,
   Tile,
   UzText,
   useSwipe,
-  type TileState,
 } from '@ui/index';
+import { streakMultiplier } from './config.ts';
+import {
+  Badge,
+  ClockIcon,
+  ClueOctagon,
+  Cracks,
+  Go,
+  MiniOctagon,
+  MiniStar,
+  PauseIcon,
+  StarBloom,
+} from './icons.tsx';
 import { label } from '../../ui/labels.ts';
 import type { BoardProps } from '../types.ts';
 import {
@@ -57,8 +68,6 @@ type Feedback = {
   points?: number;
   card: SoxtaCurrent;
 };
-
-const opposite = (s: Side): Side => (s === 'left' ? 'right' : 'left');
 
 /** Filled segments for the time left; always at least one while time remains. */
 export const segmentsLeft = (remainingMs: number, totalMs: number): number =>
@@ -168,12 +177,17 @@ export function Board({
   const warn = left > 0 && left <= WARN_SEGMENTS;
   const answerSide = correctSide(view);
 
-  const tileState = (side: Side): TileState => {
-    if (!feedback) return 'idle';
-    if (feedback.kind === 'correct') return side === feedback.picked ? 'matched' : 'idle';
-    if (side === feedback.picked) return 'wrong';
-    return 'idle';
+  /** What a tile looks like now (mockup J4): drawn by the board, so the shared Tile stays idle. */
+  const look = (side: Side): 'ok' | 'out' | 'wrong' | 'answer' | undefined => {
+    if (!feedback) return undefined;
+    if (feedback.kind === 'correct') return side === feedback.picked ? 'ok' : 'out';
+    if (feedback.kind === 'wrong') return side === feedback.picked ? 'wrong' : 'answer';
+    return side === answerSide ? 'answer' : 'out';
   };
+  const sr = (side: Side): string | undefined =>
+    ({ ok: 'toʻgʻri', wrong: 'xato', answer: 'toʻgʻri javob', out: undefined })[
+      look(side) ?? 'out'
+    ];
 
   const word = (side: Side) => {
     const isUz = side === view.uzSide;
@@ -182,41 +196,21 @@ export function Board({
         ? view.card.uz.uz.cyrl
         : view.card.uz.uz.latn
       : view.card.other.text;
+    const kind = look(side);
+    const note = sr(side);
     return (
       <div
         className={styles.cell}
         data-side={side}
+        data-look={kind}
         data-answer={feedback && side === answerSide ? '' : undefined}
-        data-kind={feedback?.kind}
-        data-wrong={feedback?.kind === 'wrong' && feedback.picked === side ? '' : undefined}
-        data-ghost={feedback && feedback.kind !== 'wrong' && side !== answerSide ? '' : undefined}
+        data-wrong={kind === 'wrong' ? '' : undefined}
       >
-        {feedback && side === answerSide && (
-          <span aria-hidden="true" className={`${styles.badge} ${styles.check}`}>
-            ✓
-          </span>
-        )}
-        {feedback?.kind === 'wrong' && feedback.picked === side && (
-          <span aria-hidden="true" className={`${styles.badge} ${styles.miss}`}>
-            ✕
-          </span>
-        )}
-        {feedback?.kind === 'wrong' && feedback.picked === side && (
-          <svg
-            data-testid="cracks"
-            className={styles.cracks}
-            viewBox="0 0 100 160"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path d="M52 0 L46 40 L60 62 L48 100 L56 160 M46 40 L30 55 M60 62 L80 48 M48 100 L34 120" />
-          </svg>
-        )}
-        <Tile label={text} state={tileState(side)} onSelect={() => answer(side)}>
+        {kind === 'ok' && <StarBloom className={styles.bloom} />}
+        <Tile label={note ? `${text}, ${label(script, note)}` : text} onSelect={() => answer(side)}>
           <span data-testid={`tile-${side}`} className={styles.tileFace}>
-            <span className={styles.tag}>{isUz ? 'UZ' : 'TR'}</span>
-            <span aria-hidden="true" className={styles.chev}>
-              {side === 'left' ? '«' : '»'}
+            <span className={styles.tag} data-tag={isUz ? 'uz' : 'tr'}>
+              {isUz ? 'UZ' : 'TR'}
             </span>
             {isUz ? (
               <UzText
@@ -232,20 +226,24 @@ export function Board({
                 className={styles.word}
               />
             )}
+            {!feedback && <Go side={side} className={styles.go} />}
           </span>
         </Tile>
+        {kind === 'wrong' && <Cracks className={styles.cracks} />}
+        {(kind === 'ok' || kind === 'answer') && <Badge kind="ok" className={styles.badge} />}
+        {kind === 'wrong' && <Badge kind="bad" className={styles.badge} />}
       </div>
     );
   };
 
   const reveal = feedback;
-  const uzMeaning = view.card.clues.uz;
-  const otherMeaning = view.card.clues.other;
   const rows = [
-    { key: 'uz', side: view.uzSide, meaning: uzMeaning },
-    { key: 'other', side: opposite(view.uzSide), meaning: otherMeaning },
+    { key: 'uz', meaning: view.card.clues.uz },
+    { key: 'other', meaning: view.card.clues.other },
   ];
   const ordered = view.clue.kind === 'uz' ? rows : [rows[1]!, rows[0]!];
+  const mult = streakMultiplier(game.streak);
+  const last = state.lives === 0 || game.over;
 
   return (
     <div
@@ -255,157 +253,191 @@ export function Board({
       data-reduced={reducedMotion ? '' : undefined}
     >
       <PatternBg className={styles.pattern} />
-      <div className={styles.hud}>
-        {onPause && (
-          <button
-            type="button"
-            className={styles.pause}
-            aria-label={label(script, 'Pauza')}
-            onClick={onPause}
-          >
-            <span aria-hidden="true" className={styles.pauseBars} />
-          </button>
-        )}
-        <Lives lives={state.lives} max={spec.lives} script={script} />
-        <Combo count={game.streak} script={script} />
-        <Score value={game.score} script={script} />
-      </div>
-
-      <div
-        data-testid="timer"
-        data-segments={left}
-        data-warn={warn ? '' : undefined}
-        data-timeout={feedback?.kind === 'timeout' ? '' : undefined}
-        role="timer"
-        aria-label={label(script, 'Vaqt')}
-        className={styles.timer}
-      >
-        <span aria-hidden="true" className={styles.clock}>
-          ◷
-        </span>
-        {Array.from({ length: SEGMENTS }, (_, i) => (
-          <span key={i} className={styles.segment} data-on={i < left ? '' : undefined} />
-        ))}
-        <span className={styles.seconds}>
-          {warn && '! '}
-          {feedback?.kind === 'timeout' ? '0.0' : (Math.max(0, timed) / 1000).toFixed(1)}
-        </span>
-      </div>
-
-      {/* The swipe surface: pointer gestures and arrow keys; the arrow buttons below are the accessible path. */}
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <div
-        data-testid="card"
-        className={styles.card}
-        style={
-          swipe.offsetX
-            ? { transform: `translateX(${swipe.offsetX}px) rotate(${swipe.offsetX / 20}deg)` }
-            : undefined
-        }
-        {...bindRest}
-        onKeyDown={onKeyDown}
-        aria-label={label(script, 'Qaysi soʻz?')}
-        role="group"
-      >
-        {feedback?.kind === 'timeout' && (
-          <span data-testid="timeout-pill" className={styles.timeoutPill}>
-            ◷ {label(script, 'Vaqt tugadi')}
-          </span>
-        )}
-        {word('left')}
-        <div className={styles.clueWrap}>
-          <span data-testid="clue" className={styles.clue} lang="en">
-            <span>{view.clue.text}</span>
-          </span>
-          <span className={styles.caption}>{label(script, 'Maʼnosi')}</span>
+      <header className={styles.hud}>
+        <div className={styles.hudTop}>
+          {onPause && (
+            <button
+              type="button"
+              className={styles.pause}
+              aria-label={label(script, 'Pauza')}
+              onClick={onPause}
+            >
+              <PauseIcon className={styles.pauseIcon} />
+            </button>
+          )}
+          <div className={styles.stats}>
+            <span className={styles.stat} aria-label={label(script, 'Ball')}>
+              <MiniStar fill="var(--color-gold)" className={styles.statIcon} />
+              <span data-testid="score">{groupDigits(game.score)}</span>
+            </span>
+            <span className={styles.stat} aria-label={label(script, 'Seriya')}>
+              <MiniOctagon className={styles.statIcon} />
+              <span data-testid="streak">{game.streak}</span>
+            </span>
+            <span
+              className={styles.mult}
+              data-on={mult > 1 ? '' : undefined}
+              aria-hidden={mult > 1 ? undefined : true}
+            >
+              <MiniStar fill="var(--color-text)" className={styles.multIcon} />×{mult}
+            </span>
+          </div>
+          <span className={styles.grow} />
+          <Lives lives={state.lives} max={spec.lives} script={script} />
         </div>
-        {word('right')}
+      </header>
+      <div className={styles.band} aria-hidden="true">
+        <RosetteBand width={1600} height={16} />
       </div>
 
-      {!reveal && (
-        <div className={styles.arrows}>
-          <button
-            type="button"
-            className={styles.arrow}
-            onClick={() => answer('left')}
-            aria-label={label(script, 'Chap')}
-          >
-            «
-          </button>
-          <button
-            type="button"
-            className={styles.arrow}
-            onClick={() => answer('right')}
-            aria-label={label(script, 'Oʻng')}
-          >
-            »
-          </button>
-        </div>
-      )}
-
-      {reveal && (
-        <button
-          type="button"
-          data-testid="reveal"
-          data-kind={reveal.kind}
-          aria-live="polite"
-          className={styles.reveal}
-          onClick={skip}
+      <div className={styles.play}>
+        <div
+          data-testid="timer"
+          data-segments={left}
+          data-warn={warn ? '' : undefined}
+          data-timeout={feedback?.kind === 'timeout' ? '' : undefined}
+          role="timer"
+          aria-label={label(script, 'Vaqt')}
+          className={styles.timer}
         >
-          <span className={styles.revealHead}>
-            <span
-              aria-hidden="true"
-              className={`${styles.cross} ${reveal.kind === 'wrong' ? '' : styles.tick}`}
-            >
-              {reveal.kind === 'correct' ? '✓' : reveal.kind === 'timeout' ? '◷' : '✕'}
-            </span>
-            <span className={styles.revealTitle}>
-              {label(
-                script,
-                reveal.kind === 'timeout'
-                  ? 'Vaqt tugadi'
-                  : reveal.kind === 'wrong'
-                    ? 'Xato'
-                    : 'Toʻgʻri!',
-              )}
-            </span>
-            <span className={`${styles.pill} ${reveal.kind === 'correct' ? styles.good : ''}`}>
-              {reveal.kind === 'correct' ? `+${reveal.points ?? 0}` : label(script, '−1 jon')}
-            </span>
+          <ClockIcon className={styles.clock} />
+          <span className={styles.segments}>
+            {Array.from({ length: SEGMENTS }, (_, i) => (
+              <span key={i} className={styles.segment} data-on={i < left ? '' : undefined} />
+            ))}
           </span>
-          {ordered.map((r) => (
-            <span
-              key={r.key}
-              className={styles.revealRow}
-              data-owner={r.key === ordered[0]!.key ? '' : undefined}
+          <span className={styles.seconds}>
+            {warn && '!'}
+            {feedback?.kind === 'timeout' ? '0.0' : (Math.max(0, timed) / 1000).toFixed(1)}
+          </span>
+        </div>
+
+        {/* The swipe surface: pointer gestures and arrow keys; the arrow buttons below are the accessible path. */}
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+        <div
+          data-testid="card"
+          className={styles.card}
+          style={
+            swipe.offsetX
+              ? { transform: `translateX(${swipe.offsetX}px) rotate(${swipe.offsetX / 20}deg)` }
+              : undefined
+          }
+          {...bindRest}
+          onKeyDown={onKeyDown}
+          aria-label={label(script, 'Qaysi soʻz?')}
+          role="group"
+        >
+          {feedback?.kind === 'timeout' && (
+            <span data-testid="timeout-pill" className={styles.banner}>
+              <ClockIcon className={styles.bannerIcon} />
+              {label(script, 'Vaqt tugadi')}
+            </span>
+          )}
+          {word('left')}
+          <div className={styles.clueWrap}>
+            <span data-testid="clue" className={styles.clue} lang="en">
+              <ClueOctagon className={styles.octagon} />
+              <span className={styles.clueText}>{view.clue.text}</span>
+            </span>
+            <span className={styles.caption}>{label(script, 'maʼnosi')}</span>
+          </div>
+          {word('right')}
+        </div>
+
+        <div className={styles.under}>
+          {!reveal && (
+            <div className={styles.arrows}>
+              <button
+                type="button"
+                className={styles.arrow}
+                onClick={() => answer('left')}
+                aria-label={label(script, 'Chap')}
+              >
+                <Go side="left" className={styles.arrowIcon} />
+                <kbd className={styles.kbd}>←</kbd>
+              </button>
+              <span />
+              <button
+                type="button"
+                className={styles.arrow}
+                onClick={() => answer('right')}
+                aria-label={label(script, 'Oʻng')}
+              >
+                <kbd className={styles.kbd}>→</kbd>
+                <Go side="right" className={styles.arrowIcon} />
+              </button>
+            </div>
+          )}
+
+          {reveal && (
+            <button
+              type="button"
+              data-testid="reveal"
+              data-kind={reveal.kind}
+              aria-live="polite"
+              className={styles.reveal}
+              onClick={skip}
             >
-              <span className={styles.rowTag}>{r.key === 'uz' ? 'UZ' : 'TR'}</span>
-              {r.key === 'uz' ? (
-                <UzText
-                  latn={view.card.uz.uz.latn}
-                  cyrl={view.card.uz.uz.cyrl}
-                  script={script === 'cyrl' ? 'uz-Cyrl' : 'uz-Latn'}
-                  className={styles.revealWord}
+              <span className={styles.revealHead}>
+                <Badge
+                  kind={reveal.kind === 'correct' ? 'ok' : reveal.kind === 'wrong' ? 'bad' : 'time'}
+                  className={styles.revealBadge}
                 />
-              ) : (
-                <SourceText
-                  lang={view.card.other.lang}
-                  text={view.card.other.text}
-                  className={styles.revealWord}
-                />
-              )}
-              {r.meaning !== undefined && (
-                <span lang="en" className={styles.meaning}>
-                  {r.meaning}
+                <span className={styles.revealTitle}>
+                  {label(
+                    script,
+                    reveal.kind === 'timeout'
+                      ? 'Vaqt tugadi'
+                      : reveal.kind === 'wrong'
+                        ? 'Xato'
+                        : 'Toʻgʻri!',
+                  )}
                 </span>
-              )}
-            </span>
-          ))}
-          <span className={styles.hint}>
-            {label(script, 'Davom etish uchun bosing yoki')} Space
-          </span>
-        </button>
-      )}
+                <span
+                  className={styles.pill}
+                  data-good={reveal.kind === 'correct' ? '' : undefined}
+                >
+                  {reveal.kind === 'correct' ? `+${reveal.points ?? 0}` : label(script, '−1 jon')}
+                </span>
+              </span>
+              {ordered.map((r, i) => (
+                <span
+                  key={r.key}
+                  className={styles.revealRow}
+                  data-owner={i === 0 ? '' : undefined}
+                >
+                  <span className={styles.rowTag} lang="en">
+                    {r.key === 'uz' ? 'UZ' : 'TR'}
+                  </span>
+                  {r.key === 'uz' ? (
+                    <UzText
+                      latn={view.card.uz.uz.latn}
+                      cyrl={view.card.uz.uz.cyrl}
+                      script={script === 'cyrl' ? 'uz-Cyrl' : 'uz-Latn'}
+                      className={styles.revealWord}
+                    />
+                  ) : (
+                    <SourceText
+                      lang={view.card.other.lang}
+                      text={view.card.other.text}
+                      className={styles.revealWord}
+                    />
+                  )}
+                  <span lang="en" className={styles.meaning}>
+                    {r.meaning ?? ''}
+                  </span>
+                </span>
+              ))}
+              <span className={styles.hint} lang="en">
+                <span>
+                  {last ? 'Last life lost · results next' : 'Tap or press Space to continue'}
+                </span>
+                {!last && <span>next card in {REVEAL_MS / 1000} s</span>}
+              </span>
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

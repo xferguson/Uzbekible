@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
 import {
@@ -7,6 +8,7 @@ import {
   type Item,
   type SourceForm,
 } from '@core/content/index.ts';
+import { loadItems } from '@core/content/index.ts';
 import { makeItem } from '@core/content/fixtures.ts';
 import { soxtaPool, tierOf } from './cards.ts';
 
@@ -115,5 +117,23 @@ describe('source glossEn schema', () => {
   it('rejects an empty source glossEn', () => {
     const item = makeItem({ sources: [ff({ glossEn: '  ' })] });
     expect(validateItems([item]).issues.some((i) => i.code === 'schema')).toBe(true);
+  });
+});
+
+describe('shipped Soxta content', () => {
+  const pool = soxtaPool(
+    loadItems(JSON.parse(readFileSync('public/content/items.v1.json', 'utf8'))),
+  );
+
+  it('has a pool to play', () => {
+    expect(pool.length).toBeGreaterThan(50);
+  });
+  // Without it the reveal shows the Turkish word with no English meaning, and no Turkish-meaning clues are dealt.
+  it('gives every card an English meaning for the Turkish word', () => {
+    expect(pool.filter((c) => !c.clues.other).map((c) => c.id)).toEqual([]);
+  });
+  it('never gives the two words the same English meaning', () => {
+    const same = pool.filter((c) => c.clues.other?.toLowerCase() === c.clues.uz.toLowerCase());
+    expect(same.map((c) => c.id)).toEqual([]);
   });
 });

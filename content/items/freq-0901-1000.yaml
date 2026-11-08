@@ -175,6 +175,7 @@
   sources:
     - lang: tr
       text: tazelemek
+      glossEn: to freshen up
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -196,6 +197,7 @@
   sources:
     - lang: tr
       text: ileri
+      glossEn: forward, ahead
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:ilgari=eskiden,önce; wiktionary:ileri
@@ -337,6 +339,7 @@
   sources:
     - lang: tr
       text: menzil
+      glossEn: range; destination
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -463,6 +466,7 @@
   sources:
     - lang: tr
       text: zor
+      glossEn: difficult, hard
       relation: false-friend
       confidence: low
       ref: wiktionary:zor
@@ -568,6 +572,7 @@
   sources:
     - lang: tr
       text: düşünce
+      glossEn: thought
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -651,6 +656,7 @@
   sources:
     - lang: tr
       text: şartname
+      glossEn: specification
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -942,6 +948,7 @@
   sources:
     - lang: tr
       text: taze
+      glossEn: fresh
       relation: false-friend
       confidence: medium
       ref: apertium-tur-uzb:toza=temiz; wiktionary:taze
@@ -1059,6 +1066,7 @@
   sources:
     - lang: tr
       text: dinç
+      glossEn: vigorous, fit
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:tinch=huzur

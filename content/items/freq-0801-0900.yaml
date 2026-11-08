@@ -53,6 +53,7 @@
   sources:
     - lang: tr
       text: atamak
+      glossEn: to appoint
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -184,6 +185,7 @@
   sources:
     - lang: tr
       text: gaye
+      glossEn: aim, goal
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -275,6 +277,7 @@
   sources:
     - lang: tr
       text: düstur
+      glossEn: principle, formula
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:dastur=rehber
@@ -466,6 +469,7 @@
   sources:
     - lang: tr
       text: sarı
+      glossEn: yellow
       relation: false-friend
       confidence: low
       ref: wiktionary:sarı
@@ -512,6 +516,7 @@
   sources:
     - lang: tr
       text: belge
+      glossEn: document, certificate
       relation: false-friend
       confidence: low
       ref: apertium-tur-uzb:belgi=belirti,işaret
@@ -580,6 +585,7 @@
   sources:
     - lang: tr
       text: kural
+      glossEn: rule
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -609,6 +615,7 @@
   sources:
     - lang: tr
       text: icat
+      glossEn: invention
       relation: false-friend
       confidence: low
       ref: curator:C2
@@ -925,6 +932,7 @@
   sources:
     - lang: tr
       text: ilaç
+      glossEn: medicine
       relation: false-friend
       confidence: low
       ref: curator:C2

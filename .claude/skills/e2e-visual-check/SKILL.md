@@ -40,7 +40,8 @@ description: Use when writing or running Playwright e2e tests, taking screenshot
 ## Screen states (`e2e/states.ts`)
 - One `ScreenState` per screen: `{ id, game, title, reach(driver) }`. Shell screens are in `e2e/states/shell.ts`;
   each game owns `e2e/states/<gameId>.ts` and is spread into `STATES`. V2's layout checks run over the same list, so
-  a new state gets layout coverage for free.
+  a new state gets layout coverage for free (`e2e/layout.e2e.ts`, checks in `e2e/layout-checks.ts`; CI runs 360 and 1280,
+  `npm run e2e:layout` runs 320/360/390/768/1280). Known v1 defects are listed in `KNOWN` with their owning V8–V10 task.
 - `reach` uses the game-agnostic `Driver` (`e2e/shots/driver.ts`): `open({ progress, settings })` seeds storage and
   freezes Playwright's clock; `openGame`, `startLevel(n, { countdownMs })`, `tap`, `advance(ms)`,
   `advanceUntil(cond)`, `check(ok, msg)`. Game-specific moves (tiles, answers) stay in the game's state file.

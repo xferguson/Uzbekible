@@ -19,6 +19,8 @@ Bring the page frame (header bar, back button, motif band, star total) and the h
 - [ ] A shared page-frame component in `src/ui` (header with back button, title, star count; motif band from `ui/motif`) used by every non-board screen
 - [ ] Home: game picker cards as in D2 (no bare buttons); settings as in D2
 - [ ] Matches the owned frames at 360/390/1280, light and dark; design-reviewer reports no blocker or major; comparison in the PR
+- [ ] Home includes Imlo as a second game card in the same style (no D2 counterpart; flag to the user); two-column desktop home with the "your city" panel
+- [ ] Settings: cards per group (source-language toggles with native name, gloss and example; script segmented control with hard chip; motion and theme segmented controls), token-styled controls, readable unselected state in dark; add the phone settings frame to `docs/design/frames.json`
 - [ ] Layout suite (V2) green for these states
 
 ## Test-first plan

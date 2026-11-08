@@ -382,9 +382,12 @@ function SlotRow({
           viewBox="0 0 100 20"
           preserveAspectRatio="none"
         >
-          <polyline points="0,6 12,11 22,5 34,12 46,6 58,13 70,7 82,12 100,8" />
-          <polyline points="30,12 36,19 40,14" />
-          <polyline points="64,13 70,0 76,7" />
+          <polyline points="50,10 38,4 20,6 0,3" />
+          <polyline points="50,10 62,16 80,14 100,18" />
+          <polyline points="50,10 44,19 40,20" />
+          <polyline points="50,10 56,0" />
+          <polyline points="38,4 30,0" />
+          <polyline points="62,16 70,20" />
         </svg>
       )}
       {state.slots[side].map((id, i) => (

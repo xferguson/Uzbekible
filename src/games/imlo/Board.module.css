@@ -202,8 +202,10 @@
   background: color-mix(in srgb, var(--color-gold) 22%, transparent);
 }
 .row[data-result='right'] .slot > button {
-  background: color-mix(in srgb, var(--color-gold) 38%, var(--color-surface));
+  /* I4 frames: a solved row is solid gold tiles with dark letters. */
+  background: var(--color-gold);
   border-color: var(--color-cobalt);
+  color: #13213f;
 }
 .row[data-result='right']::after {
   content: none;

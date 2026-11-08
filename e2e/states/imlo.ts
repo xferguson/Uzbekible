@@ -7,6 +7,8 @@ import type { Driver, ScreenState } from '../shots/types.ts';
 const TITLE = 'Imlo';
 /** Wrong-row crack in the board (Board.tsx WRONG_MS) plus a margin. */
 const AFTER_WRONG_MS = 600;
+/** Correct-check glaze in the board (Board.tsx RIGHT_MS) plus a margin. */
+const RIGHT_MS = 700;
 
 const progress = (unlocked: number, cleared = 0) => ({
   'imlo:oson': {
@@ -30,9 +32,10 @@ async function fillRow(d: Driver, side: 'source' | 'uz') {
   for (let i = 0; i < n; i++) await bank(d.page).last().click();
 }
 
-async function board(d: Driver, level = 1) {
+async function board(d: Driver, level = 1, mode?: string) {
   await d.open({ progress: progress(level), settings: { languages: ['tr'] } });
   await d.openGame(TITLE);
+  if (mode) await d.page.getByRole('radio', { name: mode }).check();
   await d.startLevel(level);
   const shown = await d.page.getByTestId('imlo-board').count();
   d.check(shown === 1, 'expected the Imlo board');
@@ -47,12 +50,8 @@ const PACK = JSON.parse(readFileSync('public/content/items.v1.json', 'utf8')) as
   items: PackItem[];
 };
 
-/**
- * Spells the Turkish row correctly (the pair is found by its clue and the bank) and fills the Uzbek row with
- * whatever is left, so a check marks only the Uzbek row wrong, as in the I4 frame. Needs Turkish as the only
- * source language.
- */
-async function sourceRightUzWrong(d: Driver) {
+/** The correct letters for the pair on screen: found by its clue and what the bank can build. */
+async function answer(d: Driver) {
   const clue = (await d.page.getByTestId('clue').innerText()).trim();
   const bank = await d.page
     .locator('[data-testid="bank-cell"] button')
@@ -68,19 +67,39 @@ async function sourceRightUzWrong(d: Driver) {
       return true;
     });
   };
-  let src: string[] | undefined;
   for (const item of PACK.items) {
     if (item.glossEn !== clue) continue;
     const uz = toLetters(item.uz.latn, 'uz-Latn');
     for (const s of item.sources.filter((x) => x.lang === 'tr')) {
-      const letters = sourceLetters(s.text, 'tr');
-      if (fits([...letters, ...uz])) src = letters;
+      const src = sourceLetters(s.text, 'tr');
+      if (fits([...src, ...uz])) return { src, uz };
     }
   }
-  d.check(src !== undefined, `no Turkish spelling found for clue "${clue}"`);
-  await d.page.getByTestId('row-source').click({ position: { x: 2, y: 2 } });
-  for (const l of src!)
+  d.check(false, `no Turkish spelling found for clue "${clue}"`);
+  throw new Error('unreachable');
+}
+
+async function spell(d: Driver, side: 'source' | 'uz', letters: string[]) {
+  await d.page.getByTestId(`row-${side}`).click({ position: { x: 2, y: 2 } });
+  for (const l of letters)
     await d.page.getByTestId('bank').getByRole('button', { name: l, exact: true }).first().click();
+}
+
+/** Solves `n` pairs correctly, so the progress dots show `n` done. Needs Turkish as the only source language. */
+async function solvePairs(d: Driver, n: number) {
+  for (let i = 0; i < n; i++) {
+    const { src, uz } = await answer(d);
+    await spell(d, 'source', src);
+    await spell(d, 'uz', uz);
+    await check(d);
+    await d.advance(RIGHT_MS);
+  }
+}
+
+/** Spells the Turkish row correctly and fills the Uzbek row with what is left: a check marks only the Uzbek row wrong. */
+async function sourceRightUzWrong(d: Driver) {
+  const { src } = await answer(d);
+  await spell(d, 'source', src);
   await fillRow(d, 'uz');
 }
 
@@ -129,9 +148,10 @@ export const imloStates: ScreenState[] = [
   {
     id: 'imlo-board-full',
     game: 'imlo',
-    title: 'Board, both rows full, the check star is ready',
+    title: 'Board, Oʻrta, third pair, both rows full, the check star is ready',
     async reach(d) {
-      await board(d);
+      await board(d, 1, 'Oʻrta');
+      await solvePairs(d, 2);
       await fillBoth(d);
       const ready = await d.page.locator('button[data-ready]').count();
       d.check(ready === 1, 'expected the check star to be ready');
@@ -140,9 +160,11 @@ export const imloStates: ScreenState[] = [
   {
     id: 'imlo-wrong',
     game: 'imlo',
-    title: 'Wrong check: only the Uzbek row cracks, the Turkish row glazes, a life is lost',
+    title:
+      'Wrong check, Qiyin, fourth pair: only the Uzbek row cracks, the Turkish row glazes, a life is lost',
     async reach(d) {
-      await board(d);
+      await board(d, 1, 'Qiyin');
+      await solvePairs(d, 3);
       await sourceRightUzWrong(d);
       await check(d);
       const cracks = await d.page.getByTestId('crack').count();

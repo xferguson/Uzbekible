@@ -218,4 +218,14 @@ describe('Soxta Board', () => {
     t.answer(opposite(correctSide(t.cur())));
     expect(screen.getByTestId('reveal')).toHaveTextContent('z-uz-meaning');
   });
+
+  it('a correct answer shows the reveal with the points and holds like a miss', () => {
+    const t = setup();
+    t.answer(correctSide(t.cur()));
+    const reveal = screen.getByTestId('reveal');
+    expect(reveal).toHaveTextContent(/\+\d+/);
+    expect(reveal).toHaveTextContent('Toʻgʻri!');
+    t.advance(CORRECT_MS);
+    expect(screen.queryByTestId('reveal')).toBeNull();
+  });
 });

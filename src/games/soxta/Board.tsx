@@ -31,8 +31,8 @@ import {
 } from './rules.ts';
 import styles from './Board.module.css';
 
-/** A correct answer glazes the tile for a moment before the next card (mockup J4). */
-export const CORRECT_MS = 350;
+/** A correct answer also shows the reveal panel (mockup J4), so it holds as long as a miss. */
+export const CORRECT_MS = 1400;
 /** A wrong answer or timeout holds the reveal this long; tap or Space skips (mockup J4). */
 export const REVEAL_MS = 1400;
 /** Timer segments (mockup J4); the last `WARN_SEGMENTS` turn ochre with a "!". */
@@ -54,6 +54,7 @@ export interface SoxtaBoardProps extends BoardProps<
 type Feedback = {
   kind: 'correct' | 'wrong' | 'timeout';
   picked?: Side;
+  points?: number;
   card: SoxtaCurrent;
 };
 
@@ -107,7 +108,7 @@ export function Board({
   useEffect(
     () =>
       subscribe((e) => {
-        const ev = e as { type: string; side?: Side };
+        const ev = e as { type: string; side?: Side; points?: number };
         const kind =
           ev.type === 'swipeCorrect'
             ? 'correct'
@@ -117,7 +118,12 @@ export function Board({
                 ? 'timeout'
                 : undefined;
         if (!kind) return;
-        const fb: Feedback = { kind, card: shown.current, ...(ev.side && { picked: ev.side }) };
+        const fb: Feedback = {
+          kind,
+          card: shown.current,
+          ...(ev.side && { picked: ev.side }),
+          ...(ev.points !== undefined && { points: ev.points }),
+        };
         setFeedback(fb);
         after(kind === 'correct' ? CORRECT_MS : REVEAL_MS, () =>
           setFeedback((cur) => (cur === fb ? null : cur)),
@@ -145,7 +151,7 @@ export function Board({
   });
   const { onKeyDown: swipeKeys, ...bindRest } = swipe.bind;
   const onKeyDown = (e: KeyboardEvent<HTMLElement>) => {
-    if (feedback && feedback.kind !== 'correct' && e.key === ' ') {
+    if (feedback && e.key === ' ') {
       e.preventDefault();
       skip();
       return;
@@ -179,10 +185,18 @@ export function Board({
       <div
         className={styles.cell}
         data-side={side}
-        data-answer={
-          feedback && feedback.kind !== 'correct' && side === answerSide ? '' : undefined
-        }
+        data-answer={feedback && side === answerSide ? '' : undefined}
       >
+        {feedback && side === answerSide && (
+          <span aria-hidden="true" className={`${styles.badge} ${styles.check}`}>
+            ✓
+          </span>
+        )}
+        {feedback?.kind === 'wrong' && feedback.picked === side && (
+          <span aria-hidden="true" className={`${styles.badge} ${styles.miss}`}>
+            ✕
+          </span>
+        )}
         {feedback?.kind === 'wrong' && feedback.picked === side && (
           <svg
             data-testid="cracks"
@@ -217,7 +231,7 @@ export function Board({
     );
   };
 
-  const reveal = feedback && feedback.kind !== 'correct' ? feedback : null;
+  const reveal = feedback;
   const uzMeaning = view.card.clues.uz;
   const otherMeaning = view.card.clues.other;
   const rows = [
@@ -249,12 +263,15 @@ export function Board({
         aria-label={label(script, 'Vaqt')}
         className={styles.timer}
       >
+        <span aria-hidden="true" className={styles.clock}>
+          ◷
+        </span>
         {Array.from({ length: SEGMENTS }, (_, i) => (
           <span key={i} className={styles.segment} data-on={i < left ? '' : undefined} />
         ))}
         <span className={styles.seconds}>
           {warn && '! '}
-          {feedback?.kind === 'timeout' ? '0' : Math.ceil(timed / 1000)}
+          {feedback?.kind === 'timeout' ? '0.0' : (Math.max(0, timed) / 1000).toFixed(1)}
         </span>
       </div>
 
@@ -283,24 +300,26 @@ export function Board({
         {word('right')}
       </div>
 
-      <div className={styles.arrows}>
-        <button
-          type="button"
-          className={styles.arrow}
-          onClick={() => answer('left')}
-          aria-label={label(script, 'Chap')}
-        >
-          ←
-        </button>
-        <button
-          type="button"
-          className={styles.arrow}
-          onClick={() => answer('right')}
-          aria-label={label(script, 'Oʻng')}
-        >
-          →
-        </button>
-      </div>
+      {!reveal && (
+        <div className={styles.arrows}>
+          <button
+            type="button"
+            className={styles.arrow}
+            onClick={() => answer('left')}
+            aria-label={label(script, 'Chap')}
+          >
+            «
+          </button>
+          <button
+            type="button"
+            className={styles.arrow}
+            onClick={() => answer('right')}
+            aria-label={label(script, 'Oʻng')}
+          >
+            »
+          </button>
+        </div>
+      )}
 
       {reveal && (
         <button
@@ -311,13 +330,25 @@ export function Board({
           onClick={skip}
         >
           <span className={styles.revealHead}>
-            <span aria-hidden="true" className={styles.cross}>
-              ✕
+            <span
+              aria-hidden="true"
+              className={`${styles.cross} ${reveal.kind === 'correct' ? styles.tick : ''}`}
+            >
+              {reveal.kind === 'correct' ? '✓' : '✕'}
             </span>
             <span className={styles.revealTitle}>
-              {label(script, reveal.kind === 'timeout' ? 'Vaqt tugadi' : 'Xato')}
+              {label(
+                script,
+                reveal.kind === 'timeout'
+                  ? 'Vaqt tugadi'
+                  : reveal.kind === 'wrong'
+                    ? 'Xato'
+                    : 'Toʻgʻri!',
+              )}
             </span>
-            <span className={styles.pill}>{label(script, '−1 jon')}</span>
+            <span className={`${styles.pill} ${reveal.kind === 'correct' ? styles.good : ''}`}>
+              {reveal.kind === 'correct' ? `+${reveal.points ?? 0}` : label(script, '−1 jon')}
+            </span>
           </span>
           {ordered.map((r) => (
             <span

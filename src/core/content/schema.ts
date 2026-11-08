@@ -27,6 +27,10 @@ export const SourceFormSchema = z.strictObject({
   confidence: ConfidenceSchema,
   correspondence: z.array(nonEmpty).optional(),
   ref: nonEmpty,
+  /** English meaning of this source word (optional; used by Soxta for the other-side clue). */
+  glossEn: nonEmpty.optional(),
+  /** A false friend sharing one sense with the Uzbek word; Soxta v1 excludes these. */
+  partial: z.boolean().optional(),
 });
 
 export const ItemSchema = z.strictObject({

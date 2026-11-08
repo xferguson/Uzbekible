@@ -81,3 +81,24 @@ export const juftDifficulty: DifficultyConfig<JuftParamKey> = {
   },
   special: hardLevels,
 };
+
+/**
+ * What a board is built around (E4). `mixed` is the usual frequency-ordered draw; `lookalike` deals words that are
+ * spelled alike, so the player must read closely; `family` deals one stem with different suffixes.
+ */
+export type JuftFocus = 'mixed' | 'lookalike' | 'family';
+
+/** Look-alike boards: every third level from chapter 2. */
+export const LOOKALIKE_FROM = 16;
+export const LOOKALIKE_EVERY = 3;
+/** Suffix-family boards: every fourth level from chapter 5, where suffixed forms begin. */
+export const FAMILY_FROM = 61;
+export const FAMILY_EVERY = 4;
+
+/** Board focus for a level. Hard-pair breathers stay `mixed`; where both apply, the suffix family wins. */
+export function focusFor(level: number): JuftFocus {
+  if (level % HARD_EVERY === 0 && level <= LAST_HARD_LEVEL) return 'mixed';
+  if (level >= FAMILY_FROM && level % FAMILY_EVERY === 2) return 'family';
+  if (level >= LOOKALIKE_FROM && level % LOOKALIKE_EVERY === 0) return 'lookalike';
+  return 'mixed';
+}

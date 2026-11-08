@@ -5,12 +5,20 @@
  */
 import { boardPool, compareByFrequency, type Item, type SourceForm } from '@core/content/index.ts';
 import { paramsFor, type DifficultyConfig } from '@core/difficulty/index.ts';
-import { sample } from '@core/random/index.ts';
+import { sample, shuffle, type Rng } from '@core/random/index.ts';
+import { distance } from '@core/similarity/index.ts';
 import { DEFAULT_REVIEW_RATIO, nextItems } from '@core/scheduler/index.ts';
 import type { SourceLang } from '@core/text/index.ts';
 import { chooseSource } from '../shared/source.ts';
 import type { LevelContext, LevelSpec } from '../types.ts';
-import { CHAPTER_SIZE, MAX_PAIRS, juftDifficulty, type JuftParamKey } from './difficulty.config.ts';
+import {
+  CHAPTER_SIZE,
+  MAX_PAIRS,
+  focusFor,
+  juftDifficulty,
+  type JuftFocus,
+  type JuftParamKey,
+} from './difficulty.config.ts';
 
 export interface JuftPair {
   /** The item id; both tiles of the pair share it. */
@@ -29,6 +37,8 @@ export interface JuftParams {
   parMs: number;
   /** A one-pair "hard pair" breather. */
   hard: boolean;
+  /** What the board is built around: a usual mix, look-alike spellings or one stem's suffixes. */
+  focus: JuftFocus;
   chapter: number;
 }
 
@@ -37,6 +47,60 @@ const NEUTRAL_TRANSPARENCY = 0.5;
 const HARD_MAX_TRANSPARENCY = 0.5;
 const HARD_WINDOW = 4;
 const LIVES = 3;
+/** Seeds tried when looking for a tight look-alike cluster. */
+const LOOKALIKE_SEEDS = 12;
+/** Fewest forms a stem needs to anchor a family board (smaller boards need fewer). */
+const FAMILY_MIN_FORMS = 4;
+
+function sourceText(item: Item, langs: ReadonlySet<SourceLang>): string {
+  return (item.sources.find((s) => langs.has(s.lang)) ?? item.sources[0])?.text ?? item.uz.latn;
+}
+
+/** How alike two items look: Uzbek spelling plus the source word's spelling (lower is more alike). */
+function likeness(a: Item, b: Item, langs: ReadonlySet<SourceLang>): number {
+  return distance(a.uz.latn, b.uz.latn) + distance(sourceText(a, langs), sourceText(b, langs));
+}
+
+/** The best of a few random seeds: the seed plus its `n - 1` nearest neighbours, with the smallest total distance. */
+function lookalikeCluster(
+  pool: readonly Item[],
+  n: number,
+  langs: ReadonlySet<SourceLang>,
+  rng: Rng,
+): Item[] {
+  let best: { total: number; cluster: Item[] } | undefined;
+  for (const seed of sample(rng, pool, LOOKALIKE_SEEDS)) {
+    const near = pool
+      .filter((it) => it.id !== seed.id)
+      .map((it) => ({ it, d: likeness(seed, it, langs) }))
+      .sort((a, b) => a.d - b.d || a.it.id.localeCompare(b.it.id))
+      .slice(0, n - 1);
+    const total = near.reduce((sum, x) => sum + x.d, 0);
+    if (!best || total < best.total) best = { total, cluster: [seed, ...near.map((x) => x.it)] };
+  }
+  return best?.cluster ?? [];
+}
+
+/** One stem at a time: the stem's own item first, then its suffixed forms in random order, until the board is full. */
+function suffixFamilies(pool: readonly Item[], n: number, rng: Rng): Item[] {
+  const forms = new Map<string, Item[]>();
+  for (const it of pool)
+    if (it.form === 'inflected' && it.lemma)
+      forms.set(it.lemma, [...(forms.get(it.lemma) ?? []), it]);
+  const byId = new Map(pool.map((it) => [it.id, it]));
+  const stems = [...forms.keys()]
+    .sort()
+    .filter((l) => forms.get(l)!.length >= Math.min(n, FAMILY_MIN_FORMS));
+  const out: Item[] = [];
+  for (const stem of shuffle(rng, stems)) {
+    const own = byId.get(stem);
+    out.push(
+      ...[...(own ? [own] : []), ...shuffle(rng, forms.get(stem)!)].slice(0, n - out.length),
+    );
+    if (out.length >= n) break;
+  }
+  return out;
+}
 /** Level at which the frequency window reaches the end of the pool. */
 const PROGRESS_LEVELS = 105;
 
@@ -73,6 +137,7 @@ export function createJuftLevels(
     const p = paramsFor(level, config);
     const n = Math.min(MAX_PAIRS, Math.max(1, p.pairs));
     const hard = p.hard === 1;
+    const focus = hard ? 'mixed' : focusFor(level);
 
     const eligible = base.filter((it) => it.sources.some((s) => langs.has(s.lang)));
     const opts = { enabledLangs: ctx.settings.sourceLangs };
@@ -103,7 +168,16 @@ export function createJuftLevels(
         const window = hardPool.slice(index, index + HARD_WINDOW);
         for (const it of nextItems(window, history, 1, rng, opts)) add(it);
       }
-    } else {
+    } else if (focus === 'lookalike') {
+      const pool = eligible.filter(
+        (it) => it.form === 'lemma' && transparencyOf(it, langs) >= p.minTransparency,
+      );
+      for (const it of lookalikeCluster(pool, n, langs, rng)) add(it);
+    } else if (focus === 'family') {
+      for (const it of suffixFamilies(eligible, n, rng)) add(it);
+    }
+
+    if (!hard && focus === 'mixed') {
       const minT = p.minTransparency;
       const suffixedWanted = Math.min(n, Math.round(p.suffixedShare * n));
       const quota = { inflected: suffixedWanted, lemma: n - suffixedWanted };
@@ -153,6 +227,7 @@ export function createJuftLevels(
         pairs,
         parMs: Math.round(pairs.length * p.parPerPairMs),
         hard,
+        focus,
         chapter: Math.min(8, Math.ceil(level / CHAPTER_SIZE)),
       },
     };

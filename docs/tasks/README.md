@@ -27,7 +27,7 @@ D Core:       T00 ─┬─ K1 ── K8
 C Content:    C1 ─┬─ C2 ── C4
                   └─ C3          C5 (T00+K1) ── C6 (C2+C3)
 B Design:     **D1 🔒 ── D2 🔒** ── (U4, U5)      D1 ── D3
-E Juft:       E1 (C5,K7,K8,K4,Q2,Q7) · E2 (K3) · E3 (K4,E2,K10,Q5,Q6)
+E Juft:       E1 (C5,K7,K8,K4,Q2,Q7) · E2 (K3) · E3 (K4,E2,K10,Q5,Q6) · E4 (E1)
 F UI:         U1 (D1,T00,K9) ── U2 / U3 / U5 / U6 ── U4 ── **U7 ── U8 ── R1**  (U3 also needs Q7)
 J Soxta:      J1 (C5) ── J2 (K3,K4,J1) ─┐   J3 (U1) ─┤   J4 🔒 (D1) ── J5 ── J6
 I Imlo:       I1 (K1) + I5 (U7) ── I2 ── I3 ─┬─ I6 (also I4) ─┬─ I7   next, before Soxta
@@ -91,6 +91,7 @@ seconds-long PR-body check with no GitHub API calls. **Queued for later:** nothi
 | [E1](E1-juft-levels.md) | Juft level generator | E Juft engine | C5, K7, K8, K4, Q2, Q7 |
 | [E2](E2-juft-rules.md) | Juft match rules on core/session | E Juft engine | K3 |
 | [E3](E3-juft-scoring-balance.md) | Juft scoring config + balance pass | E Juft engine | K4, E2, K10, Q5, Q6 |
+| [E4](E4-juft-lookalike-boards.md) | Juft look-alike and suffix-family boards | E Juft engine | E1 |
 | [U1](U1-design-tokens-motif-ui.md) | Design tokens, fonts, motif renderers, dev gallery | F UI | D1, T00, K9 |
 | [U2](U2-ui-tile-text.md) | Shared Tile, UzText/SourceText, useLongPress | F UI | U1, K1 |
 | [U3](U3-ui-shell-hud.md) | HUD, Countdown, Results, GameShell + registry | F UI | U1, K3, K5, K6, Q7 |
@@ -99,6 +100,7 @@ seconds-long PR-body check with no GitHub API calls. **Queued for later:** nothi
 | [U6](U6-settings.md) | Settings: languages, script, log export | F UI | U1, K5, K6 |
 | [U7](U7-juft-wiring.md) | Juft end-to-end wiring | F UI | U4, U5, U6, E1, E3 |
 | [U8](U8-juft-e2e.md) | Juft e2e suite | F UI | U7, T01 |
+| [U9](U9-juft-results-meanings.md) | Juft results: words and their meanings (parked) | F UI | V10 |
 | [R1](R1-v1-release.md) 🔒 | Juft v1 release checklist | G Release | U8, D3, C6 |
 | [S1](S1-spike-audio.md) 🔒 | Spike: audio sourcing | H Spikes | none |
 | [S2](S2-spike-speech.md) 🔒 | Spike: Uzbek speech-to-text feasibility | H Spikes | none |

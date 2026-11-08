@@ -146,3 +146,7 @@ seconds-long PR-body check with no GitHub API calls. **Queued for later:** nothi
 ## Writing new tasks
 Copy [`_TEMPLATE.md`](_TEMPLATE.md). Keep a task small enough for one PR (about ≤ 400 lines of non-generated
 diff), name its dependencies, and give it a test-first plan.
+
+Release (R) tasks copy [`_RELEASE_TEMPLATE.md`](_RELEASE_TEMPLATE.md) instead: it adds the visual gate (published
+compare page, `npm run e2e:layout`, design-reviewer with no blocker/major, user play-through on a real Android and
+iPhone). The release PR's Screenshots section links the compare page; "n/a" is not allowed.

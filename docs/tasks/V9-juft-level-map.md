@@ -18,6 +18,7 @@ Bring the level map up to D2: building icons in the skyline, the building facade
 ## Acceptance criteria
 - [ ] Skyline shows building icons with numbers and the cleared tick; no clipped labels at 320 px
 - [ ] The current chapter renders as its building facade (roof, bands, base) around the level cells; cell colours encode stars as in D2, locked cells show the lock
+- [ ] Ready card as in D2 (level star, Pairs/Par/Best cards, script chips, Start); check why the late-map fixture shows level 110 where D2 shows 113
 - [ ] Legend and primary "Level N" button; desktop ready card
 - [ ] Matches the owned frames at 360/390/1280, light and dark; design-reviewer reports no blocker or major; comparison in the PR
 

@@ -69,11 +69,28 @@ describe('runGate', () => {
 });
 
 describe('STEPS', () => {
-  it('runs lint → typecheck → test → build in order', () => {
-    expect(STEPS.map((s) => s.name)).toEqual(['lint', 'typecheck', 'test', 'build']);
+  it('reports an unowned frame from the docs checks', () => {
+    const frames = STEPS.find((x) => x.name === 'frames')!;
+    expect(frames.errors('error: frame "x" is claimed by no task\ntasks: 1')).toHaveLength(2);
+  });
+  it('runs tasks → frames → lint → typecheck → test → build in order', () => {
+    expect(STEPS.map((s) => s.name)).toEqual([
+      'tasks',
+      'frames',
+      'lint',
+      'typecheck',
+      'test',
+      'build',
+    ]);
   });
   it('extracts compact lint, tsc and coverage lines', () => {
-    const [lint, tsc, test] = STEPS as [GateStep, GateStep, GateStep];
+    const [, , lint, tsc, test] = STEPS as GateStep[] as [
+      GateStep,
+      GateStep,
+      GateStep,
+      GateStep,
+      GateStep,
+    ];
     expect(lint.errors('/a.ts: line 3, col 4, Error - no (rule)\n1 problem')).toHaveLength(1);
     expect(tsc.errors('src/a.ts(3,4): error TS2322: x\nother')).toHaveLength(1);
     const sum = test.summary?.(

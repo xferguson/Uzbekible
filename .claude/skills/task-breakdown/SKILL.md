@@ -32,7 +32,8 @@ Add only what the task cannot do without. For code the task *calls*, add the `AP
 When breaking down a game, give every state in `docs/design/frames.json` to exactly one task via its `Screens owned`
 row (state ids in backticks, or `none`), and list those frame PNGs in the UI task's `Read first`. UI acceptance
 criteria include "matches the owned frames at 360/390/1280, light and dark, comparison in the PR".
-`npm run tasks -- frames` (CI) fails on an unowned frame, or one claimed by two unfinished tasks.
+A game's wiring task owns the game's screen states too (map, ready, board, pause, fail): add its `Screens owned` row when you write it, not when CI fails.
+`npm run tasks -- frames` (part of `npm run gate`, and CI) fails on an unowned frame, or one claimed by two unfinished tasks.
 
 ## First red test
 Every task's "Test-first plan" names the **first failing test** (file and what it asserts), plus the invariant to

@@ -4,9 +4,8 @@ import { loadItems } from '@core/content';
 import { createLearningLog } from '@core/learning-log';
 import { createRng, seedFrom } from '@core/random';
 import type { StorageBackend } from '@core/storage';
-import { getGame, GAMES, type AnyGameDefinition } from '@games/registry';
-import { registerImlo } from '@games/imlo/definition';
-import { registerJuft } from '@games/juft/definition';
+import { registerAllGames } from '@games/all';
+import type { AnyGameDefinition } from '@games/registry';
 import type { GameSettings } from '@games/types';
 import { LevelMap, ModePicker, ScreenBar, SettingsPanel, type Script } from '@ui/index';
 import { label } from '../ui/labels';
@@ -86,9 +85,7 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
       .then((json) => {
         if (!live) return;
         const items = loadItems(json);
-        if (!getGame('juft')) registerJuft(items);
-        if (!getGame('imlo')) registerImlo(items);
-        setGames([...GAMES]);
+        setGames(registerAllGames(items));
       })
       .catch(() => live && setFailed(true));
     return () => {

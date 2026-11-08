@@ -6,6 +6,7 @@ import {
   aggregateEvents,
   createLearningLog,
   csvEscape,
+  isAttemptEvent,
   type LogEventInput,
 } from './index.ts';
 
@@ -103,6 +104,15 @@ describe('learning log', () => {
     const parsed = JSON.parse(log.exportJson());
     expect(parsed.events).toHaveLength(1);
     expect(parsed.aggregates[0]).toMatchObject({ itemId: 'a', attempts: 1 });
+  });
+});
+
+describe('isAttemptEvent', () => {
+  it('is true for a match or spell answer and false for everything else', () => {
+    for (const type of ['match_correct', 'match_wrong', 'spell_correct', 'spell_wrong'])
+      expect(isAttemptEvent({ type })).toBe(true);
+    for (const type of ['hint_used', 'level_start', 'level_complete', 'level_failed'])
+      expect(isAttemptEvent({ type })).toBe(false);
   });
 });
 

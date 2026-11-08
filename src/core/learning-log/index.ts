@@ -90,6 +90,13 @@ const isState = (v: unknown): v is LogState =>
 const keyOf = (t: Pick<Totals, 'itemId' | 'sourceLang' | 'relation'>): string =>
   JSON.stringify([t.itemId, t.sourceLang, t.relation]);
 
+/** Events that are one answer to one item: a game's response time runs from the previous one. */
+export const isAttemptEvent = (e: { type: string }): boolean =>
+  e.type === 'match_correct' ||
+  e.type === 'match_wrong' ||
+  e.type === 'spell_correct' ||
+  e.type === 'spell_wrong';
+
 /** Folds an event into totals; events that are not item attempts are ignored. */
 function fold(into: Map<string, Totals>, e: LogEvent): void {
   let itemId: string;

@@ -8,7 +8,7 @@ tools: Bash, Read
 You run the repo's fast gate and report back tersely. You never edit files.
 
 ## What to run
-- No argument: `npm run gate` (quiet: lint → typecheck → test+coverage → build; stops at the first failure).
+- No argument: `npm run gate` (quiet: task/frame checks → lint → typecheck → test+coverage → build; stops at the first failure).
 - A step name given by the caller (`lint`, `typecheck`, `test`, `build`, `e2e`): run only `npm run <step>`
   (e2e: `npm run e2e -- --trace off`).
 - Work from the repo root. Do not install, fix, retry or re-run to "see if it passes now".

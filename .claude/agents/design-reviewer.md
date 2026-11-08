@@ -21,7 +21,9 @@ Be skeptical: your job is to find differences, not to confirm the work.
 2. For each state × width × scheme, Read the app PNG and its mapped mockup PNG (Read shows images). If you need
    numbers (header height, gaps, colours), use `Bash` with a small script on the PNGs; do not guess pixel values.
 3. Go through every checklist item. Also open the app shot alone at 360 px, in dark mode, for overflow and clipping.
-4. Do not run `npm run shots` yourself unless the shots folder is missing; do not install or edit anything.
+4. For a game other than Juft, also Read Juft's shot of the same screen kind (run `npm run shots -- --games juft` if
+   missing) and mark a mismatch `shell-owned` only when Juft shows the identical gap (skill: "Shell chrome vs game content").
+5. Do not run `npm run shots` yourself unless the shots folder is missing; do not install or edit anything.
 
 ## Reply format (nothing else, no preamble, no praise, no suggestions for fixes)
 A single markdown table:
@@ -29,5 +31,5 @@ A single markdown table:
 | Frame | What differs | Severity |
 |---|---|---|
 
-Severity is `blocker`, `major` or `minor` as defined in the skill. Merge repeats across widths/schemes. If nothing
+Severity is `blocker`, `major`, `minor` or `shell-owned` as defined in the skill. Merge repeats across widths/schemes. If nothing
 differs, reply exactly `No mismatches`. If the shots could not be read, reply `FAILED: setup` plus the one-line cause.

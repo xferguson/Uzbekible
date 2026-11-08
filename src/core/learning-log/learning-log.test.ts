@@ -109,10 +109,52 @@ describe('learning log', () => {
 
 describe('isAttemptEvent', () => {
   it('is true for a match or spell answer and false for everything else', () => {
-    for (const type of ['match_correct', 'match_wrong', 'spell_correct', 'spell_wrong'])
+    for (const type of [
+      'match_correct',
+      'match_wrong',
+      'spell_correct',
+      'spell_wrong',
+      'swipe_correct',
+      'swipe_wrong',
+      'swipe_timeout',
+    ])
       expect(isAttemptEvent({ type })).toBe(true);
     for (const type of ['hint_used', 'level_start', 'level_complete', 'level_failed'])
       expect(isAttemptEvent({ type })).toBe(false);
+  });
+});
+
+describe('swipe events', () => {
+  it('export with the picked word, and stay out of the scheduler aggregates', () => {
+    const { log } = make();
+    log.log({
+      type: 'swipe_wrong',
+      gameId: 'soxta',
+      itemId: 'hozir',
+      sourceLang: 'tr',
+      side: 'source',
+      rtMs: 800,
+    });
+    log.log({
+      type: 'swipe_correct',
+      gameId: 'soxta',
+      itemId: 'hozir',
+      sourceLang: 'tr',
+      side: 'uz',
+      rtMs: 600,
+    });
+    log.log({
+      type: 'swipe_timeout',
+      gameId: 'soxta',
+      itemId: 'yomon',
+      sourceLang: 'tr',
+      rtMs: 6000,
+    });
+    const lines = log.exportCsv().trimEnd().split('\r\n');
+    expect(lines[1]).toBe('1000,s1,soxta,swipe_wrong,,hozir,,,tr,,800,,,,,source,,,,');
+    expect(lines[2]).toBe('1000,s1,soxta,swipe_correct,,hozir,,,tr,,600,,,,,uz,,,,');
+    expect(lines[3]).toBe('1000,s1,soxta,swipe_timeout,,yomon,,,tr,,6000,,,,,,,,,');
+    expect(log.aggregates()).toEqual([]);
   });
 });
 

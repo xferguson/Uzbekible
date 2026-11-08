@@ -7,12 +7,25 @@ import type { StorageBackend } from '@core/storage';
 import { registerAllGames } from '@games/all';
 import type { AnyGameDefinition } from '@games/registry';
 import type { GameSettings } from '@games/types';
-import { LevelMap, ModePicker, PatternBg, ScreenBar, SettingsPanel, type Script } from '@ui/index';
+import {
+  LevelMap,
+  ModePicker,
+  PatternBg,
+  ReadyCard,
+  ScreenBar,
+  SettingsPanel,
+  type Script,
+} from '@ui/index';
+import { levelContext } from '@games/sim-adapter';
 import { label } from '../ui/labels';
 import { isGalleryPath } from '../dev/gallery/route';
-import { isSoxtaPreviewPath } from '../dev/soxta/route';
 import { GameShell } from './GameShell';
-import { createModeStore, createProgressStore, type Progress } from './progress';
+import {
+  createModeStore,
+  createProgressStore,
+  createRunBestStore,
+  type Progress,
+} from './progress';
 import {
   applyTheme,
   createSettingsStore,
@@ -28,10 +41,6 @@ import { UpdateToast } from './UpdateToast';
 // Dev-only: the gallery chunk is dropped from production builds (import.meta.env.DEV is false there).
 const Gallery = import.meta.env.DEV
   ? lazy(() => import('../dev/gallery').then((m) => ({ default: m.Gallery })))
-  : null;
-// TEMPORARY (J5): removed by J6 with src/dev/soxta.
-const SoxtaPreview = import.meta.env.DEV
-  ? lazy(() => import('../dev/soxta/SoxtaPreview').then((m) => ({ default: m.SoxtaPreview })))
   : null;
 
 export interface AppProps {
@@ -60,13 +69,6 @@ export function App(props: AppProps) {
     return (
       <Suspense fallback={null}>
         <Gallery />
-      </Suspense>
-    );
-  }
-  if (SoxtaPreview && isSoxtaPreviewPath(window.location.pathname)) {
-    return (
-      <Suspense fallback={null}>
-        <SoxtaPreview />
       </Suspense>
     );
   }
@@ -119,6 +121,15 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
       ),
     [games, storage],
   );
+  const runBests = useMemo(
+    () =>
+      new Map(
+        games
+          .filter((g) => g.endless)
+          .map((g) => [g.id, createRunBestStore(g.id, storage)] as const),
+      ),
+    [games, storage],
+  );
   const modeStore = useMemo(() => createModeStore(storage), [storage]);
   const [chosen, setChosen] = useState(() => modeStore.get());
   useEffect(() => modeStore.subscribe(setChosen), [modeStore]);
@@ -150,7 +161,7 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
           onScript={(s) => setScript(settingsStore, s)}
           onTheme={(th) => setTheme(settingsStore, th)}
           onExport={(f) => exportLog(log, f)}
-          onReset={() => resetProgress([...progressStores.values()], log)}
+          onReset={() => resetProgress([...progressStores.values()], log, [...runBests.values()])}
         />
       </main>
     );
@@ -161,8 +172,29 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
     } else if (screen.name === 'play') {
       const { level } = screen;
       const progress = progressOf(def);
-      const toMap = () => setScreen({ name: 'map', gameId: def.id });
-      body = (
+      // For an endless game the "map" is its ready card, and leaving a run goes home.
+      const toMap = () => (def.endless ? home() : setScreen({ name: 'map', gameId: def.id }));
+      const shell = (
+        <GameShell
+          definition={def}
+          level={level}
+          mode={modeOf(def)}
+          settings={gameSettings}
+          history={log.aggregates()}
+          clock={clock}
+          progress={progress}
+          runBest={runBests.get(def.id)}
+          log={log}
+          countdownMs={countdownMs}
+          onNext={() => setScreen({ name: 'play', gameId: def.id, level: level + 1 })}
+          onMap={toMap}
+        />
+      );
+      // An endless run is full-bleed with no screen bar (mockup J4): its board draws the HUD band, and pause and
+      // the results both lead home.
+      body = def.endless ? (
+        <main className={styles.bleed}>{shell}</main>
+      ) : (
         <main className={`${styles.page} ${styles.wide}`}>
           <ScreenBar
             title={script === 'cyrl' ? def.title.uzCyrl : def.title.uzLatn}
@@ -170,18 +202,33 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
             onHome={home}
             script={script}
           />
-          <GameShell
-            definition={def}
-            level={level}
-            mode={modeOf(def)}
-            settings={gameSettings}
-            history={log.aggregates()}
-            clock={clock}
-            progress={progress}
-            log={log}
-            countdownMs={countdownMs}
-            onNext={() => setScreen({ name: 'play', gameId: def.id, level: level + 1 })}
-            onMap={toMap}
+          {shell}
+        </main>
+      );
+    } else if (def.endless) {
+      const { intro } = def.endless;
+      const best = runBests.get(def.id)!.get();
+      const lives = def.levels(levelContext(def.id, 1, gameSettings, [])).lives;
+      body = (
+        <main className={styles.page}>
+          <ScreenBar
+            title={script === 'cyrl' ? def.title.uzCyrl : def.title.uzLatn}
+            onBack={home}
+            script={script}
+          />
+          <ReadyCard
+            kicker={intro.kicker}
+            title={script === 'cyrl' ? def.title.uzCyrl : def.title.uzLatn}
+            blurb={intro.blurb}
+            sample={<intro.Sample script={script} />}
+            stats={[
+              { label: 'Lives', value: lives },
+              { label: 'Best streak', value: best.streak },
+              { label: 'Best score', value: best.score },
+            ]}
+            script={script}
+            onScript={(sc) => setScript(settingsStore, sc === 'cyrl' ? 'uz-Cyrl' : 'uz-Latn')}
+            onStart={() => setScreen({ name: 'play', gameId: def.id, level: 1 })}
           />
         </main>
       );

@@ -1,15 +1,15 @@
+/*
+ * Soxta card screen (mockup J4): navy HUD band and rosette strip, then the timer, the two word tiles with the clue
+ * between them, and the arrow buttons or the reveal. Phone sizes first; the desktop block scales the card up.
+ */
 .board {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  block-size: 100%;
-  min-block-size: 0;
-  max-inline-size: 760px;
-  margin-inline: auto;
-  padding: var(--space-4) var(--space-4) var(--space-6);
-  box-sizing: border-box;
-  position: relative;
+  min-block-size: 100dvh;
   overflow: hidden; /* the board never scrolls */
+  font-family: var(--font-ui);
+  color: var(--color-text);
 }
 .pattern {
   position: absolute;
@@ -22,65 +22,175 @@
   z-index: 1;
 }
 
+/* HUD: pause and lives on top, score, streak and multiplier under them; one row on desktop. */
 .hud {
+  background: var(--color-cobalt-deep);
+  color: var(--color-on-deep);
+}
+.hudTop {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    'pause grow lives'
+    'stats stats stats';
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  max-inline-size: 840px;
+  margin-inline: auto;
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-3);
+}
+.pause {
+  grid-area: pause;
+  font: inherit;
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  border-radius: 12px;
+  border: 1.5px solid color-mix(in srgb, var(--color-on-deep) 22%, transparent);
+  background: transparent;
+  color: var(--color-on-deep);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.pause:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+.pauseIcon {
+  inline-size: 22px;
+  block-size: 22px;
+}
+.grow {
+  grid-area: grow;
+}
+.hudTop > :last-child {
+  grid-area: lives;
+}
+.stats {
+  grid-area: stats;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
+  gap: var(--space-4);
+  padding-inline: var(--space-1);
+}
+.stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.stat:first-child {
+  font-size: 1.25rem;
+}
+.statIcon {
+  inline-size: 18px;
+  block-size: 18px;
+  flex: none;
+}
+.mult {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  block-size: 28px;
+  padding-inline: 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-gold);
+  color: var(--color-on-gold);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  visibility: hidden;
+}
+.mult[data-on] {
+  visibility: visible;
+}
+.multIcon {
+  inline-size: 14px;
+  block-size: 14px;
+}
+.band {
+  block-size: 16px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+/* Everything under the band, centred as one column. */
+.play {
+  --mid: 96px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  inline-size: 100%;
+  max-inline-size: 760px;
+  margin-inline: auto;
+  padding: 0 var(--space-4) var(--space-8);
+  box-sizing: border-box;
 }
 
 /* Per-card timer: 12 glazed segments dropping one by one. */
 .timer {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 10px;
+  padding-block-start: 10px;
+}
+.clock {
+  inline-size: 20px;
+  block-size: 20px;
+  flex: none;
+  color: var(--color-text-muted);
+}
+.segments {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-1);
 }
 .segment {
-  flex: 1;
-  block-size: 10px;
-  border-radius: var(--radius-pill);
-  background: transparent;
-  border: 2px dashed var(--color-text-muted);
+  block-size: 16px;
+  border-radius: 4px;
   box-sizing: border-box;
+  border: 1.5px dashed var(--color-text-muted);
+  opacity: 0.55;
 }
 .segment[data-on] {
+  border: 1.5px solid var(--color-cobalt);
   background: var(--color-turquoise);
-  border: 2px solid var(--color-cobalt);
+  opacity: 1;
 }
 .timer[data-warn] .segment[data-on] {
-  background: var(--color-gold);
-  border-color: var(--color-text);
-}
-.timer[data-timeout] .segment {
-  border-style: dashed;
+  background: var(--color-ochre);
+  border-color: var(--color-cobalt-deep);
 }
 .seconds {
-  min-inline-size: 3ch;
+  min-inline-size: 40px;
   text-align: end;
-  font-family: var(--font-ui);
+  font-size: 1.0625rem;
   font-weight: 700;
-  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
 }
-.timer[data-warn] .seconds {
-  color: var(--color-crack);
+.timer[data-warn] .seconds::first-letter {
+  margin-inline-end: 3px;
 }
 
-/* The card: two words on opposite sides, the clue between. */
+/* The card: two word tiles on opposite sides, the clue between them. */
 .card {
-  flex: none;
-  margin-block: var(--space-6) 0;
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr var(--mid) 1fr;
   align-items: center;
-  align-content: center;
   gap: var(--space-2);
+  padding-block-start: var(--space-4);
   touch-action: pan-y;
   cursor: grab;
   outline-offset: 4px;
   transition: transform 120ms;
 }
 .card:focus-visible {
-  outline: 3px solid var(--color-gold);
+  outline: 3px solid var(--color-cobalt);
 }
 .cell {
   position: relative;
@@ -89,289 +199,415 @@
   border-radius: var(--radius-tile);
 }
 .cell > button {
+  position: relative;
   inline-size: 100%;
-  min-block-size: clamp(180px, 34dvh, 300px);
-  padding-inline: var(--space-2);
-  font-size: 1.25rem;
-}
-.badge {
-  position: absolute;
-  inset-block-start: -10px;
-  inset-inline-end: -6px;
-  z-index: 3;
-  display: grid;
-  place-items: center;
-  inline-size: 1.7rem;
-  block-size: 1.7rem;
-  border-radius: 50%;
-  font-size: 0.9rem;
-  font-weight: 700;
-  border: 2px solid var(--color-surface);
-}
-.check {
-  color: var(--color-text);
-  background: var(--color-gold);
-}
-.miss {
-  color: var(--color-on-deep);
-  background: var(--color-crack);
-}
-.clock {
-  font-size: 1.3rem;
-  line-height: 1;
-  color: var(--color-text-muted);
-}
-.tick {
-  color: var(--color-text);
-  background: var(--color-gold);
-}
-.good {
-  color: var(--color-text);
-  background: var(--color-gold);
-}
-
-.cell[data-answer] {
-  outline: 3px dashed var(--color-gold);
-  outline-offset: 3px;
+  block-size: 252px;
+  /* Thin side padding: a long word keeps the full tile width (the tag and chevron sit absolutely). */
+  padding: var(--space-2) var(--space-1);
+  border-radius: var(--radius-tile);
+  border: 2px solid var(--color-cobalt);
+  background: linear-gradient(
+    180deg,
+    var(--color-surface) 0%,
+    var(--color-surface) 55%,
+    color-mix(in srgb, var(--color-turquoise-pale) 45%, var(--color-surface)) 100%
+  );
+  box-shadow:
+    0 2px 0 color-mix(in srgb, var(--color-cobalt-deep) 18%, transparent),
+    0 6px 14px color-mix(in srgb, var(--color-cobalt-deep) 10%, transparent);
+  /* 18px at 360, 20px from 390: a seven-letter Cyrillic word stays on one line. */
+  font-size: clamp(1.0625rem, 5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.15;
 }
 .tileFace {
   display: grid;
-  grid-template-columns: 100%;
-  justify-items: center;
-  align-content: center;
-  gap: var(--space-2);
+  place-items: center;
   inline-size: 100%;
+  block-size: 100%;
 }
 .tag {
-  justify-self: start;
-  padding: 0 var(--space-1);
-  font-size: 0.7rem;
+  position: absolute;
+  inset-block-start: var(--space-2);
+  inset-inline-start: var(--space-2);
+  z-index: 3;
+  padding: 3px 5px;
+  border-radius: 5px;
+  border: 1px solid var(--color-cobalt);
+  background: var(--color-ground);
+  color: var(--color-text-muted);
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--color-cobalt);
-  border: 1px solid currentColor;
-  border-radius: var(--radius-tile);
+  line-height: 1;
+  letter-spacing: 0.06em;
+}
+.tag[data-tag='tr'] {
+  border-color: var(--color-turquoise);
 }
 .word {
-  font-size: clamp(1rem, 4.8vw, 1.4rem);
-  overflow-wrap: break-word;
+  position: relative;
+  z-index: 2;
   text-align: center;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  min-inline-size: 0;
+  max-inline-size: 100%;
 }
-.clueWrap {
-  display: grid;
-  justify-items: center;
-  gap: var(--space-1);
-  max-inline-size: 7rem;
+.go {
+  position: absolute;
+  inset-block-end: 10px;
+  inset-inline-start: 50%;
+  inline-size: 30px;
+  block-size: 30px;
+  margin-inline-start: -15px;
+  z-index: 3;
+  color: var(--color-cobalt);
+  opacity: 0.75;
 }
-.caption {
-  font-size: 0.7rem;
+
+/* Feedback looks (mockup J4): ok = gold glaze; answer = dashed gold edge; wrong = crack border; out = ghost. */
+.cell[data-look='ok'] > button {
+  background: var(--color-gold);
+  border: 2px solid var(--color-cobalt-deep);
+  color: var(--color-on-gold);
+}
+.cell[data-look='ok'] .tag {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+.cell[data-look='answer'] > button {
+  border: 3px dashed var(--color-gold);
+  background: color-mix(in srgb, var(--color-turquoise-pale) 45%, var(--color-surface));
+}
+.cell[data-look='wrong'] > button {
+  border: 3px solid var(--color-crack);
+  transform: translateX(-4px);
+}
+.cell[data-side='right'][data-look='wrong'] > button {
+  transform: translateX(4px);
+}
+.cell[data-look='out'] > button {
+  border: 2px dashed var(--color-text-muted);
+  background: transparent;
+  box-shadow: none;
   color: var(--color-text-muted);
 }
-.clue {
-  display: grid;
-  place-items: center;
-  padding: var(--space-3);
-  position: relative;
-  background: var(--color-gold);
-  color: var(--color-text);
-  font-family: var(--font-ui);
-  font-weight: 700;
-  text-align: center;
-  clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
-  inline-size: clamp(5.25rem, 22vw, 7rem);
-  aspect-ratio: 1;
-  box-sizing: border-box;
+/* Ghosted without opacity, so the word and tag stay readable (contrast is checked by V2). */
+.cell[data-look='out'] .tag {
+  border-color: var(--color-text-muted);
+  background: transparent;
 }
-.clue::before {
-  content: '';
+.bloom {
   position: absolute;
-  inset: 4px;
-  background: var(--color-surface);
-  clip-path: inherit;
-}
-.clue > span {
-  position: relative;
-  padding: 0 var(--space-1);
-  overflow-wrap: normal;
-  hyphens: none;
-  font-size: 0.9rem;
+  inset: -14px;
+  z-index: 0;
+  inline-size: calc(100% + 28px);
+  block-size: calc(100% + 28px);
+  pointer-events: none;
 }
 .cracks {
   position: absolute;
   inset: 0;
+  z-index: 2;
   inline-size: 100%;
   block-size: 100%;
-  z-index: 2;
   pointer-events: none;
-  fill: none;
-  stroke: var(--color-crack);
-  stroke-width: 2.5;
-  vector-effect: non-scaling-stroke;
 }
-.cracks path {
-  vector-effect: non-scaling-stroke;
+.badge {
+  position: absolute;
+  inset-block-start: -11px;
+  inset-inline-end: -9px;
+  z-index: 5;
+  inline-size: 28px;
+  block-size: 28px;
+}
+.board[data-reduced] .cell > button {
+  transition: none;
 }
 
+/* Clue medallion: the English clue in a double octagon, "maʼnosi" under it. */
+.clueWrap {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+  text-align: center;
+}
+.clue {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: var(--mid);
+  block-size: var(--mid);
+}
+.octagon {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+.clueText {
+  position: relative;
+  z-index: 1;
+  max-inline-size: 80%;
+  padding-inline: 2px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+.caption {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+/* Timeout banner: navy pill with an ochre rim, centred between the timer and the tiles. */
+.banner {
+  align-self: center;
+  margin-block: var(--space-3) calc(-1 * var(--space-2));
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-ochre);
+  background: var(--color-cobalt-deep);
+  color: var(--color-on-deep);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+.bannerIcon {
+  inline-size: 16px;
+  block-size: 16px;
+  color: var(--color-gold);
+}
+
+/* Under the card: the arrow buttons, or the reveal in their place. */
+.under {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  min-block-size: 196px;
+  padding-block-start: var(--space-4);
+}
 .arrows {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-4);
+  display: grid;
+  grid-template-columns: 1fr var(--mid) 1fr;
+  gap: var(--space-2);
 }
 .arrow {
-  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
   min-block-size: 56px;
-  font-size: 1.5rem;
-  color: var(--color-text);
-  background: var(--color-surface);
-  border: 2px solid var(--color-cobalt);
   border-radius: var(--radius-tile);
+  border: 2px solid var(--color-cobalt);
+  background: var(--color-surface);
+  color: var(--color-cobalt);
+  font: 700 15px var(--font-ui);
+  box-shadow:
+    0 2px 0 color-mix(in srgb, var(--color-cobalt-deep) 18%, transparent),
+    0 6px 14px color-mix(in srgb, var(--color-cobalt-deep) 10%, transparent);
   cursor: pointer;
+  touch-action: manipulation;
 }
 .arrow:focus-visible {
-  outline: 3px solid var(--color-gold);
-  outline-offset: 2px;
+  outline: 3px solid var(--color-cobalt);
+  outline-offset: 3px;
 }
-
-/* Reveal: both words with both meanings, the clue's owner first. */
+.arrowIcon {
+  inline-size: 26px;
+  block-size: 26px;
+}
+.kbd {
+  display: none;
+  font-size: 13px;
+}
 .reveal {
   display: grid;
   gap: var(--space-2);
-  padding: var(--space-3) var(--space-4);
-  text-align: start;
-  font-family: var(--font-ui);
-  color: var(--color-text);
+  inline-size: 100%;
+  padding: var(--space-3) 14px;
+  border-radius: var(--radius-card);
+  border: 2px solid var(--color-crack);
   background: var(--color-surface);
-  border: 3px solid var(--color-crack);
-  border-radius: var(--radius-tile);
+  color: var(--color-text);
+  font: inherit;
+  text-align: start;
   cursor: pointer;
+  box-shadow:
+    0 2px 0 color-mix(in srgb, var(--color-cobalt-deep) 18%, transparent),
+    0 6px 14px color-mix(in srgb, var(--color-cobalt-deep) 10%, transparent);
+}
+.reveal[data-kind='correct'] {
+  border-color: var(--color-gold);
 }
 .revealHead {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  padding-block-end: var(--space-2);
-  border-block-end: 1px solid var(--color-text-muted);
 }
-.cross {
-  display: grid;
-  place-items: center;
-  inline-size: 1.6rem;
-  block-size: 1.6rem;
-  border-radius: 50%;
-  color: var(--color-on-deep);
-  background: var(--color-crack);
-  font-size: 0.8rem;
+.revealBadge {
+  inline-size: 22px;
+  block-size: 22px;
+  flex: none;
 }
 .revealTitle {
-  flex: 1;
-  font-size: 1.2rem;
+  font-family: var(--font-display);
+  font-size: 18px;
   font-weight: 700;
+  line-height: 1.1;
 }
 .pill {
-  padding: 0 var(--space-3);
+  margin-inline-start: auto;
+  padding: 3px var(--space-2);
   border-radius: var(--radius-pill);
-  color: var(--color-on-deep);
   background: var(--color-crack);
+  color: var(--color-ground);
+  font-size: 14px;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.pill[data-good] {
+  background: var(--color-gold);
+  color: var(--color-on-gold);
 }
 .revealRow {
-  display: flex;
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
   align-items: baseline;
-  gap: var(--space-3);
-  padding-block: var(--space-1);
-  border-block-end: 1px solid var(--color-text-muted);
+  gap: var(--space-2);
+  padding-block-start: 6px;
+  border-block-start: 1px solid color-mix(in srgb, var(--color-cobalt) 16%, transparent);
+  font-size: 16px;
 }
 .rowTag {
-  min-inline-size: 2ch;
-  font-size: 0.7rem;
+  font-size: 11px;
   font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
   color: var(--color-text-muted);
-}
-.revealRow[data-owner] .revealWord {
-  font-weight: 700;
 }
 .revealWord {
-  font-size: 1.2rem;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.1;
 }
 .meaning {
-  margin-inline-start: auto;
+  font-size: 15px;
+  text-align: end;
   color: var(--color-text-muted);
 }
+.revealRow[data-owner] .meaning {
+  color: var(--color-text);
+  font-weight: 600;
+}
 .hint {
-  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-size: 12px;
   color: var(--color-text-muted);
 }
 
-@media (prefers-reduced-motion: reduce) {
+/* Desktop (mockup J4 desk frames): one HUD row, a wider card, bigger tiles and clue, key hints. */
+@media (min-width: 900px) {
+  .hudTop {
+    grid-template-columns: auto auto 1fr auto;
+    grid-template-areas: 'pause stats grow lives';
+    gap: 18px;
+    padding: 10px var(--space-6);
+  }
+  .hudTop {
+    max-inline-size: none;
+  }
+  .play {
+    --mid: 200px;
+    max-inline-size: 840px;
+    padding-inline: var(--space-8);
+  }
+  .timer {
+    padding-block-start: 14px;
+  }
   .card {
-    transition: none;
+    gap: var(--space-6);
+    padding-block-start: 28px;
+  }
+  .cell > button {
+    block-size: 300px;
+    border-radius: 18px;
+    font-size: 34px;
+  }
+  .clueText {
+    font-size: 26px;
+  }
+  .caption {
+    font-size: 14px;
+  }
+  .under {
+    min-block-size: 220px;
+    padding-block-start: 22px;
+  }
+  .arrows {
+    gap: var(--space-6);
+  }
+  .kbd {
+    display: inline;
+  }
+  .reveal {
+    padding: var(--space-4) 20px;
+  }
+  .revealTitle {
+    font-size: 22px;
+  }
+  .revealRow {
+    font-size: 18px;
+  }
+  .revealWord {
+    font-size: 24px;
   }
 }
 
-/* Feedback looks (mockup J4). */
-.card {
+/* Ready card miniature: UZ tile, clue octagon, TR tile with a dashed gold edge. */
+.sample {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-3);
+  inline-size: min(100%, 340px);
+}
+.sampleTile {
   position: relative;
-}
-.cell > button {
-  background: linear-gradient(
-    var(--color-surface),
-    color-mix(in srgb, var(--color-turquoise-pale) 55%, var(--color-surface))
-  );
-}
-.chev {
-  margin-block-start: auto;
-  font-size: 2rem;
-  line-height: 1;
-  color: var(--color-cobalt);
-  opacity: 0.55;
-}
-.cell[data-kind='correct'][data-answer] {
-  outline: none;
-}
-.cell[data-kind='correct'][data-answer] > button {
-  background: var(--color-gold);
-  color: var(--color-text);
-  border: 3px solid var(--color-cobalt);
-}
-.cell[data-kind='correct'][data-answer] .chev {
-  color: var(--color-text);
-}
-.cell[data-kind='timeout'][data-answer] > button {
-  border: 4px dashed var(--color-gold);
-}
-.cell[data-ghost] > button {
-  background: transparent;
-  border: 2px dashed var(--color-text-muted);
-  opacity: 0.6;
-}
-.cell[data-wrong] > button {
+  display: grid;
+  place-items: center;
+  min-block-size: 64px;
+  padding: var(--space-3) var(--space-2) var(--space-2);
+  border: 2px solid var(--color-cobalt);
+  border-radius: var(--radius-tile);
   background: var(--color-surface);
-  border: 3px solid var(--color-crack);
-}
-.cracks {
-  stroke-width: 4;
-}
-.reveal[data-kind='correct'],
-.reveal[data-kind='timeout'] {
-  border-color: var(--color-gold);
-}
-.pill.good,
-.cross.tick {
   color: var(--color-text);
-  background: var(--color-gold);
+  font-size: 1.1rem;
 }
-.timeoutPill {
+.sampleTile[data-false] {
+  border: 2px dashed var(--color-gold);
+  background: color-mix(in srgb, var(--color-turquoise-pale) 45%, var(--color-surface));
+}
+.sampleTile .tag {
   position: absolute;
-  inset-block-start: -14px;
-  inset-inline: 0;
-  margin-inline: auto;
-  inline-size: max-content;
-  z-index: 4;
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-pill);
-  font-family: var(--font-ui);
-  font-weight: 700;
-  color: var(--color-text);
-  background: var(--color-gold);
-  border: 2px solid var(--color-surface);
+  inset-block-start: 4px;
+  inset-inline-start: 6px;
+}
+/* Doubled class: beats `.clue` whatever the order. */
+.clue.sampleClue {
+  inline-size: 64px;
+  block-size: 64px;
+}
+.clue.sampleClue .clueText {
+  font-size: 12px;
 }

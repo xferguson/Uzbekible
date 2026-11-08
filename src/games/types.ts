@@ -46,6 +46,28 @@ export interface BoardProps<Params, State, Action, E extends GameEvent = never> 
   state: SessionState<State>;
   dispatch: (action: Action) => void;
   subscribe: Session<State, Action, E>['subscribe'];
+  /** Set when the board draws the pause button itself (an endless game's board owns its HUD). */
+  onPause?: () => void;
+}
+
+/** A pair the player got wrong, for the "worth remembering" list after a run. */
+export interface MissedPair {
+  id: string;
+  uz: { latn: string; cyrl: string };
+  uzMeaning: string;
+  source: { lang: SourceLang; text: string };
+  /** Absent when the pack has no English gloss for the source word. */
+  sourceMeaning?: string;
+}
+
+/** What an endless run reports when it ends. */
+export interface RunSummary {
+  score: number;
+  /** Longest streak of correct answers in the run. */
+  streak: number;
+  correct: number;
+  mistakes: number;
+  missed: readonly MissedPair[];
 }
 
 export interface GameDefinition<Params, State, Action, E extends GameEvent = never> {
@@ -73,6 +95,23 @@ export interface GameDefinition<Params, State, Action, E extends GameEvent = nev
   difficulty: DifficultyConfig;
   /** The level map's buildings (name in Latin spelling, number of levels each). */
   chapters?: readonly { id: string; name: string; levels: number }[];
+  /**
+   * Present for a game with no levels and no map (Soxta): the shell opens it as level 1 straight from the home
+   * screen, shows run results from `summary` when the lives run out, and keeps the best run.
+   */
+  endless?: {
+    /** The ready card shown before a run (shell microcopy, so it may be English). */
+    intro: {
+      /** Small caps line above the title, e.g. "Game 5 · False friends". */
+      kicker: string;
+      blurb: string;
+      /** A miniature of the board, drawn by the game. */
+      Sample: ComponentType<{ script: 'latn' | 'cyrl' }>;
+    };
+    summary(game: State): RunSummary;
+    /** How long the final answer stays on the board before the results replace it. */
+    holdMs: number;
+  };
   Board: ComponentType<BoardProps<Params, State, Action, E>>;
   requires?: { audio?: boolean; microphone?: boolean };
 }

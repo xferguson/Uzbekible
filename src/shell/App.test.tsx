@@ -71,6 +71,32 @@ describe('<App />', () => {
     expect(screen.getByRole('button', { name: /^2-daraja, joriy/ })).toBeInTheDocument();
   });
 
+  it('opens Soxta on its ready card (no level map), switches script there and starts a run', async () => {
+    const { clock } = setup();
+    fireEvent.click(await screen.findByRole('button', { name: 'Soxta' }));
+    expect(screen.queryByRole('button', { name: /daraja/ })).toBeNull();
+    expect(screen.getByTestId('ready-sample')).toBeInTheDocument();
+    expect(screen.getByText('Lives').nextSibling).toHaveTextContent('3');
+    expect(screen.getByText('Best score').nextSibling).toHaveTextContent('0');
+    fireEvent.click(screen.getByRole('radio', { name: /Cyrillic/ }));
+    expect(screen.getAllByRole('heading', { name: 'Сохта', level: 2 })).toHaveLength(2);
+    fireEvent.click(screen.getByRole('radio', { name: /Latin/ }));
+    fireEvent.click(screen.getByRole('button', { name: /Boshlash/ }));
+    await act(async () => {
+      clock.advance(10);
+    });
+    expect(await screen.findByTestId('soxta-board')).toBeInTheDocument();
+    // A run is full-bleed: no screen bar; pause is the way out, and it goes home.
+    expect(screen.queryByRole('button', { name: 'Orqaga' })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Pauza' }));
+    fireEvent.click(screen.getByRole('button', { name: /Bosh sahifa/ }));
+    expect(screen.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeInTheDocument();
+    // Back from the ready card goes home too.
+    fireEvent.click(screen.getByRole('button', { name: 'Soxta' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Orqaga' }));
+    expect(screen.getByRole('heading', { level: 1, name: 'Uzbekible' })).toBeInTheDocument();
+  });
+
   it('opens settings and switches the Uzbek script', async () => {
     setup();
     await screen.findByRole('button', { name: 'Juft' });

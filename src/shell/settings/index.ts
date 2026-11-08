@@ -1,7 +1,7 @@
 /** Player settings in localStorage: source languages, Uzbek script, theme; plus download and reset helpers. */
 import { createStore, type Store, type StoreOptions } from '@core/storage';
 import type { SourceLang, UzScript } from '@core/text';
-import type { Progress } from '../progress';
+import type { Progress, RunBest } from '../progress';
 
 export type Theme = 'system' | 'light' | 'dark';
 export interface Settings {
@@ -95,7 +95,12 @@ export function exportLog(
 }
 
 /** Sets every progress store back to its default and clears the learning log. Settings are kept. */
-export function resetProgress(progress: readonly Store<Progress>[], log: { clear(): void }): void {
+export function resetProgress(
+  progress: readonly Store<Progress>[],
+  log: { clear(): void },
+  runBests: readonly Store<RunBest>[] = [],
+): void {
   for (const store of progress) store.set({ unlocked: 1, best: {} });
+  for (const store of runBests) store.set({ score: 0, streak: 0 });
   log.clear();
 }

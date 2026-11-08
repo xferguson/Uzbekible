@@ -13,7 +13,7 @@ import {
 import type { Store } from '@core/storage';
 import { levelContext } from '@games/sim-adapter';
 import type { AnyGameDefinition } from '@games/registry';
-import type { BoardProps, GameSettings } from '@games/types';
+import type { BoardProps, GameSettings, RunSummary } from '@games/types';
 import {
   Combo,
   Countdown,
@@ -21,11 +21,12 @@ import {
   Lives,
   PauseOverlay,
   ResultsScreen,
+  RunResultsScreen,
   Score,
   Timer,
 } from '@ui/index';
 import { label } from '../ui/labels';
-import { recordWin, type Progress } from './progress';
+import { recordRun, recordWin, type Progress, type RunBest } from './progress';
 
 export interface GameShellProps {
   definition: AnyGameDefinition;
@@ -36,6 +37,8 @@ export interface GameShellProps {
   history: readonly Aggregate[];
   clock: Clock;
   progress: Store<Progress>;
+  /** Best run of an endless game (its `endless` block is set). */
+  runBest?: Store<RunBest>;
   log: LearningLog;
   /** Length of the 3-2-1 before play. */
   countdownMs?: number;
@@ -51,6 +54,8 @@ interface Outcome {
   mistakes: number;
   hints: number;
   newBest: boolean;
+  /** Set for an endless game: the run's own numbers replace the level score and stars. */
+  run?: RunSummary & { previousBest: number };
 }
 
 /** Re-render interval while time is moving (display only; the session reads the injected clock). */
@@ -78,6 +83,7 @@ function Attempt({
   history,
   clock,
   progress,
+  runBest,
   log,
   countdownMs = 3_000,
   onNext,
@@ -104,6 +110,7 @@ function Attempt({
       lastAt: 0,
       outcome: undefined as Outcome | undefined,
       startedAt: 0,
+      endedAt: 0,
       streak: 0,
       spec,
       events,
@@ -126,6 +133,25 @@ function Attempt({
     function finish(won: boolean) {
       const timeMs = session.getState().elapsedMs;
       const tally = tallyScoreInput(events);
+      state.endedAt = clock.now();
+      if (def.endless) {
+        const summary = def.endless.summary(session.getState().game);
+        const previousBest = runBest?.get().score ?? 0;
+        const { newBest } = runBest
+          ? recordRun(runBest, { score: summary.score, streak: summary.streak })
+          : { newBest: false };
+        const run = { ...summary, previousBest };
+        state.outcome = { won, score: run.score, stars: 0, timeMs, ...tally, newBest, run };
+        log.log({
+          type: 'level_complete',
+          gameId: def.id,
+          score: run.score,
+          timeMs,
+          mistakes: tally.mistakes,
+          hints: tally.hints,
+        });
+        return;
+      }
       if (!won) {
         state.outcome = { won, score: 0, stars: 0, timeMs, ...tally, newBest: false };
         log.log({ type: 'level_failed', gameId: def.id, level });
@@ -161,7 +187,10 @@ function Attempt({
   }, [session, begin]);
 
   const { phase } = session.getState();
-  const moving = phase === 'countdown' || phase === 'playing';
+  const ended = phase === 'won' || phase === 'lost';
+  // An endless run keeps its last answer on screen for a moment before the results replace the board.
+  const holding = !!def.endless && ended && clock.now() - state.endedAt < def.endless.holdMs;
+  const moving = phase === 'countdown' || phase === 'playing' || holding;
   useEffect(() => {
     if (!moving) return;
     const id = setInterval(() => {
@@ -174,8 +203,24 @@ function Attempt({
   const s = session.getState();
   const t = (latn: string) => label(script, latn);
 
-  if (s.phase === 'won' || s.phase === 'lost') {
+  if (ended && !holding) {
     const o = state.outcome!;
+    if (o.run)
+      return (
+        <RunResultsScreen
+          score={o.run.score}
+          previousBest={o.run.previousBest}
+          cards={o.run.correct + o.run.mistakes}
+          streak={o.run.streak}
+          correct={o.run.correct}
+          timeMs={o.timeMs}
+          missed={o.run.missed}
+          newBest={o.newBest}
+          script={script}
+          onReplay={onRetry}
+          onHome={onMap}
+        />
+      );
     return (
       <ResultsScreen {...o} script={script} onNext={onNext} onReplay={onRetry} onMap={onMap} />
     );
@@ -191,6 +236,37 @@ function Attempt({
   }
 
   const { Board } = def;
+  const board = (
+    <Board
+      spec={state.spec}
+      settings={settings}
+      state={s}
+      dispatch={(a: unknown) => session.dispatch(a)}
+      subscribe={session.subscribe as BoardProps<unknown, unknown, unknown>['subscribe']}
+    />
+  );
+  if (def.endless)
+    // The board draws its own HUD (lives, streak, score) and the pause button.
+    return s.phase === 'paused' ? (
+      <PauseOverlay
+        script={script}
+        note="The card is hidden and its timer stopped."
+        onResume={() => session.resume()}
+        onRestart={onRetry}
+        onMap={onMap}
+        mapLabel="Bosh sahifa"
+        card
+      />
+    ) : (
+      <Board
+        spec={state.spec}
+        settings={settings}
+        state={s}
+        dispatch={(a: unknown) => session.dispatch(a)}
+        subscribe={session.subscribe as BoardProps<unknown, unknown, unknown>['subscribe']}
+        {...(!holding && { onPause: () => session.pause() })}
+      />
+    );
   return (
     <div>
       <header>
@@ -212,13 +288,7 @@ function Attempt({
       {s.phase === 'paused' ? (
         <PauseOverlay script={script} onResume={() => session.resume()} onMap={onMap} />
       ) : (
-        <Board
-          spec={state.spec}
-          settings={settings}
-          state={s}
-          dispatch={(a: unknown) => session.dispatch(a)}
-          subscribe={session.subscribe as BoardProps<unknown, unknown, unknown>['subscribe']}
-        />
+        board
       )}
     </div>
   );

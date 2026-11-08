@@ -6,14 +6,15 @@ import { createMemoryBackend } from '@core/storage';
 import type { Rules } from '@core/session';
 import type { BoardProps, GameDefinition } from '@games/types';
 import { GameShell } from './GameShell';
-import { createProgressStore } from './progress';
+import { createProgressStore, createRunBestStore } from './progress';
 
 type State = { left: number };
 type Action = { type: 'take' } | { type: 'miss' };
 
-function Board({ state, dispatch }: BoardProps<{ n: number }, State, Action>) {
+function Board({ state, dispatch, onPause }: BoardProps<{ n: number }, State, Action>) {
   return (
     <div data-testid="board">
+      {onPause && <button onClick={onPause}>board-pause</button>}
       <span>left {state.game.left}</span>
       <button onClick={() => dispatch({ type: 'take' })}>take</button>
       <button onClick={() => dispatch({ type: 'miss' })}>miss</button>
@@ -204,5 +205,113 @@ describe('GameShell', () => {
     );
     expect(seen[0]).toBe('qiyin');
     expect(multipliers).toHaveBeenCalledWith(expect.anything(), 'qiyin');
+  });
+});
+
+describe('GameShell: an endless game', () => {
+  const endless: GameDefinition<{ n: number }, State, Action> = {
+    ...fake,
+    id: 'endless',
+    endless: {
+      intro: { kicker: 'k', blurb: 'b', Sample: () => null },
+      summary: (g) => ({
+        score: 40 + g.left,
+        streak: 7,
+        correct: 5,
+        mistakes: 2,
+        missed: [
+          {
+            id: 'x',
+            uz: { latn: 'tun', cyrl: 'тун' },
+            uzMeaning: 'night',
+            source: { lang: 'tr', text: 'dün' },
+          },
+        ],
+      }),
+      holdMs: 1_000,
+    },
+  };
+
+  function run() {
+    const clock = createFakeClock(1_000);
+    const backend = createMemoryBackend();
+    const progress = createProgressStore('endless', { backend });
+    const runBest = createRunBestStore('endless', { backend });
+    const log = createLearningLog({ clock, sessionId: 's1', storage: { backend } });
+    const onMap = vi.fn();
+    render(
+      <GameShell
+        definition={endless}
+        level={1}
+        settings={{ sourceLangs: ['tr'], script: 'latn' }}
+        history={[]}
+        clock={clock}
+        progress={progress}
+        runBest={runBest}
+        log={log}
+        countdownMs={0}
+        onMap={onMap}
+      />,
+    );
+    const advance = (ms: number) =>
+      act(() => {
+        clock.advance(ms);
+        vi.advanceTimersByTime(ms);
+      });
+    return { runBest, onMap, advance, log };
+  }
+
+  beforeEach(() => vi.useFakeTimers());
+  afterEach(() => vi.useRealTimers());
+
+  it('adds no level HUD: the board gets the pause button', () => {
+    const { advance } = run();
+    advance(200);
+    expect(screen.getByTestId('board')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'board-pause' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Pauza' })).toBeNull();
+    expect(screen.queryByRole('timer')).toBeNull();
+  });
+
+  it('holds the last answer, then shows run results and keeps the best', () => {
+    const { advance, runBest, onMap } = run();
+    advance(200);
+    act(() => screen.getByRole('button', { name: 'miss' }).click());
+    act(() => screen.getByRole('button', { name: 'miss' }).click());
+    expect(screen.getByTestId('board')).toBeInTheDocument();
+    advance(500);
+    expect(screen.getByTestId('board')).toBeInTheDocument();
+    advance(600);
+    expect(screen.queryByTestId('board')).toBeNull();
+    expect(screen.getByRole('heading', { name: 'Barakalla!' })).toBeInTheDocument();
+    expect(screen.getByText('points · was 0')).toBeInTheDocument();
+    expect(screen.getByText('cards').nextSibling).toHaveTextContent('7');
+    expect(screen.getByRole('listitem')).toHaveTextContent('tun = night');
+    expect(runBest.get()).toEqual({ score: 43, streak: 7 });
+    act(() => screen.getByRole('button', { name: /Bosh sahifa/ }).click());
+    expect(onMap).toHaveBeenCalled();
+  });
+
+  it('pauses with a way home, not to a map', () => {
+    const { advance, onMap } = run();
+    advance(200);
+    act(() => screen.getByRole('button', { name: 'board-pause' }).click());
+    expect(screen.queryByRole('button', { name: 'Xarita' })).toBeNull();
+    act(() => screen.getByRole('button', { name: 'Qayta boshlash' }).click());
+    expect(screen.getByTestId('board')).toBeInTheDocument();
+    act(() => screen.getByRole('button', { name: 'board-pause' }).click());
+    act(() => screen.getByRole('button', { name: 'Bosh sahifa' }).click());
+    expect(onMap).toHaveBeenCalled();
+  });
+
+  it('replays into a fresh run', () => {
+    const { advance } = run();
+    advance(200);
+    act(() => screen.getByRole('button', { name: 'miss' }).click());
+    act(() => screen.getByRole('button', { name: 'miss' }).click());
+    advance(1_100);
+    act(() => screen.getByRole('button', { name: /Yana/ }).click());
+    advance(200);
+    expect(screen.getByTestId('board')).toBeInTheDocument();
   });
 });

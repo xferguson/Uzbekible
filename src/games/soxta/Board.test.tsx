@@ -33,7 +33,9 @@ const CARDS = [
 
 type Sess = Session<SoxtaState, SoxtaAction, SoxtaEvent | GameEvent>;
 
-function setup(opts: { script?: 'latn' | 'cyrl'; cards?: Card[]; reduced?: boolean } = {}) {
+function setup(
+  opts: { script?: 'latn' | 'cyrl'; cards?: Card[]; reduced?: boolean; onPause?: () => void } = {},
+) {
   const clock: FakeClock = createFakeClock();
   const rules = createSoxtaRules({ cards: opts.cards ?? CARDS, rng: createRng(3) });
   const session = createSession({ rules, lives: 3, countdownMs: 0, clock }) as Sess;
@@ -51,6 +53,7 @@ function setup(opts: { script?: 'latn' | 'cyrl'; cards?: Card[]; reduced?: boole
         subscribe={session.subscribe as never}
         clock={clock}
         reducedMotion={opts.reduced ?? false}
+        {...(opts.onPause && { onPause: opts.onPause })}
       />
     );
   }
@@ -71,6 +74,18 @@ function setup(opts: { script?: 'latn' | 'cyrl'; cards?: Card[]; reduced?: boole
 const opposite = (s: Side): Side => (s === 'left' ? 'right' : 'left');
 
 describe('Soxta Board', () => {
+  it('draws the pause button in its HUD only when the shell hands it one', () => {
+    const onPause = vi.fn();
+    setup({ onPause });
+    fireEvent.click(screen.getByRole('button', { name: 'Pauza' }));
+    expect(onPause).toHaveBeenCalledOnce();
+  });
+
+  it('has no pause button of its own otherwise', () => {
+    setup();
+    expect(screen.queryByRole('button', { name: 'Pauza' })).toBeNull();
+  });
+
   it('shows the Uzbek word and the Turkish word on opposite sides with the English clue between', () => {
     const t = setup();
     const { card: c, uzSide, clue } = t.cur();

@@ -1,5 +1,11 @@
 import { createMemoryBackend } from '@core/storage';
-import { createModeStore, createProgressStore, recordWin } from './progress';
+import {
+  createModeStore,
+  createProgressStore,
+  createRunBestStore,
+  recordRun,
+  recordWin,
+} from './progress';
 
 const result = (score: number, stars: 0 | 1 | 2 | 3 = 1, timeMs = 1000) => ({
   score,
@@ -64,5 +70,27 @@ describe('progress', () => {
     expect(modes.get()).toEqual({});
     modes.update((m) => ({ ...m, imlo: 'qiyin' }));
     expect(createModeStore({ backend }).get()).toEqual({ imlo: 'qiyin' });
+  });
+});
+
+describe('run best', () => {
+  it('starts at zero and keeps the best score and streak separately', () => {
+    const store = createRunBestStore('soxta', { backend: createMemoryBackend() });
+    expect(store.get()).toEqual({ score: 0, streak: 0 });
+    expect(recordRun(store, { score: 500, streak: 4 })).toEqual({ newBest: true });
+    expect(recordRun(store, { score: 300, streak: 9 })).toEqual({ newBest: false });
+    expect(store.get()).toEqual({ score: 500, streak: 9 });
+  });
+
+  it('a tied score is not a new best', () => {
+    const store = createRunBestStore('soxta', { backend: createMemoryBackend() });
+    recordRun(store, { score: 500, streak: 4 });
+    expect(recordRun(store, { score: 500, streak: 4 }).newBest).toBe(false);
+  });
+
+  it('survives a reload from the same storage', () => {
+    const backend = createMemoryBackend();
+    recordRun(createRunBestStore('soxta', { backend }), { score: 700, streak: 6 });
+    expect(createRunBestStore('soxta', { backend }).get()).toEqual({ score: 700, streak: 6 });
   });
 });

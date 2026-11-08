@@ -1,4 +1,5 @@
 import { label, langProps, type Script } from '../labels';
+import { khatam, pathData } from '../motif/geometry';
 import styles from './hud.module.css';
 
 interface Common {
@@ -24,7 +25,7 @@ export function Timer({ ms, script = 'latn' }: Common & { ms: number }) {
   );
 }
 
-/** One glazed tile per life; a lost life shows crack lines as well as a paler glaze. */
+/** One glazed tile per life with a turquoise star (D1 motif); a lost life is a dark tile with crack lines. */
 export function Lives({ lives, max, script = 'latn' }: Common & { lives: number; max: number }) {
   return (
     <span
@@ -38,12 +39,17 @@ export function Lives({ lives, max, script = 'latn' }: Common & { lives: number;
         return (
           <svg
             key={i}
-            viewBox="0 0 24 24"
+            viewBox="0 0 22 22"
             data-cracked={cracked}
             className={`${styles.life} ${cracked ? styles.cracked : ''}`}
             aria-hidden="true"
           >
-            {cracked && <path className={styles.crack} d="M12 1 L9 9 L14 13 L10 23" />}
+            <rect className={styles.lifeTile} x="1" y="1" width="20" height="20" rx="5" />
+            {cracked ? (
+              <path className={styles.crack} d="M11 1 L9 8 L13 12 L10 21 M9 8 L3 7 M13 12 L20 13" />
+            ) : (
+              <path className={styles.lifeStar} d={pathData(khatam(6), { x: 11, y: 11 })} />
+            )}
           </svg>
         );
       })}

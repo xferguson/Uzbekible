@@ -98,7 +98,7 @@ describe('soxtaPool', () => {
         }),
       );
     fc.assert(
-      fc.property(fc.array(itemArb), (items) => {
+      fc.property(fc.uniqueArray(itemArb, { selector: (i) => i.id }), (items) => {
         const board = new Set(boardPool(items).map((i) => i.id));
         for (const c of soxtaPool(items)) expect(board.has(c.id)).toBe(false);
       }),

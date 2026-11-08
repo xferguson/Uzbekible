@@ -26,8 +26,9 @@ function Button({ onClick, children }: { onClick?: () => void; children: string 
 export function PauseOverlay({
   onResume,
   onMap,
+  mapLabel = 'Xarita',
   script = 'latn',
-}: Common & { onResume: () => void; onMap: () => void }) {
+}: Common & { onResume: () => void; onMap: () => void; mapLabel?: string }) {
   return (
     <div
       role="dialog"
@@ -38,7 +39,7 @@ export function PauseOverlay({
     >
       <h2>{label(script, 'Pauza')}</h2>
       <Button onClick={onResume}>{label(script, 'Davom etish')}</Button>
-      <Button onClick={onMap}>{label(script, 'Xarita')}</Button>
+      <Button onClick={onMap}>{label(script, mapLabel)}</Button>
     </div>
   );
 }

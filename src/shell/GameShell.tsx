@@ -250,7 +250,12 @@ function Attempt({
           </header>
         )}
         {s.phase === 'paused' ? (
-          <PauseOverlay script={script} onResume={() => session.resume()} onMap={onMap} />
+          <PauseOverlay
+            script={script}
+            onResume={() => session.resume()}
+            onMap={onMap}
+            mapLabel="Bosh sahifa"
+          />
         ) : (
           board
         )}

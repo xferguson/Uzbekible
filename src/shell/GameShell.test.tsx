@@ -274,6 +274,15 @@ describe('GameShell: an endless game', () => {
     expect(onMap).toHaveBeenCalled();
   });
 
+  it('pauses with a way home, not to a map', () => {
+    const { advance, onMap } = run();
+    advance(200);
+    act(() => screen.getByRole('button', { name: 'Pauza' }).click());
+    expect(screen.queryByRole('button', { name: 'Xarita' })).toBeNull();
+    act(() => screen.getByRole('button', { name: 'Bosh sahifa' }).click());
+    expect(onMap).toHaveBeenCalled();
+  });
+
   it('replays into a fresh run', () => {
     const { advance } = run();
     advance(200);

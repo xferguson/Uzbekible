@@ -87,10 +87,11 @@
   position: relative;
   display: grid;
   place-items: center;
-  inline-size: 124px;
-  block-size: 124px;
+  /* I4 frames: the star is about 80 px on a phone and 100 px on a desktop. */
+  inline-size: 80px;
+  block-size: 80px;
   padding: 0;
-  font: 700 17px var(--font-ui);
+  font: 700 12px var(--font-ui);
   color: var(--color-text-muted);
   background: transparent;
   border: 0;
@@ -146,7 +147,17 @@
   display: none;
 }
 .star > span[aria-hidden] {
-  font-size: 44px;
+  font-size: 32px;
+}
+@media (min-width: 900px) {
+  .star {
+    inline-size: 100px;
+    block-size: 100px;
+    font-size: 14px;
+  }
+  .star > span[aria-hidden] {
+    font-size: 38px;
+  }
 }
 .clue span::before {
   content: '“';

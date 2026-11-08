@@ -1,5 +1,7 @@
 /** Imlo screens (docs/games/06-imlo.md, I4 frames). Imlo-only moves live here; shell moves come from the driver. */
+import { readFileSync } from 'node:fs';
 import type { Page } from '@playwright/test';
+import { sourceLetters, toLetters } from '../../src/core/text/index.ts';
 import type { Driver, ScreenState } from '../shots/types.ts';
 
 const TITLE = 'Imlo';
@@ -29,11 +31,57 @@ async function fillRow(d: Driver, side: 'source' | 'uz') {
 }
 
 async function board(d: Driver, level = 1) {
-  await d.open({ progress: progress(level) });
+  await d.open({ progress: progress(level), settings: { languages: ['tr'] } });
   await d.openGame(TITLE);
   await d.startLevel(level);
   const shown = await d.page.getByTestId('imlo-board').count();
   d.check(shown === 1, 'expected the Imlo board');
+}
+
+interface PackItem {
+  uz: { latn: string };
+  glossEn: string;
+  sources: { lang: string; text: string }[];
+}
+const PACK = JSON.parse(readFileSync('public/content/items.v1.json', 'utf8')) as {
+  items: PackItem[];
+};
+
+/**
+ * Spells the Turkish row correctly (the pair is found by its clue and the bank) and fills the Uzbek row with
+ * whatever is left, so a check marks only the Uzbek row wrong, as in the I4 frame. Needs Turkish as the only
+ * source language.
+ */
+async function sourceRightUzWrong(d: Driver) {
+  const clue = (await d.page.getByTestId('clue').innerText()).trim();
+  const bank = await d.page
+    .locator('[data-testid="bank-cell"] button')
+    .evaluateAll((els) =>
+      els.map((e) => (e.getAttribute('aria-label') ?? e.textContent ?? '').trim()),
+    );
+  const fits = (need: string[]) => {
+    const have = [...bank];
+    return need.every((l) => {
+      const i = have.indexOf(l);
+      if (i < 0) return false;
+      have.splice(i, 1);
+      return true;
+    });
+  };
+  let src: string[] | undefined;
+  for (const item of PACK.items) {
+    if (item.glossEn !== clue) continue;
+    const uz = toLetters(item.uz.latn, 'uz-Latn');
+    for (const s of item.sources.filter((x) => x.lang === 'tr')) {
+      const letters = sourceLetters(s.text, 'tr');
+      if (fits([...letters, ...uz])) src = letters;
+    }
+  }
+  d.check(src !== undefined, `no Turkish spelling found for clue "${clue}"`);
+  await d.page.getByTestId('row-source').click({ position: { x: 2, y: 2 } });
+  for (const l of src!)
+    await d.page.getByTestId('bank').getByRole('button', { name: l, exact: true }).first().click();
+  await fillRow(d, 'uz');
 }
 
 async function fillBoth(d: Driver) {
@@ -92,13 +140,13 @@ export const imloStates: ScreenState[] = [
   {
     id: 'imlo-wrong',
     game: 'imlo',
-    title: 'Wrong check: the wrong row cracks and a life is lost',
+    title: 'Wrong check: only the Uzbek row cracks, the Turkish row glazes, a life is lost',
     async reach(d) {
       await board(d);
-      await fillBoth(d);
+      await sourceRightUzWrong(d);
       await check(d);
       const cracks = await d.page.getByTestId('crack').count();
-      d.check(cracks > 0, 'expected a cracked row');
+      d.check(cracks === 1, `expected exactly one cracked row, got ${cracks}`);
     },
   },
   {

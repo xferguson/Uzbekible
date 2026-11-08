@@ -6,7 +6,7 @@
 | Lane | V Visual quality |
 | Depends on | [V7](V7-juft-fidelity-audit.md) |
 | Read first | `.claude/skills/design-fidelity-review/SKILL.md`, `docs/design/fidelity-juft.md` (format only), `docs/design/frames.json`, `scripts/tasks.mjs` (the `frames` check), `e2e/states.ts` |
-| Screens owned | `none` |
+| Screens owned | none |
 | API used | none |
 | Skills | `tdd-task`, `design-fidelity-review`, `task-breakdown`, `pr-flow` |
 | Branch | `task/V12-fidelity-for-every-game` |

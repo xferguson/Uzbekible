@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | in review |
+| Status | done |
 | Lane | E Juft engine |
 | Depends on | [E1](E1-juft-levels.md) |
 | Read first | `docs/games/01-juft.md` ("Level progression", "Board focus") |

@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | todo |
+| Status | done |
 | Lane | J Soxta |
 | Depends on | [U1](U1-design-tokens-motif-ui.md) |
 | Read first | `.claude/skills/ui-component/SKILL.md` (a11y, reduced motion), `docs/architecture.md` (`src/ui` row) |

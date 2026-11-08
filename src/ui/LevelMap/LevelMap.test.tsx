@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { LevelMap, chapterOf, levelState, type ChapterInfo, type MapProgress } from './index';
@@ -82,5 +83,13 @@ describe('LevelMap', () => {
   it('renders Cyrillic when the script is cyrl', () => {
     render(<LevelMap chapters={CHAPTERS} progress={progress} script="cyrl" onSelect={() => {}} />);
     expect(screen.getByRole('button', { name: /^5-даража/ })).toBeInTheDocument();
+  });
+});
+
+describe('LevelMap facade styling', () => {
+  it('outlines the facade in cobalt so it stands off the lattice ground in dark mode', () => {
+    const css = readFileSync('src/ui/LevelMap/LevelMap.module.css', 'utf8');
+    const rule = /\.facade\s*\{([^}]*)\}/.exec(css)![1]!;
+    expect(rule).toMatch(/border:\s*2px solid var\(--color-cobalt\)/);
   });
 });

@@ -312,6 +312,13 @@ export function Board({
           </span>
         </div>
 
+        {/* In the flow, above the tiles, so it never covers a tile or its badge. */}
+        {feedback?.kind === 'timeout' && (
+          <span data-testid="timeout-pill" className={styles.banner}>
+            <ClockIcon className={styles.bannerIcon} />
+            {label(script, 'Vaqt tugadi')}
+          </span>
+        )}
         {/* The swipe surface: pointer gestures and arrow keys; the arrow buttons below are the accessible path. */}
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <div
@@ -327,12 +334,6 @@ export function Board({
           aria-label={label(script, 'Qaysi soʻz?')}
           role="group"
         >
-          {feedback?.kind === 'timeout' && (
-            <span data-testid="timeout-pill" className={styles.banner}>
-              <ClockIcon className={styles.bannerIcon} />
-              {label(script, 'Vaqt tugadi')}
-            </span>
-          )}
           {word('left')}
           <div className={styles.clueWrap}>
             <span data-testid="clue" className={styles.clue} lang="en">

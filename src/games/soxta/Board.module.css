@@ -358,13 +358,10 @@
   letter-spacing: 0.04em;
   color: var(--color-text-muted);
 }
-/* Timeout banner: navy pill with an ochre rim above the tiles. */
+/* Timeout banner: navy pill with an ochre rim, centred between the timer and the tiles. */
 .banner {
-  position: absolute;
-  inset-block-start: -6px;
-  inset-inline-start: 50%;
-  transform: translateX(-50%);
-  z-index: 7;
+  align-self: center;
+  margin-block: var(--space-3) calc(-1 * var(--space-2));
   display: inline-flex;
   align-items: center;
   gap: 6px;

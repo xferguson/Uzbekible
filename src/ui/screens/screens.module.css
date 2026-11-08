@@ -146,7 +146,7 @@
   padding: var(--space-1) var(--space-4);
   border-radius: var(--radius-tile);
   background: var(--color-gold);
-  color: var(--color-text);
+  color: var(--color-on-gold);
   font-weight: 700;
 }
 .ribbon small {
@@ -260,7 +260,7 @@
   border-radius: var(--radius-tile);
   border: 2px solid var(--color-cobalt);
   background: var(--color-surface);
-  color: var(--color-cobalt);
+  color: var(--color-text);
   font: inherit;
   font-weight: 700;
   cursor: pointer;
@@ -318,7 +318,6 @@
 }
 .scriptOption small {
   font-size: 0.75rem;
-  opacity: 0.85;
 }
 .tick {
   font-size: 0.7rem;

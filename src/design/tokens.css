@@ -33,6 +33,7 @@
   --color-text-muted: #4b5878;
   --color-on-cobalt: #ffffff;
   --color-on-deep: #ffffff;
+  --color-on-gold: #0a1838;
 }
 
 [data-theme='dark'] {
@@ -52,6 +53,7 @@
   --color-text-muted: #a8b4cf;
   --color-on-cobalt: #0a1838;
   --color-on-deep: #eef2fa;
+  --color-on-gold: #0a1838;
 }
 
 /* No explicit choice: follow the OS. */
@@ -73,6 +75,7 @@
     --color-text-muted: #a8b4cf;
     --color-on-cobalt: #0a1838;
     --color-on-deep: #eef2fa;
+    --color-on-gold: #0a1838;
   }
 }
 

@@ -41,6 +41,7 @@
 }
 .pause {
   grid-area: pause;
+  font: inherit;
   display: grid;
   place-items: center;
   inline-size: 44px;
@@ -97,7 +98,7 @@
   padding-inline: 10px;
   border-radius: var(--radius-pill);
   background: var(--color-gold);
-  color: var(--color-text);
+  color: var(--color-on-gold);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   visibility: hidden;
@@ -268,7 +269,7 @@
 .cell[data-look='ok'] > button {
   background: var(--color-gold);
   border: 2px solid var(--color-cobalt-deep);
-  color: var(--color-cobalt-deep);
+  color: var(--color-on-gold);
 }
 .cell[data-look='ok'] .tag {
   background: var(--color-surface);
@@ -289,7 +290,12 @@
   border: 2px dashed var(--color-text-muted);
   background: transparent;
   box-shadow: none;
-  opacity: 0.5;
+  color: var(--color-text-muted);
+}
+/* Ghosted without opacity, so the word and tag stay readable (contrast is checked by V2). */
+.cell[data-look='out'] .tag {
+  border-color: var(--color-text-muted);
+  background: transparent;
 }
 .bloom {
   position: absolute;
@@ -470,7 +476,7 @@
 }
 .pill[data-good] {
   background: var(--color-gold);
-  color: var(--color-text);
+  color: var(--color-on-gold);
 }
 .revealRow {
   display: grid;

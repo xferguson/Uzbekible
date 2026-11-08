@@ -26,7 +26,7 @@ export function Go({ side, className }: { side: 'left' | 'right'; className?: st
 }
 
 const BADGE = {
-  ok: ['var(--color-gold)', 'var(--color-text)', 'M8 14.5 L12.5 19 L20 9.5'],
+  ok: ['var(--color-gold)', 'var(--color-on-gold)', 'M8 14.5 L12.5 19 L20 9.5'],
   bad: ['var(--color-crack)', 'var(--color-ground)', 'M9 9 L19 19 M19 9 L9 19'],
   time: ['var(--color-ochre)', 'var(--color-ground)', 'M14 7.5 V14 L18.5 16.5'],
 } as const;

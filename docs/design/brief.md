@@ -100,6 +100,7 @@ These values override the proposals in §3, §4 and §6 where they differ.
 | `--color-cobalt` | `#1B3F8F` | `#5B86E8` | dark was `#3E6BD6` (3.06:1 on surface) |
 | `--color-on-cobalt` | `#FFFFFF` | `#0A1838` | new: labels on cobalt fills |
 | `--color-on-deep` | `#FFFFFF` | `#EEF2FA` | new: text on cobalt-deep panels and headers |
+| `--color-on-gold` | `#0A1838` | `#0A1838` | new (J6): text on gold fills (ribbon, points pill, ×N chip, correct tile); the J4 mockup's `--on-gold`, ≥ 4.5:1 on both golds |
 
 Gold never sits on cobalt in the light theme (2.86:1); it goes on cobalt-deep instead.
 

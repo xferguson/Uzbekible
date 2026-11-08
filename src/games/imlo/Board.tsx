@@ -236,7 +236,7 @@ export function Board({
             <span className={styles.starLabel}>{label(script, 'Tekshir')}</span>
             {solved && <span aria-hidden="true">✓</span>}
           </button>
-          <p className={styles.clue}>
+          <p className={styles.clue} data-testid="clue">
             <span>{pair.clue}</span>
           </p>
         </div>

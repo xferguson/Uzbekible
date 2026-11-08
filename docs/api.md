@@ -60,7 +60,7 @@ _(no exports yet)_
 ## `core/learning-log`
 
 - `Aggregate` { itemId: string; sourceLang: SourceLang; relation: Relation; attempts: number; correct: number; meanRtMs: number }
-- `CSV_COLUMNS`: `readonly ["ts", "sessionId", "gameId", "type", "level", "itemId", "leftItemId", "rightItemId", "sourceLang", "relation", "rtMs", "score", "timeMs", "mistakes", "hints"]`
+- `CSV_COLUMNS`: `readonly ["ts", "sessionId", "gameId", "type", "level", "itemId", "leftItemId", "rightItemId", "sourceLang", "relation", "rtMs", "score", "timeMs", "mistakes", "hints", "side", "slot", "given", "expect…
 - `DEFAULT_CAP`: `5000`
 - `LearningLog` { log(event: LogEventInput): void; events(): readonly LogEvent[]; aggregates(): Aggregate[]; exportJson(): string; exportCsv(): string; clear(): void }
 - `LearningLogOptions` { clock: Clock; sessionId: string; cap?: number; storage?: StoreOptions; store?: Store<LogState> }

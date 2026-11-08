@@ -28,7 +28,24 @@ export type LogEvent = Base &
         relation: Relation;
         rtMs: number;
       }
-    | { type: 'hint_used'; itemId: string }
+    | { type: 'hint_used'; itemId: string; side?: 'source' | 'uz'; slot?: number }
+    | {
+        type: 'spell_correct';
+        itemId: string;
+        sourceLang: SourceLang;
+        rtMs: number;
+        checks: number;
+        hints: number;
+      }
+    | {
+        type: 'spell_wrong';
+        itemId: string;
+        sourceLang: SourceLang;
+        side: 'source' | 'uz';
+        given: string;
+        expected: string;
+        rtMs: number;
+      }
     | { type: 'level_complete'; score: number; timeMs: number; mistakes: number; hints: number }
     | { type: 'level_failed'; level?: number }
   );
@@ -137,6 +154,11 @@ export const CSV_COLUMNS = [
   'timeMs',
   'mistakes',
   'hints',
+  'side',
+  'slot',
+  'given',
+  'expected',
+  'checks',
 ] as const;
 
 export function csvEscape(value: unknown): string {

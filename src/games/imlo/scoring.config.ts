@@ -84,3 +84,24 @@ export function scoringFor(spec: LevelSpec<ImloParams>): ScoringConfig {
     ],
   };
 }
+
+/** Reference config for a late board (level 60, 8 pairs of 8 + 8 letters, 20 tiles); `GameDefinition.scoring` default. */
+export const imloScoring: ScoringConfig = (() => {
+  const [one, two, three] = POINTS.starShares;
+  return {
+    basePoints: POINTS.basePoints,
+    parMs: parMsFor(
+      60,
+      Array.from({ length: 8 }, () => ({ letters: 16, bank: 20 })),
+    ),
+    overrunFactor: POINTS.overrunFactor,
+    mistakePenalty: POINTS.mistakePenalty,
+    hintPenalty: POINTS.hintPenalty,
+    comboBonus: POINTS.comboBonus,
+    starThresholds: [
+      Math.round(POINTS.basePoints * one),
+      Math.round(POINTS.basePoints * two),
+      Math.round(POINTS.basePoints * three),
+    ],
+  };
+})();

@@ -121,8 +121,36 @@ describe('CSV export', () => {
     const lines = log.exportCsv().trimEnd().split('\r\n');
     expect(lines[0]).toBe(CSV_COLUMNS.join(','));
     expect(lines).toHaveLength(3);
-    expect(lines[1]).toBe('1000,s1,juft,match_correct,,a,,,tr,turkic-cognate,7,,,,');
-    expect(lines[2]).toBe('1000,s1,juft,level_complete,,,,,,,,90,5000,1,0');
+    expect(lines[1]).toBe('1000,s1,juft,match_correct,,a,,,tr,turkic-cognate,7,,,,,,,,,');
+    expect(lines[2]).toBe('1000,s1,juft,level_complete,,,,,,,,90,5000,1,0,,,,,');
+  });
+
+  it('exports the spelling events with what was given and expected', () => {
+    const { log } = make();
+    log.log({
+      type: 'spell_wrong',
+      gameId: 'imlo',
+      itemId: 'ism',
+      sourceLang: 'tr',
+      side: 'uz',
+      given: 'isim',
+      expected: 'ism',
+      rtMs: 900,
+    });
+    log.log({
+      type: 'spell_correct',
+      gameId: 'imlo',
+      itemId: 'ism',
+      sourceLang: 'tr',
+      rtMs: 500,
+      checks: 2,
+      hints: 0,
+    });
+    const lines = log.exportCsv().trimEnd().split('\r\n');
+    expect(lines[1]).toBe('1000,s1,imlo,spell_wrong,,ism,,,tr,,900,,,,,uz,,isim,ism,');
+    expect(lines[2]).toBe('1000,s1,imlo,spell_correct,,ism,,,tr,,500,,,,0,,,,,2');
+    // Spelling events are not Juft match attempts: they stay out of the scheduler's aggregates.
+    expect(log.aggregates()).toEqual([]);
   });
 
   it('escapes commas, quotes and newlines; leaves RTL text intact', () => {

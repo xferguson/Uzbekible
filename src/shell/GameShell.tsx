@@ -117,7 +117,11 @@ function Attempt({
         const entries = def.logEvents?.(spec, e, e.at - state.lastAt) ?? [];
         for (const entry of entries) log.log(entry);
         // Response time runs from the start of play, or from the previous answer.
-        if (entries.some((x) => x.type === 'match_correct' || x.type === 'match_wrong'))
+        if (
+          entries.some((x) =>
+            ['match_correct', 'match_wrong', 'spell_correct', 'spell_wrong'].includes(x.type),
+          )
+        )
           state.lastAt = e.at;
         if (e.type === 'combo') state.streak++;
         if (e.type === 'mistake' || e.type === 'lifeLost') state.streak = 0;

@@ -5,6 +5,7 @@ import { createLearningLog } from '@core/learning-log';
 import { createRng, seedFrom } from '@core/random';
 import type { StorageBackend } from '@core/storage';
 import { getGame, GAMES, type AnyGameDefinition } from '@games/registry';
+import { registerImlo } from '@games/imlo/definition';
 import { registerJuft } from '@games/juft/definition';
 import type { GameSettings } from '@games/types';
 import { LevelMap, ModePicker, ScreenBar, SettingsPanel, type Script } from '@ui/index';
@@ -86,6 +87,7 @@ function Home({ loadPack = fetchPack, clock = systemClock, backend, countdownMs 
         if (!live) return;
         const items = loadItems(json);
         if (!getGame('juft')) registerJuft(items);
+        if (!getGame('imlo')) registerImlo(items);
         setGames([...GAMES]);
       })
       .catch(() => live && setFailed(true));

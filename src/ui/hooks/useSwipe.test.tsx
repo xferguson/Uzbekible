@@ -130,17 +130,25 @@ describe('useSwipe', () => {
 describe('swipeOutcome properties', () => {
   it('never fires for slow drags shorter than the distance', () => {
     fc.assert(
-      fc.property(fc.integer({ min: -59, max: 59 }), fc.integer({ min: -300, max: 300 }), (dx, dy) => {
-        expect(swipeOutcome(dx, dy, 5000, 60, 0.5)).toBeNull();
-      }),
+      fc.property(
+        fc.integer({ min: -59, max: 59 }),
+        fc.integer({ min: -300, max: 300 }),
+        (dx, dy) => {
+          expect(swipeOutcome(dx, dy, 5000, 60, 0.5)).toBeNull();
+        },
+      ),
     );
   });
 
   it('never fires when vertical dominates', () => {
     fc.assert(
-      fc.property(fc.integer({ min: -500, max: 500 }), fc.integer({ min: 0, max: 5000 }), (dx, ms) => {
-        expect(swipeOutcome(dx, Math.abs(dx) + 1, ms, 60, 0.5)).toBeNull();
-      }),
+      fc.property(
+        fc.integer({ min: -500, max: 500 }),
+        fc.integer({ min: 0, max: 5000 }),
+        (dx, ms) => {
+          expect(swipeOutcome(dx, Math.abs(dx) + 1, ms, 60, 0.5)).toBeNull();
+        },
+      ),
     );
   });
 
